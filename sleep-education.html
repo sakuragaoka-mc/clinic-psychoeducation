@@ -815,6 +815,34 @@
   .tag.cor { background: #fff3e0; color: #e65100; }
   .tag.ade { background: #e3f2fd; color: #1565c0; }
 
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-link-primary {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3f51b5;
+  }
+  .nav-link-secondary {
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6b6b8d;
+  }
+
   /* ===== PRINT ===== */
   @media print {
     .hero { padding: 2rem 1rem; min-height: auto; }
@@ -826,13 +854,9 @@
 <body>
 
 <!-- TOP NAV -->
-<nav style="background:#fff; padding:0.5rem 1rem; display:flex; align-items:center; justify-content:space-between; box-shadow:0 1px 4px rgba(0,0,0,0.06); position:sticky; top:0; z-index:100;">
-  <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:700; color:#3f51b5;">
-    ← こころの学び トップへ
-  </a>
-  <a href="morning-motivation-work.html" style="text-decoration:none; font-size:0.75rem; font-weight:600; color:#6b6b8d;">
-    ワークシート →
-  </a>
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">← こころの学び トップへ</a>
+  <a href="morning-motivation-work.html" class="nav-link-secondary">ワークシート →</a>
 </nav>
 
 <!-- HERO -->

@@ -33,6 +33,11 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero::before {
@@ -54,7 +59,7 @@
   }
 
   .hero-icon {
-    font-size: 2.8rem;
+    font-size: 3.5rem;
     margin-bottom: 0.8rem;
     position: relative;
     z-index: 1;
@@ -98,8 +103,8 @@
   }
 
   .welcome p {
-    font-size: 0.9rem;
-    color: var(--text-light);
+    font-size: 0.92rem;
+    color: #555;
     line-height: 1.8;
   }
 
@@ -126,6 +131,7 @@
   .content-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border-color: #c5cae9;
   }
 
   .content-card:active {
@@ -133,7 +139,7 @@
   }
 
   .card-banner {
-    height: 100px;
+    height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +148,7 @@
   }
 
   .card-banner .banner-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
     position: relative;
     z-index: 1;
     filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
@@ -208,23 +214,17 @@
   .coming-soon {
     background: var(--card);
     border-radius: 16px;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.7rem;
     border: 2px dashed #ddd;
-    opacity: 0.6;
+    opacity: 0.65;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
   }
-
-  .coming-soon h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-light);
-    margin-bottom: 0.2rem;
-  }
-
-  .coming-soon p {
-    font-size: 0.75rem;
-    color: #aaa;
-  }
+  .coming-soon .cs-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .coming-soon .cs-content h4 { font-size: 0.87rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.15rem; }
+  .coming-soon .cs-content p { font-size: 0.75rem; color: #aaa; }
 
   /* ===== INFO BAR ===== */
   .info-bar {
@@ -256,6 +256,25 @@
     text-decoration: none;
   }
 
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    background: #1a237e;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    font-size: 0.72rem;
+    padding: 0.4rem 1rem;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* ===== FADE-UP ANIMATION ===== */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .content-card { animation: fade-up 0.5s ease both; }
+  .content-card:nth-child(2) { animation-delay: 0.1s; }
+
   /* ===== RESPONSIVE ===== */
   @media (min-width: 600px) {
     .card-grid {
@@ -269,6 +288,8 @@
 </style>
 </head>
 <body>
+
+<div class="top-bar">🌸 桜丘メンタルクリニック &nbsp;|&nbsp; 心理教育ライブラリ</div>
 
 <div class="hero">
   <div class="hero-icon">🧠</div>
@@ -327,16 +348,25 @@
   <h3 style="font-size:0.85rem; font-weight:700; color:var(--text-light); margin-bottom:0.6rem;">📚 今後追加予定</h3>
 
   <div class="coming-soon">
-    <h4>😰 不安のメカニズムと対処法</h4>
-    <p>パニック・社交不安・全般性不安障害の心理教育</p>
+    <div class="cs-icon">😰</div>
+    <div class="cs-content">
+      <h4>不安のメカニズムと対処法</h4>
+      <p>パニック・社交不安・全般性不安障害の心理教育</p>
+    </div>
   </div>
   <div class="coming-soon">
-    <h4>😔 うつの理解と行動活性化</h4>
-    <p>「やる気が出ない」の脳科学と、小さな一歩から始める方法</p>
+    <div class="cs-icon">😔</div>
+    <div class="cs-content">
+      <h4>うつの理解と行動活性化</h4>
+      <p>「やる気が出ない」の脳科学と、小さな一歩から始める方法</p>
+    </div>
   </div>
   <div class="coming-soon">
-    <h4>🧩 発達特性との付き合い方</h4>
-    <p>ADHD・ASDの特性理解と日常の工夫</p>
+    <div class="cs-icon">🧩</div>
+    <div class="cs-content">
+      <h4>発達特性との付き合い方</h4>
+      <p>ADHD・ASDの特性理解と日常の工夫</p>
+    </div>
   </div>
 
   <div class="footer">
