@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統合失調症 セルフモニタリング・ワーク — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #00695c;
+    --primary-light: #e0f2f1;
+    --primary-dark: #004d40;
+    --accent: #ff9800;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #f9fffe;
+    --card: rgba(255,255,255,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #3f51b5;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #6b6b8d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #004d40 0%, #00695c 40%, #00897b 70%, #ff9800 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.4rem, 4.5vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #ffcc80;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== INTRO ===== */
+  .intro {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--primary);
+  }
+
+  .intro h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #004d40;
+  }
+
+  .intro p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  .intro-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ===== WORK SECTIONS ===== */
+  .work-section {
+    margin: 2rem 0;
+  }
+
+  .work-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.6rem;
+  }
+
+  .work-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .work-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== WORKSHEET TABLES ===== */
+  .worksheet {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+    margin: 1rem 0;
+  }
+
+  .ws-header {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .ws-body {
+    padding: 1rem 1.2rem;
+  }
+
+  .ws-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+
+  .ws-row:last-child { border-bottom: none; }
+
+  .ws-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    min-width: 100px;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+
+  .ws-input {
+    flex: 1;
+    border: none;
+    border-bottom: 2px dotted #ddd;
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    color: var(--text);
+    background: transparent;
+    min-height: 1.8rem;
+  }
+
+  .ws-input::placeholder {
+    color: #bbb;
+    font-size: 0.78rem;
+  }
+
+  textarea.ws-input {
+    resize: vertical;
+    min-height: 3rem;
+    line-height: 1.6;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    border-radius: 16px;
+    padding: 1.3rem;
+    margin: 1rem 0;
+    border: 2px solid rgba(255,152,0,0.15);
+  }
+
+  .tip-box h4 {
+    color: #e65100;
+    font-size: 0.92rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tip-box p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
+    border-radius: 16px;
+    padding: 1.3rem;
+    margin: 1rem 0;
+    border: 2px solid rgba(0,105,92,0.12);
+  }
+
+  .science-box h4 {
+    color: #004d40;
+    font-size: 0.88rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .science-box p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav-grid {
+    display: flex;
+    gap: 0.8rem;
+    margin: 2rem 0 0;
+    flex-wrap: wrap;
+  }
+
+  .bottom-nav-grid a {
+    flex: 1;
+    min-width: 140px;
+    text-decoration: none;
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    display: block;
+  }
+
+  .bottom-nav-grid a .bn-icon {
+    font-size: 1.2rem;
+  }
+
+  .bottom-nav-grid a .bn-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .worksheet, .tip-box, .science-box { break-inside: avoid; }
+    .ws-input { border-bottom: 1px solid #999; }
+    #clear-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">← こころの学び トップへ</a>
+  <a href="schizophrenia-education.html" class="nav-link-secondary">← 統合失調症の解説</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">🌿📝</div>
+  <h1>統合失調症 セルフモニタリング・ワーク</h1>
+  <p class="subtitle">〜 自分の状態を知り、回復を進める 〜</p>
+</div>
+
+<div class="container">
+
+<!-- INTRO -->
+<div class="intro">
+  <h2>📋 このワークシートについて</h2>
+  <p>
+    自分の体調や気分を記録することは、回復の大きな力になります。毎日の変化を「見える化」することで、調子のパターンに気づき、再発の予防にもつながります。無理のない範囲で、できるところから始めてみましょう。
+  </p>
+  <div class="intro-actions">
+    <button id="clear-btn" style="background:#ef5350;color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:10px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;">🗑️ 入力をクリア</button>
+    <span style="font-size:0.75rem; color:#999;">入力内容はブラウザに自動保存されます</span>
+  </div>
+</div>
+
+<!-- ===== WORK 1: 今日の調子チェック ===== -->
+<section class="work-section">
+  <div class="work-num" style="background:#e0f2f1; color:#004d40;">WORK 1</div>
+  <h2 class="work-title">今日の調子チェック</h2>
+  <p class="work-subtitle">毎日の体調・気分・服薬状況を記録します。小さな変化に気づくことが、安定した生活につながります。</p>
+
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#00695c,#00897b);">📝 デイリー・セルフモニタリング</div>
+    <div class="ws-body">
+      <div class="ws-row">
+        <div class="ws-label">📅 日付</div>
+        <input type="text" class="ws-input" data-key="date" placeholder="例：3月24日（月）">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">🛏️ 睡眠</div>
+        <input type="text" class="ws-input" data-key="sleep" placeholder="何時間？質は？（例：6時間・途中で目が覚めた）">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">😊 気分 1-5</div>
+        <input type="text" class="ws-input" data-key="mood" placeholder="1=とてもつらい 〜 5=とても良い">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">💊 薬は飲めた？</div>
+        <input type="text" class="ws-input" data-key="medication" placeholder="○ / △ / ×">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">⚡ 気になる症状</div>
+        <textarea class="ws-input" data-key="symptoms" placeholder="幻聴・不安・イライラ・眠気・だるさ etc."></textarea>
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">✨ 今日できたこと</div>
+        <textarea class="ws-input" data-key="achievement" placeholder="例：散歩した、ごはんを作った、友人と話した"></textarea>
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">📝 ひとことメモ</div>
+        <textarea class="ws-input" data-key="memo" placeholder="気づいたこと、感じたこと、なんでも"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h4>💡 記録のコツ</h4>
+    <p>完璧に書こうとしなくて大丈夫です。一言だけでもOK。「書けた」こと自体が、今日の「できたこと」のひとつです。</p>
+  </div>
+</section>
+
+<!-- ===== WORK 2: 再発予防プラン ===== -->
+<section class="work-section">
+  <div class="work-num" style="background:#fff3e0; color:#e65100;">WORK 2</div>
+  <h2 class="work-title">再発予防プラン</h2>
+  <p class="work-subtitle">自分の「調子のバロメーター」を知っておくことで、早めに対処できるようになります。主治医やご家族と一緒に考えてみましょう。</p>
+
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#e65100,#ff9800);">🛡️ わたしの再発予防プラン</div>
+    <div class="ws-body">
+      <div class="ws-row">
+        <div class="ws-label" style="color:#2e7d32;">😊 調子がいいときのサイン</div>
+        <textarea class="ws-input" data-key="good-signs" placeholder="例：よく眠れる、人と話したくなる、料理が楽しい、散歩に出られる"></textarea>
+      </div>
+      <div class="ws-row">
+        <div class="ws-label" style="color:#e65100;">⚠️ 注意サイン</div>
+        <textarea class="ws-input" data-key="warning-signs" placeholder="例：眠れなくなる、音に敏感になる、人と会いたくなくなる、疑い深くなる"></textarea>
+      </div>
+      <div class="ws-row">
+        <div class="ws-label" style="color:#1565c0;">🔧 注意サインが出たらやること</div>
+        <textarea class="ws-input" data-key="action-plan" placeholder="例：早めに寝る、主治医に連絡する、家族に伝える、頓服薬を飲む"></textarea>
+      </div>
+      <div class="ws-row">
+        <div class="ws-label" style="color:#7b1fa2;">📞 困ったときの相談先</div>
+        <textarea class="ws-input" data-key="contacts" placeholder="名前・電話番号（例：〇〇クリニック 03-XXXX-XXXX、家族の名前・番号）"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4>🔑 ポイント</h4>
+    <p>注意サインは人によって違います。過去に調子を崩したときのことを思い出しながら書いてみましょう。家族や支援者からの「外から見たサイン」も参考になります。</p>
+  </div>
+</section>
+
+<!-- ===== WORK 3: ストレス対処リスト ===== -->
+<section class="work-section">
+  <div class="work-num" style="background:#e8eaf6; color:#283593;">WORK 3</div>
+  <h2 class="work-title">ストレス対処リスト</h2>
+  <p class="work-subtitle">ストレスをゼロにすることはできません。でも、「自分に合った対処法」を持っておくことで、ストレスに振り回されにくくなります。</p>
+
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#283593,#5c6bc0);">🧘 わたしのストレス対処リスト</div>
+    <div class="ws-body">
+      <div class="ws-row">
+        <div class="ws-label">😣 ストレスを感じる場面</div>
+        <textarea class="ws-input" data-key="stressors" placeholder="例：人が多い場所、急な予定変更、家族との口論、疲れているとき"></textarea>
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">🌿 気持ちが落ち着く方法①</div>
+        <input type="text" class="ws-input" data-key="coping1" placeholder="例：深呼吸をする、好きな音楽を聴く、散歩する">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">🌿 気持ちが落ち着く方法②</div>
+        <input type="text" class="ws-input" data-key="coping2" placeholder="例：温かい飲み物を飲む、日記を書く、ペットと過ごす">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">🤝 助けを求められる人</div>
+        <input type="text" class="ws-input" data-key="support-person" placeholder="例：母、友人の〇〇さん、デイケアのスタッフ">
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h4>💡 対処法を選ぶコツ</h4>
+    <p>「お金がかからない」「一人でもできる」「5分以内にできる」ものを中心に選ぶと、いつでもどこでも実践しやすくなります。</p>
+  </div>
+</section>
+
+<!-- SCIENCE BOX -->
+<div class="science-box">
+  <h4>📚 セルフモニタリングの効果</h4>
+  <p>
+    研究によると、統合失調症の方が自分の症状や生活リズムを定期的に記録することで、再発の早期発見率が向上し、入院率の低下にもつながることが報告されています。セルフモニタリングは「自分の回復に主体的に関わる」力を育てる重要なツールです。記録を主治医やケアチームと共有することで、より的確なサポートにもつながります。
+  </p>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav-grid">
+  <a href="index.html" style="background:#e0f2f1;">
+    <span class="bn-icon">🧠</span>
+    <p class="bn-label" style="color:#004d40;">トップに戻る</p>
+  </a>
+  <a href="schizophrenia-education.html" style="background:linear-gradient(135deg,#e0f2f1,#b2dfdb);">
+    <span class="bn-icon">🌿</span>
+    <p class="bn-label" style="color:#004d40;">統合失調症の解説を読む</p>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+  <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
+</div>
+
+</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'schizophrenia-work-data';
+  const inputs = document.querySelectorAll('.ws-input');
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+  inputs.forEach((input, i) => {
+    const key = input.dataset.key || 'input-' + i;
+    if (saved[key]) input.value = saved[key];
+    input.addEventListener('input', () => {
+      saved[key] = input.value;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      showSaveIndicator();
+    });
+  });
+
+  function showSaveIndicator() {
+    let indicator = document.getElementById('save-indicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'save-indicator';
+      indicator.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#4caf50;color:#fff;padding:0.5rem 1rem;border-radius:10px;font-size:0.8rem;font-weight:700;z-index:200;opacity:0;transition:opacity 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);';
+      document.body.appendChild(indicator);
+    }
+    indicator.textContent = '✓ 保存しました';
+    indicator.style.opacity = '1';
+    clearTimeout(indicator._timeout);
+    indicator._timeout = setTimeout(() => indicator.style.opacity = '0', 1500);
+  }
+
+  document.getElementById('clear-btn')?.addEventListener('click', () => {
+    if (confirm('入力内容をすべて消去しますか？')) {
+      localStorage.removeItem(STORAGE_KEY);
+      inputs.forEach(input => input.value = '');
+    }
+  });
+})();
+</script>
+</body>
+</html>

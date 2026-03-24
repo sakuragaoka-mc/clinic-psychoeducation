@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双極性障害の理解と付き合い方 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a237e;
+    --primary-light: #e8eaf6;
+    --primary-dark: #283593;
+    --accent: #f57c00;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #fffdf8;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #3f51b5;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #6b6b8d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 35%, #f57c00 65%, #ffb300 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #ffcc80;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== TWO-COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .bipolar-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .bipolar-card.mania {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border: 2px solid rgba(245,124,0,0.2);
+  }
+
+  .bipolar-card.depression {
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+    border: 2px solid rgba(26,35,126,0.2);
+  }
+
+  .bipolar-card .bc-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .bipolar-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .bipolar-card.mania h3 { color: #e65100; }
+  .bipolar-card.depression h3 { color: #1a237e; }
+
+  .bipolar-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== TYPE CARDS ===== */
+  .type-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .type-card.type1 { border-color: #1a237e; }
+  .type-card.type2 { border-color: #f57c00; }
+
+  .type-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .type-card.type1 h3 { color: #1a237e; }
+  .type-card.type2 h3 { color: #e65100; }
+
+  .type-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== STEP CARDS ===== */
+  .step-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .step-content h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== PREVENTION LIST ===== */
+  .prevention-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prevention-list li {
+    font-size: 0.92rem;
+    color: var(--text);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(26,35,126,0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.7;
+  }
+
+  .prevention-list li:last-child { border-bottom: none; }
+
+  .prevention-list li::before {
+    content: '✓';
+    color: #1a237e;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(245,124,0,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #e65100;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #e8eaf6 0%, #ede7f6 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(26,35,126,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #1a237e;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #3f51b5;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #e8eaf6;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #c5cae9; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .type-card, .step-card, .bipolar-card { break-inside: avoid; }
+    .tip-box, .science-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">&larr; こころの学び トップへ</a>
+  <a href="bipolar-work.html" class="nav-link-secondary">ワークシート &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">&#9878;&#65039;</div>
+  <h1>双極性障害の理解と付き合い方</h1>
+  <p class="subtitle">〜 気分の波を知り、コントロールする 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 双極性障害とは -->
+  <section>
+    <div class="section-label" style="background:#e8eaf6;color:#283593;">🧠 Section 01</div>
+    <h2 class="section-title">双極性障害とは</h2>
+
+    <div class="card">
+      <p>双極性障害は、気分が異常に高揚する「躁（そう）状態」と、ひどく落ち込む「うつ状態」を繰り返す脳の病気です。「躁うつ病」とも呼ばれます。単なる気分の波ではなく、脳の神経伝達物質やリズムの制御に関わる生物学的な疾患です。</p>
+    </div>
+
+    <div class="two-col">
+      <div class="bipolar-card mania">
+        <div class="bc-icon">⬆️</div>
+        <h3>躁（そう）状態</h3>
+        <p>気分の高揚・万能感、睡眠の必要が減る、多弁・多動、衝動的な行動（浪費・無謀な計画）、怒りっぽくなる。本人は「調子がいい」と感じるため、病気だと気づきにくいのが特徴。</p>
+      </div>
+      <div class="bipolar-card depression">
+        <div class="bc-icon">⬇️</div>
+        <h3>うつ状態</h3>
+        <p>強い気分の落ち込み、意欲・興味の消失、疲労感、自責感、死にたい気持ち。双極性障害のうつはうつ病と似ていますが、治療法が異なるため正確な診断が重要です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 双極I型とII型 -->
+  <section>
+    <div class="section-label" style="background:#fff3e0;color:#e65100;">📋 Section 02</div>
+    <h2 class="section-title">双極I型とII型</h2>
+
+    <div class="type-card type1">
+      <h3>双極I型</h3>
+      <p>明確な躁状態（社会生活に支障が出るレベル）＋うつ状態。躁状態では入院が必要になることも。</p>
+    </div>
+
+    <div class="type-card type2">
+      <h3>双極II型</h3>
+      <p>軽躁状態（比較的軽い気分の高揚）＋うつ状態。うつの期間が長いため、うつ病と誤診されやすい。正しい診断まで平均7〜10年かかるとも言われています。</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 治療のポイント -->
+  <section>
+    <div class="section-label" style="background:#e8eaf6;color:#283593;">🛠️ Section 03</div>
+    <h2 class="section-title">治療のポイント</h2>
+
+    <div class="step-card">
+      <div class="step-icon">💊</div>
+      <div class="step-content">
+        <h3>気分安定薬が治療の中心</h3>
+        <p>リチウム、バルプロ酸、ラモトリギンなどの気分安定薬が基本。抗うつ薬の単独使用は躁転のリスクがあり注意が必要。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-icon">📊</div>
+      <div class="step-content">
+        <h3>生活リズムの安定化</h3>
+        <p>睡眠・起床時間の固定、社会的リズム療法（IPSRT）。不規則な生活が気分エピソードの引き金に。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-icon">📝</div>
+      <div class="step-content">
+        <h3>気分の記録</h3>
+        <p>毎日の気分・睡眠・活動を記録し、波のパターンを把握。早期に変化に気づき、対処する。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 再発を防ぐために -->
+  <section>
+    <div class="section-label" style="background:#e0f2f1;color:#00695c;">🔄 Section 04</div>
+    <h2 class="section-title">再発を防ぐために</h2>
+
+    <div class="card">
+      <ul class="prevention-list">
+        <li>服薬の継続（「調子がいい＝治った」ではない）</li>
+        <li>睡眠を守る（徹夜・不規則は最大のリスク）</li>
+        <li>ストレスの管理</li>
+        <li>アルコール・カフェインの制限</li>
+        <li>家族や支援者との連携</li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <div class="tb-header">🏥 躁状態のサインに気づいたら</div>
+      <p>睡眠時間が減っても平気、次々とアイデアが湧く、お金を使いすぎる、怒りっぽい——こうした変化は躁の始まりかもしれません。ご本人は気づきにくいので、家族や信頼できる人と「注意サイン」を共有しておくことが大切です。</p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">📚 エビデンス</div>
+      <p>双極性障害は生涯にわたる管理が必要ですが、適切な薬物療法と心理教育により、気分エピソードの頻度と重症度を大幅に減らせることが示されています（Colom et al., 2003）。特に心理教育プログラムへの参加は、再発率を約50%減少させるという報告があります。</p>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">&larr; トップに戻る</a>
+    <a href="bipolar-work.html">ワークに取り組む &rarr;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+    <p style="margin-top:0.5rem;">&copy; 2026 こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>

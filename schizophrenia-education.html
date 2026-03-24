@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統合失調症の理解と回復 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #00695c;
+    --primary-light: #e0f2f1;
+    --primary-dark: #004d40;
+    --accent: #ff9800;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #f9fffe;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #3f51b5;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #6b6b8d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #004d40 0%, #00695c 40%, #00897b 70%, #4db6ac 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(77,182,172,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #b2dfdb;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== TWO-COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .info-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .info-card.gene {
+    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+    border: 2px solid rgba(0,105,92,0.2);
+  }
+
+  .info-card.recovery {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 2px solid rgba(46,125,50,0.2);
+  }
+
+  .info-card .ic-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .info-card.gene h3 { color: #004d40; }
+  .info-card.recovery h3 { color: #2e7d32; }
+
+  .info-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== SYMPTOM CARDS ===== */
+  .symptom-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .symptom-card.positive { border-color: #e65100; }
+  .symptom-card.negative { border-color: #5c6bc0; }
+  .symptom-card.cognitive { border-color: #00897b; }
+
+  .symptom-card .s-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .symptom-card .s-icon {
+    font-size: 1.6rem;
+  }
+
+  .symptom-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .symptom-card.positive h3 { color: #e65100; }
+  .symptom-card.negative h3 { color: #5c6bc0; }
+  .symptom-card.cognitive h3 { color: #00897b; }
+
+  .symptom-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== STEP CARDS ===== */
+  .step-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .step-content h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(245,124,0,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #e65100;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(0,105,92,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #004d40;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #004d40;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #e0f2f1;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #b2dfdb; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .symptom-card, .step-card, .info-card { break-inside: avoid; }
+    .tip-box, .science-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">← こころの学び トップへ</a>
+  <a href="schizophrenia-work.html" class="nav-link-secondary">ワークシート →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">🌿</div>
+  <h1>統合失調症の理解と回復</h1>
+  <p class="subtitle">〜 正しく知ることが、回復の第一歩 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 統合失調症とは -->
+  <section>
+    <div class="section-label" style="background:#e0f2f1; color:#004d40;">🧠 Section 01</div>
+    <h2 class="section-title">統合失調症とは</h2>
+
+    <div class="card">
+      <h3>💡 まず知っていただきたいこと</h3>
+      <p>統合失調症は約100人に1人が経験する、決して珍しくない脳の病気です。脳内の神経伝達物質（主にドーパミン）のバランスが乱れることで、考えや感覚に影響が出ます。適切な治療で多くの方が回復に向かいます。</p>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card gene">
+        <div class="ic-icon">🧬</div>
+        <h3>脳の病気であること</h3>
+        <p>統合失調症は「性格の問題」や「育て方のせい」ではありません。脳の神経回路の働き方に違いが生じることで発症します。ストレスや遺伝的素因など、複数の要因が重なって発症すると考えられています（ストレス脆弱性モデル）。</p>
+      </div>
+      <div class="info-card recovery">
+        <div class="ic-icon">📊</div>
+        <h3>回復できる病気</h3>
+        <p>早期発見・早期治療で予後が大きく改善します。薬物療法で症状をコントロールし、リハビリテーションで社会生活を取り戻していくことができます。「治らない病気」という古い認識は間違いです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 主な症状 -->
+  <section>
+    <div class="section-label" style="background:#fff3e0; color:#e65100;">📋 Section 02</div>
+    <h2 class="section-title">主な症状</h2>
+
+    <div class="symptom-card positive">
+      <div class="s-header">
+        <span class="s-icon">⚡</span>
+        <h3>陽性症状（増えるもの）</h3>
+      </div>
+      <p>幻聴（聞こえないはずの声が聞こえる）、妄想（現実にはないことを確信する）、思考の混乱、興奮。薬が最も効きやすい症状です。</p>
+    </div>
+
+    <div class="symptom-card negative">
+      <div class="s-header">
+        <span class="s-icon">🌀</span>
+        <h3>陰性症状（減るもの）</h3>
+      </div>
+      <p>意欲の低下、感情表現の減少、引きこもり、楽しみの減少。ゆっくりと改善していくため、焦らないことが大切。</p>
+    </div>
+
+    <div class="symptom-card cognitive">
+      <div class="s-header">
+        <span class="s-icon">🧩</span>
+        <h3>認知機能の症状</h3>
+      </div>
+      <p>集中力の低下、記憶力の低下、段取りが立てにくい。リハビリテーション（認知機能リハ）で改善が期待できます。</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 治療の3本柱 -->
+  <section>
+    <div class="section-label" style="background:#e8eaf6; color:#283593;">🏥 Section 03</div>
+    <h2 class="section-title">治療の3本柱</h2>
+
+    <div class="step-card">
+      <div class="step-icon">💊</div>
+      <div class="step-content">
+        <h3>薬物療法</h3>
+        <p>抗精神病薬でドーパミンのバランスを整えます。「症状が落ち着いたから」と自己判断で薬をやめると再発リスクが高まります。副作用が気になるときは主治医に相談を。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-icon">🗣️</div>
+      <div class="step-content">
+        <h3>心理社会的治療</h3>
+        <p>認知行動療法（CBT）、社会生活技能訓練（SST）、心理教育。病気の理解を深め、対処スキルを身につけます。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-icon">🏠</div>
+      <div class="step-content">
+        <h3>リハビリテーション</h3>
+        <p>デイケア、就労支援、グループホームなど。社会参加を段階的に進めていきます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 家族へのメッセージ -->
+  <section>
+    <div class="section-label" style="background:#fce4ec; color:#c2185b;">💌 Section 04</div>
+    <h2 class="section-title">家族へのメッセージ</h2>
+
+    <div class="card">
+      <h3>🤝 ご家族の方へ</h3>
+      <p>家族の方も疲れて当然です。本人を支えながらも、ご自身の休息とサポート（家族会・相談窓口）も大切にしてください。「批判」や「過保護」ではなく、「温かく見守る」姿勢が本人の回復を助けます。</p>
+    </div>
+  </section>
+
+  <!-- TIP BOX -->
+  <div class="tip-box">
+    <div class="tb-header">🏥 再発のサイン</div>
+    <p>不眠が続く、独り言が増える、イライラしやすくなる、人との交流を避ける——これらが現れたら早めに主治医に相談してください。</p>
+  </div>
+
+  <!-- SCIENCE BOX -->
+  <div class="science-box">
+    <div class="sb-header">📚 治療の進歩</div>
+    <p>統合失調症の治療は過去30年で大きく進歩しました。第二世代抗精神病薬の登場、早期介入プログラムの普及、リカバリー概念の広がりにより、多くの患者さんが地域で自分らしい生活を送れるようになっています。</p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">← トップに戻る</a>
+    <a href="schizophrenia-work.html">ワークに取り組む →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+    <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>
