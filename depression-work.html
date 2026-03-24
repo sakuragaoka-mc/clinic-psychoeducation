@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #2e7d32;
-    --primary-light: #e8f5e9;
-    --primary-dark: #1b5e20;
-    --accent: #ff9800;
+    --primary: #6aada8;
+    --primary-light: #edf6f5;
+    --primary-dark: #4d968f;
+    --accent: #7aad78;
     --text: #3d3935;
     --text-light: #827c73;
-    --bg: #fffdf8;
+    --bg: #faf9f8;
     --card: #fff;
   }
 
@@ -41,14 +41,14 @@
   }
 
   .nav-link-primary {
-    color: #3f51b5;
+    color: #c06d86;
     font-weight: 700;
     font-size: 0.82rem;
     text-decoration: none;
   }
 
   .nav-link-secondary {
-    color: #6b6b8d;
+    color: #4d968f;
     font-weight: 600;
     font-size: 0.78rem;
     text-decoration: none;
@@ -62,7 +62,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 40%, #43a047 70%, #ff9800 100%);
+    background: linear-gradient(135deg, #5a9a68 0%, #6aad78 40%, #8dbd8b 70%, #6aada8 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -80,7 +80,7 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+      radial-gradient(circle at 80% 70%, rgba(106,173,168,0.12) 0%, transparent 50%);
   }
 
   .hero::after {
@@ -117,7 +117,7 @@
   }
 
   .hero .subtitle {
-    color: #ffcc80;
+    color: #c3ddb5;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     font-weight: 500;
     margin-top: 0.8rem;
@@ -279,9 +279,10 @@
   }
 
   .tracker-table th {
-    background: #f5f5f5;
+    background: #edf6f5;
     font-weight: 700;
     font-size: 0.72rem;
+    color: #6aada8;
   }
 
   .tracker-table td {
@@ -291,8 +292,9 @@
 
   .tracker-table .day-header {
     font-weight: 700;
-    background: #fafafa;
+    background: #f5faf8;
     width: 40px;
+    color: #6aada8;
   }
 
   .tracker-table input.ws-input {
@@ -306,15 +308,15 @@
 
   /* ===== TIP BOX ===== */
   .tip-box {
-    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    background: linear-gradient(135deg, #fef6ec, #fef6ec);
     border-radius: 16px;
     padding: 1.3rem;
     margin: 1rem 0;
-    border: 2px solid rgba(255,152,0,0.15);
+    border: 2px solid rgba(196,128,80,0.15);
   }
 
   .tip-box h4 {
-    color: #e65100;
+    color: #c48050;
     font-size: 0.92rem;
     margin-bottom: 0.4rem;
   }
@@ -323,6 +325,31 @@
     font-size: 0.82rem;
     color: var(--text-light);
     line-height: 1.7;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #edf6f5 0%, #c8e8e5 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(106,173,168,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #6aada8;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
   }
 
   /* ===== BOTTOM NAV ===== */
@@ -338,15 +365,15 @@
   .bottom-nav a {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #3f51b5;
+    color: #6aada8;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: #e8eaf6;
+    background: #edf6f5;
     transition: background 0.2s;
   }
 
-  .bottom-nav a:hover { background: #c5cae9; }
+  .bottom-nav a:hover { background: #c8e8e5; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -360,25 +387,16 @@
 
   /* ===== PRINT ===== */
   @media print {
-    body { font-size: 9pt; line-height: 1.4; }
-    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer { display: none !important; }
-    .header, .hero { padding: 1rem !important; min-height: auto !important; }
-    .hero::before, .hero::after, .header::before, .header::after { display: none !important; }
-    .container { max-width: 100%; padding: 0 0.5rem; }
-    .card, .worksheet, .tip-box, .science-box, .work-section, .intro {
-      break-inside: avoid;
-      margin: 0.4rem 0;
-      padding: 0.6rem;
-      box-shadow: none;
-    }
-    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; }
-    .work-num { margin-bottom: 0.3rem; }
-    .work-title { font-size: 1rem; margin-bottom: 0.2rem; }
-    .work-subtitle { font-size: 0.75rem; margin-bottom: 0.4rem; }
-    .anchor-grid, .ifthen { margin: 0.3rem 0; }
-    .tracker-table th, .tracker-table td { padding: 0.2rem; font-size: 7pt; }
-    h1 { font-size: 1.2rem !important; }
-    @page { size: A4; margin: 10mm; }
+    body { font-size: 8pt; line-height: 1.3; }
+    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer, .hero, .intro { display: none !important; }
+    .container { max-width: 100%; padding: 0 5mm; }
+    .work-section { break-inside: avoid; margin: 0.3rem 0; padding: 0.4rem; box-shadow: none; border: 1px solid #ddd; }
+    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; padding: 0.1rem 0 !important; }
+    .tracker-table th, .tracker-table td { padding: 0.15rem; font-size: 6.5pt; }
+    .card, .tip-box, .science-box { display: none !important; }
+    @page { size: A4; margin: 8mm; }
+    body::before { content: '行動活性化ワークシート — こころのクリニック桜が丘'; display: block; font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 1px solid #ccc; }
+    body::after { content: '患者ID:＿＿＿＿＿＿  記入日:＿＿＿＿年＿＿月＿＿日  © こころのクリニック桜が丘'; display: block; font-size: 7pt; text-align: center; margin-top: 3mm; padding-top: 2mm; border-top: 1px solid #ccc; color: #999; }
   }
 </style>
 </head>
@@ -409,12 +427,12 @@
 </div>
 
 <div class="print-btn-wrap" style="text-align:right; margin:-0.5rem 0 1rem;">
-  <button onclick="window.print()" style="background:linear-gradient(135deg,#3f51b5,#5c6bc0);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(63,81,181,0.3);">📄 PDF出力 / スクショ用</button>
+  <button onclick="window.print()" style="background:linear-gradient(135deg,#6aada8,#7aad78);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(106,173,168,0.3);">📄 PDF出力 / スクショ用</button>
 </div>
 
 <!-- ===== WORK 1: 活動と気分の記録 ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#f0f5ef; color:#7aad78;">WORK 1</div>
+  <div class="work-num" style="background:#edf6f5; color:#6aada8;">WORK 1</div>
   <h2 class="work-title">活動と気分の記録（1週間）</h2>
   <p class="work-subtitle">毎日の活動と気分を記録して、「どんな活動が気分に影響するか」を見つけましょう。</p>
 
@@ -426,7 +444,7 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#2e7d32,#43a047);">📊 活動と気分のトラッカー</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#6aada8,#7aad78);">📊 活動と気分のトラッカー</div>
     <div class="ws-body" style="overflow-x:auto;">
       <table class="tracker-table">
         <thead>
@@ -442,59 +460,59 @@
         <tbody>
           <tr>
             <td class="day-header">月</td>
-            <td><input type="text" class="ws-input" data-key="activity-mon" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-mon" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-mon" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-mon" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-mon" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-mon" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-mon" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-mon" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-mon" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-mon" placeholder="気づき"></td>
           </tr>
           <tr>
             <td class="day-header">火</td>
-            <td><input type="text" class="ws-input" data-key="activity-tue" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-tue" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-tue" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-tue" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-tue" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-tue" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-tue" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-tue" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-tue" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-tue" placeholder="気づき"></td>
           </tr>
           <tr>
             <td class="day-header">水</td>
-            <td><input type="text" class="ws-input" data-key="activity-wed" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-wed" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-wed" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-wed" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-wed" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-wed" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-wed" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-wed" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-wed" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-wed" placeholder="気づき"></td>
           </tr>
           <tr>
             <td class="day-header">木</td>
-            <td><input type="text" class="ws-input" data-key="activity-thu" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-thu" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-thu" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-thu" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-thu" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-thu" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-thu" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-thu" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-thu" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-thu" placeholder="気づき"></td>
           </tr>
           <tr>
             <td class="day-header">金</td>
-            <td><input type="text" class="ws-input" data-key="activity-fri" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-fri" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-fri" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-fri" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-fri" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-fri" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-fri" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-fri" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-fri" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-fri" placeholder="気づき"></td>
           </tr>
           <tr>
             <td class="day-header">土</td>
-            <td><input type="text" class="ws-input" data-key="activity-sat" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-sat" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-sat" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-sat" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-sat" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-sat" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-sat" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-sat" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-sat" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-sat" placeholder="気づき"></td>
           </tr>
           <tr>
             <td class="day-header">日</td>
-            <td><input type="text" class="ws-input" data-key="activity-sun" placeholder="活動"></td>
-            <td><input type="text" class="ws-input" data-key="mood-pre-sun" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="mood-post-sun" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="achieve-sun" placeholder="1-5"></td>
-            <td><input type="text" class="ws-input" data-key="note-sun" placeholder="気づき"></td>
+            <td><input type="text" class="ws-input" data-key="w1-activity-sun" placeholder="活動"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-pre-sun" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-mood-post-sun" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-achieve-sun" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="w1-note-sun" placeholder="気づき"></td>
           </tr>
         </tbody>
       </table>
@@ -509,7 +527,7 @@
 
 <!-- ===== WORK 2: 快活動プランニング ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#fff3e0; color:#e65100;">WORK 2</div>
+  <div class="work-num" style="background:#fef6ec; color:#c48050;">WORK 2</div>
   <h2 class="work-title">快活動プランニング</h2>
   <p class="work-subtitle">「楽しい」「心地よい」と感じる活動を意図的にスケジュールに組み込みます。</p>
 
@@ -521,7 +539,7 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#ff9800,#f57c00);">📝 快活動プラン</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#c48050,#d4a070);">📝 快活動プラン</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label">昔好きだったこと<br>楽しかったこと</div>
@@ -553,7 +571,7 @@
 
 <!-- ===== WORK 3: 小さな目標設定 ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#f0f5ef; color:#1b5e20;">WORK 3</div>
+  <div class="work-num" style="background:#f0f5ef; color:#5a9a68;">WORK 3</div>
   <h2 class="work-title">小さな目標設定</h2>
   <p class="work-subtitle">大きな目標ではなく、「確実にできること」から始めます。小さな成功体験の積み重ねが回復への道です。</p>
 
@@ -565,7 +583,7 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#43a047,#2e7d32);">📝 小さな目標シート</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#7aad78,#6aada8);">📝 小さな目標シート</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label">今日できる<br>たった1つのこと</div>
@@ -606,7 +624,6 @@
 <!-- FOOTER -->
 <div class="footer" style="text-align:center;">
   <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
-  <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
 </div>
 
 </div>
@@ -632,7 +649,7 @@
     if (!indicator) {
       indicator = document.createElement('div');
       indicator.id = 'save-indicator';
-      indicator.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#4caf50;color:#fff;padding:0.5rem 1rem;border-radius:10px;font-size:0.8rem;font-weight:700;z-index:200;opacity:0;transition:opacity 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);';
+      indicator.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#6aada8;color:#fff;padding:0.5rem 1rem;border-radius:10px;font-size:0.8rem;font-weight:700;z-index:200;opacity:0;transition:opacity 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);';
       document.body.appendChild(indicator);
     }
     indicator.textContent = '✓ 保存しました';

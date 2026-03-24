@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --night: #1a1a3e;
-    --deep-night: #0d0d2b;
-    --dawn: #ff7b54;
-    --morning: #ffb26b;
-    --sky: #6ec6ff;
-    --light-sky: #e8f4fd;
-    --melatonin: #7c5cbf;
-    --cortisol: #ff9a3c;
-    --body-clock: #3dd6c8;
-    --sleep-pressure: #5b86e5;
+    --night: #4d5080;
+    --deep-night: #3a3a68;
+    --dawn: #e8a88a;
+    --morning: #f0c898;
+    --sky: #8dd2f5;
+    --light-sky: #f0f7fd;
+    --melatonin: #9b85cf;
+    --cortisol: #e8b468;
+    --body-clock: #6acdbc;
+    --sleep-pressure: #7bafd5;
     --card-bg: rgba(255,255,255,0.92);
     --text: #3d3935;
     --text-light: #827c73;
@@ -34,7 +34,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, var(--night) 0%, #2d1b69 40%, #4a2c8a 60%, var(--dawn) 100%);
+    background: linear-gradient(135deg, var(--night) 0%, #5d4b8a 40%, #7a6baa 60%, var(--dawn) 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -162,13 +162,13 @@
   }
 
   .process-card.clock {
-    background: linear-gradient(135deg, #e0f7f5 0%, #f0faf9 100%);
-    border: 2px solid rgba(61,214,200,0.3);
+    background: linear-gradient(135deg, #edf6f5 0%, #f0faf9 100%);
+    border: 2px solid rgba(106,205,188,0.3);
   }
 
   .process-card.pressure {
     background: linear-gradient(135deg, #e4ecfa 0%, #f0f4ff 100%);
-    border: 2px solid rgba(91,134,229,0.3);
+    border: 2px solid rgba(123,175,213,0.3);
   }
 
   .process-icon {
@@ -183,7 +183,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .process-card.clock h3 { color: #1a9e8f; }
+  .process-card.clock h3 { color: #6aada8; }
   .process-card.pressure h3 { color: #4a6ec4; }
 
   .process-card p {
@@ -391,7 +391,7 @@
     margin-bottom: 0.3rem;
   }
 
-  .advice-item.do h4 { color: #2e7d32; }
+  .advice-item.do h4 { color: #7aad78; }
   .advice-item.dont h4 { color: #c62828; }
 
   .advice-item p {
@@ -550,7 +550,7 @@
   .technique-item.light { background: linear-gradient(135deg, #fff8e1, #fff3e0); }
   .technique-item.temp { background: linear-gradient(135deg, #e0f7fa, #e1f5fe); }
   .technique-item.sound { background: linear-gradient(135deg, #fce4ec, #f3e5f5); }
-  .technique-item.move { background: linear-gradient(135deg, #e8f5e9, #f1f8e9); }
+  .technique-item.move { background: linear-gradient(135deg, #f0f5ef, #f1f8e9); }
 
   .technique-item .tech-icon {
     font-size: 1.5rem;
@@ -592,11 +592,11 @@
 
   /* ===== EXCURSION SECTION ===== */
   .ensoku-box {
-    background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+    background: linear-gradient(135deg, #edeef6, #d5d6e9);
     border-radius: 20px;
     padding: 2rem;
     margin-bottom: 1.2rem;
-    border: 2px solid rgba(63,81,181,0.15);
+    border: 2px solid rgba(93,75,138,0.15);
     position: relative;
     overflow: hidden;
   }
@@ -615,7 +615,7 @@
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 1.15rem;
     font-weight: 800;
-    color: #283593;
+    color: #5d4b8a;
     margin-bottom: 0.7rem;
   }
 
@@ -709,13 +709,13 @@
     border-radius: 16px;
     padding: 1.3rem;
     margin-top: 1rem;
-    border-left: 4px solid #3f51b5;
+    border-left: 4px solid #c06d86;
   }
 
   .ensoku-takeaway h4 {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #283593;
+    color: #5d4b8a;
     margin-bottom: 0.4rem;
   }
 
@@ -834,13 +834,13 @@
     gap: 0.4rem;
     font-size: 0.82rem;
     font-weight: 700;
-    color: #3f51b5;
+    color: #c06d86;
   }
   .nav-link-secondary {
     text-decoration: none;
     font-size: 0.78rem;
     font-weight: 600;
-    color: #6b6b8d;
+    color: #827c73;
   }
 
   /* ===== PRINT ===== */
@@ -870,7 +870,7 @@
 
 <!-- ===== SECTION 1: 2つのしくみ ===== -->
 <section>
-  <div class="section-label" style="background:#e0f7f5; color:#1a9e8f;">🧠 基本のしくみ</div>
+  <div class="section-label" style="background:#edf6f5; color:#6aada8;">🧠 基本のしくみ</div>
   <h2 class="section-title">眠りとめざめは<br>2つのしくみで決まる</h2>
   <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
     私たちが「眠くなる・目が覚める」のは、気合いや根性ではなく、脳の中の<strong>2つの生体システム</strong>で自動的にコントロールされています。
@@ -937,7 +937,7 @@
     </div>
 
     <div class="tl-item">
-      <div class="tl-dot" style="background:linear-gradient(135deg,#283593,#1a237e);">😴</div>
+      <div class="tl-dot" style="background:linear-gradient(135deg,#5d4b8a,#4d5080);">😴</div>
       <div class="tl-content">
         <div class="tl-time">睡眠中</div>
         <div class="tl-title">脳のメンテナンス中</div>
@@ -1139,7 +1139,7 @@
 
 <!-- ===== SECTION 6: 遠足の日に起きられるワケ ===== -->
 <section>
-  <div class="section-label" style="background:#faeef1; color:#283593;">🎒 素朴なギモン</div>
+  <div class="section-label" style="background:#faeef1; color:#5d4b8a;">🎒 素朴なギモン</div>
   <h2 class="section-title">「遠足の日は起きられるのに<br>なんで学校の日はダメなの？」</h2>
 
   <div class="ensoku-box">
@@ -1207,7 +1207,7 @@
     <div style="background:linear-gradient(135deg,#f5f5f5,#eeeeee); border-radius:14px; padding:1.2rem; margin-top:1rem;">
       <p style="font-size:0.85rem; font-weight:700; text-align:center; margin-bottom:0.6rem;">朝スッキリ起きるための3条件</p>
       <div style="display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:center;">
-        <span style="background:#e0f7f5; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#00796b;">① 体内時計が合っている</span>
+        <span style="background:#edf6f5; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#00796b;">① 体内時計が合っている</span>
         <span style="background:#e3f2fd; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#1565c0;">② 十分な睡眠がとれている</span>
         <span style="background:#fff3e0; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#e65100;">③ 覚醒の動機がある</span>
       </div>
@@ -1252,7 +1252,7 @@
 
 <!-- ===== SECTION 7: さらなる覚醒の仮説 ===== -->
 <section>
-  <div class="section-label" style="background:#faeef1; color:#283593;">🔬 もう少し深く</div>
+  <div class="section-label" style="background:#faeef1; color:#5d4b8a;">🔬 もう少し深く</div>
   <h2 class="section-title">覚醒を支える<br>もうひとつの仕組みたち</h2>
   <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
     ここまで説明した「体内時計」「睡眠圧」「ドーパミン」に加えて、朝の覚醒に関わる重要な仕組みがあります。これらを知ると、<strong>なぜ「遠足の日は起きられる」のか</strong>がもっと立体的に理解できます。
@@ -1313,7 +1313,7 @@
       <div style="display:flex; align-items:center; font-size:1.5rem; padding:0 0.3rem;">⇄</div>
       <div style="background:#faeef1; padding:0.8rem 1.2rem; border-radius:14px; text-align:center; flex:1; min-width:140px;">
         <p style="font-size:1.2rem; margin-bottom:0.2rem;">😴</p>
-        <p style="font-size:0.78rem; font-weight:700; color:#283593;">睡眠中枢</p>
+        <p style="font-size:0.78rem; font-weight:700; color:#5d4b8a;">睡眠中枢</p>
         <p style="font-size:0.72rem; color:var(--text-light);">VLPO<br>（腹外側視索前野）</p>
       </div>
     </div>
@@ -1322,8 +1322,8 @@
     </p>
   </div>
 
-  <div class="teen-highlight" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9); border-color:rgba(63,81,181,0.2);">
-    <h3 style="color:#283593;">🧩 全体像：覚醒は「チーム戦」</h3>
+  <div class="teen-highlight" style="background:linear-gradient(135deg,#edeef6,#d5d6e9); border-color:rgba(93,75,138,0.2);">
+    <h3 style="color:#5d4b8a;">🧩 全体像：覚醒は「チーム戦」</h3>
     <p style="font-size:0.9rem; line-height:1.8;">
       朝起きるという一見シンプルな行為は、実は<strong>複数のシステムが協力してはじめて成立</strong>しています。
     </p>

@@ -7,11 +7,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --morning: #ff9800;
-    --sky: #42a5f5;
-    --green: #66bb6a;
-    --purple: #7e57c2;
-    --pink: #ec407a;
+    --morning: #f0c898;
+    --sky: #8dd2f5;
+    --green: #7aad78;
+    --purple: #9b85cf;
+    --pink: #c06d86;
     --text: #3d3935;
     --text-light: #827c73;
     --bg: #fafafa;
@@ -28,7 +28,7 @@
   }
 
   .header {
-    background: linear-gradient(135deg, #1a237e 0%, #283593 30%, #3949ab 50%, var(--morning) 100%);
+    background: linear-gradient(135deg, #4d5080 0%, #5d4b8a 30%, #7a6baa 50%, var(--morning) 100%);
     padding: 2.5rem 1.5rem;
     text-align: center;
     position: relative;
@@ -55,7 +55,7 @@
   }
 
   .header p {
-    color: #ffcc80;
+    color: #f0dcc0;
     font-size: 0.9rem;
     margin-top: 0.4rem;
     position: relative;
@@ -77,7 +77,7 @@
     font-size: 1.05rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #1565c0;
+    color: #5d7aaa;
   }
 
   .intro p {
@@ -125,7 +125,7 @@
     padding: 0.15rem 0.6rem;
     border-radius: 8px;
     background: #e3f2fd;
-    color: #1565c0;
+    color: #5d7aaa;
     margin-bottom: 0.6rem;
   }
 
@@ -257,7 +257,7 @@
   }
 
   .ifthen-then {
-    background: #e8f5e9;
+    background: #f0f5ef;
   }
 
   .ifthen-label {
@@ -269,7 +269,7 @@
   }
 
   .ifthen-if .ifthen-label { color: #c62828; }
-  .ifthen-then .ifthen-label { color: #2e7d32; }
+  .ifthen-then .ifthen-label { color: #7aad78; }
 
   .ifthen-text {
     font-size: 0.85rem;
@@ -300,6 +300,25 @@
   .tracker-table td {
     background: #fff;
     min-height: 2rem;
+    padding: 0.2rem;
+  }
+
+  .tracker-table td .ws-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px dotted #ddd;
+    font-family: inherit;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.1rem;
+    color: var(--text);
+    background: transparent;
+    text-align: center;
+    min-height: 1.5rem;
+  }
+
+  .tracker-table td .ws-input::placeholder {
+    color: #ccc;
+    font-size: 0.68rem;
   }
 
   .tracker-table .day-header {
@@ -331,15 +350,15 @@
 
   /* ===== SCIENCE BOX ===== */
   .science-box {
-    background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+    background: linear-gradient(135deg, #edeef6, #d5d6e9);
     border-radius: 16px;
     padding: 1.3rem;
     margin: 1rem 0;
-    border: 2px solid rgba(63,81,181,0.12);
+    border: 2px solid rgba(93,75,138,0.12);
   }
 
   .science-box h4 {
-    color: #283593;
+    color: #5d4b8a;
     font-size: 0.88rem;
     margin-bottom: 0.4rem;
   }
@@ -379,35 +398,49 @@
     gap: 0.4rem;
     font-size: 0.82rem;
     font-weight: 700;
-    color: #3f51b5;
+    color: #c06d86;
   }
   .nav-link-secondary {
     text-decoration: none;
     font-size: 0.78rem;
     font-weight: 600;
-    color: #6b6b8d;
+    color: #827c73;
   }
 
+  /* ===== SAVE INDICATOR ===== */
+  #save-indicator {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #7aad78;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    z-index: 200;
+  }
+
+  /* ===== PRINT ===== */
   @media print {
-    body { font-size: 9pt; line-height: 1.4; }
-    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer { display: none !important; }
-    .header, .hero { padding: 1rem !important; min-height: auto !important; }
+    body { font-size: 8pt; line-height: 1.3; }
+    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer, .hero, .header, .intro { display: none !important; }
     .hero::before, .hero::after, .header::before, .header::after { display: none !important; }
-    .container { max-width: 100%; padding: 0 0.5rem; }
-    .card, .worksheet, .tip-box, .science-box, .work-section, .intro {
-      break-inside: avoid;
-      margin: 0.4rem 0;
-      padding: 0.6rem;
-      box-shadow: none;
-    }
-    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; }
+    .container { max-width: 100%; padding: 0 5mm; }
+    .work-section { break-inside: avoid; margin: 0.3rem 0; padding: 0.4rem; box-shadow: none; border: 1px solid #ddd; }
+    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; padding: 0.1rem 0 !important; }
+    .tracker-table th, .tracker-table td { padding: 0.15rem; font-size: 6.5pt; }
+    .card, .tip-box, .science-box { display: none !important; }
+    @page { size: A4; margin: 8mm; }
+    body::before { content: '朝の覚醒モチベーション ワークシート — こころのクリニック桜が丘'; display: block; font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 1px solid #ccc; }
+    body::after { content: '患者ID:＿＿＿＿＿＿  記入日:＿＿＿＿年＿＿月＿＿日  © こころのクリニック桜が丘'; display: block; font-size: 7pt; text-align: center; margin-top: 3mm; padding-top: 2mm; border-top: 1px solid #ccc; color: #999; }
     .work-num { margin-bottom: 0.3rem; }
     .work-title { font-size: 1rem; margin-bottom: 0.2rem; }
     .work-subtitle { font-size: 0.75rem; margin-bottom: 0.4rem; }
     .anchor-grid, .ifthen { margin: 0.3rem 0; }
-    .tracker-table th, .tracker-table td { padding: 0.2rem; font-size: 7pt; }
     h1 { font-size: 1.2rem !important; }
-    @page { size: A4; margin: 10mm; }
   }
 </style>
 </head>
@@ -435,7 +468,8 @@
 </div>
 
 <div class="print-btn-wrap" style="text-align:right; margin:-0.5rem 0 1rem;">
-  <button onclick="window.print()" style="background:linear-gradient(135deg,#3f51b5,#5c6bc0);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(63,81,181,0.3);">📄 PDF出力 / スクショ用</button>
+  <button onclick="window.print()" style="background:linear-gradient(135deg,#c06d86,#d48a9e);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(192,109,134,0.3);">📄 PDF出力 / スクショ用</button>
+  <button id="clear-btn" style="background:#f5f5f5;color:var(--text-light);border:1px solid #ddd;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;margin-left:0.5rem;">🗑 クリア</button>
 </div>
 
 <!-- ===== WORK 1: Morning Anchor ===== -->
@@ -458,7 +492,7 @@
       <h5>お気に入りの飲み物</h5>
       <p>好きなココア、カフェラテ、フルーツティーを朝専用にする</p>
     </div>
-    <div class="anchor-item" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">
+    <div class="anchor-item" style="background:linear-gradient(135deg,#f0f5ef,#d8e8d6);">
       <div class="ai-icon">🎧</div>
       <h5>朝だけプレイリスト</h5>
       <p>好きなアーティストの新曲を朝限定で解禁する</p>
@@ -476,19 +510,19 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,var(--morning),#ff7043);">📝 わたしの「朝アンカー」</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,var(--morning),#e8a88a);">📝 わたしの「朝アンカー」</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label">朝アンカー</div>
-        <input type="text" class="ws-input" placeholder="例：朝だけ特別ココア＋好きな音楽15分">
+        <input type="text" class="ws-input" data-key="w1-anchor" placeholder="例：朝だけ特別ココア＋好きな音楽15分">
       </div>
       <div class="ws-row">
         <div class="ws-label">なぜこれ？</div>
-        <input type="text" class="ws-input" placeholder="例：ココアが好きだけど普段は飲まないから特別感がある">
+        <input type="text" class="ws-input" data-key="w1-why" placeholder="例：ココアが好きだけど普段は飲まないから特別感がある">
       </div>
       <div class="ws-row">
         <div class="ws-label">前夜の準備</div>
-        <input type="text" class="ws-input" placeholder="例：マグカップとココアの粉を枕元に置いておく">
+        <input type="text" class="ws-input" data-key="w1-prep" placeholder="例：マグカップとココアの粉を枕元に置いておく">
       </div>
     </div>
   </div>
@@ -538,23 +572,23 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#66bb6a,#43a047);">📝 わたしの If-Then プラン</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#7aad78,#5a9a58);">📝 わたしの If-Then プラン</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label" style="color:#c62828;">If ①</div>
-        <input type="text" class="ws-input" placeholder="例：目覚ましが鳴ったら…">
+        <input type="text" class="ws-input" data-key="w2-if1" placeholder="例：目覚ましが鳴ったら…">
       </div>
       <div class="ws-row">
         <div class="ws-label" style="color:#7aad78;">Then ①</div>
-        <input type="text" class="ws-input" placeholder="例：すぐ立ち上がってカーテンを開ける">
+        <input type="text" class="ws-input" data-key="w2-then1" placeholder="例：すぐ立ち上がってカーテンを開ける">
       </div>
       <div class="ws-row">
         <div class="ws-label" style="color:#c62828;">If ②</div>
-        <input type="text" class="ws-input" placeholder="例：「もう少し寝たい」と思ったら…">
+        <input type="text" class="ws-input" data-key="w2-if2" placeholder="例：「もう少し寝たい」と思ったら…">
       </div>
       <div class="ws-row">
         <div class="ws-label" style="color:#7aad78;">Then ②</div>
-        <input type="text" class="ws-input" placeholder="例：「朝アンカー」のことを思い出す">
+        <input type="text" class="ws-input" data-key="w2-then2" placeholder="例：「朝アンカー」のことを思い出す">
       </div>
     </div>
   </div>
@@ -562,7 +596,7 @@
 
 <!-- ===== WORK 3: Values-Based Morning Vision ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#ede7f6; color:#5e35b1;">WORK 3</div>
+  <div class="work-num" style="background:#ede7f6; color:#7a6baa;">WORK 3</div>
   <h2 class="work-title">「なりたい自分の朝」を描く</h2>
   <p class="work-subtitle">価値に基づいた目標設定は、行動活性化療法の中核です。「〇〇しなきゃ」ではなく「〇〇な自分でいたい」から出発します。</p>
   <span class="evidence-tag">価値に基づく行動活性化（Values-Based BA）</span>
@@ -575,23 +609,23 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#7e57c2,#5e35b1);">📝 わたしにとって大事なこと</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#9b85cf,#7a6baa);">📝 わたしにとって大事なこと</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label">大事なこと①</div>
-        <input type="text" class="ws-input" placeholder="例：友達との時間、部活、将来の夢、推し活、家族 etc.">
+        <input type="text" class="ws-input" data-key="w3-value1" placeholder="例：友達との時間、部活、将来の夢、推し活、家族 etc.">
       </div>
       <div class="ws-row">
         <div class="ws-label">朝起きると<br>近づける？</div>
-        <input type="text" class="ws-input" placeholder="例：部活の朝練に行ける → レギュラーに近づく">
+        <input type="text" class="ws-input" data-key="w3-connect1" placeholder="例：部活の朝練に行ける → レギュラーに近づく">
       </div>
       <div class="ws-row">
         <div class="ws-label">大事なこと②</div>
-        <input type="text" class="ws-input" placeholder="例：絵を描くこと、ゲーム制作、動物の世話…">
+        <input type="text" class="ws-input" data-key="w3-value2" placeholder="例：絵を描くこと、ゲーム制作、動物の世話…">
       </div>
       <div class="ws-row">
         <div class="ws-label">朝起きると<br>近づける？</div>
-        <input type="text" class="ws-input" placeholder="例：朝30分の作業時間が確保できる">
+        <input type="text" class="ws-input" data-key="w3-connect2" placeholder="例：朝30分の作業時間が確保できる">
       </div>
     </div>
   </div>
@@ -602,41 +636,97 @@
       今の状態ではなく、<strong>2〜3週間後にこうなっていたい</strong>という朝の理想像を書きます。達成可能な範囲で具体的に。
     </p>
     <div style="margin-top:0.6rem;">
-      <input type="text" class="ws-input" style="font-size:0.95rem; font-weight:500; border-bottom:2px solid #e65100; padding:0.5rem 0;" placeholder="例：7時に起きて、好きな音楽聴きながらココア飲んで、余裕をもって家を出る朝">
+      <input type="text" class="ws-input" data-key="w3-ideal-morning" style="font-size:0.95rem; font-weight:500; border-bottom:2px solid #e65100; padding:0.5rem 0;" placeholder="例：7時に起きて、好きな音楽聴きながらココア飲んで、余裕をもって家を出る朝">
     </div>
   </div>
 </section>
 
 <!-- ===== WORK 4: 1-Week Tracker ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#e3f2fd; color:#1565c0;">WORK 4</div>
+  <div class="work-num" style="background:#e3f2fd; color:#5d7aaa;">WORK 4</div>
   <h2 class="work-title">1週間トラッカー</h2>
   <p class="work-subtitle">毎朝の記録をつけることで、自分のパターンが見えてきます。うまくいった日の「なぜ？」を分析するのが目的です。</p>
   <span class="evidence-tag">活動モニタリング（Activity Monitoring）</span>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,var(--sky),#1e88e5);">📊 朝のモニタリング・シート</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,var(--sky),#6ab8e8);">📊 朝のモニタリング・シート</div>
     <div class="ws-body" style="overflow-x:auto;">
       <table class="tracker-table">
         <thead>
           <tr>
             <th></th>
-            <th>就寝<br>時刻</th>
             <th>起床<br>時刻</th>
-            <th>起きやすさ<br>1〜5</th>
-            <th>朝アンカー<br>できた？</th>
+            <th>光を<br>浴びた</th>
+            <th>朝の<br>活動</th>
             <th>気分<br>1〜5</th>
-            <th>ひとことメモ</th>
+            <th>楽しみ<br>実行</th>
+            <th>メモ</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td class="day-header">月</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td class="day-header">火</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td class="day-header">水</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td class="day-header">木</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td class="day-header">金</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td class="day-header">土</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-          <tr><td class="day-header">日</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr>
+            <td class="day-header">月</td>
+            <td><input type="text" class="ws-input" data-key="tracker-mon-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-mon-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-mon-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-mon-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-mon-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-mon-memo" placeholder=""></td>
+          </tr>
+          <tr>
+            <td class="day-header">火</td>
+            <td><input type="text" class="ws-input" data-key="tracker-tue-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-tue-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-tue-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-tue-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-tue-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-tue-memo" placeholder=""></td>
+          </tr>
+          <tr>
+            <td class="day-header">水</td>
+            <td><input type="text" class="ws-input" data-key="tracker-wed-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-wed-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-wed-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-wed-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-wed-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-wed-memo" placeholder=""></td>
+          </tr>
+          <tr>
+            <td class="day-header">木</td>
+            <td><input type="text" class="ws-input" data-key="tracker-thu-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-thu-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-thu-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-thu-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-thu-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-thu-memo" placeholder=""></td>
+          </tr>
+          <tr>
+            <td class="day-header">金</td>
+            <td><input type="text" class="ws-input" data-key="tracker-fri-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-fri-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-fri-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-fri-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-fri-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-fri-memo" placeholder=""></td>
+          </tr>
+          <tr>
+            <td class="day-header">土</td>
+            <td><input type="text" class="ws-input" data-key="tracker-sat-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sat-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sat-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sat-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sat-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sat-memo" placeholder=""></td>
+          </tr>
+          <tr>
+            <td class="day-header">日</td>
+            <td><input type="text" class="ws-input" data-key="tracker-sun-wake" placeholder="例: 7:00"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sun-light" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sun-activity" placeholder="散歩"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sun-mood" placeholder="3"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sun-fun" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="tracker-sun-memo" placeholder=""></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -645,14 +735,14 @@
   <div class="card">
     <h4>🔍 1週間後の振り返りポイント</h4>
     <p>
-      「起きやすさ」が3以上だった日に共通点はある？ → 就寝時刻、前夜の準備、翌日の予定、気分との関係を見てみよう。「うまくいった日」のパターンを増やすのが次の週の目標になります。
+      「気分」が3以上だった日に共通点はある？ → 起床時刻、光を浴びたか、朝の活動、楽しみ実行との関係を見てみよう。「うまくいった日」のパターンを増やすのが次の週の目標になります。
     </p>
   </div>
 </section>
 
 <!-- ===== 使い方ガイド ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#fce4ec; color:#c2185b;">💬 臨床ガイド</div>
+  <div class="work-num" style="background:#fce4ec; color:#c06d86;">💬 臨床ガイド</div>
   <h2 class="work-title">診察での使い方</h2>
 
   <div class="card" style="border-left:4px solid var(--pink);">
@@ -664,7 +754,7 @@
   <div class="card" style="border-left:4px solid var(--purple);">
     <h4>2回目（振り返り）</h4>
     <p>
-      WORK 4のトラッカーを一緒に確認します。「起きやすさ」スコアが高い日のパターンに注目し、<strong>本人に気づきを言語化させる</strong>ことが重要です（「その日は何が違った？」）。うまくいかなかった日を責めず、うまくいった日を拡大する姿勢で。
+      WORK 4のトラッカーを一緒に確認します。「気分」スコアが高い日のパターンに注目し、<strong>本人に気づきを言語化させる</strong>ことが重要です（「その日は何が違った？」）。うまくいかなかった日を責めず、うまくいった日を拡大する姿勢で。
     </p>
   </div>
   <div class="card" style="border-left:4px solid var(--green);">
@@ -685,14 +775,14 @@
 </section>
 
 <!-- BOTTOM NAV -->
-<div style="display:flex; gap:0.8rem; margin:2rem 0 0; flex-wrap:wrap;">
+<div class="bottom-nav" style="display:flex; gap:0.8rem; margin:2rem 0 0; flex-wrap:wrap;">
   <a href="index.html" style="flex:1; min-width:140px; text-decoration:none; background:#faeef1; border-radius:14px; padding:1rem; text-align:center; display:block;">
     <span style="font-size:1.2rem;">🧠</span>
     <p style="font-size:0.82rem; font-weight:700; color:#c06d86; margin-top:0.2rem;">トップに戻る</p>
   </a>
-  <a href="sleep-education.html" style="flex:1; min-width:140px; text-decoration:none; background:linear-gradient(135deg,#ede7f6,#e8eaf6); border-radius:14px; padding:1rem; text-align:center; display:block;">
+  <a href="sleep-education.html" style="flex:1; min-width:140px; text-decoration:none; background:linear-gradient(135deg,#ede7f6,#edeef6); border-radius:14px; padding:1rem; text-align:center; display:block;">
     <span style="font-size:1.2rem;">🌙☀️</span>
-    <p style="font-size:0.82rem; font-weight:700; color:#5e35b1; margin-top:0.2rem;">睡眠の解説を読む</p>
+    <p style="font-size:0.82rem; font-weight:700; color:#7a6baa; margin-top:0.2rem;">睡眠の解説を読む</p>
   </a>
 </div>
 
@@ -701,5 +791,50 @@
 </div>
 
 </div>
+
+<!-- Save indicator -->
+<div id="save-indicator">✓ 保存しました</div>
+
+<script>
+(function() {
+  'use strict';
+  const STORAGE_KEY = 'morning-motivation-work-data';
+
+  function loadData() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      document.querySelectorAll('.ws-input[data-key]').forEach(input => {
+        if (data[input.dataset.key]) input.value = data[input.dataset.key];
+      });
+    } catch(e) {}
+  }
+
+  function saveData() {
+    const data = {};
+    document.querySelectorAll('.ws-input[data-key]').forEach(input => {
+      if (input.value.trim()) data[input.dataset.key] = input.value;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showSaveIndicator();
+  }
+
+  function showSaveIndicator() {
+    const el = document.getElementById('save-indicator');
+    if (el) { el.style.display = 'block'; setTimeout(() => el.style.display = 'none', 1500); }
+  }
+
+  document.addEventListener('input', e => { if (e.target.classList.contains('ws-input')) saveData(); });
+
+  const clearBtn = document.getElementById('clear-btn');
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    if (confirm('入力内容をすべてクリアしますか？')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('.ws-input').forEach(i => i.value = '');
+    }
+  });
+
+  loadData();
+})();
+</script>
 </body>
 </html>

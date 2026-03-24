@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #1a237e;
-    --primary-light: #e8eaf6;
-    --primary-dark: #283593;
-    --accent: #f57c00;
+    --primary: #7b88c4;
+    --primary-light: #eef0f9;
+    --primary-dark: #6a78b5;
+    --accent: #d4a060;
     --text: #3d3935;
     --text-light: #827c73;
-    --bg: #fffdf8;
+    --bg: #faf9f8;
     --card: #fff;
   }
 
@@ -41,7 +41,7 @@
   }
 
   .nav-link-primary {
-    color: #3f51b5;
+    color: #c06d86;
     font-weight: 700;
     font-size: 0.82rem;
     text-decoration: none;
@@ -56,7 +56,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #1a237e 0%, #283593 35%, #f57c00 65%, #ffb300 100%);
+    background: linear-gradient(135deg, #6a78b5 0%, #7b88c4 35%, #d4a060 65%, #e8c478 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -74,7 +74,7 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+      radial-gradient(circle at 80% 70%, rgba(212,160,96,0.12) 0%, transparent 50%);
   }
 
   .hero::after {
@@ -111,7 +111,7 @@
   }
 
   .hero .subtitle {
-    color: #ffcc80;
+    color: #f0d8a0;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     font-weight: 500;
     margin-top: 0.8rem;
@@ -196,13 +196,13 @@
   }
 
   .bipolar-card.mania {
-    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-    border: 2px solid rgba(245,124,0,0.2);
+    background: linear-gradient(135deg, #fef6ec, #f8ecd8);
+    border: 2px solid rgba(212,160,96,0.2);
   }
 
   .bipolar-card.depression {
-    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
-    border: 2px solid rgba(26,35,126,0.2);
+    background: linear-gradient(135deg, #eef0f9, #d5d9f0);
+    border: 2px solid rgba(106,120,181,0.2);
   }
 
   .bipolar-card .bc-icon {
@@ -217,8 +217,8 @@
     margin-bottom: 0.4rem;
   }
 
-  .bipolar-card.mania h3 { color: #e65100; }
-  .bipolar-card.depression h3 { color: #1a237e; }
+  .bipolar-card.mania h3 { color: #c48050; }
+  .bipolar-card.depression h3 { color: #6a78b5; }
 
   .bipolar-card p {
     font-size: 0.88rem;
@@ -236,8 +236,8 @@
     border-left: 5px solid;
   }
 
-  .type-card.type1 { border-color: #1a237e; }
-  .type-card.type2 { border-color: #f57c00; }
+  .type-card.type1 { border-color: #6a78b5; }
+  .type-card.type2 { border-color: #d4a060; }
 
   .type-card h3 {
     font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -246,8 +246,8 @@
     margin-bottom: 0.5rem;
   }
 
-  .type-card.type1 h3 { color: #1a237e; }
-  .type-card.type2 h3 { color: #e65100; }
+  .type-card.type1 h3 { color: #6a78b5; }
+  .type-card.type2 h3 { color: #c48050; }
 
   .type-card p {
     font-size: 0.88rem;
@@ -297,7 +297,7 @@
     font-size: 0.92rem;
     color: var(--text);
     padding: 0.6rem 0;
-    border-bottom: 1px solid rgba(26,35,126,0.08);
+    border-bottom: 1px solid rgba(106,120,181,0.08);
     display: flex;
     align-items: flex-start;
     gap: 0.6rem;
@@ -307,8 +307,8 @@
   .prevention-list li:last-child { border-bottom: none; }
 
   .prevention-list li::before {
-    content: '✓';
-    color: #1a237e;
+    content: '\2713';
+    color: #6a78b5;
     font-weight: 700;
     flex-shrink: 0;
     margin-top: 0.05rem;
@@ -316,10 +316,10 @@
 
   /* ===== TIP BOX ===== */
   .tip-box {
-    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
     border-radius: 18px;
     padding: 1.4rem 1.6rem;
-    border: 2px solid rgba(245,124,0,0.2);
+    border: 2px solid rgba(212,160,96,0.2);
     margin-bottom: 1.2rem;
   }
 
@@ -330,7 +330,7 @@
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
-    color: #e65100;
+    color: #c48050;
     margin-bottom: 0.8rem;
   }
 
@@ -342,11 +342,11 @@
 
   /* ===== SCIENCE BOX ===== */
   .science-box {
-    background: linear-gradient(135deg, #e8eaf6 0%, #ede7f6 100%);
+    background: linear-gradient(135deg, #eef0f9 0%, #f0edf6 100%);
     border-radius: 16px;
     padding: 1.2rem 1.4rem;
     margin-bottom: 1.2rem;
-    border: 1px solid rgba(26,35,126,0.15);
+    border: 1px solid rgba(106,120,181,0.15);
   }
 
   .science-box .sb-header {
@@ -355,7 +355,7 @@
     gap: 0.5rem;
     font-weight: 700;
     font-size: 0.88rem;
-    color: #1a237e;
+    color: #6a78b5;
     margin-bottom: 0.5rem;
   }
 
@@ -378,15 +378,15 @@
   .bottom-nav a {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #3f51b5;
+    color: #7b88c4;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: #e8eaf6;
+    background: #eef0f9;
     transition: background 0.2s;
   }
 
-  .bottom-nav a:hover { background: #c5cae9; }
+  .bottom-nav a:hover { background: #d5d9f0; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -427,7 +427,7 @@
 
   <!-- SECTION 1: 双極性障害とは -->
   <section>
-    <div class="section-label" style="background:#faeef1;color:#283593;">🧠 Section 01</div>
+    <div class="section-label" style="background:#faeef1;color:#7b88c4;">&#129504; Section 01</div>
     <h2 class="section-title">双極性障害とは</h2>
 
     <div class="card">
@@ -436,21 +436,27 @@
 
     <div class="two-col">
       <div class="bipolar-card mania">
-        <div class="bc-icon">⬆️</div>
+        <div class="bc-icon">&#11014;&#65039;</div>
         <h3>躁（そう）状態</h3>
         <p>気分の高揚・万能感、睡眠の必要が減る、多弁・多動、衝動的な行動（浪費・無謀な計画）、怒りっぽくなる。本人は「調子がいい」と感じるため、病気だと気づきにくいのが特徴。</p>
       </div>
       <div class="bipolar-card depression">
-        <div class="bc-icon">⬇️</div>
+        <div class="bc-icon">&#11015;&#65039;</div>
         <h3>うつ状態</h3>
         <p>強い気分の落ち込み、意欲・興味の消失、疲労感、自責感、死にたい気持ち。双極性障害のうつはうつ病と似ていますが、治療法が異なるため正確な診断が重要です。</p>
       </div>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; 脳科学からの理解</div>
+      <p>双極性障害では、前頭前皮質—辺縁系回路の接続異常が報告されています（Strakowski et al., 2012）。躁状態では前頭前皮質の抑制機能が低下し、感情の制御が困難になります。fMRI研究では、扁桃体の過活動と前頭前皮質の低活動が気分エピソード中に顕著に見られます。</p>
+      <p style="margin-top:0.5rem;">遺伝率は約80%と高く（McGuffin et al., 2003）、カルシウムチャネル遺伝子（CACNA1C）やANK3遺伝子との関連が大規模ゲノム研究（GWASs）で同定されています。ただし、遺伝的素因があっても発症しない人も多く、環境因子（睡眠リズムの乱れ、ストレス）との相互作用が発症の鍵です。</p>
     </div>
   </section>
 
   <!-- SECTION 2: 双極I型とII型 -->
   <section>
-    <div class="section-label" style="background:#fff3e0;color:#e65100;">📋 Section 02</div>
+    <div class="section-label" style="background:#fef6ec;color:#c48050;">&#128203; Section 02</div>
     <h2 class="section-title">双極I型とII型</h2>
 
     <div class="type-card type1">
@@ -462,31 +468,39 @@
       <h3>双極II型</h3>
       <p>軽躁状態（比較的軽い気分の高揚）＋うつ状態。うつの期間が長いため、うつ病と誤診されやすい。正しい診断まで平均7〜10年かかるとも言われています。</p>
     </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128202; 診断の難しさと最新の知見</div>
+      <p>双極II型は、うつ病との鑑別が最も難しい疾患の一つです。初診から正確な診断まで平均7.5年かかるという報告があります（Hirschfeld et al., 2003）。軽躁を見逃さないために、MDQ（気分障害質問票）やHCL-32などのスクリーニングツールが開発されています。</p>
+      <p style="margin-top:0.5rem;">抗うつ薬の単独使用は躁転リスクがあり、双極II型うつに対しては気分安定薬（特にラモトリギン）やクエチアピンが第一選択とされています（CANMAT/ISBD, 2018）。</p>
+    </div>
   </section>
 
   <!-- SECTION 3: 治療のポイント -->
   <section>
-    <div class="section-label" style="background:#faeef1;color:#283593;">🛠️ Section 03</div>
+    <div class="section-label" style="background:#faeef1;color:#7b88c4;">&#128736;&#65039; Section 03</div>
     <h2 class="section-title">治療のポイント</h2>
 
     <div class="step-card">
-      <div class="step-icon">💊</div>
+      <div class="step-icon">&#128138;</div>
       <div class="step-content">
         <h3>気分安定薬が治療の中心</h3>
         <p>リチウム、バルプロ酸、ラモトリギンなどの気分安定薬が基本。抗うつ薬の単独使用は躁転のリスクがあり注意が必要。</p>
+        <p style="margin-top:0.4rem;">リチウムは自殺リスクを低減する唯一の気分安定薬であることが、複数のメタ分析で確認されています（Cipriani et al., 2013）。血中濃度モニタリングが必要ですが、適切に使用すれば長期的な気分の安定に最も効果的です。</p>
       </div>
     </div>
 
     <div class="step-card">
-      <div class="step-icon">📊</div>
+      <div class="step-icon">&#128202;</div>
       <div class="step-content">
         <h3>生活リズムの安定化</h3>
         <p>睡眠・起床時間の固定、社会的リズム療法（IPSRT）。不規則な生活が気分エピソードの引き金に。</p>
+        <p style="margin-top:0.4rem;">IPSRT（対人関係・社会リズム療法）は、Frank et al.（2005）の研究で、薬物療法との併用により再発率を有意に低下させることが示されました。毎日の起床・就寝・食事・運動の時間を一定にすることで、体内時計の安定化を図ります。</p>
       </div>
     </div>
 
     <div class="step-card">
-      <div class="step-icon">📝</div>
+      <div class="step-icon">&#128221;</div>
       <div class="step-content">
         <h3>気分の記録</h3>
         <p>毎日の気分・睡眠・活動を記録し、波のパターンを把握。早期に変化に気づき、対処する。</p>
@@ -496,7 +510,7 @@
 
   <!-- SECTION 4: 再発を防ぐために -->
   <section>
-    <div class="section-label" style="background:#e0f2f1;color:#00695c;">🔄 Section 04</div>
+    <div class="section-label" style="background:#e0f2f1;color:#00695c;">&#128260; Section 04</div>
     <h2 class="section-title">再発を防ぐために</h2>
 
     <div class="card">
@@ -510,12 +524,12 @@
     </div>
 
     <div class="tip-box">
-      <div class="tb-header">🏥 躁状態のサインに気づいたら</div>
+      <div class="tb-header">&#127973; 躁状態のサインに気づいたら</div>
       <p>睡眠時間が減っても平気、次々とアイデアが湧く、お金を使いすぎる、怒りっぽい——こうした変化は躁の始まりかもしれません。ご本人は気づきにくいので、家族や信頼できる人と「注意サイン」を共有しておくことが大切です。</p>
     </div>
 
     <div class="science-box">
-      <div class="sb-header">📚 エビデンス</div>
+      <div class="sb-header">&#128218; エビデンス</div>
       <p>双極性障害は生涯にわたる管理が必要ですが、適切な薬物療法と心理教育により、気分エピソードの頻度と重症度を大幅に減らせることが示されています（Colom et al., 2003）。特に心理教育プログラムへの参加は、再発率を約50%減少させるという報告があります。</p>
     </div>
   </section>
@@ -528,8 +542,7 @@
 
   <!-- FOOTER -->
   <div class="footer" style="text-align:center;">
-    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
-    <p style="margin-top:0.5rem;">&copy; 2026 こころのクリニック桜が丘</p>
+    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
   </div>
 
 </div>

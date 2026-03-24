@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #3f51b5;
-    --primary-light: #e8eaf6;
-    --primary-dark: #1a237e;
-    --accent: #ff9800;
+    --primary: #7b88c4;
+    --primary-light: #eef0f9;
+    --primary-dark: #6a78b5;
+    --accent: #d4b070;
     --text: #3d3935;
     --text-light: #827c73;
-    --bg: #fffdf8;
+    --bg: #faf9f8;
     --card: #fff;
   }
 
@@ -41,7 +41,7 @@
   }
 
   .nav-link-primary {
-    color: #3f51b5;
+    color: #c06d86;
     font-weight: 700;
     font-size: 0.82rem;
     text-decoration: none;
@@ -62,7 +62,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #1a237e 0%, #283593 40%, #3f51b5 70%, #ff9800 100%);
+    background: linear-gradient(135deg, #6a78b5 0%, #7b88c4 40%, #8d9ad4 70%, #d4b070 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -80,7 +80,7 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+      radial-gradient(circle at 80% 70%, rgba(212,176,112,0.12) 0%, transparent 50%);
   }
 
   .hero::after {
@@ -117,7 +117,7 @@
   }
 
   .hero .subtitle {
-    color: #ffcc80;
+    color: #f0d8a0;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     font-weight: 500;
     margin-top: 0.8rem;
@@ -294,22 +294,22 @@
     border-radius: 14px;
     padding: 1rem 1.2rem;
     margin-bottom: 0.8rem;
-    border: 1px solid rgba(63,81,181,0.1);
+    border: 1px solid rgba(123,136,196,0.1);
   }
 
   .ps-group:last-child { margin-bottom: 0; }
 
   /* ===== TIP BOX ===== */
   .tip-box {
-    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    background: linear-gradient(135deg, #fef8f5, #fef6ec);
     border-radius: 16px;
     padding: 1.3rem;
     margin: 1rem 0;
-    border: 2px solid rgba(255,152,0,0.15);
+    border: 2px solid rgba(212,176,112,0.15);
   }
 
   .tip-box h4 {
-    color: #e65100;
+    color: #c48050;
     font-size: 0.92rem;
     margin-bottom: 0.4rem;
   }
@@ -318,6 +318,31 @@
     font-size: 0.82rem;
     color: var(--text-light);
     line-height: 1.7;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #eef0f9 0%, #f0edf6 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(123,136,196,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #7b88c4;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
   }
 
   /* ===== BOTTOM NAV ===== */
@@ -333,15 +358,15 @@
   .bottom-nav a {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #3f51b5;
+    color: #7b88c4;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: #e8eaf6;
+    background: #eef0f9;
     transition: background 0.2s;
   }
 
-  .bottom-nav a:hover { background: #c5cae9; }
+  .bottom-nav a:hover { background: #d5d9f0; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -355,25 +380,16 @@
 
   /* ===== PRINT ===== */
   @media print {
-    body { font-size: 9pt; line-height: 1.4; }
-    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer { display: none !important; }
-    .header, .hero { padding: 1rem !important; min-height: auto !important; }
-    .hero::before, .hero::after, .header::before, .header::after { display: none !important; }
-    .container { max-width: 100%; padding: 0 0.5rem; }
-    .card, .worksheet, .tip-box, .science-box, .work-section, .intro {
-      break-inside: avoid;
-      margin: 0.4rem 0;
-      padding: 0.6rem;
-      box-shadow: none;
-    }
-    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; }
-    .work-num { margin-bottom: 0.3rem; }
-    .work-title { font-size: 1rem; margin-bottom: 0.2rem; }
-    .work-subtitle { font-size: 0.75rem; margin-bottom: 0.4rem; }
-    .anchor-grid, .ifthen { margin: 0.3rem 0; }
-    .tracker-table th, .tracker-table td { padding: 0.2rem; font-size: 7pt; }
-    h1 { font-size: 1.2rem !important; }
-    @page { size: A4; margin: 10mm; }
+    body { font-size: 8pt; line-height: 1.3; }
+    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer, .hero, .intro { display: none !important; }
+    .container { max-width: 100%; padding: 0 5mm; }
+    .work-section { break-inside: avoid; margin: 0.3rem 0; padding: 0.4rem; box-shadow: none; border: 1px solid #ddd; }
+    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; padding: 0.1rem 0 !important; }
+    .tracker-table th, .tracker-table td { padding: 0.15rem; font-size: 6.5pt; }
+    .card, .tip-box, .science-box { display: none !important; }
+    @page { size: A4; margin: 8mm; }
+    body::before { content: '発達特性ワークシート — こころのクリニック桜が丘'; display: block; font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 1px solid #ccc; }
+    body::after { content: '患者ID:＿＿＿＿＿＿  記入日:＿＿＿＿年＿＿月＿＿日  © こころのクリニック桜が丘'; display: block; font-size: 7pt; text-align: center; margin-top: 3mm; padding-top: 2mm; border-top: 1px solid #ccc; color: #999; }
   }
 </style>
 </head>
@@ -404,12 +420,12 @@
 </div>
 
 <div class="print-btn-wrap" style="text-align:right; margin:-0.5rem 0 1rem;">
-  <button onclick="window.print()" style="background:linear-gradient(135deg,#3f51b5,#5c6bc0);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(63,81,181,0.3);">📄 PDF出力 / スクショ用</button>
+  <button onclick="window.print()" style="background:linear-gradient(135deg,#7b88c4,#8d9ad4);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(123,136,196,0.3);">📄 PDF出力 / スクショ用</button>
 </div>
 
 <!-- ===== WORK 1: 自分の特性マップ ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#faeef1; color:#283593;">WORK 1</div>
+  <div class="work-num" style="background:#faeef1; color:#7b88c4;">WORK 1</div>
   <h2 class="work-title">自分の特性マップ</h2>
   <p class="work-subtitle">まずは自分の特性を「見える化」しましょう。得意と苦手、両方を書き出すことで全体像がつかめます。</p>
 
@@ -421,7 +437,7 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#283593,#3f51b5);">📝 わたしの特性マップ</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#6a78b5,#8d9ad4);">📝 わたしの特性マップ</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label">得意なこと<br>好きなこと</div>
@@ -445,7 +461,7 @@
 
 <!-- ===== WORK 2: 困りごと別 対策プラン ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#fff3e0; color:#e65100;">WORK 2</div>
+  <div class="work-num" style="background:#fef6ec; color:#c48050;">WORK 2</div>
   <h2 class="work-title">困りごと別 対策プラン</h2>
   <p class="work-subtitle">具体的な困りごとに対して、対策とツールをセットで考えます。</p>
 
@@ -457,11 +473,11 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#ff9800,#f57c00);">📝 困りごと対策シート</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#d4b070,#c48050);">📝 困りごと対策シート</div>
     <div class="ws-body">
       <div class="ps-group">
         <div class="ws-row">
-          <div class="ws-label" style="color:#e65100;">困りごと①</div>
+          <div class="ws-label" style="color:#c48050;">困りごと①</div>
           <input type="text" class="ws-input" data-key="problem1" placeholder="例：朝、時間通りに準備できない">
         </div>
         <div class="ws-row">
@@ -476,7 +492,7 @@
 
       <div class="ps-group">
         <div class="ws-row">
-          <div class="ws-label" style="color:#e65100;">困りごと②</div>
+          <div class="ws-label" style="color:#c48050;">困りごと②</div>
           <input type="text" class="ws-input" data-key="problem2" placeholder="例：やるべきことを忘れてしまう">
         </div>
         <div class="ws-row">
@@ -491,7 +507,7 @@
 
       <div class="ps-group">
         <div class="ws-row">
-          <div class="ws-label" style="color:#e65100;">困りごと③</div>
+          <div class="ws-label" style="color:#c48050;">困りごと③</div>
           <input type="text" class="ws-input" data-key="problem3" placeholder="例：集中しすぎて休憩を忘れる">
         </div>
         <div class="ws-row">
@@ -509,12 +525,12 @@
 
 <!-- ===== WORK 3: 環境調整チェックリスト ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#f0f5ef; color:#1b5e20;">WORK 3</div>
+  <div class="work-num" style="background:#f0f5ef; color:#7aad78;">WORK 3</div>
   <h2 class="work-title">環境調整チェックリスト</h2>
   <p class="work-subtitle">生活を楽にするための「仕組み」を整えましょう。できているもの、これから取り組むものを書き出します。</p>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#43a047,#2e7d32);">✅ 環境調整チェックリスト</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#7aad78,#7aad78);">✅ 環境調整チェックリスト</div>
     <div class="ws-body">
       <div class="checklist-item">
         <div class="checklist-label">📱 スマホのアラーム<br>リマインダー設定</div>
@@ -563,7 +579,7 @@
 
 <!-- ===== WORK 4: 伝え方シート ===== -->
 <section class="work-section">
-  <div class="work-num" style="background:#fce4ec; color:#c2185b;">WORK 4</div>
+  <div class="work-num" style="background:#faeef1; color:#c06d86;">WORK 4</div>
   <h2 class="work-title">伝え方シート</h2>
   <p class="work-subtitle">自分の特性を周囲に伝えるための「伝え方メモ」を作ります。家族・職場・学校で使えます。</p>
 
@@ -575,7 +591,7 @@
   </div>
 
   <div class="worksheet">
-    <div class="ws-header" style="background:linear-gradient(90deg,#c2185b,#e91e63);">📝 わたしの伝え方シート</div>
+    <div class="ws-header" style="background:linear-gradient(90deg,#c06d86,#e098ab);">📝 わたしの伝え方シート</div>
     <div class="ws-body">
       <div class="ws-row">
         <div class="ws-label">私の特性を<br>一言で</div>
@@ -604,7 +620,7 @@
 
 <!-- CLEAR BUTTON -->
 <div style="text-align:center; margin:2rem 0 1rem;">
-  <button id="clear-btn" style="background:#ef5350;color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:10px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;">🗑️ 入力をクリア</button>
+  <button id="clear-btn" style="background:#d4917a;color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:10px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;">🗑️ 入力をクリア</button>
 </div>
 
 <!-- BOTTOM NAV -->
@@ -616,7 +632,6 @@
 <!-- FOOTER -->
 <div class="footer" style="text-align:center;">
   <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
-  <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
 </div>
 
 </div>
@@ -642,7 +657,7 @@
     if (!indicator) {
       indicator = document.createElement('div');
       indicator.id = 'save-indicator';
-      indicator.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#4caf50;color:#fff;padding:0.5rem 1rem;border-radius:10px;font-size:0.8rem;font-weight:700;z-index:200;opacity:0;transition:opacity 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);';
+      indicator.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#7aad78;color:#fff;padding:0.5rem 1rem;border-radius:10px;font-size:0.8rem;font-weight:700;z-index:200;opacity:0;transition:opacity 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);';
       document.body.appendChild(indicator);
     }
     indicator.textContent = '✓ 保存しました';

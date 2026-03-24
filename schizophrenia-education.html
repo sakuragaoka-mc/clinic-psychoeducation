@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #00695c;
-    --primary-light: #e0f2f1;
-    --primary-dark: #004d40;
-    --accent: #ff9800;
+    --primary: #6aada8;
+    --primary-light: #edf6f5;
+    --primary-dark: #4d968f;
+    --accent: #7aad78;
     --text: #3d3935;
     --text-light: #827c73;
-    --bg: #f9fffe;
+    --bg: #faf9f8;
     --card: #fff;
   }
 
@@ -41,7 +41,7 @@
   }
 
   .nav-link-primary {
-    color: #3f51b5;
+    color: #c06d86;
     font-weight: 700;
     font-size: 0.82rem;
     text-decoration: none;
@@ -56,7 +56,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #004d40 0%, #00695c 40%, #00897b 70%, #4db6ac 100%);
+    background: linear-gradient(135deg, #4d968f 0%, #6aada8 40%, #7dbdb7 70%, #98cdc8 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -74,7 +74,7 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(77,182,172,0.12) 0%, transparent 50%);
+      radial-gradient(circle at 80% 70%, rgba(152,205,200,0.12) 0%, transparent 50%);
   }
 
   .hero::after {
@@ -111,7 +111,7 @@
   }
 
   .hero .subtitle {
-    color: #b2dfdb;
+    color: #c8e8e5;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     font-weight: 500;
     margin-top: 0.8rem;
@@ -196,13 +196,13 @@
   }
 
   .info-card.gene {
-    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
-    border: 2px solid rgba(0,105,92,0.2);
+    background: linear-gradient(135deg, #edf6f5 0%, #c8e8e5 100%);
+    border: 2px solid rgba(106,173,168,0.2);
   }
 
   .info-card.recovery {
-    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-    border: 2px solid rgba(46,125,50,0.2);
+    background: linear-gradient(135deg, #f0f5ef 0%, #d5e8d4 100%);
+    border: 2px solid rgba(122,173,120,0.2);
   }
 
   .info-card .ic-icon {
@@ -217,8 +217,8 @@
     margin-bottom: 0.4rem;
   }
 
-  .info-card.gene h3 { color: #004d40; }
-  .info-card.recovery h3 { color: #2e7d32; }
+  .info-card.gene h3 { color: #4d968f; }
+  .info-card.recovery h3 { color: #7aad78; }
 
   .info-card p {
     font-size: 0.88rem;
@@ -236,9 +236,9 @@
     border-left: 5px solid;
   }
 
-  .symptom-card.positive { border-color: #e65100; }
-  .symptom-card.negative { border-color: #5c6bc0; }
-  .symptom-card.cognitive { border-color: #00897b; }
+  .symptom-card.positive { border-color: #c48050; }
+  .symptom-card.negative { border-color: #8d9ad4; }
+  .symptom-card.cognitive { border-color: #7dbdb7; }
 
   .symptom-card .s-header {
     display: flex;
@@ -257,9 +257,9 @@
     font-weight: 800;
   }
 
-  .symptom-card.positive h3 { color: #e65100; }
-  .symptom-card.negative h3 { color: #5c6bc0; }
-  .symptom-card.cognitive h3 { color: #00897b; }
+  .symptom-card.positive h3 { color: #c48050; }
+  .symptom-card.negative h3 { color: #8d9ad4; }
+  .symptom-card.cognitive h3 { color: #7dbdb7; }
 
   .symptom-card p {
     font-size: 0.88rem;
@@ -301,10 +301,10 @@
 
   /* ===== TIP BOX ===== */
   .tip-box {
-    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    background: linear-gradient(135deg, #fef6ec 0%, #fef6ec 100%);
     border-radius: 18px;
     padding: 1.4rem 1.6rem;
-    border: 2px solid rgba(245,124,0,0.2);
+    border: 2px solid rgba(196,128,80,0.2);
     margin-bottom: 1.2rem;
   }
 
@@ -315,7 +315,7 @@
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
-    color: #e65100;
+    color: #c48050;
     margin-bottom: 0.8rem;
   }
 
@@ -327,11 +327,11 @@
 
   /* ===== SCIENCE BOX ===== */
   .science-box {
-    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+    background: linear-gradient(135deg, #edf6f5 0%, #c8e8e5 100%);
     border-radius: 16px;
     padding: 1.2rem 1.4rem;
     margin-bottom: 1.2rem;
-    border: 1px solid rgba(0,105,92,0.15);
+    border: 1px solid rgba(106,173,168,0.15);
   }
 
   .science-box .sb-header {
@@ -340,7 +340,7 @@
     gap: 0.5rem;
     font-weight: 700;
     font-size: 0.88rem;
-    color: #004d40;
+    color: #4d968f;
     margin-bottom: 0.5rem;
   }
 
@@ -348,6 +348,30 @@
     font-size: 0.88rem;
     color: var(--text-light);
     line-height: 1.75;
+  }
+
+  /* ===== RECOVERY CARD ===== */
+  .recovery-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 4px solid #7aad78;
+  }
+
+  .recovery-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .recovery-card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
   }
 
   /* ===== BOTTOM NAV ===== */
@@ -363,15 +387,15 @@
   .bottom-nav a {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #004d40;
+    color: #4d968f;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: #e0f2f1;
+    background: #edf6f5;
     transition: background 0.2s;
   }
 
-  .bottom-nav a:hover { background: #b2dfdb; }
+  .bottom-nav a:hover { background: #c8e8e5; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -397,8 +421,8 @@
 
 <!-- TOP NAV -->
 <nav class="top-nav">
-  <a href="index.html" class="nav-link-primary">← こころの学び トップへ</a>
-  <a href="schizophrenia-work.html" class="nav-link-secondary">ワークシート →</a>
+  <a href="index.html" class="nav-link-primary">&larr; こころの学び トップへ</a>
+  <a href="schizophrenia-work.html" class="nav-link-secondary">ワークシート &rarr;</a>
 </nav>
 
 <!-- HERO -->
@@ -412,7 +436,7 @@
 
   <!-- SECTION 1: 統合失調症とは -->
   <section>
-    <div class="section-label" style="background:#e0f2f1; color:#004d40;">🧠 Section 01</div>
+    <div class="section-label" style="background:#edf6f5; color:#4d968f;">🧠 Section 01</div>
     <h2 class="section-title">統合失調症とは</h2>
 
     <div class="card">
@@ -432,11 +456,18 @@
         <p>早期発見・早期治療で予後が大きく改善します。薬物療法で症状をコントロールし、リハビリテーションで社会生活を取り戻していくことができます。「治らない病気」という古い認識は間違いです。</p>
       </div>
     </div>
+
+    <!-- NEW: 脳科学の最新知見 science-box -->
+    <div class="science-box">
+      <div class="sb-header">🔬 脳科学の最新知見</div>
+      <p>統合失調症では、ドーパミンの過活動（中脳辺縁系）と低活動（前頭前皮質）が同時に起きていることがわかっています（Davis et al., 1991; Howes &amp; Kapur, 2009）。この「ドーパミン仮説」は、近年のPETイメージング研究で精緻化され、シナプス前ドーパミン合成能の亢進が陽性症状と直接関連することが確認されています。</p>
+      <p style="margin-top:0.5rem;">また、グルタミン酸系の機能異常（NMDA受容体低機能仮説）も注目されており、2020年代には新しい作用機序を持つ薬剤の開発が進んでいます。2024年に承認されたKarXTは、ムスカリン受容体を標的とする初の新規作用機序の抗精神病薬です。</p>
+    </div>
   </section>
 
   <!-- SECTION 2: 主な症状 -->
   <section>
-    <div class="section-label" style="background:#fff3e0; color:#e65100;">📋 Section 02</div>
+    <div class="section-label" style="background:#fef6ec; color:#c48050;">📋 Section 02</div>
     <h2 class="section-title">主な症状</h2>
 
     <div class="symptom-card positive">
@@ -462,11 +493,17 @@
       </div>
       <p>集中力の低下、記憶力の低下、段取りが立てにくい。リハビリテーション（認知機能リハ）で改善が期待できます。</p>
     </div>
+
+    <!-- NEW: 回復の見通しカード -->
+    <div class="recovery-card">
+      <h3>📊 回復の見通し——データが語る希望</h3>
+      <p>長期追跡研究によると、統合失調症の患者の約25%は完全回復し、約50%は大幅な改善が見られます（Harrison et al., 2001, 15年追跡）。早期介入（発症から未治療期間＝DUPを短くする）は予後を大きく改善します。世界保健機関（WHO）の研究では、発展途上国の方が予後が良いという結果も報告されており、社会的支援の重要性が示唆されています。</p>
+    </div>
   </section>
 
   <!-- SECTION 3: 治療の3本柱 -->
   <section>
-    <div class="section-label" style="background:#faeef1; color:#283593;">🏥 Section 03</div>
+    <div class="section-label" style="background:#faeef1; color:#7b88c4;">🏥 Section 03</div>
     <h2 class="section-title">治療の3本柱</h2>
 
     <div class="step-card">
@@ -474,6 +511,7 @@
       <div class="step-content">
         <h3>薬物療法</h3>
         <p>抗精神病薬でドーパミンのバランスを整えます。「症状が落ち着いたから」と自己判断で薬をやめると再発リスクが高まります。副作用が気になるときは主治医に相談を。</p>
+        <p style="margin-top:0.5rem;">第二世代抗精神病薬（SGA）は、従来の薬に比べて錐体外路症状が少なく、陰性症状にも一定の効果があります。持効性注射剤（LAI）は、飲み忘れの心配なく安定した血中濃度を維持でき、再発率を約30%低減させることが示されています（Kishimoto et al., 2021）。</p>
       </div>
     </div>
 
@@ -490,13 +528,14 @@
       <div class="step-content">
         <h3>リハビリテーション</h3>
         <p>デイケア、就労支援、グループホームなど。社会参加を段階的に進めていきます。</p>
+        <p style="margin-top:0.5rem;">認知機能リハビリテーション（CR）は、コンピューターベースのトレーニングと実生活スキル練習を組み合わせた手法で、注意力・記憶・問題解決能力の改善が多数のRCTで確認されています（Wykes et al., 2011, メタ分析）。</p>
       </div>
     </div>
   </section>
 
   <!-- SECTION 4: 家族へのメッセージ -->
   <section>
-    <div class="section-label" style="background:#fce4ec; color:#c2185b;">💌 Section 04</div>
+    <div class="section-label" style="background:#faeef1; color:#c06d86;">💌 Section 04</div>
     <h2 class="section-title">家族へのメッセージ</h2>
 
     <div class="card">
@@ -519,14 +558,13 @@
 
   <!-- BOTTOM NAV -->
   <div class="bottom-nav">
-    <a href="index.html">← トップに戻る</a>
-    <a href="schizophrenia-work.html">ワークに取り組む →</a>
+    <a href="index.html">&larr; トップに戻る</a>
+    <a href="schizophrenia-work.html">ワークに取り組む &rarr;</a>
   </div>
 
   <!-- FOOTER -->
   <div class="footer" style="text-align:center;">
     <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
-    <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
   </div>
 
 </div>

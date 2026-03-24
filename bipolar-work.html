@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #1a237e;
-    --primary-light: #e8eaf6;
-    --primary-dark: #283593;
-    --accent: #f57c00;
+    --primary: #7b88c4;
+    --primary-light: #eef0f9;
+    --primary-dark: #6a78b5;
+    --accent: #d4a060;
     --text: #3d3935;
     --text-light: #827c73;
-    --bg: #fffdf8;
+    --bg: #faf9f8;
     --card: #fff;
   }
 
@@ -41,7 +41,7 @@
   }
 
   .nav-link-primary {
-    color: #3f51b5;
+    color: #c06d86;
     font-weight: 700;
     font-size: 0.82rem;
     text-decoration: none;
@@ -56,7 +56,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #1a237e 0%, #283593 35%, #f57c00 65%, #ff9800 100%);
+    background: linear-gradient(135deg, #6a78b5 0%, #7b88c4 35%, #d4a060 65%, #e8c478 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -74,7 +74,7 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+      radial-gradient(circle at 80% 70%, rgba(212,160,96,0.12) 0%, transparent 50%);
   }
 
   .hero::after {
@@ -111,7 +111,7 @@
   }
 
   .hero .subtitle {
-    color: #ffcc80;
+    color: #f0d8a0;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     font-weight: 500;
     margin-top: 0.8rem;
@@ -253,7 +253,7 @@
   }
 
   .mood-table thead th {
-    background: #283593;
+    background: #7b88c4;
     color: #fff;
     padding: 0.6rem 0.4rem;
     font-weight: 700;
@@ -308,8 +308,8 @@
 
   .mood-table .ws-input:focus {
     outline: none;
-    border-color: #283593;
-    box-shadow: 0 0 0 3px rgba(40,53,147,0.12);
+    border-color: #7b88c4;
+    box-shadow: 0 0 0 3px rgba(123,136,196,0.12);
     background: #fff;
   }
 
@@ -361,8 +361,8 @@
 
   .ws-field .ws-input:focus {
     outline: none;
-    border-color: #283593;
-    box-shadow: 0 0 0 3px rgba(40,53,147,0.12);
+    border-color: #7b88c4;
+    box-shadow: 0 0 0 3px rgba(123,136,196,0.12);
     background: #fff;
   }
 
@@ -374,16 +374,16 @@
 
   /* ===== SIGN SECTION ===== */
   .sign-group {
-    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    background: linear-gradient(135deg, #fef6ec 0%, #f8ecd8 100%);
     border-radius: 14px;
     padding: 1.2rem;
     margin-bottom: 1rem;
-    border: 1px solid rgba(245,124,0,0.15);
+    border: 1px solid rgba(212,160,96,0.15);
   }
 
   .sign-group.depression-group {
-    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
-    border: 1px solid rgba(26,35,126,0.15);
+    background: linear-gradient(135deg, #eef0f9 0%, #d5d9f0 100%);
+    border: 1px solid rgba(106,120,181,0.15);
   }
 
   .sign-group h4 {
@@ -393,8 +393,8 @@
     margin-bottom: 0.6rem;
   }
 
-  .sign-group.mania-group h4 { color: #e65100; }
-  .sign-group.depression-group h4 { color: #1a237e; }
+  .sign-group.mania-group h4 { color: #c48050; }
+  .sign-group.depression-group h4 { color: #6a78b5; }
 
   .sign-group .ws-hint {
     font-size: 0.78rem;
@@ -418,8 +418,8 @@
 
   .sign-group .ws-input:focus {
     outline: none;
-    border-color: #283593;
-    box-shadow: 0 0 0 3px rgba(40,53,147,0.12);
+    border-color: #7b88c4;
+    box-shadow: 0 0 0 3px rgba(123,136,196,0.12);
     background: #fff;
   }
 
@@ -510,11 +510,11 @@
 
   /* ===== SCIENCE BOX ===== */
   .science-box {
-    background: linear-gradient(135deg, #e8eaf6 0%, #ede7f6 100%);
+    background: linear-gradient(135deg, #eef0f9 0%, #f0edf6 100%);
     border-radius: 16px;
     padding: 1.2rem 1.4rem;
     margin-bottom: 1.2rem;
-    border: 1px solid rgba(26,35,126,0.15);
+    border: 1px solid rgba(106,120,181,0.15);
   }
 
   .science-box .sb-header {
@@ -523,7 +523,7 @@
     gap: 0.5rem;
     font-weight: 700;
     font-size: 0.88rem;
-    color: #1a237e;
+    color: #6a78b5;
     margin-bottom: 0.5rem;
   }
 
@@ -531,6 +531,37 @@
     font-size: 0.88rem;
     color: var(--text-light);
     line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(212,160,96,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #c48050;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* ===== WORK SECTION (for print) ===== */
+  .work-section {
+    margin: 2rem 0;
   }
 
   /* ===== BOTTOM NAV ===== */
@@ -546,15 +577,15 @@
   .bottom-nav a {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #3f51b5;
+    color: #7b88c4;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: #e8eaf6;
+    background: #eef0f9;
     transition: background 0.2s;
   }
 
-  .bottom-nav a:hover { background: #c5cae9; }
+  .bottom-nav a:hover { background: #d5d9f0; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -568,25 +599,16 @@
 
   /* ===== PRINT ===== */
   @media print {
-    body { font-size: 9pt; line-height: 1.4; }
-    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer { display: none !important; }
-    .header, .hero { padding: 1rem !important; min-height: auto !important; }
-    .hero::before, .hero::after, .header::before, .header::after { display: none !important; }
-    .container { max-width: 100%; padding: 0 0.5rem; }
-    .card, .worksheet, .tip-box, .science-box, .work-section, .intro {
-      break-inside: avoid;
-      margin: 0.4rem 0;
-      padding: 0.6rem;
-      box-shadow: none;
-    }
-    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; }
-    .work-num { margin-bottom: 0.3rem; }
-    .work-title { font-size: 1rem; margin-bottom: 0.2rem; }
-    .work-subtitle { font-size: 0.75rem; margin-bottom: 0.4rem; }
-    .anchor-grid, .ifthen { margin: 0.3rem 0; }
-    .tracker-table th, .tracker-table td { padding: 0.2rem; font-size: 7pt; }
-    h1 { font-size: 1.2rem !important; }
-    @page { size: A4; margin: 10mm; }
+    body { font-size: 8pt; line-height: 1.3; }
+    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer, .hero, .intro { display: none !important; }
+    .container { max-width: 100%; padding: 0 5mm; }
+    .work-section { break-inside: avoid; margin: 0.3rem 0; padding: 0.4rem; box-shadow: none; border: 1px solid #ddd; }
+    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; padding: 0.1rem 0 !important; }
+    .tracker-table th, .tracker-table td { padding: 0.15rem; font-size: 6.5pt; }
+    .card, .tip-box, .science-box { display: none !important; }
+    @page { size: A4; margin: 8mm; }
+    body::before { content: '\53CC\6975\6027\969C\5BB3 \6C17\5206\30E2\30CB\30BF\30EA\30F3\30B0 \2014 \3053\3053\308D\306E\30AF\30EA\30CB\30C3\30AF\685C\304C\4E18'; display: block; font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 1px solid #ccc; }
+    body::after { content: '\60A3\8005ID\FF1A\FF3F\FF3F\FF3F\FF3F\FF3F\FF3F  \8A18\5165\65E5\FF1A\FF3F\FF3F\FF3F\FF3F\5E74\FF3F\FF3F\6708\FF3F\FF3F\65E5  \00A9 \3053\3053\308D\306E\30AF\30EA\30CB\30C3\30AF\685C\304C\4E18'; display: block; font-size: 7pt; text-align: center; margin-top: 3mm; padding-top: 2mm; border-top: 1px solid #ccc; color: #999; }
   }
 </style>
 </head>
@@ -608,26 +630,26 @@
 <div class="container">
 
   <!-- INTRO -->
-  <section>
+  <section class="intro">
     <div class="intro-card">
       <p>このワークシートは、気分の波を記録・可視化し、早期のサインに気づくためのツールです。入力内容はお使いのブラウザに自動保存されます。</p>
-      <button id="clear-btn" class="clear-btn">🗑️ 入力内容をすべて消去</button>
+      <button id="clear-btn" class="clear-btn">&#128465;&#65039; 入力内容をすべて消去</button>
     </div>
   </section>
 
   <div class="print-btn-wrap" style="text-align:right; margin:-0.5rem 0 1rem;">
-    <button onclick="window.print()" style="background:linear-gradient(135deg,#3f51b5,#5c6bc0);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(63,81,181,0.3);">📄 PDF出力 / スクショ用</button>
+    <button onclick="window.print()" style="background:linear-gradient(135deg,#7b88c4,#8d9ad4);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(123,136,196,0.3);">&#128196; PDF出力 / スクショ用</button>
   </div>
 
   <!-- WORK 1: 気分チャート（1週間） -->
-  <section>
-    <div class="section-label" style="background:#faeef1;color:#283593;">📊 Work 01</div>
+  <section class="work-section">
+    <div class="section-label" style="background:#faeef1;color:#7b88c4;">&#128202; Work 01</div>
     <h2 class="section-title">気分チャート（1週間）</h2>
 
     <div class="ws-card">
-      <h3>📅 今週の気分・睡眠・活動を記録しましょう</h3>
+      <h3>&#128197; 今週の気分・睡眠・活動を記録しましょう</h3>
       <div class="mood-table-wrapper">
-        <table class="mood-table">
+        <table class="mood-table tracker-table">
           <thead>
             <tr>
               <th>日</th>
@@ -706,15 +728,15 @@
   </section>
 
   <!-- WORK 2: 私の「注意サイン」リスト -->
-  <section>
-    <div class="section-label" style="background:#fff3e0;color:#e65100;">⚠️ Work 02</div>
+  <section class="work-section">
+    <div class="section-label" style="background:#fef6ec;color:#c48050;">&#9888;&#65039; Work 02</div>
     <h2 class="section-title">私の「注意サイン」リスト</h2>
 
     <div class="ws-card">
-      <h3>🔺 気分が変わり始めるサインを書き出しましょう</h3>
+      <h3>&#128314; 気分が変わり始めるサインを書き出しましょう</h3>
 
       <div class="sign-group mania-group">
-        <h4>⬆️ 躁に向かうサイン</h4>
+        <h4>&#11014;&#65039; 躁に向かうサイン</h4>
         <span class="ws-hint">例：睡眠が3時間でも平気、お金を使いすぎる、早口になる</span>
         <input type="text" class="ws-input" data-key="mania-sign1" placeholder="サイン①">
         <input type="text" class="ws-input" data-key="mania-sign2" placeholder="サイン②">
@@ -722,7 +744,7 @@
       </div>
 
       <div class="sign-group depression-group">
-        <h4>⬇️ うつに向かうサイン</h4>
+        <h4>&#11015;&#65039; うつに向かうサイン</h4>
         <span class="ws-hint">例：朝起きられない、好きなことに興味がなくなる</span>
         <input type="text" class="ws-input" data-key="depression-sign1" placeholder="サイン①">
         <input type="text" class="ws-input" data-key="depression-sign2" placeholder="サイン②">
@@ -730,7 +752,7 @@
       </div>
 
       <div class="action-group">
-        <h4>🛡️ サインに気づいたらやること</h4>
+        <h4>&#128737;&#65039; サインに気づいたらやること</h4>
         <label>躁のサインに気づいたら：</label>
         <textarea class="ws-input" data-key="action-mania" placeholder="例：主治医に連絡する、睡眠を確保する、大きな決断を延期する"></textarea>
         <label style="margin-top:0.5rem;">うつのサインに気づいたら：</label>
@@ -738,19 +760,19 @@
       </div>
 
       <div class="emergency-group">
-        <h4>📞 緊急連絡先（主治医・家族）</h4>
+        <h4>&#128222; 緊急連絡先（主治医・家族）</h4>
         <textarea class="ws-input" data-key="emergency-contact" placeholder="例：主治医 ○○先生 TEL: 000-0000-0000 / 家族 ○○ TEL: 000-0000-0000"></textarea>
       </div>
     </div>
   </section>
 
   <!-- WORK 3: 生活リズム記録 -->
-  <section>
-    <div class="section-label" style="background:#e0f2f1;color:#00695c;">🕐 Work 03</div>
+  <section class="work-section">
+    <div class="section-label" style="background:#e0f2f1;color:#00695c;">&#128336; Work 03</div>
     <h2 class="section-title">生活リズム記録</h2>
 
     <div class="ws-card">
-      <h3>🌅 安定した生活リズムをデザインしましょう</h3>
+      <h3>&#127749; 安定した生活リズムをデザインしましょう</h3>
 
       <div class="ws-field">
         <label>理想の起床時間</label>
@@ -786,7 +808,7 @@
 
   <!-- SCIENCE BOX -->
   <div class="science-box">
-    <div class="sb-header">📚 気分モニタリングの効果</div>
+    <div class="sb-header">&#128218; 気分モニタリングの効果</div>
     <p>毎日の気分を記録する「ムードチャート」は、双極性障害の自己管理において最も効果的なツールの一つです。気分の波のパターンを可視化することで、再発の早期警告サインに気づきやすくなり、主治医との情報共有にも役立ちます。研究では、気分モニタリングを継続した患者は、エピソードの持続期間が短くなる傾向が報告されています。</p>
   </div>
 
@@ -798,8 +820,7 @@
 
   <!-- FOOTER -->
   <div class="footer" style="text-align:center;">
-    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
-    <p style="margin-top:0.5rem;">&copy; 2026 こころのクリニック桜が丘</p>
+    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
   </div>
 
 </div>
@@ -829,7 +850,7 @@
       indicator.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#4caf50;color:#fff;padding:0.5rem 1rem;border-radius:10px;font-size:0.8rem;font-weight:700;z-index:200;opacity:0;transition:opacity 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);';
       document.body.appendChild(indicator);
     }
-    indicator.textContent = '✓ 保存しました';
+    indicator.textContent = '\u2713 保存しました';
     indicator.style.opacity = '1';
     clearTimeout(indicator._timeout);
     indicator._timeout = setTimeout(() => indicator.style.opacity = '0', 1500);
