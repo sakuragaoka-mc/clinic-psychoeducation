@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不安のメカニズムと対処法 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #f57c00;
+    --primary-light: #fff8e1;
+    --primary-dark: #e65100;
+    --accent: #ab47bc;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #fffdf8;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #3f51b5;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #6b6b8d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 40%, #ab47bc 70%, #f57c00 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #ffcc80;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    background: #fff3e0;
+    color: #f57c00;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== TWO-COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .anxiety-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .anxiety-card.acute {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border: 2px solid rgba(245,124,0,0.2);
+  }
+
+  .anxiety-card.chronic {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    border: 2px solid rgba(171,71,188,0.2);
+  }
+
+  .anxiety-card .ac-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .anxiety-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .anxiety-card.acute h3 { color: #e65100; }
+  .anxiety-card.chronic h3 { color: #7b1fa2; }
+
+  .anxiety-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== SYMPTOMS GRID ===== */
+  .symptom-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .symptom-tag {
+    background: #fff8e1;
+    color: #f57c00;
+    border: 1px solid rgba(245,124,0,0.3);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  /* ===== DISORDER CARDS ===== */
+  .disorder-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .disorder-card.panic { border-color: #f57c00; }
+  .disorder-card.social { border-color: #ab47bc; }
+  .disorder-card.gad { border-color: #5c6bc0; }
+
+  .disorder-card .d-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .disorder-card .d-icon {
+    font-size: 1.6rem;
+  }
+
+  .disorder-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .disorder-card.panic h3 { color: #f57c00; }
+  .disorder-card.social h3 { color: #ab47bc; }
+  .disorder-card.gad h3 { color: #5c6bc0; }
+
+  .disorder-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 0.4rem;
+  }
+
+  .disorder-card .d-hint {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #e65100;
+    background: #fff8e1;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+
+  /* ===== COPING APPROACHES ===== */
+  .approach-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .approach-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .approach-content h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .approach-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BREATHING BOX ===== */
+  .breathing-box {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .breath-step {
+    padding: 0.8rem 0.4rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+  }
+
+  .breath-step .b-num {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffcc80;
+    line-height: 1;
+  }
+
+  .breath-step .b-label {
+    font-size: 0.78rem;
+    margin-top: 0.25rem;
+    opacity: 0.9;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(171,71,188,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #7b1fa2;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(245,124,0,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #e65100;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tip-box ul li {
+    font-size: 0.9rem;
+    color: var(--text);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(245,124,0,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.6;
+  }
+
+  .tip-box ul li:last-child { border-bottom: none; }
+
+  .tip-box ul li::before {
+    content: '✓';
+    color: #f57c00;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #3f51b5;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #e8eaf6;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #c5cae9; }
+
+  .bottom-nav .coming-tag {
+    font-size: 0.75rem;
+    color: #999;
+    background: #f5f5f5;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .disorder-card, .approach-card, .anxiety-card { break-inside: avoid; }
+    .tip-box, .science-box, .breathing-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">← トップへ</a>
+  <span class="nav-clinic-name">🌸 こころのクリニック桜が丘</span>
+  <a href="index.html" class="nav-link-secondary">ライブラリ一覧</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">😰 → 😌</div>
+  <h1>不安のメカニズムと対処法</h1>
+  <p class="subtitle">〜 不安は「敵」じゃない、守ってくれる仕組み 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 不安とは何か -->
+  <section>
+    <div class="section-label">🧠 Section 01</div>
+    <h2 class="section-title">不安とは何か</h2>
+
+    <div class="science-box">
+      <div class="sb-header">🔬 脳科学からみる不安</div>
+      <p>
+        不安は脳の「扁桃体」が危険を察知したときに発動するアラームシステムです。
+        太古から人類を守ってきたこの仕組みは、今も私たちの中に生きています。
+        不安が生まれること自体は、脳が正しく機能している証拠です。
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="anxiety-card acute">
+        <div class="ac-icon">⚡</div>
+        <h3>急性不安</h3>
+        <p>「戦うか・逃げるか反応」（Fight-or-Flight）。危険を感知した瞬間に全身を緊急モードに切り替えます。数分〜数十分で収まることがほとんどです。</p>
+      </div>
+      <div class="anxiety-card chronic">
+        <div class="ac-icon">🌀</div>
+        <h3>慢性不安</h3>
+        <p>「もしかしたら…」という将来への心配が持続する状態。明確な危険がなくても不安感が続き、日常生活に支障をきたすことがあります。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>💓 身体症状は「正常な反応」です</h3>
+      <p>不安を感じると身体にさまざまな反応が起きますが、これはすべて脳が生存のために送るシグナルです。症状があることは、体が正しく働いている証拠でもあります。</p>
+      <div class="symptom-tags">
+        <span class="symptom-tag">動悸・心拍数上昇</span>
+        <span class="symptom-tag">息切れ・呼吸が速くなる</span>
+        <span class="symptom-tag">手汗・発汗</span>
+        <span class="symptom-tag">筋肉の緊張</span>
+        <span class="symptom-tag">胃のムカつき</span>
+        <span class="symptom-tag">めまい感</span>
+        <span class="symptom-tag">手足のしびれ</span>
+        <span class="symptom-tag">口の乾き</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 不安障害の種類 -->
+  <section>
+    <div class="section-label">📋 Section 02</div>
+    <h2 class="section-title">不安障害の種類</h2>
+
+    <div class="disorder-card panic">
+      <div class="d-header">
+        <span class="d-icon">💥</span>
+        <h3>パニック障害</h3>
+      </div>
+      <p>突然・前触れなく強烈な不安発作が起きる状態。「死ぬかもしれない」「気が狂いそう」という強い恐怖感を伴うことがあります。発作は通常10〜20分でピークに達し、その後収まります。</p>
+      <p>発作が怖くて外出を避けるなど、「予期不安」や「回避」が二次的な問題となりやすいです。</p>
+      <span class="d-hint">💡 治療：認知行動療法（CBT）+ 必要に応じて薬物療法</span>
+    </div>
+
+    <div class="disorder-card social">
+      <div class="d-header">
+        <span class="d-icon">👥</span>
+        <h3>社交不安障害（SAD）</h3>
+      </div>
+      <p>人前で話す、食事をする、書類にサインするなど、他者に見られる状況で強い恐れと苦痛を感じる状態。「恥をかくかもしれない」という恐怖が核心にあります。</p>
+      <p>学校・職場での発表、電話対応、パーティーなど幅広い場面で困りごとが起きやすいです。</p>
+      <span class="d-hint">💡 治療：段階的エクスポージャー・社会スキルトレーニング</span>
+    </div>
+
+    <div class="disorder-card gad">
+      <div class="d-header">
+        <span class="d-icon">🌀</span>
+        <h3>全般性不安障害（GAD）</h3>
+      </div>
+      <p>仕事・家族・健康・お金など、複数のテーマにわたる慢性的な心配が6ヶ月以上続く状態。心配をコントロールするのが難しく、疲労感・筋緊張・睡眠障害を伴うことが多いです。</p>
+      <p>「心配性な性格」と見過ごされやすいですが、脳の不安調節の問題として適切な支援が可能です。</p>
+      <span class="d-hint">💡 治療：マインドフルネス・認知再構成・必要に応じて薬物療法</span>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 対処法 -->
+  <section>
+    <div class="section-label">🛠️ Section 03</div>
+    <h2 class="section-title">不安への対処法：3つのアプローチ</h2>
+
+    <div class="approach-card">
+      <div class="approach-icon">🧘</div>
+      <div class="approach-content">
+        <h3>呼吸法（4-7-8呼吸）</h3>
+        <p>
+          副交感神経を活性化し、体の「緊急モード」を解除します。
+          パニックを感じたときや、眠れないとき、緊張する場面の前に有効です。
+        </p>
+        <div class="breathing-box">
+          <div class="breath-step">
+            <div class="b-num">4</div>
+            <div class="b-label">鼻から<br>ゆっくり吸う<br>（4秒）</div>
+          </div>
+          <div class="breath-step">
+            <div class="b-num">7</div>
+            <div class="b-label">息を<br>止める<br>（7秒）</div>
+          </div>
+          <div class="breath-step">
+            <div class="b-num">8</div>
+            <div class="b-label">口から<br>細く吐く<br>（8秒）</div>
+          </div>
+        </div>
+        <p style="margin-top:0.6rem; font-size:0.82rem;">※ 1回につき3〜4サイクル繰り返すのがおすすめです。最初は数を数えずに「長く吐く」だけでも効果があります。</p>
+      </div>
+    </div>
+
+    <div class="approach-card">
+      <div class="approach-icon">🔍</div>
+      <div class="approach-content">
+        <h3>認知再構成（考え方を見直す）</h3>
+        <p>
+          不安は「最悪のシナリオ」を自動的に描きがちです。
+          認知再構成では、その考えを「証拠」と「別の見方」で検証します。
+        </p>
+        <div class="card" style="margin-top:0.8rem; background:#f9f9f9; padding:1rem;">
+          <p style="font-size:0.85rem;"><strong>例）</strong>「プレゼンで失敗して、もう仕事を失う」<br>
+          → <em>「過去にもプレゼンで緊張したけど、なんとかなった。準備できているか？」</em></p>
+        </div>
+        <p style="font-size:0.85rem; margin-top:0.5rem; color: var(--text-light);">自動思考に気づく → 証拠を探す → より現実的な解釈を見つける、というステップを練習します。</p>
+      </div>
+    </div>
+
+    <div class="approach-card">
+      <div class="approach-icon">📋</div>
+      <div class="approach-content">
+        <h3>段階的エクスポージャー</h3>
+        <p>
+          避けていた状況に、少しずつ・繰り返し近づいていく方法です。
+          回避は短期的に不安を和らげますが、長期的には不安を維持・悪化させます。
+        </p>
+        <div class="card" style="margin-top:0.8rem; background:#f9f9f9; padding:1rem;">
+          <p style="font-size:0.85rem;">
+            <strong>ステップの例（エレベーター恐怖の場合）</strong><br>
+            ① エレベーターのそばに立つ<br>
+            ② ドアが開いた状態で乗り口に立つ<br>
+            ③ 1階だけ乗って降りる<br>
+            ④ 複数階を乗る
+          </p>
+        </div>
+        <p style="font-size:0.85rem; margin-top:0.5rem; color: var(--text-light);">不安が下がるまで場面に留まることが大切です。セラピストと一緒に「不安ヒエラルキー」を作成します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 受診のタイミング -->
+  <section>
+    <div class="section-label">🏥 Section 04</div>
+    <h2 class="section-title">こんなとき受診を</h2>
+
+    <div class="tip-box">
+      <div class="tb-header">⚠️ 以下の状況が続くときはご相談ください</div>
+      <ul>
+        <li>不安が2週間以上続いており、日常生活（仕事・学校・家事）に支障が出ている</li>
+        <li>パニック発作が繰り返し起き、発作を恐れて外出を避けるようになった</li>
+        <li>人前に出ることが怖くて、大切な場面（面接・授業・会合）を避けてしまう</li>
+        <li>眠れない・食欲がない状態が続いている</li>
+        <li>アルコールや薬で不安をコントロールしようとしている</li>
+        <li>「死にたい」「消えたい」という気持ちが浮かぶことがある</li>
+      </ul>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">💬 当クリニックについて</div>
+      <p>
+        不安障害は適切なサポートで改善できます。「性格の問題」や「弱さ」ではありません。
+        気になることがあれば、まず気軽に相談していただけます。
+        問診・診察・必要に応じた心理検査を行い、一緒に対処法を考えていきます。
+      </p>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">← トップへ</a>
+    <span class="coming-tag">✏️ ワークシートは準備中</span>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+    <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>

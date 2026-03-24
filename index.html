@@ -162,6 +162,18 @@
     background: linear-gradient(135deg, #1a237e, #283593, #42a5f5, #64b5f6);
   }
 
+  .card-banner.anxiety {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2, #ab47bc, #f57c00);
+  }
+
+  .card-banner.depression {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32, #43a047, #26a69a);
+  }
+
+  .card-banner.adhd {
+    background: linear-gradient(135deg, #1a237e, #283593, #3f51b5, #ff9800);
+  }
+
   .card-body {
     padding: 1.2rem 1.4rem;
   }
@@ -177,6 +189,9 @@
 
   .card-tag.education { background: #e8eaf6; color: #3f51b5; }
   .card-tag.worksheet { background: #e8f5e9; color: #2e7d32; }
+  .card-tag.anxiety-tag { background: #f3e5f5; color: #7b1fa2; }
+  .card-tag.depression-tag { background: #e0f2f1; color: #00695c; }
+  .card-tag.adhd-tag { background: #e8eaf6; color: #283593; }
 
   .card-body h3 {
     font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -289,7 +304,7 @@
 </head>
 <body>
 
-<div class="top-bar">🌸 桜丘メンタルクリニック &nbsp;|&nbsp; 心理教育ライブラリ</div>
+<div class="top-bar">🌸 こころのクリニック桜が丘 &nbsp;|&nbsp; 心理教育ライブラリ</div>
 
 <div class="hero">
   <div class="hero-icon">🧠</div>
@@ -342,37 +357,57 @@
       </div>
     </a>
 
-  </div>
+    <!-- Card 3: Anxiety Education -->
+    <a href="anxiety-education.html" class="content-card" style="animation-delay:0.2s;">
+      <div class="card-banner anxiety">
+        <span class="banner-icon">😰→😌</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag anxiety-tag">📖 心理教育</span>
+        <h3>不安のメカニズムと対処法</h3>
+        <p>パニック・社交不安・全般性不安障害——「不安」が生まれる脳の仕組みと、3つの対処アプローチ。</p>
+        <div class="card-arrow">
+          読む <span class="arrow">→</span>
+        </div>
+      </div>
+    </a>
 
-  <!-- Coming Soon -->
-  <h3 style="font-size:0.85rem; font-weight:700; color:var(--text-light); margin-bottom:0.6rem;">📚 今後追加予定</h3>
+    <!-- Card 4: Depression Education -->
+    <a href="depression-education.html" class="content-card" style="animation-delay:0.3s;">
+      <div class="card-banner depression">
+        <span class="banner-icon">😔→🌱</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag depression-tag">📖 心理教育</span>
+        <h3>うつの理解と行動活性化</h3>
+        <p>「やる気が出ない」は意志の問題じゃない——脳科学から理解するうつと、小さな一歩から始める行動活性化。</p>
+        <div class="card-arrow">
+          読む <span class="arrow">→</span>
+        </div>
+      </div>
+    </a>
 
-  <div class="coming-soon">
-    <div class="cs-icon">😰</div>
-    <div class="cs-content">
-      <h4>不安のメカニズムと対処法</h4>
-      <p>パニック・社交不安・全般性不安障害の心理教育</p>
-    </div>
-  </div>
-  <div class="coming-soon">
-    <div class="cs-icon">😔</div>
-    <div class="cs-content">
-      <h4>うつの理解と行動活性化</h4>
-      <p>「やる気が出ない」の脳科学と、小さな一歩から始める方法</p>
-    </div>
-  </div>
-  <div class="coming-soon">
-    <div class="cs-icon">🧩</div>
-    <div class="cs-content">
-      <h4>発達特性との付き合い方</h4>
-      <p>ADHD・ASDの特性理解と日常の工夫</p>
-    </div>
+    <!-- Card 5: ADHD/ASD Education -->
+    <a href="adhd-asd-education.html" class="content-card" style="animation-delay:0.4s;">
+      <div class="card-banner adhd">
+        <span class="banner-icon">🧩</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag adhd-tag">📖 心理教育</span>
+        <h3>発達特性との付き合い方</h3>
+        <p>ADHD・ASDは「欠陥」じゃなく「脳の多様性」——特性を知り、日常をもっとラクにする工夫。</p>
+        <div class="card-arrow">
+          読む <span class="arrow">→</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 
   <div class="footer">
     <p>この資料は一般的な情報提供を目的としています。<br>
     個別の症状については主治医にご相談ください。</p>
-    <p style="margin-top:0.5rem;">© 2026 心理教育ライブラリ</p>
+    <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
   </div>
 
 </div>

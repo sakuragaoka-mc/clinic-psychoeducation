@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>うつの理解と行動活性化 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #00695c;
+    --primary-light: #e0f2f1;
+    --primary-dark: #004d40;
+    --accent: #26a69a;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #f9fdfb;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #3f51b5;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #6b6b8d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 40%, #43a047 70%, #26a69a 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(38,166,154,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #a5d6a7;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== TWO-COLUMN GRID (process-grid) ===== */
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .process-grid { grid-template-columns: 1fr; }
+  }
+
+  .process-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .process-card .pc-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .process-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .process-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== THREE-COLUMN GRID ===== */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 640px) {
+    .three-col { grid-template-columns: 1fr; }
+  }
+
+  .symptom-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .symptom-card .sc-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .symptom-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .symptom-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .symptom-card ul li {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    padding: 0.25rem 0;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .symptom-card ul li:last-child { border-bottom: none; }
+
+  .symptom-card ul li::before {
+    content: '・';
+    font-weight: 700;
+  }
+
+  /* ===== KEY MESSAGE CARD ===== */
+  .key-message {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 4px solid #26a69a;
+  }
+
+  .key-message h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: #00695c;
+    margin-bottom: 0.6rem;
+  }
+
+  .key-message p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== ANCHOR GRID (快活動) ===== */
+  .anchor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin: 0.8rem 0 1.2rem;
+  }
+
+  @media (max-width: 500px) {
+    .anchor-grid { grid-template-columns: 1fr; }
+  }
+
+  .anchor-item {
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .anchor-item .ai-icon { font-size: 1.8rem; margin-bottom: 0.3rem; }
+
+  .anchor-item h5 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  /* ===== TRACKER TABLE ===== */
+  .tracker-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    margin: 0.8rem 0;
+  }
+
+  .tracker-table th, .tracker-table td {
+    padding: 0.5rem 0.4rem;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+  }
+
+  .tracker-table th {
+    background: #e0f2f1;
+    font-weight: 700;
+    font-size: 0.72rem;
+    color: #00695c;
+  }
+
+  .tracker-table td {
+    background: #fff;
+    min-height: 2rem;
+  }
+
+  .tracker-table .day-header {
+    font-weight: 700;
+    background: #f1f8f6;
+    width: 40px;
+    color: #00695c;
+  }
+
+  /* ===== STEP CARDS ===== */
+  .step-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00695c, #26a69a);
+    color: #fff;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-content h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(245,124,0,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #e65100;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(0,105,92,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #00695c;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    gap: 0.8rem;
+    margin: 2rem 0 0;
+    flex-wrap: wrap;
+  }
+
+  .bottom-nav a {
+    flex: 1;
+    min-width: 140px;
+    text-decoration: none;
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    display: block;
+  }
+
+  .bottom-nav a .bn-icon {
+    font-size: 1.2rem;
+  }
+
+  .bottom-nav a p {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .process-card, .symptom-card, .step-card { break-inside: avoid; }
+    .tip-box, .science-box, .key-message { break-inside: avoid; }
+    section { break-inside: avoid; }
+    .tracker-table { font-size: 9pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">← こころの学び トップへ</a>
+  <a href="anxiety-education.html" class="nav-link-secondary">← 不安の解説</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">😔 → 🌱</div>
+  <h1>うつの理解と行動活性化</h1>
+  <p class="subtitle">〜 「やる気が出ない」の脳科学と、小さな一歩 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: うつとは何か -->
+  <section>
+    <div class="section-label" style="background:#e0f2f1; color:#00695c;">🧠 基本のしくみ</div>
+    <h2 class="section-title">うつとは何か</h2>
+
+    <div class="process-grid">
+      <div class="process-card" style="background:linear-gradient(135deg, #e0f2f1, #f0faf9); border:2px solid rgba(38,166,154,0.3);">
+        <div class="pc-icon">🧬</div>
+        <h3 style="color:#00695c;">脳の神経伝達物質</h3>
+        <p>セロトニン（気分の安定）、ドーパミン（やる気・快感）、ノルアドレナリン（集中・意欲）——これらのバランスが崩れると、気分や意欲に影響が出ます。「気合い」や「根性」の問題ではなく、脳の化学的な変化です。</p>
+      </div>
+      <div class="process-card" style="background:linear-gradient(135deg, #fff3e0, #fff8e1); border:2px solid rgba(255,152,0,0.2);">
+        <div class="pc-icon">🔄</div>
+        <h3 style="color:#e65100;">うつのサイクル</h3>
+        <p>気分が落ちる→活動が減る→達成感・楽しみが減る→さらに気分が落ちる。この「下向きスパイラル」が、うつを維持・悪化させるメカニズムです。行動活性化は、このサイクルを逆回転させるアプローチです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: うつの主な症状 -->
+  <section>
+    <div class="section-label" style="background:#fce4ec; color:#c2185b;">📋 知っておきたいサイン</div>
+    <h2 class="section-title">うつの主な症状</h2>
+
+    <p style="font-size:0.92rem; color:var(--text-light); line-height:1.8; margin-bottom:1.2rem;">うつ病の症状は「こころ」だけでなく「からだ」や「考え方」にも現れます。2週間以上続く場合は、受診のサインです。</p>
+
+    <div class="three-col">
+      <div class="symptom-card" style="background:linear-gradient(135deg, #fff3e0, #fff8e1); border:2px solid rgba(255,152,0,0.15);">
+        <div class="sc-icon">😢</div>
+        <h3 style="color:#e65100;">感情の症状</h3>
+        <ul>
+          <li>気分の落ち込み</li>
+          <li>喜びの消失（好きだったことが楽しくない）</li>
+          <li>強い罪悪感や自責感</li>
+          <li>涙もろくなる</li>
+        </ul>
+      </div>
+      <div class="symptom-card" style="background:linear-gradient(135deg, #e0f2f1, #f0faf9); border:2px solid rgba(38,166,154,0.15);">
+        <div class="sc-icon">😴</div>
+        <h3 style="color:#00695c;">からだの症状</h3>
+        <ul>
+          <li>睡眠の変化（不眠or過眠）</li>
+          <li>食欲の変化（減退or過食）</li>
+          <li>強い疲労感・だるさ</li>
+          <li>頭痛・肩こり</li>
+        </ul>
+      </div>
+      <div class="symptom-card" style="background:linear-gradient(135deg, #f3e5f5, #ede7f6); border:2px solid rgba(123,31,162,0.15);">
+        <div class="sc-icon">🌫️</div>
+        <h3 style="color:#7b1fa2;">思考の症状</h3>
+        <ul>
+          <li>集中力の低下</li>
+          <li>決断ができない</li>
+          <li>「自分はダメだ」という思考</li>
+          <li>悲観的な見方が続く</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 行動活性化（BA）とは -->
+  <section>
+    <div class="section-label" style="background:#e8f5e9; color:#2e7d32;">🌱 回復へのアプローチ</div>
+    <h2 class="section-title">行動活性化（BA）とは</h2>
+
+    <div class="key-message">
+      <h3>💡 「気分が上がるまで待つ」→「小さく動いて気分を変える」</h3>
+      <p>行動活性化（Behavioral Activation）は、うつ病に対するエビデンスが確立された心理療法です。ポイントは「やる気が出てから動く」のではなく、「動くからやる気が出てくる」という逆の発想。小さな行動が、脳のドーパミン系を再び活性化させます。</p>
+    </div>
+
+    <div class="anchor-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="anchor-item" style="background:#e8f5e9;">
+        <div class="ai-icon">🚶</div>
+        <h5>散歩・軽い運動</h5>
+      </div>
+      <div class="anchor-item" style="background:#e3f2fd;">
+        <div class="ai-icon">🎵</div>
+        <h5>好きな音楽を聴く</h5>
+      </div>
+      <div class="anchor-item" style="background:#fff8e1;">
+        <div class="ai-icon">🍳</div>
+        <h5>簡単な料理を作る</h5>
+      </div>
+      <div class="anchor-item" style="background:#fce4ec;">
+        <div class="ai-icon">💬</div>
+        <h5>友人や家族と話す</h5>
+      </div>
+      <div class="anchor-item" style="background:#f1f8e9;">
+        <div class="ai-icon">🌿</div>
+        <h5>植物の世話をする</h5>
+      </div>
+      <div class="anchor-item" style="background:#f3e5f5;">
+        <div class="ai-icon">📖</div>
+        <h5>短い文章を読む</h5>
+      </div>
+    </div>
+
+    <div style="background:#fff; border-radius:16px; box-shadow:0 3px 16px rgba(0,0,0,0.06); overflow:hidden; margin:1rem 0;">
+      <div style="padding:0.8rem 1.2rem; font-size:0.85rem; font-weight:700; color:#fff; background:linear-gradient(90deg,#00695c,#26a69a);">📊 活動と気分の記録シート</div>
+      <div style="padding:1rem 1.2rem; overflow-x:auto;">
+        <table class="tracker-table">
+          <thead>
+            <tr>
+              <th>日</th>
+              <th>活動内容</th>
+              <th>気分(前)<br>1-5</th>
+              <th>気分(後)<br>1-5</th>
+              <th>気づき</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="day-header">月</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="day-header">火</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="day-header">水</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="day-header">木</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="day-header">金</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="day-header">土</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="day-header">日</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 回復の3ステップ -->
+  <section>
+    <div class="section-label" style="background:#e8eaf6; color:#3f51b5;">🪜 ステップ</div>
+    <h2 class="section-title">回復の3ステップ</h2>
+
+    <div class="step-card" style="border-left:4px solid #26a69a;">
+      <div class="step-badge">1</div>
+      <div class="step-content">
+        <h3>今できることを1つ見つける</h3>
+        <p>「完璧な1日」ではなく「今日できるたった1つのこと」を選びます。歯を磨く、カーテンを開ける、5分だけ外に出る——どんなに小さくてもOK。</p>
+      </div>
+    </div>
+
+    <div class="step-card" style="border-left:4px solid #43a047;">
+      <div class="step-badge">2</div>
+      <div class="step-content">
+        <h3>毎日同じ時間に実行する</h3>
+        <p>同じ時間に同じ活動をすることで、脳が「この時間はこれをする」と学習し、だんだん意志の力なしで動けるようになります。</p>
+      </div>
+    </div>
+
+    <div class="step-card" style="border-left:4px solid #66bb6a;">
+      <div class="step-badge">3</div>
+      <div class="step-content">
+        <h3>記録して気分との関係を確認する</h3>
+        <p>活動と気分の関係を記録すると、「動いた日は少しだけ気分がマシ」というパターンに気づけます。この「気づき」が回復の推進力になります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIP BOX -->
+  <div class="tip-box">
+    <div class="tb-header">🏥 こんなときは受診を</div>
+    <p>2週間以上気分の落ち込みが続く／眠れない・食べられない日が続く／「消えてしまいたい」という考えが浮かぶ——このようなときは、早めに専門家にご相談ください。行動活性化と薬物療法を組み合わせることで、回復がより確かなものになります。</p>
+  </div>
+
+  <!-- SCIENCE BOX -->
+  <div class="science-box">
+    <div class="sb-header">📚 エビデンス</div>
+    <p>行動活性化（BA）は、うつ病に対する認知行動療法（CBT）と同等の効果があることが大規模RCT（COBRA試験, Richards et al., 2016）で示されています。思考の修正よりも「行動を変える」ことに焦点を当てるため、取り組みやすく、10代を含む幅広い年代で有効です。</p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html" style="background:#e0f2f1;">
+      <span class="bn-icon">🧠</span>
+      <p style="color:#00695c;">トップに戻る</p>
+    </a>
+    <a href="anxiety-education.html" style="background:linear-gradient(135deg, #f3e5f5, #e8eaf6);">
+      <span class="bn-icon">😰→😌</span>
+      <p style="color:#7b1fa2;">不安の解説を読む</p>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+    <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>

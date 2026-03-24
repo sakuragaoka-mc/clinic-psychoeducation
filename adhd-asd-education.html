@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>発達特性との付き合い方 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #283593;
+    --primary-light: #e8eaf6;
+    --primary-dark: #1a237e;
+    --accent: #ff9800;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #fafafe;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #3f51b5;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #6b6b8d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 40%, #3f51b5 70%, #ff9800 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #ffcc80;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== TWO-COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .trait-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .trait-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .trait-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== THREE-COLUMN GRID ===== */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .three-col { grid-template-columns: 1fr; }
+  }
+
+  .mini-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .mini-card .mc-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mini-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .mini-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== TIP CARD ===== */
+  .tip-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .tip-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .tip-card p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.8;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .tip-card p:last-child {
+    border-bottom: none;
+  }
+
+  /* ===== STEP CARDS ===== */
+  .step-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .step-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #e8eaf6 0%, #ede7f6 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(63,81,181,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #283593;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { opacity: 0.85; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .step-card, .tip-card, .mini-card, .trait-card { break-inside: avoid; }
+    .science-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">← こころの学び トップへ</a>
+  <a href="depression-education.html" class="nav-link-secondary">← うつの解説</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">🧩</div>
+  <h1>発達特性との付き合い方</h1>
+  <p class="subtitle">〜 「できない」じゃなく「脳の特性」を知ろう 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 発達特性とは -->
+  <section>
+    <div class="section-label" style="background: #e8eaf6; color: #283593;">🧠 基本の考え方</div>
+    <h2 class="section-title">発達特性とは</h2>
+
+    <div class="card" style="border-left: 4px solid #3f51b5;">
+      <h3>💡 ニューロダイバーシティ（脳の多様性）</h3>
+      <p>ADHDやASDは「欠陥」や「病気」ではなく、脳の働き方の「違い」です。人間の脳には多様性があり、それぞれに得意・不得意のパターンがあります。大切なのは、自分の特性を知り、「自分に合ったやり方」を見つけること。無理に「普通」に合わせようとするよりも、仕組みで解決するほうがずっとラクです。</p>
+    </div>
+
+    <div class="two-col">
+      <div class="trait-card" style="background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%); border: 2px solid rgba(63,81,181,0.2);">
+        <h3 style="color: #283593;">特性は「弱み」でもあり「強み」でもある</h3>
+        <p>ADHDの衝動性は「行動力」に、ASDのこだわりは「集中力・専門性」につながります。特性を「なくす」のではなく、「活かす場面を増やし、困る場面を工夫で減らす」が目標です。</p>
+      </div>
+      <div class="trait-card" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border: 2px solid rgba(255,152,0,0.2);">
+        <h3 style="color: #e65100;">困りごとは「環境とのミスマッチ」</h3>
+        <p>同じ特性でも、環境によって「困りごと」にも「強み」にもなります。自分を責めるのではなく、環境の調整や仕組みの工夫で対処するのが現代的なアプローチです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ADHD -->
+  <section>
+    <div class="section-label" style="background: #fff3e0; color: #e65100;">⚡ ADHD</div>
+    <h2 class="section-title">ADHDの3つの特性</h2>
+
+    <div class="three-col">
+      <div class="mini-card" style="background: #fff8e1; border: 2px solid rgba(255,152,0,0.2);">
+        <div class="mc-icon">🔍</div>
+        <h3 style="color: #e65100;">不注意</h3>
+        <p>集中が続かない、忘れ物が多い、細かいミスが増える、話を聞いていても頭に入らない</p>
+      </div>
+      <div class="mini-card" style="background: #fff3e0; border: 2px solid rgba(255,152,0,0.25);">
+        <div class="mc-icon">🏃</div>
+        <h3 style="color: #e65100;">多動性</h3>
+        <p>じっとしているのが辛い、貧乏ゆすり、頭の中が常に忙しい、リラックスしづらい</p>
+      </div>
+      <div class="mini-card" style="background: #fbe9e7; border: 2px solid rgba(255,87,34,0.2);">
+        <div class="mc-icon">💥</div>
+        <h3 style="color: #bf360c;">衝動性</h3>
+        <p>思いつきで行動する、順番を待てない、相手の話を遮ってしまう、衝動買い</p>
+      </div>
+    </div>
+
+    <div class="tip-card" style="border-left: 4px solid #ff9800;">
+      <h3>🛠️ ADHDの対策ヒント</h3>
+      <p><strong>外部化する</strong>：記憶に頼らず、リスト・メモ・アラームで「外に出す」</p>
+      <p><strong>ポモドーロ法</strong>：25分集中→5分休憩のサイクルで、集中と休憩を交互に</p>
+      <p><strong>環境整理</strong>：スマホを別の部屋に、デスクの上は必要最小限に</p>
+      <p><strong>「すぐやる」ルール</strong>：2分以内に終わることは、後回しにせず即実行</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: ASD -->
+  <section>
+    <div class="section-label" style="background: #e8eaf6; color: #283593;">🌈 ASD</div>
+    <h2 class="section-title">ASDの主な特性</h2>
+
+    <div class="three-col">
+      <div class="mini-card" style="background: linear-gradient(135deg, #e8eaf6, #f5f5ff); border: 2px solid rgba(63,81,181,0.2);">
+        <div class="mc-icon">💬</div>
+        <h3 style="color: #283593;">社会的コミュニケーション</h3>
+        <p>暗黙のルールがわかりにくい、言葉の裏の意味を読み取りにくい、雑談が苦手、表情の読み取りが難しい</p>
+      </div>
+      <div class="mini-card" style="background: linear-gradient(135deg, #ede7f6, #f8f5ff); border: 2px solid rgba(126,87,194,0.2);">
+        <div class="mc-icon">🔁</div>
+        <h3 style="color: #5e35b1;">こだわり・パターン</h3>
+        <p>ルーティンの変化が辛い、特定の分野への強い興味、物事のやり方に独自のルールがある</p>
+      </div>
+      <div class="mini-card" style="background: linear-gradient(135deg, #fce4ec, #fff5f7); border: 2px solid rgba(236,64,122,0.2);">
+        <div class="mc-icon">👂</div>
+        <h3 style="color: #c2185b;">感覚の特性</h3>
+        <p>音・光・匂いに敏感（感覚過敏）、特定の触感が苦手、逆に感覚を求める場合も（感覚鈍麻）</p>
+      </div>
+    </div>
+
+    <div class="tip-card" style="border-left: 4px solid #3f51b5;">
+      <h3>🛠️ ASDの対策ヒント</h3>
+      <p><strong>明文化する</strong>：暗黙のルールを言葉にして整理する、困ったら「具体的に教えて」と伝える</p>
+      <p><strong>ルーティン化</strong>：予定の変更は事前に知らせてもらう、1日の流れを決めておく</p>
+      <p><strong>感覚への配慮</strong>：イヤーマフ・サングラスの活用、休憩スペースの確保</p>
+      <p><strong>得意を活かす</strong>：興味の深さを学業や仕事に活かせる環境を探す</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 共通するコツ -->
+  <section>
+    <div class="section-label" style="background: #e0f7fa; color: #00838f;">🤝 どちらにも共通</div>
+    <h2 class="section-title">ADHD・ASD共通の生活の工夫</h2>
+
+    <div class="step-card" style="border-left: 4px solid #ff9800;">
+      <h3>📝 自分の「特性マップ」を作る</h3>
+      <p>得意なこと・苦手なこと・エネルギーが消耗する場面・回復する方法を書き出してみましょう。自分の取扱説明書を作るイメージです。</p>
+    </div>
+
+    <div class="step-card" style="border-left: 4px solid #3f51b5;">
+      <h3>🔧 環境を調整する</h3>
+      <p>「自分を変える」よりも「仕組みを変える」ほうが効果的です。アラーム、チェックリスト、定位置管理、ノイズキャンセリングイヤホン——道具と環境の力を借りましょう。</p>
+    </div>
+
+    <div class="step-card" style="border-left: 4px solid #26a69a;">
+      <h3>🗣️ 信頼できる人に伝える</h3>
+      <p>自分の特性を理解してくれる人がいると、生活のしやすさが大きく変わります。「こういう場面が苦手」「こうしてもらえると助かる」を具体的に伝える練習をしましょう。</p>
+    </div>
+  </section>
+
+  <!-- SCIENCE BOX -->
+  <div class="science-box">
+    <div class="sb-header">📚 発達特性の理解のために</div>
+    <p>ADHDは脳の実行機能（前頭前野）の発達の違いが関与しており、ドーパミン・ノルアドレナリン系の機能が定型発達とは異なることがわかっています。ASDは社会的認知や感覚処理に関わる脳領域のネットワークの違いが報告されています。どちらも生まれ持った脳の特性であり、適切な理解と環境調整、必要に応じた薬物療法で、生活の質（QOL）を大きく改善できます。</p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html" style="background: #e8eaf6; color: #283593;">🧠 トップに戻る</a>
+    <a href="depression-education.html" style="background: linear-gradient(135deg, #e0f2f1, #e8f5e9); color: #00695c;">😔→🌱 うつの解説を読む</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+    <p style="margin-top:0.5rem;">© 2026 こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>
