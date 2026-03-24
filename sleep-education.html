@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>睡眠と覚醒のしくみ — 朝起きられないキミへ</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #1a1a3e;
+    --deep-night: #0d0d2b;
+    --dawn: #ff7b54;
+    --morning: #ffb26b;
+    --sky: #6ec6ff;
+    --light-sky: #e8f4fd;
+    --melatonin: #7c5cbf;
+    --cortisol: #ff9a3c;
+    --body-clock: #3dd6c8;
+    --sleep-pressure: #5b86e5;
+    --card-bg: rgba(255,255,255,0.92);
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--light-sky);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--night) 0%, #2d1b69 40%, #4a2c8a 60%, var(--dawn) 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 50% 15%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 85% 70%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 20% 80%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.8), transparent);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  .hero-icons {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: var(--morning);
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.3rem, 4vw, 1.7rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.8rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+    backdrop-filter: blur(10px);
+  }
+
+  /* ===== TWO PROCESSES ===== */
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .process-grid { grid-template-columns: 1fr; }
+  }
+
+  .process-card {
+    border-radius: 20px;
+    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-card.clock {
+    background: linear-gradient(135deg, #e0f7f5 0%, #f0faf9 100%);
+    border: 2px solid rgba(61,214,200,0.3);
+  }
+
+  .process-card.pressure {
+    background: linear-gradient(135deg, #e4ecfa 0%, #f0f4ff 100%);
+    border: 2px solid rgba(91,134,229,0.3);
+  }
+
+  .process-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .process-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .process-card.clock h3 { color: #1a9e8f; }
+  .process-card.pressure h3 { color: #4a6ec4; }
+
+  .process-card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(
+      to bottom,
+      var(--night) 0%,
+      var(--melatonin) 25%,
+      var(--deep-night) 45%,
+      var(--cortisol) 70%,
+      var(--sky) 100%
+    );
+    border-radius: 3px;
+  }
+
+  .tl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 1.4rem;
+    position: relative;
+  }
+
+  .tl-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  }
+
+  .tl-content {
+    flex: 1;
+    padding-top: 0.5rem;
+  }
+
+  .tl-time {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.15rem;
+  }
+
+  .tl-title {
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .tl-desc {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* ===== TEEN SECTION ===== */
+  .teen-highlight {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-radius: 20px;
+    padding: 1.8rem;
+    border: 2px solid rgba(255,152,0,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .teen-highlight h3 {
+    color: #e65100;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+  }
+
+  .teen-highlight p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  .shift-diagram {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .shift-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 0.8rem 0;
+  }
+
+  .shift-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .shift-bar-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 60px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .shift-bar-track {
+    flex: 1;
+    height: 32px;
+    background: #f0f0f0;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shift-bar-fill {
+    position: absolute;
+    height: 100%;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .shift-bar-fill.adult {
+    background: linear-gradient(90deg, var(--melatonin), #9575cd);
+    left: 29%;
+    width: 33%;
+  }
+
+  .shift-bar-fill.teen {
+    background: linear-gradient(90deg, #7e57c2, #ab47bc);
+    left: 37.5%;
+    width: 33%;
+  }
+
+  .time-markers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    color: var(--text-light);
+    padding: 0 60px 0 66px;
+    margin-top: 0.3rem;
+  }
+
+  /* ===== ADVICE ===== */
+  .advice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .advice-grid { grid-template-columns: 1fr; }
+  }
+
+  .advice-item {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 4px solid;
+    transition: transform 0.2s ease;
+  }
+
+  .advice-item:hover { transform: translateY(-2px); }
+
+  .advice-item.do { border-left-color: #4caf50; }
+  .advice-item.dont { border-left-color: #ef5350; }
+
+  .advice-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .advice-item h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .advice-item.do h4 { color: #2e7d32; }
+  .advice-item.dont h4 { color: #c62828; }
+
+  .advice-item p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.65;
+  }
+
+  /* ===== STEP BY STEP ===== */
+  .step-list {
+    counter-reset: steps;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    counter-increment: steps;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky), #42a5f5);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(66,165,245,0.3);
+  }
+
+  .step-text {
+    flex: 1;
+    padding-top: 0.4rem;
+  }
+
+  .step-text strong {
+    display: block;
+    font-size: 0.98rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .step-text p {
+    font-size: 0.87rem;
+    color: var(--text-light);
+    line-height: 1.65;
+  }
+
+  /* ===== ALARM DEEP DIVE ===== */
+  .alarm-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .alarm-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px;
+    height: 100%;
+  }
+
+  .alarm-card.why::before { background: linear-gradient(to bottom, #ef5350, #ff8a80); }
+  .alarm-card.deep::before { background: linear-gradient(to bottom, var(--melatonin), #b39ddb); }
+  .alarm-card.inertia::before { background: linear-gradient(to bottom, #78909c, #b0bec5); }
+
+  .alarm-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .alarm-card p, .alarm-card li {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .alarm-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+
+  .alarm-card ul li {
+    padding: 0.35rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .alarm-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--melatonin);
+    font-weight: 700;
+  }
+
+  .sleep-inertia-visual {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 1rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 56px;
+  }
+
+  .si-phase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    padding: 0 0.6rem;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .si-phase.heavy { background: #37474f; flex: 2; }
+  .si-phase.foggy { background: #78909c; flex: 3; }
+  .si-phase.clearing { background: #b0bec5; flex: 2; color: #37474f; }
+  .si-phase.awake { background: #e0f2f1; flex: 3; color: #00695c; }
+
+  .technique-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .technique-grid { grid-template-columns: 1fr; }
+  }
+
+  .technique-item {
+    background: linear-gradient(135deg, #f3e5f5, #ede7f6);
+    border-radius: 14px;
+    padding: 1.1rem;
+  }
+
+  .technique-item.light { background: linear-gradient(135deg, #fff8e1, #fff3e0); }
+  .technique-item.temp { background: linear-gradient(135deg, #e0f7fa, #e1f5fe); }
+  .technique-item.sound { background: linear-gradient(135deg, #fce4ec, #f3e5f5); }
+  .technique-item.move { background: linear-gradient(135deg, #e8f5e9, #f1f8e9); }
+
+  .technique-item .tech-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .technique-item h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .technique-item p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .snooze-warning {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border-radius: 14px;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .snooze-warning .sw-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .snooze-warning p {
+    font-size: 0.86rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* ===== EXCURSION SECTION ===== */
+  .ensoku-box {
+    background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.2rem;
+    border: 2px solid rgba(63,81,181,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ensoku-box::after {
+    content: '🎒';
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    font-size: 4rem;
+    opacity: 0.12;
+    transform: rotate(15deg);
+  }
+
+  .ensoku-box h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #283593;
+    margin-bottom: 0.7rem;
+  }
+
+  .ensoku-box p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .brain-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .brain-compare { grid-template-columns: 1fr; }
+  }
+
+  .brain-col {
+    border-radius: 16px;
+    padding: 1.3rem;
+    text-align: center;
+  }
+
+  .brain-col.school {
+    background: linear-gradient(135deg, #eceff1, #cfd8dc);
+    border: 2px solid rgba(96,125,139,0.2);
+  }
+
+  .brain-col.ensoku {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    border: 2px solid rgba(255,160,0,0.2);
+  }
+
+  .brain-col .bc-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .brain-col h5 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .brain-col.school h5 { color: #455a64; }
+  .brain-col.ensoku h5 { color: #e65100; }
+
+  .brain-col p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    text-align: left;
+  }
+
+  .brain-meter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.6rem 0;
+  }
+
+  .brain-meter-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    width: 70px;
+    text-align: right;
+    flex-shrink: 0;
+    color: var(--text-light);
+  }
+
+  .brain-meter-bar {
+    flex: 1;
+    height: 14px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 7px;
+    overflow: hidden;
+  }
+
+  .brain-meter-fill {
+    height: 100%;
+    border-radius: 7px;
+    transition: width 0.4s ease;
+  }
+
+  .ensoku-takeaway {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.3rem;
+    margin-top: 1rem;
+    border-left: 4px solid #3f51b5;
+  }
+
+  .ensoku-takeaway h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #283593;
+    margin-bottom: 0.4rem;
+  }
+
+  .ensoku-takeaway p {
+    font-size: 0.86rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== NOTE ===== */
+  .note-box {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid rgba(233,30,99,0.15);
+  }
+
+  .note-box h4 {
+    color: #c2185b;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .note-box p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* ===== REFERENCES ===== */
+  .references {
+    margin: 2rem 0 0;
+    padding: 1.5rem;
+    background: #f5f5f5;
+    border-radius: 18px;
+  }
+
+  .references h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .ref-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: refs;
+  }
+
+  .ref-list li {
+    counter-increment: refs;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    padding: 0.4rem 0;
+    padding-left: 2rem;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .ref-list li:last-child { border-bottom: none; }
+
+  .ref-list li::before {
+    content: counter(refs) ".";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--text);
+    width: 1.5rem;
+    text-align: right;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    margin-top: 2rem;
+  }
+
+  /* ===== TAG ===== */
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.65rem;
+    border-radius: 10px;
+    margin-right: 0.3rem;
+  }
+
+  .tag.mel { background: #ede7f6; color: #5e35b1; }
+  .tag.cor { background: #fff3e0; color: #e65100; }
+  .tag.ade { background: #e3f2fd; color: #1565c0; }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .hero { padding: 2rem 1rem; min-height: auto; }
+    .card, .process-card, .teen-highlight, .advice-item { break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">🌙 → ☀️</div>
+  <h1>睡眠と覚醒のしくみ</h1>
+  <p class="subtitle">〜 朝起きられないキミへ 〜</p>
+</div>
+
+<div class="container">
+
+<!-- ===== SECTION 1: 2つのしくみ ===== -->
+<section>
+  <div class="section-label" style="background:#e0f7f5; color:#1a9e8f;">🧠 基本のしくみ</div>
+  <h2 class="section-title">眠りとめざめは<br>2つのしくみで決まる</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
+    私たちが「眠くなる・目が覚める」のは、気合いや根性ではなく、脳の中の<strong>2つの生体システム</strong>で自動的にコントロールされています。
+  </p>
+
+  <div class="process-grid">
+    <div class="process-card clock">
+      <div class="process-icon">⏰</div>
+      <h3>① 体内時計<br><small style="font-size:0.78rem; font-weight:400;">（概日リズム）</small></h3>
+      <p>
+        脳の「視交叉上核（しこうさじょうかく）」という場所に、約24時間周期の時計があります。朝に光を浴びると時計がリセットされ、夜になると<span class="tag mel">メラトニン</span>（眠りのホルモン）が分泌されて眠くなります。
+      </p>
+    </div>
+    <div class="process-card pressure">
+      <div class="process-icon">💤</div>
+      <h3>② 睡眠圧<br><small style="font-size:0.78rem; font-weight:400;">（恒常性維持機構）</small></h3>
+      <p>
+        起きている間に脳に<span class="tag ade">アデノシン</span>という物質がたまり、「そろそろ寝よう」という圧力（＝睡眠圧）が高まります。寝るとリセットされます。カフェインはこのアデノシンをブロックして眠気を消します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: 一晩の流れ ===== -->
+<section>
+  <div class="section-label" style="background:#ede7f6; color:#5e35b1;">🌗 ホルモンの流れ</div>
+  <h2 class="section-title">一日の中で<br>カラダに起きていること</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:linear-gradient(135deg,#5c6bc0,#3949ab);">🌅</div>
+      <div class="tl-content">
+        <div class="tl-time">朝 6〜8時ごろ</div>
+        <div class="tl-title">光がリセットボタンを押す</div>
+        <div class="tl-desc">目から入った光が体内時計に届き、<span class="tag cor">コルチゾール</span>（覚醒ホルモン）が分泌。メラトニンの分泌がストップし、体温が上がりはじめます。</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:linear-gradient(135deg,#42a5f5,#1e88e5);">☀️</div>
+      <div class="tl-content">
+        <div class="tl-time">日中</div>
+        <div class="tl-title">覚醒が維持される</div>
+        <div class="tl-desc">体内時計が「起きていなさい」という信号を出し続けます。同時にアデノシンが少しずつたまっていきます。</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:linear-gradient(135deg,#ff9800,#f57c00);">🌆</div>
+      <div class="tl-content">
+        <div class="tl-time">夕方〜夜</div>
+        <div class="tl-title">体温が下がりはじめる</div>
+        <div class="tl-desc">体温のピークを過ぎ、体は「そろそろ夜だぞ」と準備を始めます。深部体温が下がると眠気が増します。</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:linear-gradient(135deg,#7e57c2,#5e35b1);">🌙</div>
+      <div class="tl-content">
+        <div class="tl-time">夜 21〜23時ごろ</div>
+        <div class="tl-title">メラトニンが分泌される</div>
+        <div class="tl-desc">暗くなるとメラトニンの分泌がスタート。「眠りなさい」の合図です。<strong>ただし、スマホの光はこの分泌を遅らせます。</strong></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:linear-gradient(135deg,#283593,#1a237e);">😴</div>
+      <div class="tl-content">
+        <div class="tl-time">睡眠中</div>
+        <div class="tl-title">脳のメンテナンス中</div>
+        <div class="tl-desc">ノンレム睡眠（深い眠り）とレム睡眠（夢を見る眠り）が約90分サイクルで繰り返されます。記憶の整理・定着、成長ホルモン分泌、脳の老廃物除去が行われます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: 思春期 ===== -->
+<section>
+  <div class="section-label" style="background:#fff3e0; color:#e65100;">🔑 ここが大事！</div>
+  <h2 class="section-title">10代の体内時計は<br>もともと「夜型」にずれている</h2>
+
+  <div class="teen-highlight">
+    <h3>🧬 思春期の「概日リズム後退」</h3>
+    <p>
+      思春期になると、メラトニンの分泌開始が<strong>大人より1〜3時間遅くなる</strong>ことがわかっています。これは怠けているのではなく、<strong>生物学的な変化</strong>です。つまり夜なかなか眠れず、朝も起きにくいのは体の自然な反応です。
+    </p>
+
+    <div class="shift-diagram">
+      <p style="font-size:0.82rem; font-weight:700; margin-bottom:0.3rem;">メラトニン分泌のタイミング比較</p>
+      <div class="shift-bars">
+        <div class="shift-bar-row">
+          <div class="shift-bar-label" style="color:#5e35b1;">大人</div>
+          <div class="shift-bar-track">
+            <div class="shift-bar-fill adult">21時〜6時</div>
+          </div>
+        </div>
+        <div class="shift-bar-row">
+          <div class="shift-bar-label" style="color:#ab47bc;">10代</div>
+          <div class="shift-bar-track">
+            <div class="shift-bar-fill teen">23時〜8時</div>
+          </div>
+        </div>
+      </div>
+      <div class="time-markers">
+        <span>18時</span><span>21時</span><span>0時</span><span>3時</span><span>6時</span><span>9時</span><span>12時</span>
+      </div>
+    </div>
+
+    <p style="margin-top:0.8rem;">
+      さらに、睡眠圧（アデノシン）のたまるスピードも大人より遅いため、夜更かししても「眠くならない」と感じやすいのが10代の特徴です。
+    </p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem;">📱 スマホ・ゲームが追い打ちをかける</h3>
+    <p style="font-size:0.9rem; color:var(--text-light); line-height:1.75;">
+      ブルーライト自体の影響はまだ議論がありますが、<strong>スマホやゲームの「刺激」が脳を興奮状態に保つ</strong>ことは確かです。SNSの通知、動画の続き、ゲームの緊張感——どれも脳に「まだ起きていろ」と指令を送り、メラトニンの分泌を妨げます。
+    </p>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: アドバイス ===== -->
+<section>
+  <div class="section-label" style="background:#e8f5e9; color:#2e7d32;">💡 今日からできること</div>
+  <h2 class="section-title">朝起きられるようになる<br>7つの習慣</h2>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong>朝の光を最優先にする ☀️</strong>
+        <p>起きたらカーテンを開けて15〜30分、朝の光を浴びましょう。曇りでも屋外の光は室内の何倍も明るく、体内時計のリセットに十分です。これが一番大事なステップです。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong>就寝1時間前にスマホを手放す 📵</strong>
+        <p>できればリビングに置いて寝室に持ち込まない。目覚ましはスマホ以外を使いましょう。最初は難しいので、まず「ベッドの上では見ない」からでOKです。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong>起きる時間を固定する ⏰</strong>
+        <p>寝る時間より<strong>起きる時間をそろえる</strong>方が効果的です。休日も平日と2時間以上ずらさないようにすると、体内時計がぶれにくくなります。（＝ソーシャルジェットラグの予防）</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <strong>朝ごはんを食べる 🍙</strong>
+        <p>食事は「末梢時計」をリセットする合図です。おにぎり1個でもいいので、起床後1時間以内に何か口に入れましょう。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-text">
+        <strong>夕方以降のカフェインを避ける ☕</strong>
+        <p>カフェインの半減期は約5〜6時間。15時以降のコーヒー、エナジードリンク、濃い緑茶は睡眠の質を下げます。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">6</div>
+      <div class="step-text">
+        <strong>昼寝は15時前に20分まで 💤</strong>
+        <p>どうしても眠いときは短い昼寝が有効ですが、長すぎたり遅い時間だと夜の睡眠に影響します。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">7</div>
+      <div class="step-text">
+        <strong>少しずつ前倒しにする 📅</strong>
+        <p>いきなり早寝は難しいので、就寝時間を<strong>1週間に15〜30分ずつ</strong>前倒しにしていくのが現実的です。焦らず2〜3週間かけて調整しましょう。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: 目覚ましでも起きられない ===== -->
+<section>
+  <div class="section-label" style="background:#ffebee; color:#c62828;">🔔 よくある悩み</div>
+  <h2 class="section-title">目覚ましが鳴っても<br>起きられないのはなぜ？</h2>
+
+  <div class="alarm-card why">
+    <h4>🧠 脳がまだ「夜モード」のまま</h4>
+    <p>
+      目覚ましが鳴る時刻に、脳がまだ深い睡眠（ノンレム睡眠のステージ3）にいると、アラーム音が聞こえていても「意識として認識できない」状態になります。体内時計が後退している10代では、たとえば6時にアラームを鳴らしても、脳の体感はまだ「深夜3〜4時」。起きられないのは当然です。
+    </p>
+  </div>
+
+  <div class="alarm-card inertia">
+    <h4>😶‍🌫️ 睡眠慣性（スリープ・イナーシャ）</h4>
+    <p>
+      深い眠りから無理やり起こされると、「目は開いたけどぼんやりして動けない」状態が続きます。これを<strong>睡眠慣性</strong>といいます。通常15〜30分で解消しますが、睡眠不足や体内時計のずれがあると<strong>1〜2時間</strong>続くこともあります。
+    </p>
+    <div class="sleep-inertia-visual">
+      <div class="si-phase heavy">起きた直後<br>ぼんやり</div>
+      <div class="si-phase foggy">〜15分<br>頭にモヤ</div>
+      <div class="si-phase clearing">〜30分<br>少しずつ晴れる</div>
+      <div class="si-phase awake">30分〜<br>すっきり覚醒</div>
+    </div>
+    <p style="font-size:0.8rem; color:var(--text-light);">
+      ※ 睡眠不足・体内時計のずれがあると、「ぼんやり〜モヤ」の時間が大幅に延びます
+    </p>
+  </div>
+
+  <div class="alarm-card deep">
+    <h4>🔁 アラーム止め→二度寝 の悪循環</h4>
+    <p>こんなパターンに心当たりはありませんか？</p>
+    <ul>
+      <li>アラームを何個もセットしている（5分おき等）</li>
+      <li>止めた記憶がないのに止まっている</li>
+      <li>家族が起こしても反応しない・暴言を吐く</li>
+      <li>起きても体が鉛のように重くて動けない</li>
+    </ul>
+    <p style="margin-top:0.6rem;">
+      これらは「やる気がない」のではなく、<strong>脳の覚醒スイッチがまだ入っていない</strong>サインです。意志の力だけで解決しようとしても限界があります。
+    </p>
+  </div>
+
+  <h3 style="font-size:1.1rem; font-weight:700; margin:1.5rem 0 0.8rem;">🛠 目覚ましだけに頼らない「起きる仕組み」</h3>
+  <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;">
+    アラーム音は覚醒のきっかけにすぎません。<strong>脳を「朝だ」と認識させる複数の刺激</strong>を組み合わせることが重要です。
+  </p>
+
+  <div class="technique-grid">
+    <div class="technique-item light">
+      <div class="tech-icon">💡</div>
+      <h5>光で起こす</h5>
+      <p>起床30分前からカーテンを開けておく、または光目覚まし時計（2,500ルクス以上）を使う。光はメラトニン分泌を止め、コルチゾール分泌を促す最強の覚醒シグナルです。</p>
+    </div>
+    <div class="technique-item temp">
+      <div class="tech-icon">🌡️</div>
+      <h5>体温を上げる</h5>
+      <p>エアコンのタイマーで起床30分前に暖房ON。寒い布団から出られない場合は、枕元に上着を用意。起きたらすぐ顔を洗う・シャワーも効果的です。</p>
+    </div>
+    <div class="technique-item sound">
+      <div class="tech-icon">🔊</div>
+      <h5>段階的に刺激を上げる</h5>
+      <p>最初は小さな音や振動 → 5分後に大きな音、など段階的に。スマホを離れた場所に置いて「歩かないと止められない」設定も有効です。</p>
+    </div>
+    <div class="technique-item move">
+      <div class="tech-icon">🏃</div>
+      <h5>体を動かす「儀式」を作る</h5>
+      <p>目が開いたら布団の中で手足をグーパー10回、大きく伸びをする。小さな動きでも筋肉を動かすと交感神経のスイッチが入りやすくなります。</p>
+    </div>
+  </div>
+
+  <div class="snooze-warning">
+    <div class="sw-icon">⚠️</div>
+    <div>
+      <p>
+        <strong>スヌーズの繰り返しは逆効果です。</strong>5分おきのアラーム→二度寝を繰り返すと、脳は浅い眠りと覚醒を何度も行き来し、睡眠慣性がかえって悪化します。アラームは<strong>「本当に起きる時刻」の1回だけ</strong>にして、そのかわり光や室温など別の仕組みで補うのがベストです。
+      </p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem;">
+    <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:0.4rem;">👨‍👩‍👧 保護者の方ができるサポート</h4>
+    <p style="font-size:0.88rem; color:var(--text-light); line-height:1.75;">
+      「何度起こしても起きない」ことに疲弊している保護者の方も多いと思います。毎朝の声かけは親子双方のストレスになりがちです。<strong>本人を直接起こすのではなく、環境を整えることに注力する</strong>（カーテンを開ける、暖房をつける、朝食の匂いを漂わせる）と、衝突が減り、かつ脳への覚醒シグナルとしても効果的です。それでも改善しない場合は、無理に対処し続けず、早めにご相談ください。
+    </p>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: 遠足の日に起きられるワケ ===== -->
+<section>
+  <div class="section-label" style="background:#e8eaf6; color:#283593;">🎒 素朴なギモン</div>
+  <h2 class="section-title">「遠足の日は起きられるのに<br>なんで学校の日はダメなの？」</h2>
+
+  <div class="ensoku-box">
+    <h3>これ、実はとても大事な問いです</h3>
+    <p>
+      「遠足の日は起きられるんだから、やる気の問題でしょ？」——そう思いたくなる気持ちはわかります。でも実は、遠足の日に起きられることこそ、<strong>これが「怠け」ではなく「脳のしくみ」の問題だという証拠</strong>なのです。
+    </p>
+  </div>
+
+  <div class="card">
+    <h4 style="font-size:1rem; font-weight:700; margin-bottom:0.8rem;">🧪 脳の中で何が違うのか？</h4>
+
+    <div class="brain-compare">
+      <div class="brain-col school">
+        <div class="bc-emoji">😩</div>
+        <h5>ふつうの学校の日</h5>
+        <div class="brain-meter">
+          <div class="brain-meter-label">ドーパミン</div>
+          <div class="brain-meter-bar"><div class="brain-meter-fill" style="width:20%; background:#90a4ae;"></div></div>
+        </div>
+        <div class="brain-meter">
+          <div class="brain-meter-label">ノルアドレナリン</div>
+          <div class="brain-meter-bar"><div class="brain-meter-fill" style="width:25%; background:#90a4ae;"></div></div>
+        </div>
+        <div class="brain-meter">
+          <div class="brain-meter-label">覚醒の力</div>
+          <div class="brain-meter-bar"><div class="brain-meter-fill" style="width:20%; background:#b0bec5;"></div></div>
+        </div>
+        <p style="margin-top:0.6rem;">
+          「また同じ授業か…」という予測に対して、脳の報酬系は反応しにくい。覚醒を後押しする力が弱いままです。
+        </p>
+      </div>
+      <div class="brain-col ensoku">
+        <div class="bc-emoji">🤩</div>
+        <h5>遠足・楽しみな日</h5>
+        <div class="brain-meter">
+          <div class="brain-meter-label">ドーパミン</div>
+          <div class="brain-meter-bar"><div class="brain-meter-fill" style="width:85%; background:linear-gradient(90deg,#ff9800,#ff5722);"></div></div>
+        </div>
+        <div class="brain-meter">
+          <div class="brain-meter-label">ノルアドレナリン</div>
+          <div class="brain-meter-bar"><div class="brain-meter-fill" style="width:75%; background:linear-gradient(90deg,#ffa726,#ef6c00);"></div></div>
+        </div>
+        <div class="brain-meter">
+          <div class="brain-meter-label">覚醒の力</div>
+          <div class="brain-meter-bar"><div class="brain-meter-fill" style="width:90%; background:linear-gradient(90deg,#ffca28,#ff9800);"></div></div>
+        </div>
+        <p style="margin-top:0.6rem;">
+          「楽しいことが待っている！」という期待で<strong>ドーパミン</strong>と<strong>ノルアドレナリン</strong>が前夜〜早朝から大量に分泌。睡眠慣性を吹き飛ばします。
+        </p>
+      </div>
+    </div>
+
+    <p style="font-size:0.9rem; line-height:1.8; margin-top:0.8rem;">
+      つまり遠足の日に起きられるのは「根性を出したから」ではなく、<strong>ワクワクという感情が脳内の覚醒システムに直接作用している</strong>からです。ドーパミンは報酬系だけでなく、覚醒の維持にも深く関わる神経伝達物質です。楽しみな予定があると、前日の夜から脳が「明日に備えろ」と覚醒準備を始め、睡眠も浅くなりやすくなります。
+    </p>
+  </div>
+
+  <div class="card">
+    <h4 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem;">🔄 逆に言えば…</h4>
+    <p style="font-size:0.9rem; line-height:1.8;">
+      ふつうの学校の日に起きられないのは、脳にとって<strong>「起きるに値する報酬の予測」が弱い</strong>状態です。これに体内時計の後退と睡眠不足が重なると、覚醒システムが「まだ寝ていていい」と判断してしまいます。本人の意志や性格の問題ではなく、<strong>脳の覚醒を支える3つの条件</strong>がそろっていないのです。
+    </p>
+
+    <div style="background:linear-gradient(135deg,#f5f5f5,#eeeeee); border-radius:14px; padding:1.2rem; margin-top:1rem;">
+      <p style="font-size:0.85rem; font-weight:700; text-align:center; margin-bottom:0.6rem;">朝スッキリ起きるための3条件</p>
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:center;">
+        <span style="background:#e0f7f5; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#00796b;">① 体内時計が合っている</span>
+        <span style="background:#e3f2fd; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#1565c0;">② 十分な睡眠がとれている</span>
+        <span style="background:#fff3e0; padding:0.5rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:700; color:#e65100;">③ 覚醒の動機がある</span>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-light); text-align:center; margin-top:0.6rem;">遠足の日は③が強力なので、①②が多少崩れていても起きられる</p>
+    </div>
+  </div>
+
+  <div class="ensoku-takeaway">
+    <h4>💬 診察でこう伝えてみてください</h4>
+    <p>
+      遠足の日に起きられるのは、<strong>キミの脳がちゃんと働いている証拠</strong>だよ。問題は気持ちじゃなくて、ふだんの日に脳の「起きろスイッチ」が入りにくい環境になっていること。体内時計を整えて、睡眠の借金を返していけば、ふつうの日にもスイッチが入りやすくなるからね。
+    </p>
+  </div>
+</section>
+
+<!-- ===== DO / DON'T ===== -->
+<section>
+  <h2 class="section-title" style="font-size:1.2rem;">保護者の方へ：声かけのヒント</h2>
+  <div class="advice-grid">
+    <div class="advice-item do">
+      <div class="advice-icon">⭕</div>
+      <h4>効果的な声かけ</h4>
+      <p>「体の時計がずれているんだね、一緒に少しずつ戻していこう」と理解を示す。仕組みの問題であって本人の怠けではないことを共有する。</p>
+    </div>
+    <div class="advice-item dont">
+      <div class="advice-icon">❌</div>
+      <h4>逆効果になりがちな声かけ</h4>
+      <p>「根性が足りない」「だらしない」「早く寝ればいいだけ」は逆効果です。本人も困っていることが多く、責められると余計にストレスで眠れなくなります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 受診の目安 ===== -->
+<section>
+  <div class="note-box">
+    <h4>⚠️ こんなときは相談を</h4>
+    <p>
+      上記を2〜3週間試しても改善しない場合、<strong>睡眠相後退症候群（DSWPD）</strong>や<strong>起立性調節障害（OD）</strong>など、治療が必要な状態の可能性があります。「怠けている」と決めつけず、一度ご相談ください。光療法やメラトニン受容体作動薬など、医学的なアプローチもあります。
+    </p>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: さらなる覚醒の仮説 ===== -->
+<section>
+  <div class="section-label" style="background:#e8eaf6; color:#283593;">🔬 もう少し深く</div>
+  <h2 class="section-title">覚醒を支える<br>もうひとつの仕組みたち</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
+    ここまで説明した「体内時計」「睡眠圧」「ドーパミン」に加えて、朝の覚醒に関わる重要な仕組みがあります。これらを知ると、<strong>なぜ「遠足の日は起きられる」のか</strong>がもっと立体的に理解できます。
+  </p>
+
+  <div class="card" style="border-left:4px solid #ff9800;">
+    <h4 style="font-size:1.05rem; font-weight:700; margin-bottom:0.6rem; color:#e65100;">
+      ① コルチゾール覚醒反応（CAR）<br>
+      <small style="font-size:0.78rem; font-weight:400; color:var(--text-light);">Cortisol Awakening Response</small>
+    </h4>
+    <p style="font-size:0.9rem; line-height:1.8; margin-bottom:0.8rem;">
+      起床後30〜45分でコルチゾール（ストレスホルモン）が<strong>50〜75%も急上昇</strong>する現象です。これは体内時計に制御されており、「今日一日に備えろ」という脳の準備反応と考えられています。
+    </p>
+    <div style="background:linear-gradient(135deg,#fff8e1,#fff3e0); border-radius:14px; padding:1rem; margin-bottom:0.8rem;">
+      <p style="font-size:0.85rem; font-weight:700; margin-bottom:0.3rem;">💡 臨床での意味</p>
+      <p style="font-size:0.82rem; color:var(--text-light); line-height:1.7;">
+        CARは<strong>「翌日の予定への期待・緊張」で大きくなる</strong>ことが報告されています。競技会の朝はCARが増大し、休日は減少します。つまり遠足前夜の脳は、コルチゾールの面からも「起きる準備」をしているのです。逆に、「行きたくない学校」の朝は、このブーストが弱くなる可能性があります。
+      </p>
+    </div>
+    <p style="font-size:0.82rem; color:var(--text-light); line-height:1.7;">
+      また、<strong>光の中で目覚めるとCARが大きくなる</strong>ことも確認されており、カーテンを開けて寝る／光目覚まし時計が有効な理由のひとつです。うつ病ではCARが平坦化することも知られており、「朝起きられない＋気分の落ち込み」がある場合は注意が必要です。
+    </p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--body-clock);">
+    <h4 style="font-size:1.05rem; font-weight:700; margin-bottom:0.6rem; color:#00796b;">
+      ② オレキシン（ヒポクレチン）系<br>
+      <small style="font-size:0.78rem; font-weight:400; color:var(--text-light);">Orexin / Hypocretin System</small>
+    </h4>
+    <p style="font-size:0.9rem; line-height:1.8; margin-bottom:0.8rem;">
+      視床下部にあるオレキシン産生ニューロンは、覚醒を維持する「マスタースイッチ」です。このニューロンが壊れるとナルコレプシー（居眠り病）になることからもわかるように、<strong>「起きている状態を安定的に維持する」</strong>ために不可欠な存在です。
+    </p>
+    <div style="background:linear-gradient(135deg,#e0f7fa,#e1f5fe); border-radius:14px; padding:1rem; margin-bottom:0.8rem;">
+      <p style="font-size:0.85rem; font-weight:700; margin-bottom:0.3rem;">💡 なぜ「動機」と「覚醒」がつながるのか</p>
+      <p style="font-size:0.82rem; color:var(--text-light); line-height:1.7;">
+        オレキシンニューロンの重要な特徴は、<strong>覚醒だけでなく、報酬・摂食・情動にも関与する</strong>「マルチタスク細胞」であることです。空腹のときや報酬が期待されるときにオレキシンが活性化し、覚醒を後押しします。これは「動機づけ覚醒（motivational activation）仮説」と呼ばれ、<strong>「何かしたいことがある→起きていられる」</strong>というメカニズムの神経基盤になっています。
+      </p>
+    </div>
+    <p style="font-size:0.82rem; color:var(--text-light); line-height:1.7;">
+      遠足の日にパッと起きられるのは、オレキシン系が「楽しみな予定」によって活性化され、脳幹の覚醒中枢（ノルアドレナリン、セロトニン、ヒスタミン系）をまとめて起動させるからとも説明できます。逆に「何もしたくない」状態では、この系の活動が低下し、覚醒が不安定になります。
+    </p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--sleep-pressure);">
+    <h4 style="font-size:1.05rem; font-weight:700; margin-bottom:0.6rem; color:#1565c0;">
+      ③ フリップフロップ・スイッチ仮説<br>
+      <small style="font-size:0.78rem; font-weight:400; color:var(--text-light);">Saper's Flip-Flop Switch Model</small>
+    </h4>
+    <p style="font-size:0.9rem; line-height:1.8; margin-bottom:0.8rem;">
+      ハーバード大学のSaperらが提唱した有名なモデルです。脳には<strong>「覚醒を促す領域」と「睡眠を促す領域」が互いに抑制し合う</strong>回路があり、まるで電気のスイッチのように「ON/OFF」が切り替わります。
+    </p>
+    <div style="display:flex; gap:0.5rem; margin:0.8rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="background:#e8f5e9; padding:0.8rem 1.2rem; border-radius:14px; text-align:center; flex:1; min-width:140px;">
+        <p style="font-size:1.2rem; margin-bottom:0.2rem;">⚡</p>
+        <p style="font-size:0.78rem; font-weight:700; color:#2e7d32;">覚醒中枢</p>
+        <p style="font-size:0.72rem; color:var(--text-light);">LC, TMN, DR, BF<br>+ オレキシン</p>
+      </div>
+      <div style="display:flex; align-items:center; font-size:1.5rem; padding:0 0.3rem;">⇄</div>
+      <div style="background:#e8eaf6; padding:0.8rem 1.2rem; border-radius:14px; text-align:center; flex:1; min-width:140px;">
+        <p style="font-size:1.2rem; margin-bottom:0.2rem;">😴</p>
+        <p style="font-size:0.78rem; font-weight:700; color:#283593;">睡眠中枢</p>
+        <p style="font-size:0.72rem; color:var(--text-light);">VLPO<br>（腹外側視索前野）</p>
+      </div>
+    </div>
+    <p style="font-size:0.82rem; color:var(--text-light); line-height:1.7;">
+      オレキシンはこのスイッチを<strong>「覚醒側」に安定させる役割</strong>を担っています。スイッチが不安定だと、覚醒と睡眠の間を頻繁に行き来してしまいます（ナルコレプシーで起きる現象）。体内時計のずれや睡眠不足があると、朝の時間帯でスイッチが睡眠側に倒れたままになりやすく、目覚ましが鳴っても切り替わらない——というのがこのモデルからの説明です。
+    </p>
+  </div>
+
+  <div class="teen-highlight" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9); border-color:rgba(63,81,181,0.2);">
+    <h3 style="color:#283593;">🧩 全体像：覚醒は「チーム戦」</h3>
+    <p style="font-size:0.9rem; line-height:1.8;">
+      朝起きるという一見シンプルな行為は、実は<strong>複数のシステムが協力してはじめて成立</strong>しています。
+    </p>
+    <div style="background:var(--card-bg); border-radius:14px; padding:1.2rem; margin:1rem 0;">
+      <div style="display:flex; flex-direction:column; gap:0.5rem;">
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.2rem;">⏰</span>
+          <div style="flex:1;">
+            <span style="font-size:0.82rem; font-weight:700;">体内時計（概日リズム）</span>
+            <span style="font-size:0.78rem; color:var(--text-light);"> → 「そろそろ朝だぞ」と全身に時報を送る</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.2rem;">💤</span>
+          <div style="flex:1;">
+            <span style="font-size:0.82rem; font-weight:700;">睡眠圧の解消</span>
+            <span style="font-size:0.78rem; color:var(--text-light);"> → 十分寝てアデノシンがリセットされている</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.2rem;">🧬</span>
+          <div style="flex:1;">
+            <span style="font-size:0.82rem; font-weight:700;">コルチゾール覚醒反応</span>
+            <span style="font-size:0.78rem; color:var(--text-light);"> → 「今日に備えろ」と身体をブートアップ</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.2rem;">🔥</span>
+          <div style="flex:1;">
+            <span style="font-size:0.82rem; font-weight:700;">オレキシン系</span>
+            <span style="font-size:0.78rem; color:var(--text-light);"> → 覚醒スイッチを安定させ、覚醒中枢を起動</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.2rem;">🎯</span>
+          <div style="flex:1;">
+            <span style="font-size:0.82rem; font-weight:700;">ドーパミン（動機・報酬）</span>
+            <span style="font-size:0.78rem; color:var(--text-light);"> → 「今日やりたいことがある」が覚醒を加速</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.2rem;">☀️</span>
+          <div style="flex:1;">
+            <span style="font-size:0.82rem; font-weight:700;">光の入力</span>
+            <span style="font-size:0.78rem; color:var(--text-light);"> → 体内時計をリセットし、メラトニン分泌を停止</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.88rem; line-height:1.8;">
+      朝起きられない10代の子は、このうち<strong>複数が同時に弱まっている</strong>状態です。体内時計がずれている（①）、睡眠が足りていない（②）、光を浴びていない（⑥）、起きる動機が薄い（⑤）——これでは覚醒チームが総崩れです。治療や生活改善は、<strong>「崩れたチームメンバーを一人ずつ立て直す」</strong>イメージで取り組むと、本人にも保護者にもわかりやすくなります。
+    </p>
+  </div>
+</section>
+
+<!-- ===== 参考文献 ===== -->
+<section>
+  <div class="references">
+    <h3>📚 参考文献</h3>
+    <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:0.8rem;">この資料の内容は以下の文献に基づいています。</p>
+    <ol class="ref-list">
+      <li>Borbély AA. A two process model of sleep regulation. <em>Human Neurobiology</em>. 1982;1(3):195-204. PMID: 7185792</li>
+      <li>Borbély AA, Daan S, Wirz-Justice A, Deboer T. The two-process model of sleep regulation: a reappraisal. <em>Journal of Sleep Research</em>. 2016;25(2):131-143. doi:10.1111/jsr.12371</li>
+      <li>Carskadon MA. Sleep in adolescents: the perfect storm. <em>Pediatric Clinics of North America</em>. 2011;58(3):637-647. doi:10.1016/j.pcl.2011.03.003</li>
+      <li>Crowley SJ, Acebo C, Carskadon MA. Sleep, circadian rhythms, and delayed phase in adolescence. <em>Sleep Medicine</em>. 2007;8(6):602-612. doi:10.1016/j.sleep.2006.12.002</li>
+      <li>Crowley SJ, Wolfson AR, Tarokh L, Carskadon MA. An update on adolescent sleep: New evidence informing the perfect storm model. <em>Journal of Adolescence</em>. 2018;67:55-65. doi:10.1016/j.adolescence.2018.06.001</li>
+      <li>Hagenauer MH, Perryman JI, Lee TM, Carskadon MA. Adolescent changes in the homeostatic and circadian regulation of sleep. <em>Developmental Neuroscience</em>. 2009;31(4):276-284. doi:10.1159/000216538</li>
+      <li>Tassi P, Muzet A. Sleep inertia. <em>Sleep Medicine Reviews</em>. 2000;4(4):341-353. doi:10.1053/smrv.2000.0098</li>
+      <li>Trotti LM. Waking up is the hardest thing I do all day: Sleep inertia and sleep drunkenness. <em>Sleep Medicine Reviews</em>. 2017;35:76-84. doi:10.1016/j.smrv.2016.08.005</li>
+      <li>Eban-Rothschild A, Rothschild G, Giardino WJ, Jones JR, de Lecea L. VTA dopaminergic neurons regulate ethologically relevant sleep-wake behaviors. <em>Nature Neuroscience</em>. 2016;19(10):1356-1366. doi:10.1038/nn.4377</li>
+      <li>Volkow ND, Tomasi D, Wang GJ, et al. Evidence that sleep deprivation downregulates dopamine D2R in ventral striatum in the human brain. <em>Journal of Neuroscience</em>. 2012;32(19):6711-6717. doi:10.1523/JNEUROSCI.0045-12.2012</li>
+      <li>Wisor JP. Dopamine and wakefulness: Pharmacology, genetics, and circuitry. In: Landolt HP, Dijk DJ, eds. <em>Sleep-Wake Neurobiology and Pharmacology. Handbook of Experimental Pharmacology</em>, vol 253. Springer; 2019:321-335. doi:10.1007/164_2018_95</li>
+      <li>Cho JR, Treweek JB, Robinson JE, et al. Dorsal raphe dopamine neurons modulate arousal and promote wakefulness by salient stimuli. <em>Neuron</em>. 2017;94(6):1205-1219.e8. doi:10.1016/j.neuron.2017.05.020</li>
+      <li>Luo YJ, Li YD, Wang L, et al. Nucleus accumbens controls wakefulness by a subpopulation of neurons expressing dopamine D1 receptors. <em>Nature Communications</em>. 2018;9:1576. doi:10.1038/s41467-018-03889-3</li>
+      <li>Clow A, Hucklebridge F, Stalder T, Evans P, Thorn L. The cortisol awakening response: more than a measure of HPA axis function. <em>Neuroscience &amp; Biobehavioral Reviews</em>. 2010;35(1):97-103. doi:10.1016/j.neubiorev.2009.12.011</li>
+      <li>Fries E, Dettenborn L, Kirschbaum C. The cortisol awakening response (CAR): facts and future directions. <em>International Journal of Psychophysiology</em>. 2009;72(1):67-73. doi:10.1016/j.ijpsycho.2008.03.014</li>
+      <li>Scheer FAJL, Morris CJ, Garcia JI, et al. The circadian system modulates the cortisol awakening response in humans. <em>Journal of Biological Rhythms</em>. 2023;38(2):141-150. doi:10.1177/07487304221131384</li>
+      <li>Mahler SV, Moorman DE, Smith RJ, James MH, Aston-Jones G. Motivational activation: a unifying hypothesis of orexin/hypocretin function. <em>Nature Neuroscience</em>. 2014;17(10):1298-1303. doi:10.1038/nn.3810</li>
+      <li>Sakurai T. Role of orexin in modulating arousal, feeding, and motivation. <em>Frontiers in Behavioral Neuroscience</em>. 2013;7:28. doi:10.3389/fnbeh.2013.00028</li>
+      <li>Saper CB, Scammell TE, Lu J. Hypothalamic regulation of sleep and circadian rhythms. <em>Nature</em>. 2005;437(7063):1257-1263. doi:10.1038/nature04284</li>
+      <li>Saper CB, Fuller PM, Pedersen NP, Lu J, Scammell TE. Sleep state switching. <em>Neuron</em>. 2010;68(6):1023-1042. doi:10.1016/j.neuron.2010.11.032</li>
+    </ol>
+  </div>
+</section>
+
+<div class="footer">
+  <p>この資料は一般的な情報提供を目的としたものです。個別の症状については主治医にご相談ください。</p>
+</div>
+
+</div>
+</body>
+</html>
