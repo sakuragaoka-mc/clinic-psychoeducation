@@ -355,10 +355,25 @@
 
   /* ===== PRINT ===== */
   @media print {
-    .top-nav { position: static; box-shadow: none; }
-    .hero { padding: 1.5rem; }
-    .card, .worksheet { break-inside: avoid; }
-    .ws-input { border-bottom: 1px solid #999; }
+    body { font-size: 9pt; line-height: 1.4; }
+    .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer { display: none !important; }
+    .header, .hero { padding: 1rem !important; min-height: auto !important; }
+    .hero::before, .hero::after, .header::before, .header::after { display: none !important; }
+    .container { max-width: 100%; padding: 0 0.5rem; }
+    .card, .worksheet, .tip-box, .science-box, .work-section, .intro {
+      break-inside: avoid;
+      margin: 0.4rem 0;
+      padding: 0.6rem;
+      box-shadow: none;
+    }
+    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; }
+    .work-num { margin-bottom: 0.3rem; }
+    .work-title { font-size: 1rem; margin-bottom: 0.2rem; }
+    .work-subtitle { font-size: 0.75rem; margin-bottom: 0.4rem; }
+    .anchor-grid, .ifthen { margin: 0.3rem 0; }
+    .tracker-table th, .tracker-table td { padding: 0.2rem; font-size: 7pt; }
+    h1 { font-size: 1.2rem !important; }
+    @page { size: A4; margin: 10mm; }
   }
 </style>
 </head>
@@ -386,6 +401,10 @@
   <p>
     ADHD・ASDなどの発達特性は、「直す」ものではなく<strong>「自分に合った工夫で付き合っていく」</strong>ものです。このワークでは、自分の特性を理解し、生活を楽にするための「自分トリセツ」を作ります。入力した内容はスマホに自動保存されます。
   </p>
+</div>
+
+<div class="print-btn-wrap" style="text-align:right; margin:-0.5rem 0 1rem;">
+  <button onclick="window.print()" style="background:linear-gradient(135deg,#3f51b5,#5c6bc0);color:#fff;border:none;padding:0.55rem 1.2rem;border-radius:12px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(63,81,181,0.3);">📄 PDF出力 / スクショ用</button>
 </div>
 
 <!-- ===== WORK 1: 自分の特性マップ ===== -->
