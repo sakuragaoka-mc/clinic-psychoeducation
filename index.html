@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こころの学び — 心理教育ライブラリ</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #3f51b5;
+    --primary-light: #e8eaf6;
+    --accent: #ff7043;
+    --text: #2d2d4e;
+    --text-light: #6b6b8d;
+    --bg: #f8f9fc;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 35%, #3949ab 60%, #5c6bc0 100%);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 40px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 1;
+    animation: gentle-float 4s ease-in-out infinite;
+  }
+
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.03em;
+  }
+
+  .hero .subtitle {
+    color: #b3c2ff;
+    font-size: 0.88rem;
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== MESSAGE ===== */
+  .welcome {
+    text-align: center;
+    padding: 1.5rem 0 0.5rem;
+  }
+
+  .welcome p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== CARDS ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0 2rem;
+  }
+
+  .content-card {
+    background: var(--card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border: 2px solid transparent;
+  }
+
+  .content-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  .content-card:active {
+    transform: translateY(-1px);
+  }
+
+  .card-banner {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-banner .banner-icon {
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+  }
+
+  .card-banner.sleep {
+    background: linear-gradient(135deg, #1a1a3e, #2d1b69, #4a2c8a, #ff7b54);
+  }
+
+  .card-banner.morning {
+    background: linear-gradient(135deg, #1a237e, #283593, #42a5f5, #64b5f6);
+  }
+
+  .card-body {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.2rem 0.7rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-tag.education { background: #e8eaf6; color: #3f51b5; }
+  .card-tag.worksheet { background: #e8f5e9; color: #2e7d32; }
+
+  .card-body h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .card-body p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.65;
+  }
+
+  .card-arrow {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.8rem;
+  }
+
+  .card-arrow .arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .content-card:hover .card-arrow .arrow {
+    transform: translateX(4px);
+  }
+
+  /* ===== COMING SOON ===== */
+  .coming-soon {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 2px dashed #ddd;
+    opacity: 0.6;
+  }
+
+  .coming-soon h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.2rem;
+  }
+
+  .coming-soon p {
+    font-size: 0.75rem;
+    color: #aaa;
+  }
+
+  /* ===== INFO BAR ===== */
+  .info-bar {
+    background: linear-gradient(135deg, #fff8e1, #fff3e0);
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    margin: 0.5rem 0 1.5rem;
+    border: 1px solid rgba(255,152,0,0.15);
+    text-align: center;
+  }
+
+  .info-bar p {
+    font-size: 0.78rem;
+    color: #e65100;
+    line-height: 1.6;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .footer a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (min-width: 600px) {
+    .card-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media print {
+    .hero { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-icon">🧠</div>
+  <h1>こころの学び</h1>
+  <p class="subtitle">心理教育ライブラリ</p>
+</div>
+
+<div class="container">
+
+  <div class="welcome">
+    <p>
+      こころや体のしくみを知ることは、回復への第一歩です。<br>
+      あなたのペースで、気になるテーマから読んでみてください。
+    </p>
+  </div>
+
+  <div class="info-bar">
+    <p>📱 スマホのホーム画面に追加すると、いつでもすぐにアクセスできます</p>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Card 1: Sleep Education -->
+    <a href="sleep-education.html" class="content-card">
+      <div class="card-banner sleep">
+        <span class="banner-icon">🌙☀️</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag education">📖 心理教育</span>
+        <h3>睡眠と覚醒のしくみ</h3>
+        <p>朝起きられないのは怠けじゃない——体内時計・ドーパミン・オレキシンなど、脳のメカニズムからやさしく解説します。</p>
+        <div class="card-arrow">
+          読む <span class="arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 2: Morning Motivation Work -->
+    <a href="morning-motivation-work.html" class="content-card">
+      <div class="card-banner morning">
+        <span class="banner-icon">🌅📝</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag worksheet">✏️ ワークシート</span>
+        <h3>朝の覚醒モチベーション・ワーク</h3>
+        <p>「朝アンカー」「If-Thenプラン」「価値の明確化」——起きる理由を脳にインストールする4つのワーク。</p>
+        <div class="card-arrow">
+          取り組む <span class="arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Coming Soon -->
+  <h3 style="font-size:0.85rem; font-weight:700; color:var(--text-light); margin-bottom:0.6rem;">📚 今後追加予定</h3>
+
+  <div class="coming-soon">
+    <h4>😰 不安のメカニズムと対処法</h4>
+    <p>パニック・社交不安・全般性不安障害の心理教育</p>
+  </div>
+  <div class="coming-soon">
+    <h4>😔 うつの理解と行動活性化</h4>
+    <p>「やる気が出ない」の脳科学と、小さな一歩から始める方法</p>
+  </div>
+  <div class="coming-soon">
+    <h4>🧩 発達特性との付き合い方</h4>
+    <p>ADHD・ASDの特性理解と日常の工夫</p>
+  </div>
+
+  <div class="footer">
+    <p>この資料は一般的な情報提供を目的としています。<br>
+    個別の症状については主治医にご相談ください。</p>
+    <p style="margin-top:0.5rem;">© 2026 心理教育ライブラリ</p>
+  </div>
+
+</div>
+
+</body>
+</html>
