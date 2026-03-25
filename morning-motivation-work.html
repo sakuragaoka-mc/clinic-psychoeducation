@@ -98,33 +98,33 @@
     align-items: center;
     gap: 0.5rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     font-weight: 800;
-    padding: 0.3rem 1rem;
+    padding: 0.35rem 1.1rem;
     border-radius: 20px;
     margin-bottom: 0.6rem;
   }
 
   .work-title {
     font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+    font-size: clamp(1.2rem, 3.5vw, 1.5rem);
     font-weight: 800;
     margin-bottom: 0.5rem;
     line-height: 1.4;
   }
 
   .work-subtitle {
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     color: var(--text-light);
     margin-bottom: 1rem;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .evidence-tag {
     display: inline-block;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.15rem 0.6rem;
+    padding: 0.2rem 0.7rem;
     border-radius: 8px;
     background: #e3f2fd;
     color: #5d7aaa;
@@ -162,14 +162,14 @@
   }
 
   .ws-header {
-    padding: 0.8rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #fff;
   }
 
   .ws-body {
-    padding: 1rem 1.2rem;
+    padding: 1.2rem;
   }
 
   .ws-row {
@@ -183,28 +183,34 @@
   .ws-row:last-child { border-bottom: none; }
 
   .ws-label {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     font-weight: 700;
     min-width: 100px;
     flex-shrink: 0;
-    padding-top: 0.2rem;
+    padding-top: 0.25rem;
   }
 
   .ws-input {
     flex: 1;
     border: none;
-    border-bottom: 2px dotted #ddd;
+    border-bottom: 2px dotted #d8d4cd;
     font-family: inherit;
-    font-size: 0.85rem;
-    padding: 0.3rem 0;
+    font-size: 1rem;
+    padding: 0.45rem 0;
     color: var(--text);
     background: transparent;
-    min-height: 1.8rem;
+    min-height: 2.2rem;
+  }
+
+  .ws-input:focus {
+    outline: none;
+    border-bottom-color: var(--pink);
+    background: #fef8f9;
   }
 
   .ws-input::placeholder {
-    color: #bbb;
-    font-size: 0.78rem;
+    color: #c8c4bd;
+    font-size: 0.88rem;
   }
 
   /* ===== MORNING ANCHOR ===== */
@@ -280,53 +286,80 @@
   }
 
   /* ===== TRACKER ===== */
+  .tracker-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0.8rem -0.5rem;
+    padding: 0 0.5rem 0.5rem;
+  }
+
+  .tracker-scroll::after {
+    content: '← スクロールできます →';
+    display: block;
+    text-align: center;
+    font-size: 0.72rem;
+    color: #ada79e;
+    margin-top: 0.4rem;
+  }
+
   .tracker-table {
+    min-width: 620px;
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.78rem;
-    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    margin: 0;
   }
 
   .tracker-table th, .tracker-table td {
-    padding: 0.5rem 0.4rem;
+    padding: 0.6rem 0.5rem;
     text-align: center;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ebe8e3;
   }
 
   .tracker-table th {
-    background: #f5f5f5;
+    background: var(--bg);
     font-weight: 700;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
+    color: var(--text);
+    white-space: nowrap;
   }
 
   .tracker-table td {
     background: #fff;
-    min-height: 2rem;
-    padding: 0.2rem;
+    min-height: 2.5rem;
+    padding: 0.3rem;
   }
 
   .tracker-table td .ws-input {
     width: 100%;
     border: none;
-    border-bottom: 1px dotted #ddd;
+    border-bottom: 1.5px dotted #d8d4cd;
     font-family: inherit;
-    font-size: 0.75rem;
-    padding: 0.2rem 0.1rem;
+    font-size: 0.92rem;
+    padding: 0.4rem 0.2rem;
     color: var(--text);
     background: transparent;
     text-align: center;
-    min-height: 1.5rem;
+    min-height: 2rem;
+  }
+
+  .tracker-table td .ws-input:focus {
+    outline: none;
+    border-bottom-color: var(--pink);
+    background: #fef8f9;
   }
 
   .tracker-table td .ws-input::placeholder {
-    color: #ccc;
-    font-size: 0.68rem;
+    color: #c8c4bd;
+    font-size: 0.82rem;
   }
 
   .tracker-table .day-header {
     font-weight: 700;
-    background: #fafafa;
-    width: 40px;
+    background: #fef8f5;
+    width: 44px;
+    color: var(--pink);
+    font-size: 0.95rem;
   }
 
   /* ===== TIPS ===== */
@@ -654,7 +687,8 @@
 
   <div class="worksheet">
     <div class="ws-header" style="background:linear-gradient(90deg,var(--sky),#6ab8e8);">📊 朝のモニタリング・シート</div>
-    <div class="ws-body" style="overflow-x:auto;">
+    <div class="ws-body">
+      <div class="tracker-scroll">
       <table class="tracker-table">
         <thead>
           <tr>
@@ -733,6 +767,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 
@@ -791,7 +826,7 @@
 </div>
 
 <div class="footer" style="text-align:center;">
-  <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
+  <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
 </div>
 
 </div>
