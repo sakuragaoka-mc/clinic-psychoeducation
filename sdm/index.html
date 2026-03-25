@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お薬えらびサポート（SDM） — こころのクリニック桜が丘</title>
+  <meta name="description" content="Shared Decision Making：お薬の特徴を比較して、あなたの希望や生活スタイルに合ったお薬を一緒に考えるためのツールです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --primary: #d4819a;
+      --primary-light: #faeef1;
+      --primary-dark: #c06d86;
+      --green: #7aad78;
+      --green-light: #f0f5ef;
+      --blue: #7bafd5;
+      --blue-light: #eef4fb;
+      --lavender: #a89cc8;
+      --lavender-light: #f0edf6;
+      --amber: #d4b070;
+      --amber-light: #fef6ec;
+      --text: #3d3935;
+      --text-light: #827c73;
+      --bg: #faf9f8;
+      --card-shadow: 0 2px 12px rgba(61,57,53,0.07);
+      --font-base: 'Noto Sans JP', sans-serif;
+      --font-heading: 'Noto Serif JP', serif;
+    }
+
+    body {
+      font-family: var(--font-base);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100dvh;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #fff;
+      border-bottom: 1px solid #f0ece8;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-bar-back {
+      font-size: 13px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .top-bar-back:hover { color: var(--primary-dark); }
+    .top-bar-clinic {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* Footer */
+    .site-footer {
+      margin-top: 3rem;
+      padding: 2rem 0;
+      border-top: 1px solid #ebe8e3;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .site-footer a {
+      color: var(--primary);
+      margin: 0 0.5rem;
+    }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* Views */
+    .view { display: none; padding: 1.5rem 0 2rem; }
+    .view.active { display: block; }
+
+    /* Welcome View */
+    .welcome-header {
+      text-align: center;
+      padding: 2rem 0 1.5rem;
+    }
+    .welcome-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .welcome-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .welcome-subtitle {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .welcome-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.8;
+      text-align: left;
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+    }
+    .welcome-desc .disclaimer-icon {
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    /* Pill buttons */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      border-radius: 50px;
+      border: 2px solid #ebe8e3;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-base);
+      user-select: none;
+    }
+    .pill-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .pill-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+    .pill-btn .pill-icon { font-size: 16px; }
+
+    /* Category pills (larger) */
+    .category-pills .pill-btn {
+      padding: 14px 22px;
+      font-size: 15px;
+      border-radius: 16px;
+      min-width: 140px;
+      justify-content: center;
+    }
+
+    /* Medication cards */
+    .med-card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .med-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: var(--card-shadow);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .med-card:hover {
+      border-color: var(--primary);
+    }
+    .med-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .med-card.selected .med-card-check {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .med-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .med-card-check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #d8d4cd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .med-card-info { flex: 1; }
+    .med-card-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .med-card-generic {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .med-card-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    .med-card-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* Action button */
+    .action-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: var(--font-base);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+    .action-btn:hover { background: var(--primary-dark); }
+    .action-btn:disabled {
+      background: #d8d4cd;
+      cursor: not-allowed;
+    }
+
+    .secondary-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #ebe8e3;
+      border-radius: 16px;
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-base);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+    .secondary-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Comparison View */
+    .comparison-header {
+      text-align: center;
+      padding-bottom: 1.25rem;
+    }
+    .comparison-header h2 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .comparison-header p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .comparison-col {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 14px;
+      box-shadow: var(--card-shadow);
+    }
+    .comparison-col.col-a { border-top: 3px solid var(--blue); }
+    .comparison-col.col-b { border-top: 3px solid var(--lavender); }
+    .comparison-col-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .comparison-col-generic {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .comparison-section {
+      margin-bottom: 12px;
+    }
+    .comparison-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .comparison-section-title.merit { color: var(--green); }
+    .comparison-section-title.demerit { color: #c07a5f; }
+    .comparison-section-title.mechanism { color: var(--blue); }
+    .comparison-section-title.onset { color: var(--lavender); }
+    .comparison-section-title.cost { color: var(--amber); }
+    .comparison-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .comparison-section li {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-light);
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 2px;
+    }
+    .comparison-section li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d8d4cd;
+    }
+    .comparison-section .value {
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .comparison-section .cost-icon {
+      font-size: 14px;
+    }
+
+    /* Preference View */
+    .pref-section {
+      margin-bottom: 2rem;
+    }
+    .pref-question {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .pref-question .q-num {
+      background: var(--primary);
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pref-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pref-pills .pill-btn {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .free-text-area {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #ebe8e3;
+      border-radius: 16px;
+      font-family: var(--font-base);
+      font-size: 14px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 80px;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .free-text-area:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Result View */
+    .result-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 1rem;
+    }
+    .result-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .match-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f3f0;
+    }
+    .match-row:last-child { border-bottom: none; }
+    .match-med-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .match-stars {
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
+    .match-stars .filled { color: var(--amber); }
+    .match-stars .empty { color: #e5e1dc; }
+
+    .match-bar-container {
+      margin-top: 6px;
+    }
+    .match-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .match-bar {
+      height: 8px;
+      background: #f0ece8;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .match-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .match-bar-fill.bar-a { background: var(--blue); }
+    .match-bar-fill.bar-b { background: var(--lavender); }
+
+    .recommendation-box {
+      background: var(--primary-light);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-top: 12px;
+    }
+    .recommendation-box strong {
+      color: var(--primary-dark);
+    }
+
+    .disclaimer-box {
+      background: var(--amber-light);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 12px;
+      color: #8a7240;
+      line-height: 1.7;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .disclaimer-box .icon { font-size: 18px; flex-shrink: 0; }
+
+    /* Progress indicator */
+    .progress-bar {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      padding: 16px 0 8px;
+    }
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e5e1dc;
+      transition: all 0.3s;
+    }
+    .progress-dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 4px;
+    }
+    .progress-dot.done {
+      background: var(--primary);
+    }
+
+    /* Back nav inside views */
+    .view-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--primary);
+      cursor: pointer;
+      margin-bottom: 12px;
+      background: none;
+      border: none;
+      font-family: var(--font-base);
+      padding: 0;
+    }
+    .view-back:hover { color: var(--primary-dark); }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .view.active {
+      animation: fadeInUp 0.35s ease;
+    }
+
+    /* Scroll to top utility */
+    .scroll-top { scroll-margin-top: 80px; }
+
+    /* Responsive tweaks */
+    @media (max-width: 400px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+      .comparison-col.col-b { margin-top: 0; }
+      .category-pills .pill-btn {
+        min-width: 120px;
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="container">
+      <a href="/index.html" class="top-bar-back">← アプリトップ</a>
+      <span class="top-bar-clinic">こころのクリニック桜が丘</span>
+    </div>
+  </header>
+
+  <main class="container" id="app">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-dot active" data-step="0"></div>
+      <div class="progress-dot" data-step="1"></div>
+      <div class="progress-dot" data-step="2"></div>
+      <div class="progress-dot" data-step="3"></div>
+      <div class="progress-dot" data-step="4"></div>
+    </div>
+
+    <!-- View 1: Welcome -->
+    <section class="view active" id="viewWelcome">
+      <div class="welcome-header">
+        <div class="welcome-icon">💊</div>
+        <h1 class="welcome-title">お薬えらびサポート（SDM）</h1>
+        <p class="welcome-subtitle">Shared Decision Making &mdash; 一緒に決める、あなたのお薬</p>
+      </div>
+
+      <div class="welcome-desc">
+        <span class="disclaimer-icon">🤝</span>
+        このツールは、お薬の特徴を比較して、あなたの希望や生活スタイルに合ったお薬を一緒に考えるためのものです。<br><br>最終的な判断は必ず主治医と相談して行ってください。
+      </div>
+
+      <p class="section-label">お薬のカテゴリを選んでください</p>
+
+      <div class="pill-group category-pills">
+        <button class="pill-btn" onclick="selectCategory('antidepressants')">
+          <span class="pill-icon">🧠</span> 抗うつ薬
+        </button>
+        <button class="pill-btn" onclick="selectCategory('anxiolytics')">
+          <span class="pill-icon">🌿</span> 抗不安薬
+        </button>
+        <button class="pill-btn" onclick="selectCategory('moodStabilizers')">
+          <span class="pill-icon">⚖️</span> 気分安定薬
+        </button>
+        <button class="pill-btn" onclick="selectCategory('antipsychotics')">
+          <span class="pill-icon">🔬</span> 抗精神病薬
+        </button>
+        <button class="pill-btn" onclick="selectCategory('hypnotics')">
+          <span class="pill-icon">🌙</span> 睡眠薬
+        </button>
+      </div>
+    </section>
+
+    <!-- View 2: Medication Selection -->
+    <section class="view" id="viewSelection">
+      <button class="view-back" onclick="goToView(0)">← カテゴリ選択に戻る</button>
+      <div class="comparison-header">
+        <h2 id="categoryTitle"></h2>
+        <p>2つのお薬を選んで比較しましょう</p>
+      </div>
+      <div class="med-card-list" id="medCardList"></div>
+      <button class="action-btn" id="btnCompare" disabled onclick="goToComparison()">比較する</button>
+    </section>
+
+    <!-- View 3: Comparison -->
+    <section class="view" id="viewComparison">
+      <button class="view-back" onclick="goToView(1)">← お薬選択に戻る</button>
+      <div class="comparison-header">
+        <h2>お薬の比較</h2>
+      </div>
+      <div class="comparison-grid" id="comparisonGrid"></div>
+      <div style="text-align:center; margin: 1.5rem 0 0.5rem;">
+        <p class="section-label">続いて、あなたの希望を教えてください</p>
+      </div>
+      <button class="action-btn" onclick="goToView(3)">希望を入力する →</button>
+    </section>
+
+    <!-- View 4: Preferences -->
+    <section class="view" id="viewPreferences">
+      <button class="view-back" onclick="goToView(2)">← 比較に戻る</button>
+      <div class="comparison-header" style="padding-bottom:1rem;">
+        <h2>あなたの希望を教えてください</h2>
+        <p>当てはまるものを選んでください（複数可）</p>
+      </div>
+
+      <div class="pref-section">
+        <div class="pref-question">
+          <span class="q-num">1</span>
+          お薬に一番求めることは？
+        </div>
+        <div class="pref-pills" id="prefNeeds">
+          <button class="pill-btn" data-pref="needs" data-value="効果の強さ" onclick="togglePref(this)">効果の強さ</button>
+          <button class="pill-btn" data-pref="needs" data-value="副作用の少なさ" onclick="togglePref(this)">副作用の少なさ</button>
+          <button class="pill-btn" data-pref="needs" data-value="即効性" onclick="togglePref(this)">即効性</button>
+          <button class="pill-btn" data-pref="needs" data-value="眠くならない" onclick="togglePref(this)">眠くならない</button>
+          <button class="pill-btn" data-pref="needs" data-value="太りにくい" onclick="togglePref(this)">太りにくい</button>
+          <button class="pill-btn" data-pref="needs" data-value="費用が安い" onclick="togglePref(this)">費用が安い</button>
+        </div>
+      </div>
+
+      <div class="pref-section">
+        <div class="pref-question">
+          <span class="q-num">2</span>
+          気になる副作用は？
+        </div>
+        <div class="pref-pills" id="prefSideEffects">
+          <button class="pill-btn" data-pref="sideEffects" data-value="眠気" onclick="togglePref(this)">眠気</button>
+          <button class="pill-btn" data-pref="sideEffects" data-value="体重増加" onclick="togglePref(this)">体重増加</button>
+          <button class="pill-btn" data-pref="sideEffects" data-value="吐き気" onclick="togglePref(this)">吐き気</button>
+          <button class="pill-btn" data-pref="sideEffects" data-value="性機能" onclick="togglePref(this)">性機能</button>
+          <button class="pill-btn" data-pref="sideEffects" data-value="口の渇き" onclick="togglePref(this)">口の渇き</button>
+          <button class="pill-btn" data-pref="sideEffects" data-value="めまい" onclick="togglePref(this)">めまい</button>
+          <button class="pill-btn" data-pref="sideEffects" data-value="依存性" onclick="togglePref(this)">依存性</button>
+        </div>
+      </div>
+
+      <div class="pref-section">
+        <div class="pref-question">
+          <span class="q-num">3</span>
+          生活で大切なことは？
+        </div>
+        <div class="pref-pills" id="prefLifestyle">
+          <button class="pill-btn" data-pref="lifestyle" data-value="車の運転" onclick="togglePref(this)">車の運転</button>
+          <button class="pill-btn" data-pref="lifestyle" data-value="仕事の集中力" onclick="togglePref(this)">仕事の集中力</button>
+          <button class="pill-btn" data-pref="lifestyle" data-value="妊娠の可能性" onclick="togglePref(this)">妊娠の可能性</button>
+          <button class="pill-btn" data-pref="lifestyle" data-value="お酒を飲む" onclick="togglePref(this)">お酒を飲む</button>
+          <button class="pill-btn" data-pref="lifestyle" data-value="他の薬を飲んでいる" onclick="togglePref(this)">他の薬を飲んでいる</button>
+        </div>
+      </div>
+
+      <div class="pref-section">
+        <div class="pref-question">
+          <span class="q-num">4</span>
+          その他、先生に伝えたいこと
+        </div>
+        <textarea class="free-text-area" id="freeText" placeholder="自由にご記入ください…"></textarea>
+      </div>
+
+      <button class="action-btn" onclick="showResults()">結果を見る</button>
+    </section>
+
+    <!-- View 5: Result -->
+    <section class="view" id="viewResult">
+      <button class="view-back" onclick="goToView(3)">← 希望入力に戻る</button>
+      <div class="comparison-header">
+        <h2>あなたの希望との相性</h2>
+      </div>
+
+      <div class="result-card" id="resultScores"></div>
+      <div class="result-card" id="resultRecommendation"></div>
+      <div class="result-card" id="resultPreferencesSummary"></div>
+
+      <div class="disclaimer-box" style="margin-top: 1rem;">
+        <span class="icon">⚠️</span>
+        <span>この結果は参考情報です。必ず主治医と相談の上、最終的な判断を行ってください。お薬の効果には個人差があります。</span>
+      </div>
+
+      <button class="action-btn" style="margin-top: 1.5rem;" onclick="openSummary()">結果を表示</button>
+      <p style="text-align:center; font-size:12px; color:var(--text-light); margin-top:6px;">印刷用の画面が新しいタブで開きます</p>
+      <button class="secondary-btn" onclick="resetApp()">最初からやり直す</button>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>こころのクリニック桜が丘</p>
+      <div style="margin-top:6px;">
+        <a href="https://www.kokorono-clinic.jp/" target="_blank" rel="noopener">クリニックHP</a>
+        <a href="/index.html">サイトトップ</a>
+      </div>
+      <p style="margin-top:10px;">&copy; 2026 こころのクリニック桜が丘</p>
+    </div>
+  </footer>
+
+<script>
+// ============================================================
+// MEDICATION DATABASE
+// ============================================================
+const medicationDB = {
+  antidepressants: {
+    label: '抗うつ薬',
+    icon: '🧠',
+    meds: [
+      {
+        id: 'sertraline',
+        brand: 'ジェイゾロフト',
+        generic: 'セルトラリン',
+        classLabel: 'SSRI',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '効果と副作用のバランスが良い定番のSSRI',
+        mechanism: 'セロトニンの再取り込みを選択的に阻害し、脳内セロトニン濃度を高めます。',
+        merits: ['効果と副作用のバランスが良い', '幅広い適応（うつ・パニック・社交不安・PTSD）', '妊娠中の安全性データが多い'],
+        demerits: ['効果発現に2-4週かかる', '吐き気（初期）', '性機能障害', '下痢'],
+        onset: '2-4週間',
+        cost: '◎',
+        costLabel: '安い',
+        // scoring tags
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 2, sexualDysfunction: 2,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
+          fastOnset: 0, lowSideEffects: 2, lowCost: 3, pregnancy: 2, cognitive: 1
+        }
+      },
+      {
+        id: 'escitalopram',
+        brand: 'レクサプロ',
+        generic: 'エスシタロプラム',
+        classLabel: 'SSRI',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '選択性が高く副作用が少ないSSRI',
+        mechanism: 'セロトニン再取り込み阻害薬の中で最も選択性が高く、ピンポイントに作用します。',
+        merits: ['SSRIで最も選択性が高い', '副作用が比較的少ない', '1日1回の服用'],
+        demerits: ['効果発現に2-4週かかる', 'QT延長リスク（高用量）', '性機能障害'],
+        onset: '2-4週間',
+        cost: '○',
+        costLabel: 'ふつう',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 1, sexualDysfunction: 2,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
+          fastOnset: 0, lowSideEffects: 3, lowCost: 2, pregnancy: 1, cognitive: 1
+        }
+      },
+      {
+        id: 'duloxetine',
+        brand: 'サインバルタ',
+        generic: 'デュロキセチン',
+        classLabel: 'SNRI',
+        classColor: '#7aad78',
+        classColorLight: '#f0f5ef',
+        desc: 'うつ＋痛みの両方に効くSNRI',
+        mechanism: 'セロトニンとノルアドレナリンの両方の再取り込みを阻害し、意欲と痛みを改善します。',
+        merits: ['うつ＋痛みに効果', '意欲改善', '慢性痛・線維筋痛症にも適応'],
+        demerits: ['吐き気（初期）', '口渇', '発汗', '血圧上昇', '急な中止で離脱症状'],
+        onset: '1-2週間',
+        cost: '○',
+        costLabel: 'ふつう',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 2, sexualDysfunction: 1,
+          dryMouth: 2, dizziness: 1, dependence: 1, efficacy: 3,
+          fastOnset: 1, lowSideEffects: 1, lowCost: 2, pregnancy: 0, cognitive: 1
+        }
+      },
+      {
+        id: 'mirtazapine',
+        brand: 'リフレックス',
+        generic: 'ミルタザピン',
+        classLabel: 'NaSSA',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '睡眠改善が早く、吐き気が少ない',
+        mechanism: 'ノルアドレナリンとセロトニンの放出を促進し、特にヒスタミン受容体に作用して睡眠を改善します。',
+        merits: ['睡眠改善が早い', '吐き気が少ない', '食欲改善'],
+        demerits: ['眠気が強い', '体重増加', '口渇'],
+        onset: '1-2週間（睡眠は初日から）',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 3, weightGain: 3, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 2, dizziness: 1, dependence: 0, efficacy: 2,
+          fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1
+        }
+      },
+      {
+        id: 'vortioxetine',
+        brand: 'トリンテリックス',
+        generic: 'ボルチオキセチン',
+        classLabel: 'セロトニン調節薬',
+        classColor: '#d4b070',
+        classColorLight: '#fef6ec',
+        desc: '認知機能改善効果があり副作用も少ない新薬',
+        mechanism: 'セロトニン受容体を多面的に調節し、認知機能の改善にも効果を発揮します。',
+        merits: ['認知機能改善効果', '性機能障害が少ない', '体重への影響少ない'],
+        demerits: ['吐き気（初期）', '比較的新しい薬', '高価'],
+        onset: '2-4週間',
+        cost: '△',
+        costLabel: 'やや高い',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 2, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
+          fastOnset: 0, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 3
+        }
+      }
+    ]
+  },
+  anxiolytics: {
+    label: '抗不安薬',
+    icon: '🌿',
+    meds: [
+      {
+        id: 'lorazepam',
+        brand: 'ワイパックス',
+        generic: 'ロラゼパム',
+        classLabel: 'ベンゾジアゼピン',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '即効性があり確実に不安を和らげる',
+        mechanism: 'GABA受容体に結合し、脳の興奮を抑えて不安を軽減します。',
+        merits: ['即効性', '確実な不安軽減', '肝臓への負担少ない'],
+        demerits: ['眠気', '依存性リスク', '長期使用非推奨', '認知機能低下'],
+        onset: '30分-1時間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 1, dependence: 3, efficacy: 3,
+          fastOnset: 3, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0
+        }
+      },
+      {
+        id: 'etizolam',
+        brand: 'デパス',
+        generic: 'エチゾラム',
+        classLabel: 'チエノジアゼピン',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '即効性と筋弛緩作用があり広く使われる',
+        mechanism: 'ベンゾジアゼピン受容体に作用し、不安・緊張を緩和。筋弛緩作用もあります。',
+        merits: ['即効性', '筋弛緩作用', '肩こり・緊張性頭痛にも'],
+        demerits: ['依存性が高い', '眠気', '長期処方に制限あり'],
+        onset: '15-30分',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 1, dependence: 3, efficacy: 3,
+          fastOnset: 3, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0
+        }
+      },
+      {
+        id: 'tandospirone',
+        brand: 'セディール',
+        generic: 'タンドスピロン',
+        classLabel: 'セロトニン1A作動薬',
+        classColor: '#7aad78',
+        classColorLight: '#f0f5ef',
+        desc: '依存性がなく長期使用可能な抗不安薬',
+        mechanism: 'セロトニン1A受容体に作用し、穏やかに不安を改善します。',
+        merits: ['依存性なし', '眠気少ない', '長期使用可能'],
+        demerits: ['効果発現に1-2週かかる', 'ベンゾジアゼピンより効果マイルド'],
+        onset: '1-2週間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 1,
+          fastOnset: 0, lowSideEffects: 3, lowCost: 3, pregnancy: 0, cognitive: 2
+        }
+      },
+      {
+        id: 'hydroxyzine',
+        brand: 'アタラックス',
+        generic: 'ヒドロキシジン',
+        classLabel: '抗ヒスタミン薬',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '依存性がなく即効性もある抗不安薬',
+        mechanism: 'ヒスタミンH1受容体を遮断し、不安・かゆみを軽減します。',
+        merits: ['依存性なし', '即効性あり', 'かゆみにも効果'],
+        demerits: ['眠気', '口渇', 'QT延長リスク（高齢者注意）'],
+        onset: '30分-1時間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 2, dizziness: 1, dependence: 0, efficacy: 2,
+          fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1
+        }
+      }
+    ]
+  },
+  moodStabilizers: {
+    label: '気分安定薬',
+    icon: '⚖️',
+    meds: [
+      {
+        id: 'lithium',
+        brand: 'リーマス',
+        generic: 'リチウム',
+        classLabel: '気分安定薬',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '躁状態に最も確実で長い使用実績がある',
+        mechanism: 'セカンドメッセンジャー系に作用し、神経活動の過剰な興奮を抑えます。自殺リスクを低減する唯一の薬剤です。',
+        merits: ['躁状態に最も確実', '自殺リスク低減', '長い使用実績'],
+        demerits: ['血中濃度モニタリング必須', '腎機能・甲状腺への影響', '手の震え', 'リチウム中毒リスク'],
+        onset: '1-2週間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 1, weightGain: 1, nausea: 1, sexualDysfunction: 0,
+          dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 3,
+          fastOnset: 1, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 1
+        }
+      },
+      {
+        id: 'valproate',
+        brand: 'デパケン',
+        generic: 'バルプロ酸',
+        classLabel: '気分安定薬',
+        classColor: '#7aad78',
+        classColorLight: '#f0f5ef',
+        desc: '混合状態や急速交代型に強い',
+        mechanism: 'GABA系を増強し、神経の過剰な興奮を抑制します。',
+        merits: ['躁状態に有効', '混合状態に良い', '急速交代型にも'],
+        demerits: ['体重増加', '脱毛', '肝機能障害', '催奇形性（妊婦禁忌）'],
+        onset: '3-5日',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 1, weightGain: 2, nausea: 1, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 1, dependence: 0, efficacy: 3,
+          fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1
+        }
+      },
+      {
+        id: 'lamotrigine',
+        brand: 'ラミクタール',
+        generic: 'ラモトリギン',
+        classLabel: '気分安定薬',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '双極性うつに有効で体重・認知への影響が少ない',
+        mechanism: 'ナトリウムチャネルを阻害し、グルタミン酸の過剰放出を抑えて気分を安定させます。',
+        merits: ['双極性うつに有効', '体重への影響少ない', '認知機能への影響少ない'],
+        demerits: ['重篤な皮疹（SJS）リスクのため漸増必須', '効果発現に時間がかかる'],
+        onset: '4-6週間（漸増のため）',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 1, dependence: 0, efficacy: 2,
+          fastOnset: 0, lowSideEffects: 2, lowCost: 3, pregnancy: 1, cognitive: 3
+        }
+      }
+    ]
+  },
+  antipsychotics: {
+    label: '抗精神病薬',
+    icon: '🔬',
+    meds: [
+      {
+        id: 'aripiprazole',
+        brand: 'エビリファイ',
+        generic: 'アリピプラゾール',
+        classLabel: 'DSS（ドパミン部分作動薬）',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '体重増加が少なく副作用のバランスが良い',
+        mechanism: 'ドパミンD2受容体に部分作動薬として働き、ドパミンの過剰も不足もバランスよく調整します。',
+        merits: ['体重増加少ない', '代謝への影響少ない', 'うつの増強にも', 'アカシジア以外の副作用少ない'],
+        demerits: ['アカシジア（そわそわ感）', '不眠', '不安（初期）'],
+        onset: '1-2週間',
+        cost: '◎',
+        costLabel: '安い（後発品あり）',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
+          fastOnset: 1, lowSideEffects: 2, lowCost: 3, pregnancy: 0, cognitive: 2
+        }
+      },
+      {
+        id: 'olanzapine',
+        brand: 'ジプレキサ',
+        generic: 'オランザピン',
+        classLabel: 'MARTA（多元受容体作用薬）',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '強力な鎮静と幅広い症状に効果',
+        mechanism: '複数の受容体（ドパミン、セロトニン、ヒスタミン等）に作用し、幅広い症状を改善します。',
+        merits: ['強力な鎮静', '興奮・不眠に即効', '幅広い症状に効果'],
+        demerits: ['体重増加（著明）', '代謝異常（糖尿病リスク）', '眠気'],
+        onset: '数日-1週間',
+        cost: '◎',
+        costLabel: '安い（後発品あり）',
+        tags: {
+          drowsiness: 3, weightGain: 3, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 3,
+          fastOnset: 2, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 0
+        }
+      },
+      {
+        id: 'quetiapine',
+        brand: 'セロクエル',
+        generic: 'クエチアピン',
+        classLabel: 'MARTA（多元受容体作用薬）',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '低用量で睡眠・不安にも効果がある',
+        mechanism: '多元的に受容体に作用し、低用量では睡眠改善、高用量では抗精神病効果を発揮します。',
+        merits: ['低用量で睡眠改善', '双極性うつに有効', '不安にも効果'],
+        demerits: ['眠気（強い）', '体重増加', '起立性低血圧'],
+        onset: '数日',
+        cost: '◎',
+        costLabel: '安い（後発品あり）',
+        tags: {
+          drowsiness: 3, weightGain: 2, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 1, dizziness: 2, dependence: 0, efficacy: 2,
+          fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1
+        }
+      },
+      {
+        id: 'brexpiprazole',
+        brand: 'レキサルティ',
+        generic: 'ブレクスピプラゾール',
+        classLabel: 'SDAM',
+        classColor: '#d4b070',
+        classColorLight: '#fef6ec',
+        desc: 'アカシジアが少なく穏やかに効く新薬',
+        mechanism: 'ドパミンD2受容体とセロトニン受容体に部分作動薬として作用し、穏やかにバランスを調整します。',
+        merits: ['アリピプラゾールよりアカシジア少ない', 'うつ増強に適応', '穏やかな効果'],
+        demerits: ['体重増加（軽度）', '比較的新しい薬'],
+        onset: '1-2週間',
+        cost: '△',
+        costLabel: 'やや高い',
+        tags: {
+          drowsiness: 0, weightGain: 1, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
+          fastOnset: 1, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 2
+        }
+      }
+    ]
+  },
+  hypnotics: {
+    label: '睡眠薬',
+    icon: '🌙',
+    meds: [
+      {
+        id: 'suvorexant',
+        brand: 'ベルソムラ',
+        generic: 'スボレキサント',
+        classLabel: 'オレキシン受容体拮抗薬',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '自然な眠りに近く依存性が低い',
+        mechanism: '覚醒を維持するオレキシンの働きをブロックし、自然に近い睡眠を促します。',
+        merits: ['自然な眠りに近い', '依存性低い', '中途覚醒にも効果'],
+        demerits: ['悪夢', '翌朝の眠気', 'ナルコレプシー患者に禁忌'],
+        onset: '30分-1時間',
+        cost: '△',
+        costLabel: 'やや高い',
+        tags: {
+          drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
+          fastOnset: 2, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 2
+        }
+      },
+      {
+        id: 'lemborexant',
+        brand: 'デエビゴ',
+        generic: 'レンボレキサント',
+        classLabel: 'オレキシン受容体拮抗薬',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '入眠＋中途覚醒の両方に効く新しい睡眠薬',
+        mechanism: 'オレキシン受容体をブロックし、入眠と睡眠維持の両方を改善します。',
+        merits: ['入眠＋中途覚醒の両方に効果', '依存性低い', '高齢者にも安全'],
+        demerits: ['翌朝の眠気', '悪夢', 'CYP3A阻害薬との併用注意'],
+        onset: '30分',
+        cost: '△',
+        costLabel: 'やや高い',
+        tags: {
+          drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 3,
+          fastOnset: 2, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 2
+        }
+      },
+      {
+        id: 'ramelteon',
+        brand: 'ロゼレム',
+        generic: 'ラメルテオン',
+        classLabel: 'メラトニン受容体作動薬',
+        classColor: '#7aad78',
+        classColorLight: '#f0f5ef',
+        desc: '依存性なし、体内時計を整える安全な薬',
+        mechanism: 'メラトニン受容体に作用し、体内時計のリズムを整えて自然な眠りを導きます。',
+        merits: ['依存性なし', '体内時計を整える', '高齢者に安全'],
+        demerits: ['効果がマイルド', '重度の不眠には不十分な場合も'],
+        onset: '数日-2週間（体内時計の調整）',
+        cost: '○',
+        costLabel: 'ふつう',
+        tags: {
+          drowsiness: 0, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 1,
+          fastOnset: 0, lowSideEffects: 3, lowCost: 2, pregnancy: 0, cognitive: 3
+        }
+      },
+      {
+        id: 'zolpidem',
+        brand: 'マイスリー',
+        generic: 'ゾルピデム',
+        classLabel: '非ベンゾジアゼピン',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '入眠に即効で翌朝に残りにくい',
+        mechanism: 'GABA-A受容体のα1サブユニットに選択的に結合し、催眠作用を発揮します。',
+        merits: ['入眠に即効', '超短時間作用', '翌朝に残りにくい'],
+        demerits: ['中途覚醒には効かない', '依存性あり', '健忘リスク', '夢遊行動'],
+        onset: '15-30分',
+        cost: '◎',
+        costLabel: '安い',
+        tags: {
+          drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0,
+          dryMouth: 0, dizziness: 0, dependence: 2, efficacy: 2,
+          fastOnset: 3, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0
+        }
+      }
+    ]
+  }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let currentView = 0;
+let selectedCategory = null;
+let selectedMeds = [];
+let preferences = {
+  needs: [],
+  sideEffects: [],
+  lifestyle: [],
+  freeText: ''
+};
+
+// ============================================================
+// VIEW NAVIGATION
+// ============================================================
+function goToView(index) {
+  const views = document.querySelectorAll('.view');
+  views.forEach(v => v.classList.remove('active'));
+  views[index].classList.add('active');
+  currentView = index;
+  updateProgress(index);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress(step) {
+  const dots = document.querySelectorAll('.progress-dot');
+  dots.forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < step) d.classList.add('done');
+    if (i === step) d.classList.add('active');
+  });
+}
+
+// ============================================================
+// VIEW 1: CATEGORY SELECTION
+// ============================================================
+function selectCategory(catKey) {
+  selectedCategory = catKey;
+  selectedMeds = [];
+  const cat = medicationDB[catKey];
+  document.getElementById('categoryTitle').textContent = cat.icon + ' ' + cat.label;
+  renderMedCards(cat.meds);
+  document.getElementById('btnCompare').disabled = true;
+  goToView(1);
+}
+
+// ============================================================
+// VIEW 2: MEDICATION CARDS
+// ============================================================
+function renderMedCards(meds) {
+  const list = document.getElementById('medCardList');
+  list.innerHTML = '';
+  meds.forEach(med => {
+    const card = document.createElement('div');
+    card.className = 'med-card';
+    card.dataset.medId = med.id;
+    card.onclick = () => toggleMedSelection(med.id, card);
+    card.innerHTML = `
+      <div class="med-card-top">
+        <div class="med-card-check"></div>
+        <div class="med-card-info">
+          <div class="med-card-name">${med.brand}</div>
+          <div class="med-card-generic">${med.generic}</div>
+        </div>
+        <span class="med-card-tag" style="background:${med.classColorLight};color:${med.classColor}">${med.classLabel}</span>
+      </div>
+      <div class="med-card-desc">${med.desc}</div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function toggleMedSelection(medId, cardEl) {
+  const idx = selectedMeds.indexOf(medId);
+  if (idx > -1) {
+    selectedMeds.splice(idx, 1);
+    cardEl.classList.remove('selected');
+    cardEl.querySelector('.med-card-check').textContent = '';
+  } else {
+    if (selectedMeds.length >= 2) {
+      // Deselect the first one
+      const first = selectedMeds.shift();
+      const firstCard = document.querySelector(`.med-card[data-med-id="${first}"]`);
+      if (firstCard) {
+        firstCard.classList.remove('selected');
+        firstCard.querySelector('.med-card-check').textContent = '';
+      }
+    }
+    selectedMeds.push(medId);
+    cardEl.classList.add('selected');
+    cardEl.querySelector('.med-card-check').textContent = '✓';
+  }
+  document.getElementById('btnCompare').disabled = selectedMeds.length !== 2;
+}
+
+// ============================================================
+// VIEW 3: COMPARISON
+// ============================================================
+function goToComparison() {
+  if (selectedMeds.length !== 2) return;
+  const cat = medicationDB[selectedCategory];
+  const medA = cat.meds.find(m => m.id === selectedMeds[0]);
+  const medB = cat.meds.find(m => m.id === selectedMeds[1]);
+  renderComparison(medA, medB);
+  goToView(2);
+}
+
+function renderComparison(medA, medB) {
+  const grid = document.getElementById('comparisonGrid');
+  grid.innerHTML = `
+    ${renderComparisonCol(medA, 'col-a')}
+    ${renderComparisonCol(medB, 'col-b')}
+  `;
+}
+
+function costEmoji(cost) {
+  if (cost === '◎') return '◎ 安い';
+  if (cost === '○') return '○ ふつう';
+  if (cost === '△') return '△ やや高い';
+  return cost;
+}
+
+function renderComparisonCol(med, colClass) {
+  return `
+    <div class="comparison-col ${colClass}">
+      <div class="comparison-col-name">${med.brand}</div>
+      <div class="comparison-col-generic">${med.generic}</div>
+
+      <div class="comparison-section">
+        <div class="comparison-section-title merit">✅ メリット</div>
+        <ul>${med.merits.map(m => `<li>${m}</li>`).join('')}</ul>
+      </div>
+
+      <div class="comparison-section">
+        <div class="comparison-section-title demerit">⚠️ デメリット</div>
+        <ul>${med.demerits.map(d => `<li>${d}</li>`).join('')}</ul>
+      </div>
+
+      <div class="comparison-section">
+        <div class="comparison-section-title mechanism">💊 作用機序</div>
+        <p style="font-size:12px;color:var(--text-light);line-height:1.6">${med.mechanism}</p>
+      </div>
+
+      <div class="comparison-section">
+        <div class="comparison-section-title onset">⏱️ 効果発現</div>
+        <div class="value">${med.onset}</div>
+      </div>
+
+      <div class="comparison-section">
+        <div class="comparison-section-title cost">💰 薬価目安</div>
+        <div class="value cost-icon">${costEmoji(med.cost)}</div>
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+// VIEW 4: PREFERENCES
+// ============================================================
+function togglePref(btn) {
+  const pref = btn.dataset.pref;
+  const value = btn.dataset.value;
+  const arr = preferences[pref];
+  const idx = arr.indexOf(value);
+  if (idx > -1) {
+    arr.splice(idx, 1);
+    btn.classList.remove('selected');
+  } else {
+    arr.push(value);
+    btn.classList.add('selected');
+  }
+}
+
+// ============================================================
+// VIEW 5: SCORING & RESULTS
+// ============================================================
+function scoreMed(med) {
+  let score = 0;
+
+  // Needs scoring
+  preferences.needs.forEach(need => {
+    switch (need) {
+      case '効果の強さ':
+        score += med.tags.efficacy;
+        break;
+      case '副作用の少なさ':
+        score += med.tags.lowSideEffects;
+        break;
+      case '即効性':
+        score += med.tags.fastOnset;
+        break;
+      case '眠くならない':
+        score -= med.tags.drowsiness;
+        score += (3 - med.tags.drowsiness); // bonus for low drowsiness
+        break;
+      case '太りにくい':
+        score -= med.tags.weightGain;
+        score += (3 - med.tags.weightGain);
+        break;
+      case '費用が安い':
+        score += med.tags.lowCost;
+        break;
+    }
+  });
+
+  // Side effects scoring (penalize)
+  preferences.sideEffects.forEach(se => {
+    switch (se) {
+      case '眠気':
+        score -= med.tags.drowsiness * 1.5;
+        break;
+      case '体重増加':
+        score -= med.tags.weightGain * 1.5;
+        break;
+      case '吐き気':
+        score -= med.tags.nausea * 1.5;
+        break;
+      case '性機能':
+        score -= med.tags.sexualDysfunction * 1.5;
+        break;
+      case '口の渇き':
+        score -= med.tags.dryMouth * 1.5;
+        break;
+      case 'めまい':
+        score -= med.tags.dizziness * 1.5;
+        break;
+      case '依存性':
+        score -= med.tags.dependence * 1.5;
+        break;
+    }
+  });
+
+  // Lifestyle scoring
+  preferences.lifestyle.forEach(ls => {
+    switch (ls) {
+      case '車の運転':
+        score -= med.tags.drowsiness * 2;
+        break;
+      case '仕事の集中力':
+        score += med.tags.cognitive;
+        score -= med.tags.drowsiness;
+        break;
+      case '妊娠の可能性':
+        score += med.tags.pregnancy * 2;
+        break;
+      case 'お酒を飲む':
+        score -= med.tags.drowsiness;
+        score -= med.tags.dependence;
+        break;
+      case '他の薬を飲んでいる':
+        score += med.tags.lowSideEffects;
+        break;
+    }
+  });
+
+  return score;
+}
+
+function scoreToStars(score, maxScore) {
+  if (maxScore <= 0) return 3; // default 3 stars if no preferences selected
+  const ratio = (score - (-maxScore)) / (maxScore - (-maxScore));
+  const stars = Math.round(ratio * 4) + 1;
+  return Math.max(1, Math.min(5, stars));
+}
+
+function starsHTML(count) {
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    html += `<span class="${i < count ? 'filled' : 'empty'}">★</span>`;
+  }
+  return html;
+}
+
+function showResults() {
+  preferences.freeText = document.getElementById('freeText').value;
+
+  const cat = medicationDB[selectedCategory];
+  const medA = cat.meds.find(m => m.id === selectedMeds[0]);
+  const medB = cat.meds.find(m => m.id === selectedMeds[1]);
+
+  const scoreA = scoreMed(medA);
+  const scoreB = scoreMed(medB);
+
+  // Normalize for display
+  const maxPossible = Math.max(Math.abs(scoreA), Math.abs(scoreB), 1);
+  const starsA = scoreToStars(scoreA, maxPossible);
+  const starsB = scoreToStars(scoreB, maxPossible);
+
+  // Percentage for bar display
+  const range = Math.max(Math.abs(scoreA), Math.abs(scoreB), 1);
+  const pctA = Math.round(((scoreA + range) / (2 * range)) * 100);
+  const pctB = Math.round(((scoreB + range) / (2 * range)) * 100);
+
+  // Scores card
+  document.getElementById('resultScores').innerHTML = `
+    <div class="result-card-title">📊 あなたの希望との相性</div>
+    <div class="match-row">
+      <div>
+        <div class="match-med-name">${medA.brand}</div>
+        <div style="font-size:12px;color:var(--text-light)">${medA.generic}</div>
+      </div>
+      <div class="match-stars">${starsHTML(starsA)}</div>
+    </div>
+    <div class="match-bar-container">
+      <div class="match-bar-label"><span>${medA.brand}</span><span>${pctA}%</span></div>
+      <div class="match-bar"><div class="match-bar-fill bar-a" style="width:${pctA}%"></div></div>
+    </div>
+    <div class="match-row" style="margin-top:12px;">
+      <div>
+        <div class="match-med-name">${medB.brand}</div>
+        <div style="font-size:12px;color:var(--text-light)">${medB.generic}</div>
+      </div>
+      <div class="match-stars">${starsHTML(starsB)}</div>
+    </div>
+    <div class="match-bar-container">
+      <div class="match-bar-label"><span>${medB.brand}</span><span>${pctB}%</span></div>
+      <div class="match-bar"><div class="match-bar-fill bar-b" style="width:${pctB}%"></div></div>
+    </div>
+  `;
+
+  // Recommendation
+  let recText = '';
+  const allPrefs = [...preferences.needs, ...preferences.sideEffects.map(s => s + 'が少ない'), ...preferences.lifestyle];
+  const prefSummary = allPrefs.length > 0 ? allPrefs.slice(0, 3).join('・') : '特になし';
+
+  if (scoreA > scoreB) {
+    recText = `あなたの「<strong>${prefSummary}</strong>」を重視すると、<strong>${medA.brand}（${medA.generic}）</strong>が合いそうです。`;
+  } else if (scoreB > scoreA) {
+    recText = `あなたの「<strong>${prefSummary}</strong>」を重視すると、<strong>${medB.brand}（${medB.generic}）</strong>が合いそうです。`;
+  } else {
+    recText = `どちらのお薬も、あなたの希望に同程度マッチしています。主治医と詳しく相談してみましょう。`;
+  }
+
+  document.getElementById('resultRecommendation').innerHTML = `
+    <div class="result-card-title">💡 ポイント</div>
+    <div class="recommendation-box">${recText}</div>
+  `;
+
+  // Preferences summary
+  let prefHTML = '';
+  if (preferences.needs.length > 0) {
+    prefHTML += `<div style="margin-bottom:8px"><strong>求めること：</strong>${preferences.needs.join('、')}</div>`;
+  }
+  if (preferences.sideEffects.length > 0) {
+    prefHTML += `<div style="margin-bottom:8px"><strong>気になる副作用：</strong>${preferences.sideEffects.join('、')}</div>`;
+  }
+  if (preferences.lifestyle.length > 0) {
+    prefHTML += `<div style="margin-bottom:8px"><strong>生活で大切なこと：</strong>${preferences.lifestyle.join('、')}</div>`;
+  }
+  if (preferences.freeText.trim()) {
+    prefHTML += `<div style="margin-bottom:8px"><strong>その他：</strong>${escapeHTML(preferences.freeText)}</div>`;
+  }
+  if (!prefHTML) {
+    prefHTML = '<div style="color:var(--text-light)">（希望の選択なし）</div>';
+  }
+
+  document.getElementById('resultPreferencesSummary').innerHTML = `
+    <div class="result-card-title">📝 あなたが選んだ希望</div>
+    <div style="font-size:13px;line-height:1.8;color:var(--text)">${prefHTML}</div>
+  `;
+
+  // Store for summary
+  window._resultData = { medA, medB, scoreA, scoreB, starsA, starsB, pctA, pctB, recText, preferences: { ...preferences } };
+
+  goToView(4);
+}
+
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ============================================================
+// OPEN SUMMARY IN NEW TAB
+// ============================================================
+function openSummary() {
+  const d = window._resultData;
+  if (!d) return;
+
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日`;
+  const cat = medicationDB[selectedCategory];
+
+  let prefLines = '';
+  if (d.preferences.needs.length > 0) {
+    prefLines += `<tr><th>求めること</th><td>${d.preferences.needs.join('、')}</td></tr>`;
+  }
+  if (d.preferences.sideEffects.length > 0) {
+    prefLines += `<tr><th>気になる副作用</th><td>${d.preferences.sideEffects.join('、')}</td></tr>`;
+  }
+  if (d.preferences.lifestyle.length > 0) {
+    prefLines += `<tr><th>生活で大切なこと</th><td>${d.preferences.lifestyle.join('、')}</td></tr>`;
+  }
+  if (d.preferences.freeText.trim()) {
+    prefLines += `<tr><th>その他</th><td>${escapeHTML(d.preferences.freeText)}</td></tr>`;
+  }
+
+  function starsText(n) {
+    return '★'.repeat(n) + '☆'.repeat(5 - n);
+  }
+
+  const html = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お薬比較レポート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #faf9f8;
+    color: #3d3935;
+    font-size: 14px;
+    line-height: 1.75;
+    padding: 1.5rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .report-header {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #faeef1;
+    margin-bottom: 1.5rem;
+  }
+  .report-header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    color: #d4819a;
+    margin-bottom: 4px;
+  }
+  .report-header .meta {
+    font-size: 12px;
+    color: #827c73;
+  }
+  .section { margin-bottom: 1.5rem; }
+  .section h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ebe8e3;
+  }
+  .med-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .med-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .med-box.box-a { border-top: 3px solid #7bafd5; }
+  .med-box.box-b { border-top: 3px solid #a89cc8; }
+  .med-box h3 { font-size: 14px; margin-bottom: 2px; }
+  .med-box .generic { font-size: 11px; color: #827c73; margin-bottom: 8px; }
+  .med-box .label { font-size: 11px; font-weight: 700; margin-top: 8px; }
+  .med-box .label.green { color: #7aad78; }
+  .med-box .label.orange { color: #c07a5f; }
+  .med-box ul { padding-left: 16px; font-size: 12px; margin: 2px 0; }
+  .med-box li { margin-bottom: 1px; }
+  .stars { font-size: 16px; letter-spacing: 2px; margin-top: 4px; }
+  .stars .filled { color: #d4b070; }
+  .stars .empty { color: #e5e1dc; }
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f5f3f0;
+  }
+  .score-row:last-child { border-bottom: none; }
+  .rec-box {
+    background: #faeef1;
+    border-radius: 10px;
+    padding: 14px;
+    line-height: 1.8;
+    font-size: 13px;
+  }
+  .rec-box strong { color: #c06d86; }
+  table.pref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.pref-table th {
+    text-align: left;
+    padding: 6px 8px;
+    background: #faeef1;
+    width: 120px;
+    vertical-align: top;
+    font-weight: 500;
+  }
+  table.pref-table td {
+    padding: 6px 8px;
+  }
+  .disclaimer {
+    background: #fef6ec;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 11px;
+    color: #8a7240;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+  }
+  .footer-msg {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ebe8e3;
+    font-size: 12px;
+    color: #827c73;
+    line-height: 1.8;
+  }
+  @media print {
+    body { padding: 1rem; }
+  }
+  @media (max-width: 400px) {
+    .med-compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="report-header">
+    <h1>お薬比較レポート</h1>
+    <div class="meta">${dateStr} ｜ こころのクリニック桜が丘</div>
+    <div class="meta">カテゴリ：${cat.icon} ${cat.label}</div>
+  </div>
+
+  <div class="section">
+    <h2>比較したお薬</h2>
+    <div class="med-compare">
+      <div class="med-box box-a">
+        <h3>${d.medA.brand}</h3>
+        <div class="generic">${d.medA.generic}（${d.medA.classLabel}）</div>
+        <div class="label green">✅ メリット</div>
+        <ul>${d.medA.merits.map(m => '<li>' + m + '</li>').join('')}</ul>
+        <div class="label orange">⚠️ デメリット</div>
+        <ul>${d.medA.demerits.map(m => '<li>' + m + '</li>').join('')}</ul>
+        <div style="margin-top:8px;font-size:12px">⏱ ${d.medA.onset} ｜ 💰 ${costEmoji(d.medA.cost)}</div>
+      </div>
+      <div class="med-box box-b">
+        <h3>${d.medB.brand}</h3>
+        <div class="generic">${d.medB.generic}（${d.medB.classLabel}）</div>
+        <div class="label green">✅ メリット</div>
+        <ul>${d.medB.merits.map(m => '<li>' + m + '</li>').join('')}</ul>
+        <div class="label orange">⚠️ デメリット</div>
+        <ul>${d.medB.demerits.map(m => '<li>' + m + '</li>').join('')}</ul>
+        <div style="margin-top:8px;font-size:12px">⏱ ${d.medB.onset} ｜ 💰 ${costEmoji(d.medB.cost)}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>あなたの希望との相性</h2>
+    <div class="score-row">
+      <div><strong>${d.medA.brand}</strong></div>
+      <div class="stars">${starsText(d.starsA).split('').map(s => s === '★' ? '<span class="filled">★</span>' : '<span class="empty">★</span>').join('')}</div>
+    </div>
+    <div class="score-row">
+      <div><strong>${d.medB.brand}</strong></div>
+      <div class="stars">${starsText(d.starsB).split('').map(s => s === '★' ? '<span class="filled">★</span>' : '<span class="empty">★</span>').join('')}</div>
+    </div>
+    <div class="rec-box" style="margin-top:12px">${d.recText}</div>
+  </div>
+
+  ${prefLines ? `
+  <div class="section">
+    <h2>あなたが選んだ希望</h2>
+    <table class="pref-table">
+      ${prefLines}
+    </table>
+  </div>` : ''}
+
+  <div class="disclaimer">
+    ⚠️ この結果は参考情報です。必ず主治医と相談の上、最終的な判断を行ってください。お薬の効果には個人差があります。
+  </div>
+
+  <div class="footer-msg">
+    このスクリーンショットをデジスマ問診票に添付してください<br>
+    こころのクリニック桜が丘
+  </div>
+</body>
+</html>`;
+
+  const newTab = window.open('', '_blank');
+  if (newTab) {
+    newTab.document.write(html);
+    newTab.document.close();
+  }
+}
+
+// ============================================================
+// RESET
+// ============================================================
+function resetApp() {
+  selectedCategory = null;
+  selectedMeds = [];
+  preferences = { needs: [], sideEffects: [], lifestyle: [], freeText: '' };
+  window._resultData = null;
+
+  // Reset preference pill states
+  document.querySelectorAll('.pref-pills .pill-btn').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+  document.getElementById('freeText').value = '';
+
+  goToView(0);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  goToView(0);
+});
+</script>
+
+</body>
+</html>
