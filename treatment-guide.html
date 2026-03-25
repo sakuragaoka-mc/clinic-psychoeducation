@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>治療の解説 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #d4819a;
+    --primary-light: #faeef1;
+    --primary-dark: #c06d86;
+    --accent: #7aad78;
+    --accent-light: #f0f5ef;
+    --blue: #7bafd5;
+    --blue-light: #eef4fb;
+    --lavender: #a89cc8;
+    --lavender-light: #f0edf6;
+    --text: #3d3935;
+    --text-light: #827c73;
+    --bg: #faf9f8;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #c06d86;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #827c73;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #d4819a 0%, #c06d86 40%, #a89cc8 70%, #7bafd5 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(168,156,200,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #edb8c5;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .card .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ===== THREE-COLUMN GRID ===== */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 640px) {
+    .three-col { grid-template-columns: 1fr; }
+  }
+
+  .type-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+
+  .type-card .tc-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .type-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .type-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  .type-card a {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+  }
+
+  /* ===== THERAPY CARDS ===== */
+  .therapy-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .therapy-card.cbt { border-color: #d4819a; }
+  .therapy-card.ipt { border-color: #a89cc8; }
+  .therapy-card.mbct { border-color: #7aad78; }
+  .therapy-card.dbt { border-color: #e8a87c; }
+  .therapy-card.emdr { border-color: #7bafd5; }
+
+  .therapy-card .t-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .therapy-card .t-icon {
+    font-size: 1.6rem;
+  }
+
+  .therapy-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .therapy-card.cbt h3 { color: #d4819a; }
+  .therapy-card.ipt h3 { color: #9b7baf; }
+  .therapy-card.mbct h3 { color: #5a9a68; }
+  .therapy-card.dbt h3 { color: #c08a5a; }
+  .therapy-card.emdr h3 { color: #6a95b8; }
+
+  .therapy-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 0.4rem;
+  }
+
+  .therapy-card .t-evidence {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+
+  .therapy-card.cbt .t-evidence { background: #faeef1; color: #a25a71; }
+  .therapy-card.ipt .t-evidence { background: #f0edf6; color: #7a6b94; }
+  .therapy-card.mbct .t-evidence { background: #f0f5ef; color: #4d7a4b; }
+  .therapy-card.dbt .t-evidence { background: #fef6ec; color: #9a6d3a; }
+  .therapy-card.emdr .t-evidence { background: #eef4fb; color: #5a7fa0; }
+
+  /* ===== STEP CARDS ===== */
+  .step-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .step-content h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #f0edf6 0%, #faeef1 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(168,156,200,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #a89cc8;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(212,129,154,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #a25a71;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* ===== Q&A ===== */
+  .qa-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .qa-q {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .qa-q .q-badge {
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .qa-a {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    padding-left: 2.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .qa-a .a-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .qa-a-text {
+    flex: 1;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #c06d86;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #faeef1;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #f5d8de; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .therapy-card, .step-card, .qa-card, .type-card { break-inside: avoid; }
+    .tip-box, .science-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">&larr; トップへ</a>
+  <span class="nav-clinic-name">&#127800; こころのクリニック桜が丘</span>
+  <a href="medication-guide.html" class="nav-link-secondary">薬の解説 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">&#127973; &#128138; &#128172;</div>
+  <h1>治療の解説</h1>
+  <p class="subtitle">〜 精神科・心療内科の治療を正しく知る 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- ===== SECTION 1: 精神科・心療内科の治療とは ===== -->
+  <section>
+    <div class="section-label" style="background:#faeef1; color:#c06d86;">&#129504; Section 01</div>
+    <h2 class="section-title">精神科・心療内科の治療とは</h2>
+
+    <div class="card">
+      <div class="card-icon">&#128144;</div>
+      <h3>心の不調は「脳の機能」の問題です</h3>
+      <p>
+        精神的な不調は、脳の神経伝達物質のバランスや神経回路の機能変化によって生じます。「気合いが足りない」「性格の問題」ではなく、医学的なアプローチが必要な状態です。風邪をひいたら内科を受診するように、こころの不調も専門家に相談することが回復への第一歩です。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">&#127919;</div>
+      <h3>治療の3つの目標</h3>
+      <p>
+        <strong>&#9312; 症状の軽減</strong> — つらい症状を和らげ、日常生活への支障を減らします。<br>
+        <strong>&#9313; 生活機能の回復</strong> — 仕事、学校、家庭での役割を少しずつ取り戻します。<br>
+        <strong>&#9314; 再発予防</strong> — 安定した状態を維持し、再発のリスクを最小限にします。
+      </p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; WHO報告</div>
+      <p>
+        世界保健機関（WHO）の報告によると、メンタルヘルスの問題は世界の疾病負担の約13%を占めています。うつ病は世界の障害原因の第4位であり、2030年には第1位になると予測されています。しかし、早期に適切な介入を行うことで、回復率は大幅に向上することが多くの研究で示されています。治療を受けたうつ病患者の約70-80%が症状の改善を経験します。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: 治療の種類 ===== -->
+  <section>
+    <div class="section-label" style="background:#eef4fb; color:#7bafd5;">&#127973; Section 02</div>
+    <h2 class="section-title">治療の種類</h2>
+
+    <div class="three-col">
+      <div class="type-card" style="background:linear-gradient(135deg, #faeef1, #fff); border:2px solid rgba(212,129,154,0.2);">
+        <div class="tc-icon">&#128138;</div>
+        <h3 style="color:#d4819a;">薬物療法</h3>
+        <p>脳の神経伝達物質（セロトニン、ノルアドレナリン、ドーパミンなど）のバランスを整えることで、症状の改善を図ります。抗うつ薬、抗不安薬、気分安定薬、抗精神病薬など、症状に応じた薬剤を使用します。</p>
+        <a href="medication-guide.html" style="background:#faeef1; color:#c06d86;">薬の解説を読む &rarr;</a>
+      </div>
+      <div class="type-card" style="background:linear-gradient(135deg, #f0edf6, #fff); border:2px solid rgba(168,156,200,0.2);">
+        <div class="tc-icon">&#128483;&#65039;</div>
+        <h3 style="color:#a89cc8;">心理療法</h3>
+        <p>認知行動療法（CBT）、対人関係療法、マインドフルネスなど、科学的根拠に基づいた心理療法を通じて、思考パターンや行動の改善を目指します。薬物療法との併用でより高い効果が期待できます。</p>
+        <a href="#psychotherapy" style="background:#f0edf6; color:#8a7caf;">詳しくは下記へ &darr;</a>
+      </div>
+      <div class="type-card" style="background:linear-gradient(135deg, #f0f5ef, #fff); border:2px solid rgba(122,173,120,0.2);">
+        <div class="tc-icon">&#127963;</div>
+        <h3 style="color:#7aad78;">生活指導・リハビリ</h3>
+        <p>生活リズムの調整、適度な運動、栄養バランスの改善、社会参加の促進など、日常生活全体を整えるアプローチです。デイケアやリワークプログラムを活用する場合もあります。</p>
+        <a href="#" style="background:#f0f5ef; color:#5a8a58; pointer-events:none;">治療の土台となります</a>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tb-header">&#128161; ポイント</div>
+      <p>治療法は一つだけではなく、これらを組み合わせて「オーダーメイド」で行うのが現代の精神科治療の基本です。どの治療法が最適かは、症状の種類・重症度・ご本人のご希望を踏まえて、主治医と一緒に決めていきます。</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: 心理療法の種類 ===== -->
+  <section id="psychotherapy">
+    <div class="section-label" style="background:#f0edf6; color:#a89cc8;">&#128156; Section 03</div>
+    <h2 class="section-title">心理療法の種類</h2>
+
+    <div class="therapy-card cbt">
+      <div class="t-header">
+        <span class="t-icon">&#128161;</span>
+        <h3>認知行動療法（CBT）</h3>
+      </div>
+      <p>
+        考え方（認知）と行動パターンに働きかける心理療法です。「認知の歪み」（ものごとの捉え方のクセ）を見つけて修正し、適応的な行動を増やしていくことで症状の改善を目指します。うつ病・不安障害・PTSD・強迫性障害・摂食障害など、幅広い疾患に対するエビデンスが最も豊富で、世界的に広く用いられています。
+      </p>
+      <span class="t-evidence">NICE推奨 &#183; 効果サイズ d=0.8-1.3 &#183; エビデンス最多</span>
+    </div>
+
+    <div class="therapy-card ipt">
+      <div class="t-header">
+        <span class="t-icon">&#129309;</span>
+        <h3>対人関係療法（IPT）</h3>
+      </div>
+      <p>
+        対人関係の問題に焦点を当てた構造化された心理療法です。「大切な人との別れ（悲哀）」「役割の変化（転職・出産など）」「対人関係の葛藤」「孤立」の4つの領域からアプローチし、対人関係の改善を通じて症状の軽減を図ります。うつ病・摂食障害に対する有効性が確認されており、WHO推奨の治療法です。
+      </p>
+      <span class="t-evidence">WHO推奨 &#183; うつ病・摂食障害に有効</span>
+    </div>
+
+    <div class="therapy-card mbct">
+      <div class="t-header">
+        <span class="t-icon">&#129495;</span>
+        <h3>マインドフルネス認知療法（MBCT）</h3>
+      </div>
+      <p>
+        瞑想の実践と認知療法を統合したアプローチです。「今、この瞬間」に意図的に注意を向ける力を養い、ネガティブな思考パターンに巻き込まれにくくします。8週間の構造化されたプログラムとして実施され、特にうつ病の再発予防に高い効果が実証されています。Teasdale et al.（2000）の研究で、3回以上のうつ病エピソードがある患者の再発率を約半減させることが示されました。
+      </p>
+      <span class="t-evidence">再発率を約44%低減（Kuyken et al., 2016） &#183; 8週間プログラム</span>
+    </div>
+
+    <div class="therapy-card dbt">
+      <div class="t-header">
+        <span class="t-icon">&#9878;&#65039;</span>
+        <h3>弁証法的行動療法（DBT）</h3>
+      </div>
+      <p>
+        Linehan（1993）が開発した、感情の制御が難しい方に対する包括的な治療アプローチです。4つの主要スキルを体系的に学びます：&#9312; マインドフルネス（気づき）、&#9313; 対人関係スキル、&#9314; 感情調節スキル、&#9315; 苦痛耐性スキル。「変化」と「受容」のバランスを大切にする弁証法的な考え方が特徴です。境界性パーソナリティ障害に対するエビデンスが豊富です。
+      </p>
+      <span class="t-evidence">Linehan, 1993 &#183; 4つのスキルモジュール &#183; BPDに有効</span>
+    </div>
+
+    <div class="therapy-card emdr">
+      <div class="t-header">
+        <span class="t-icon">&#128065;</span>
+        <h3>EMDR（眼球運動による脱感作と再処理法）</h3>
+      </div>
+      <p>
+        PTSD・トラウマに対する第一選択治療のひとつとしてWHOが推奨しています。眼球運動などの両側性刺激を用いながら、つらい記憶を安全に処理していきます。従来の暴露療法に比べ、トラウマ体験を詳細に語る必要が少ないのが特徴で、比較的短期間で効果が得られることが多い治療法です。
+      </p>
+      <span class="t-evidence">WHO, APA推奨 &#183; PTSD第一選択治療</span>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: 治療の流れ ===== -->
+  <section>
+    <div class="section-label" style="background:#f0f5ef; color:#7aad78;">&#127793; Section 04</div>
+    <h2 class="section-title">治療の流れ</h2>
+
+    <div class="step-card">
+      <div class="step-num" style="background:linear-gradient(135deg, #c06d86, #d4819a);">1</div>
+      <div class="step-content">
+        <h3>初診・問診</h3>
+        <p>現在の困りごと、症状の経過、生活状況、既往歴などを丁寧にお聞きします。必要に応じて心理検査（質問紙検査や認知機能検査など）を行い、症状を客観的に評価します。初診は30〜60分程度かかります。ご不安なことは何でもお聞きください。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:linear-gradient(135deg, #9b7baf, #a89cc8);">2</div>
+      <div class="step-content">
+        <h3>診断・治療計画</h3>
+        <p>問診・検査の結果を総合的に評価し、診断をお伝えします。治療方針（薬物療法・心理療法・生活指導の組み合わせ）を患者さんと共有し、ご納得いただいた上で治療を開始します。インフォームドコンセント（十分な説明と同意）を大切にしています。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:linear-gradient(135deg, #5a9a68, #7aad78);">3</div>
+      <div class="step-content">
+        <h3>治療開始</h3>
+        <p>治療計画に基づき、薬物療法や心理療法を開始します。お薬を使用する場合は、効果が出るまでに2〜4週間かかることがあります。副作用が気になる場合は遠慮なくご相談ください。心理療法は通常、週1回〜隔週のペースで行います。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:linear-gradient(135deg, #6a95b8, #7bafd5);">4</div>
+      <div class="step-content">
+        <h3>経過観察</h3>
+        <p>定期的な通院で症状の変化を確認します。お薬の効果や副作用、日常生活の変化をお聞きしながら、治療の調整を行います。通院頻度は症状の安定度に応じて、週1回〜月1回程度です。困ったことがあれば、次の受診を待たずにご連絡ください。</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:linear-gradient(135deg, #c08a5a, #e8a87c);">5</div>
+      <div class="step-content">
+        <h3>維持・再発予防</h3>
+        <p>症状が安定した後も、再発予防のために一定期間の治療継続が推奨されます。再発のサイン（睡眠の乱れ、食欲の変化、億劫さの増加など）を一緒に確認し、対処法を共有します。徐々に通院間隔を広げながら、安心して日常生活を送れるようサポートします。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5: よくある質問 ===== -->
+  <section>
+    <div class="section-label" style="background:#faeef1; color:#c06d86;">&#128172; Section 05</div>
+    <h2 class="section-title">よくある質問</h2>
+
+    <div class="qa-card">
+      <div class="qa-q">
+        <span class="q-badge">Q</span>
+        治療はどのくらいかかりますか？
+      </div>
+      <div class="qa-a">
+        <span class="a-badge">A</span>
+        <span class="qa-a-text">症状や状態により異なりますが、一般的にうつ病の急性期治療は2〜3ヶ月、その後の維持療法は6〜12ヶ月が目安です。不安障害では3〜6ヶ月の治療で多くの方が改善を実感されます。焦らず、ご自身のペースで回復を目指しましょう。再発を防ぐためにも、症状が良くなった後も主治医と相談しながら治療を続けることが大切です。</span>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">
+        <span class="q-badge">Q</span>
+        薬を飲みたくないのですが？
+      </div>
+      <div class="qa-a">
+        <span class="a-badge">A</span>
+        <span class="qa-a-text">軽度〜中等度の場合は、心理療法のみで対応できることもあります。例えば、軽度のうつ病や不安障害では、CBT（認知行動療法）単独でも十分な効果が得られることがエビデンスで示されています。ただし、重症度が高い場合や日常生活に大きな支障がある場合は、薬物療法の併用が推奨されます。主治医とご相談の上、最適な治療法を一緒に選びましょう。</span>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-q">
+        <span class="q-badge">Q</span>
+        家族はどうサポートすればよいですか？
+      </div>
+      <div class="qa-a">
+        <span class="a-badge">A</span>
+        <span class="qa-a-text">「温かく見守る」姿勢が最も大切です。「頑張れ」「気の持ちようだ」といった言葉は、本人を追い詰めてしまうことがあります。批判的な態度（高EE: Expressed Emotion）は再発リスクを高めることが研究で示されています。過保護になりすぎず、本人のペースを尊重しながら、「あなたの味方だよ」と伝えてください。ご家族自身のケアも忘れずに。家族相談もお気軽にどうぞ。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== エビデンスに基づく治療 ===== -->
+  <div class="science-box">
+    <div class="sb-header">&#128202; エビデンスに基づく治療の重要性</div>
+    <p>
+      現代の精神科治療は、ランダム化比較試験（RCT）やメタ分析に基づく「エビデンスに基づく医療（EBM）」を重視しています。Cochrane Systematic Review（コクラン・レビュー）は、各治療法の有効性と安全性を厳密に評価した最も信頼性の高い医学的エビデンスの一つです。
+    </p>
+    <p style="margin-top:0.5rem;">
+      当クリニックでは、これらの科学的根拠に加え、臨床経験と患者さんご本人のご希望・価値観を統合して、最善の治療を一緒に選んでいきます。「何が正しいか」だけでなく、「あなたに合った治療は何か」を大切にしています。
+    </p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">&larr; トップに戻る</a>
+    <a href="medication-guide.html">薬の解説を読む &rarr;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer" style="text-align:center;">
+    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>

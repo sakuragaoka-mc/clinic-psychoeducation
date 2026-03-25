@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>薬の解説 — こころのクリニック桜が丘</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #7bafd5;
+    --primary-light: #eef4fb;
+    --primary-dark: #5a8db5;
+    --accent: #d4819a;
+    --accent-light: #faeef1;
+    --sage: #7aad78;
+    --sage-light: #f0f5ef;
+    --text: #3d3935;
+    --text-light: #827c73;
+    --bg: #faf9f8;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #c06d86;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #827c73;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #7bafd5 0%, #6a9cc4 40%, #8d9ad4 70%, #a89cc8 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(168,156,200,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #c5d8ee;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+
+  .section-label.green {
+    background: #edf6f0;
+    color: #6a9a68;
+  }
+
+  .section-label.pink {
+    background: #faeef1;
+    color: #c06d86;
+  }
+
+  .section-label.purple {
+    background: #f0edf6;
+    color: #a89cc8;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .card .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ===== MEDICATION CARDS ===== */
+  .med-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .med-card.antidepressant { border-color: #7aad78; }
+  .med-card.anxiolytic { border-color: #d4819a; }
+  .med-card.mood-stabilizer { border-color: #7bafd5; }
+  .med-card.antipsychotic { border-color: #a89cc8; }
+  .med-card.hypnotic { border-color: #d4b070; }
+
+  .med-card .m-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .med-card .m-icon {
+    font-size: 1.6rem;
+  }
+
+  .med-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .med-card.antidepressant h3 { color: #5a9a68; }
+  .med-card.anxiolytic h3 { color: #c06d86; }
+  .med-card.mood-stabilizer h3 { color: #5a8db5; }
+  .med-card.antipsychotic h3 { color: #8a7fb5; }
+  .med-card.hypnotic h3 { color: #b89a50; }
+
+  .med-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 0.4rem;
+  }
+
+  .med-card .drug-group {
+    margin-top: 0.7rem;
+    padding: 0.7rem 0.9rem;
+    background: #fafafa;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  .med-card .drug-group h4 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .med-card .drug-group p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .med-card .m-evidence {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .med-card.antidepressant .m-evidence { background: #f0f5ef; color: #4a8a48; }
+  .med-card.anxiolytic .m-evidence { background: #faeef1; color: #a25a71; }
+  .med-card.mood-stabilizer .m-evidence { background: #eef4fb; color: #4a7da5; }
+  .med-card.antipsychotic .m-evidence { background: #f0edf6; color: #7a6fa5; }
+  .med-card.hypnotic .m-evidence { background: #faf5ea; color: #9a8040; }
+
+  .med-card .caution-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: #fff5f5;
+    color: #c06d6d;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #f0edf6 0%, #faeef1 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(176,139,196,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #a89cc8;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(212,129,154,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #a25a71;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tip-box ul li {
+    font-size: 0.9rem;
+    color: var(--text);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(212,129,154,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.6;
+  }
+
+  .tip-box ul li:last-child { border-bottom: none; }
+
+  .tip-box ul li::before {
+    content: '\2713';
+    color: #c06d86;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ===== Q&A ===== */
+  .qa-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(123,175,213,0.15);
+  }
+
+  .qa-item:last-child { border-bottom: none; }
+
+  .qa-q {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .qa-q .q-badge {
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .qa-a {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    padding-left: 2.2rem;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #c06d86;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #faeef1;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #f5d8de; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .med-card { break-inside: avoid; }
+    .tip-box, .science-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">&larr; トップへ</a>
+  <span class="nav-clinic-name">&#127800; こころのクリニック桜が丘</span>
+  <a href="treatment-guide.html" class="nav-link-secondary">&larr; 治療の解説</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">&#128138;</div>
+  <h1>薬の解説</h1>
+  <p class="subtitle">〜 お薬の種類・効果・付き合い方を正しく知る 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 精神科のお薬について -->
+  <section>
+    <div class="section-label">&#129504; Section 01</div>
+    <h2 class="section-title">精神科のお薬について</h2>
+
+    <div class="card">
+      <div class="card-icon">&#129513;</div>
+      <h3>脳の化学バランスを整える科学的治療</h3>
+      <p>
+        精神科で処方されるお薬は、脳の神経伝達物質（セロトニン、ノルアドレナリン、ドーパミンなど）に作用して、こころの不調を改善するものです。「薬に頼る」というネガティブなイメージを持つ方もいらっしゃいますが、これは糖尿病にインスリンを使うのと同じく、脳の化学的なバランスの乱れを正常に戻す科学的な治療です。お薬を適切に使うことで、心理療法の効果も高まり、生活の質が向上します。
+      </p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; 薬物療法の歴史</div>
+      <p>
+        精神科薬物療法の歴史は1950年代に始まります。フランスの外科医ラボリがクロルプロマジン（最初の抗精神病薬）の精神科的効果を発見し、それまで有効な治療法がなかった統合失調症の治療が大きく変わりました。その後、三環系抗うつ薬、ベンゾジアゼピン系抗不安薬が登場し、1980年代後半にはSSRI（選択的セロトニン再取り込み阻害薬）が開発されました。SSRIの登場は、副作用が少なく使いやすいことから、うつ病・不安障害の治療を劇的に変革しました。現在も新しい作用機序の薬が次々と開発されています。
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 主な薬の種類 -->
+  <section>
+    <div class="section-label purple">&#128156; Section 02</div>
+    <h2 class="section-title">主な薬の種類</h2>
+
+    <!-- 抗うつ薬 -->
+    <div class="med-card antidepressant">
+      <div class="m-header">
+        <span class="m-icon">&#127793;</span>
+        <h3>抗うつ薬</h3>
+      </div>
+      <p>うつ病・不安障害・パニック障害・強迫性障害・PTSDなど、幅広い疾患に用いられます。脳内のセロトニンやノルアドレナリンの働きを調整し、気分の落ち込みや不安を改善します。</p>
+
+      <div class="drug-group">
+        <h4>&#9679; SSRI（選択的セロトニン再取り込み阻害薬）</h4>
+        <p>セルトラリン、パロキセチン、エスシタロプラム、フルボキサミン等。シナプス間隙でのセロトニンの再取り込みを選択的に阻害し、セロトニン濃度を高めます。うつ病・不安障害の第一選択薬。効果が現れるまで2〜4週間かかることが特徴です。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; SNRI（セロトニン・ノルアドレナリン再取り込み阻害薬）</h4>
+        <p>デュロキセチン、ベンラファキシン等。セロトニンに加え、ノルアドレナリンの再取り込みも阻害します。意欲低下が強いうつ病や、慢性疼痛（痛み）の改善にも効果を発揮します。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; NaSSA（ノルアドレナリン・セロトニン作動性抗うつ薬）</h4>
+        <p>ミルタザピン。セロトニンとノルアドレナリン両方の神経伝達を増強します。睡眠改善効果が比較的早期（数日以内）に現れやすく、食欲改善効果もあるため、不眠・食欲低下を伴ううつ病に使いやすい薬です。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; 三環系抗うつ薬</h4>
+        <p>アミトリプチリン、イミプラミン等。1950年代から使われている古典的な抗うつ薬で、効果は強力です。ただし口渇・便秘・眠気・体重増加などの副作用が多いため、現在ではSSRI/SNRIで効果不十分な場合の第2〜3選択として用いられます。</p>
+      </div>
+
+      <span class="m-evidence">Cipriani et al., Lancet 2018 — 21種の抗うつ薬メタ分析：すべてプラセボより有効。エスシタロプラム・セルトラリンが忍容性に優れる</span>
+    </div>
+
+    <!-- 抗不安薬 -->
+    <div class="med-card anxiolytic">
+      <div class="m-header">
+        <span class="m-icon">&#127800;</span>
+        <h3>抗不安薬</h3>
+      </div>
+      <p>強い不安やパニック、緊張を和らげるお薬です。即効性のあるものと、じっくり効くものがあります。</p>
+
+      <div class="drug-group">
+        <h4>&#9679; ベンゾジアゼピン系</h4>
+        <p>ロラゼパム、アルプラゾラム、エチゾラム等。GABA受容体に作用し、即効性があります（服用後15〜30分で効果発現）。パニック発作や急性の不安に頓服的に使用することが推奨されます。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; セロトニン1A受容体作動薬</h4>
+        <p>タンドスピロン。セロトニン1A受容体に作用する非ベンゾジアゼピン系の抗不安薬です。依存性がなく安全性が高い一方、効果発現まで1〜2週間を要します。長期使用に適しています。</p>
+      </div>
+
+      <span class="caution-tag">&#9888; ベンゾジアゼピン系は依存性に注意 — 短期・頓服的使用を推奨</span>
+      <br>
+      <span class="caution-tag">&#9888; 長期使用は減薬が困難になる場合あり — 計画的な使用が大切</span>
+    </div>
+
+    <!-- 気分安定薬 -->
+    <div class="med-card mood-stabilizer">
+      <div class="m-header">
+        <span class="m-icon">&#9878;&#65039;</span>
+        <h3>気分安定薬</h3>
+      </div>
+      <p>双極性障害（躁うつ病）の治療に用いられ、気分の波を穏やかにします。躁状態の治療だけでなく、うつ状態の改善や再発予防にも重要です。</p>
+
+      <div class="drug-group">
+        <h4>&#9679; リチウム（炭酸リチウム）</h4>
+        <p>躁状態の治療・再発予防の第一選択薬。自殺リスクを低減する効果も報告されています。治療域が狭いため、定期的な血中濃度モニタリング（採血）が必要です。脱水や腎機能に注意が必要です。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; バルプロ酸（デパケン等）</h4>
+        <p>躁状態に有効で、即効性がリチウムより高いとされます。定期的な肝機能・血液検査が必要です。妊娠可能年齢の女性には催奇形性の観点から注意が必要です。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; ラモトリギン（ラミクタール）</h4>
+        <p>双極性障害のうつ状態の予防に特に有効とされ、うつエピソードの再発を抑制します。スティーブンス・ジョンソン症候群（重篤な皮膚障害）のリスクがあるため、必ずゆっくり漸増するスケジュールで開始します。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; カルバマゼピン（テグレトール）</h4>
+        <p>リチウム・バルプロ酸で効果が不十分な難治例に使用されることがあります。薬物相互作用が多い点に注意が必要です。</p>
+      </div>
+
+      <span class="m-evidence">リチウムは自殺リスク低減効果がメタ分析で確認されている（Cipriani et al., BMJ 2013）</span>
+    </div>
+
+    <!-- 抗精神病薬 -->
+    <div class="med-card antipsychotic">
+      <div class="m-header">
+        <span class="m-icon">&#128302;</span>
+        <h3>抗精神病薬</h3>
+      </div>
+      <p>統合失調症の治療薬として開発されましたが、現在では双極性障害やうつ病の増強療法など幅広く使用されます。</p>
+
+      <div class="drug-group">
+        <h4>&#9679; 第二世代（非定型）抗精神病薬（SGA）</h4>
+        <p>リスペリドン、オランザピン、アリピプラゾール、クエチアピン、ブレクスピプラゾール等。ドーパミンだけでなくセロトニンにも作用し、陽性症状（幻聴・妄想）と陰性症状（意欲低下・感情の平板化）の両方に効果があります。うつ病の増強療法（抗うつ薬に追加）や双極性障害の治療にも広く用いられます。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; 第一世代（定型）抗精神病薬（FGA）</h4>
+        <p>ハロペリドール、クロルプロマジン等。ドーパミンD2受容体を強力にブロックし、幻覚・妄想などの陽性症状に効果的です。錐体外路症状（手の震え、筋肉のこわばり等）が出やすいため、急性期や第二世代で効果不十分な場合に使用されます。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; 持効性注射剤（LAI）</h4>
+        <p>パリペリドンLAI、アリピプラゾールLAI等。月1回（または3ヶ月に1回）の注射で安定した血中濃度を維持できます。毎日の服薬が難しい方や、再発を繰り返す方に有効です。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; 新規薬剤</h4>
+        <p>KarXT（キサノメリン・トロスピウム）— 2024年に米国で承認。従来のドーパミン受容体ブロックとは異なり、ムスカリン受容体（M1/M4）を標的とする全く新しい作用機序の抗精神病薬です。体重増加や代謝への影響が少ないことが期待されています。</p>
+      </div>
+
+      <span class="m-evidence">LAIは再発率を約30%減少 — Kishimoto et al., 2021</span>
+    </div>
+
+    <!-- 睡眠薬 -->
+    <div class="med-card hypnotic">
+      <div class="m-header">
+        <span class="m-icon">&#127769;</span>
+        <h3>睡眠薬</h3>
+      </div>
+      <p>不眠症の治療に用いられます。近年は依存性の低い新しいタイプの睡眠薬が第一選択となっています。</p>
+
+      <div class="drug-group">
+        <h4>&#9679; オレキシン受容体拮抗薬</h4>
+        <p>スボレキサント（ベルソムラ）、レンボレキサント（デエビゴ）。覚醒を維持するオレキシンの働きを抑え、自然な眠りに近い形で入眠を促します。依存性が低く、翌日の持ち越し効果も少ないのが特徴です。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; メラトニン受容体作動薬</h4>
+        <p>ラメルテオン（ロゼレム）。体内時計のリズムを整えるメラトニンの受容体に作用します。依存性がなく安全性が高い薬です。入眠困難や概日リズムの乱れに適しています。</p>
+      </div>
+
+      <div class="drug-group">
+        <h4>&#9679; ベンゾジアゼピン受容体作動薬</h4>
+        <p>ゾルピデム（マイスリー）、エスゾピクロン（ルネスタ）等。GABA-A受容体に作用し、確実な催眠効果があります。短期間の使用には有効ですが、長期使用では依存性や耐性の問題が生じることがあります。</p>
+      </div>
+
+      <span class="m-evidence">不眠症ガイドライン — オレキシン受容体拮抗薬・メラトニン受容体作動薬を第一選択に推奨</span>
+    </div>
+
+  </section>
+
+  <!-- SECTION 3: お薬との付き合い方 -->
+  <section>
+    <div class="section-label green">&#127793; Section 03</div>
+    <h2 class="section-title">お薬との付き合い方</h2>
+
+    <div class="tip-box">
+      <div class="tb-header">&#128161; 安心してお薬を使うためのポイント</div>
+      <ul>
+        <li>
+          <strong>効果が出るまでの期間を知りましょう。</strong>抗うつ薬は2〜4週間、気分安定薬は1〜2週間かかることがあります。すぐに効果を感じなくても、焦らず続けることが大切です。
+        </li>
+        <li>
+          <strong>自己判断で中断しないでください。</strong>急にやめると離脱症状（めまい・しびれ・不安の悪化など）が現れたり、症状が再発するリスクがあります。減薬・中止は必ず主治医と相談して行いましょう。
+        </li>
+        <li>
+          <strong>副作用は主治医にご相談ください。</strong>吐き気・眠気・体重変化などの副作用が気になる場合は遠慮なくお伝えください。用量の調整や薬の変更で対応できることが多いです。我慢して飲み続ける必要はありません。
+        </li>
+        <li>
+          <strong>おくすり手帳を活用しましょう。</strong>お薬の名前・量・変更履歴を一元管理できます。他の医療機関を受診する際にも、飲み合わせの確認に役立ちます。
+        </li>
+        <li>
+          <strong>アルコールとの併用は避けましょう。</strong>多くの精神科薬はアルコールと併用すると効果が増強されすぎたり、副作用が強く出ることがあります。飲酒については主治医にご相談ください。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTION 4: よくある質問 -->
+  <section>
+    <div class="section-label pink">&#128172; Section 04</div>
+    <h2 class="section-title">よくある質問</h2>
+
+    <div class="tip-box">
+      <div class="tb-header">&#128587; お薬に関するよくあるご質問</div>
+
+      <div class="qa-item">
+        <div class="qa-q">
+          <span class="q-badge">Q</span>
+          薬に依存しませんか？
+        </div>
+        <p class="qa-a">抗うつ薬や気分安定薬は「依存」を起こす薬ではありません。高血圧の方が降圧薬を飲み続けるのと同じように、脳の化学バランスを整えるために必要な治療です。ベンゾジアゼピン系の抗不安薬・睡眠薬については身体的依存が起きうるため、短期間の使用や頓服的な使用が推奨されます。主治医と計画的に使うことが大切です。</p>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">
+          <span class="q-badge">Q</span>
+          一生飲み続けるのですか？
+        </div>
+        <p class="qa-a">症状や疾患により異なります。たとえばうつ病の初発であれば、症状改善後も6〜12ヶ月の維持療法を行った後、主治医と相談しながら少しずつ減薬を検討します。一方、再発歴がある場合や双極性障害・統合失調症では、再発予防のために長期的な維持療法が推奨されることがあります。いずれの場合も、ご本人の状態とご希望に合わせて判断します。</p>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">
+          <span class="q-badge">Q</span>
+          妊娠中・授乳中は飲めますか？
+        </div>
+        <p class="qa-a">薬剤の種類によって異なります。妊娠を希望される場合や妊娠がわかった場合は、必ず主治医にご相談ください。治療を継続する場合のリスクと、中断した場合の再発リスクのバランスを慎重に評価し、ご本人と相談しながら方針を決めます。比較的安全性データが豊富な薬剤への変更も選択肢となります。</p>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">
+          <span class="q-badge">Q</span>
+          ジェネリック医薬品でも効きますか？
+        </div>
+        <p class="qa-a">ジェネリック医薬品は先発品と同じ有効成分を同じ量だけ含んでおり、効果は同等です。厚生労働省による厳格な審査を経て承認されています。経済的な負担を軽減できるため、積極的にご活用いただけます。ただし、添加物の違いにより合う・合わないがある場合もまれにありますので、気になる場合は主治医・薬剤師にご相談ください。</p>
+      </div>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128202; エビデンスに基づく薬物療法</div>
+      <p>
+        現代の精神科薬物療法は、大規模な臨床試験やメタ分析に基づくエビデンスを重視しています。お薬の選択は、最新の治療ガイドラインと臨床経験、そして患者さん一人ひとりの状態・ご希望を統合して行われます。わからないことや不安なことは、いつでも主治医にお尋ねください。正しい知識を持つことが、治療への安心感につながります。
+      </p>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">&larr; トップに戻る</a>
+    <a href="treatment-guide.html">&larr; 治療の解説</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer" style="text-align:center;">
+    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>
