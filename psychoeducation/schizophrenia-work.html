@@ -549,7 +549,7 @@
 
 <!-- FOOTER -->
 <div class="footer" style="text-align:center;">
-  <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="../mindfulness/index.html" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
+  <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="/index.html" style="color:#827c73; text-decoration:none;">サイトトップ</a>　·　<a href="../mindfulness/index.html" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
 </div>
 
 </div>
@@ -592,5 +592,88 @@
   });
 })();
 </script>
+
+<script>
+function generateOutput() {
+  var inputs = document.querySelectorAll('.ws-input[data-key]');
+  var data = [];
+  inputs.forEach(function(el) {
+    var val = el.value.trim();
+    if (!val) return;
+    var label = '';
+    // Try to find label from parent context
+    var row = el.closest('.ws-row');
+    if (row) {
+      var lbl = row.querySelector('.ws-label');
+      if (lbl) label = lbl.textContent.trim();
+    }
+    if (!label) {
+      var ph = el.getAttribute('placeholder') || '';
+      var key = el.getAttribute('data-key') || '';
+      label = key.replace(/-/g, ' ').replace(/^(w\d+|tracker)\s*/, '');
+    }
+    data.push({ label: label, value: val, key: el.getAttribute('data-key') });
+  });
+
+  if (data.length === 0) {
+    alert('まだ何も入力されていません');
+    return;
+  }
+
+  var today = new Date();
+  var dateStr = today.getFullYear() + '年' + (today.getMonth()+1) + '月' + today.getDate() + '日';
+
+  var html = '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+    '<title>統合失調症セルフモニタリング — 記録</title>' +
+    '<style>' +
+    '* { margin:0; padding:0; box-sizing:border-box; }' +
+    'body { font-family:-apple-system,BlinkMacSystemFont,sans-serif; background:#faf9f8; color:#3d3935; padding:12px; font-size:14px; line-height:1.5; max-width:420px; margin:0 auto; }' +
+    '.hd { background:linear-gradient(135deg,#d4819a,#c06d86); color:#fff; padding:14px 16px; border-radius:12px; margin-bottom:10px; text-align:center; }' +
+    '.hd h1 { font-size:15px; font-weight:700; }' +
+    '.hd p { font-size:11px; opacity:0.85; margin-top:2px; }' +
+    '.sec { background:#fff; border-radius:10px; padding:10px 12px; margin-bottom:8px; border:1px solid #ebe8e3; }' +
+    '.sec-t { font-size:11px; color:#c06d86; font-weight:700; margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid #f5d8de; }' +
+    '.row { display:flex; gap:6px; padding:4px 0; border-bottom:1px solid #f5f3f0; font-size:13px; }' +
+    '.row:last-child { border-bottom:none; }' +
+    '.lbl { color:#827c73; min-width:80px; flex-shrink:0; font-size:12px; }' +
+    '.val { color:#3d3935; font-weight:500; flex:1; word-break:break-all; }' +
+    '.ft { text-align:center; font-size:10px; color:#ada79e; margin-top:8px; padding-top:6px; border-top:1px solid #ebe8e3; }' +
+    '</style></head><body>' +
+    '<div class="hd"><h1>統合失調症セルフモニタリング</h1><p>こころのクリニック桜が丘 — ' + dateStr + '</p></div>';
+
+  // Group by work section (w1-, w2-, tracker-, etc.)
+  var sections = {};
+  var sectionOrder = [];
+  data.forEach(function(d) {
+    var prefix = d.key.split('-')[0];
+    if (d.key.startsWith('tracker-')) prefix = 'tracker';
+    if (!sections[prefix]) { sections[prefix] = []; sectionOrder.push(prefix); }
+    sections[prefix].push(d);
+  });
+
+  sectionOrder.forEach(function(sec) {
+    var items = sections[sec];
+    var secName = sec;
+    if (sec === 'tracker') secName = '記録シート';
+    else if (sec.match(/^w\d+$/)) secName = 'WORK ' + sec.replace('w','');
+    else secName = sec.toUpperCase();
+
+    html += '<div class="sec"><div class="sec-t">' + secName + '</div>';
+    items.forEach(function(d) {
+      html += '<div class="row"><span class="lbl">' + d.label + '</span><span class="val">' + d.value.replace(/</g,'&lt;') + '</span></div>';
+    });
+    html += '</div>';
+  });
+
+  html += '<div class="ft">© こころのクリニック桜が丘<br>このスクリーンショットをデジスマ問診票に添付してください</div>';
+  html += '</body></html>';
+
+  var w = window.open('', '_blank');
+  w.document.write(html);
+  w.document.close();
+}
+</script>
+
 </body>
 </html>
