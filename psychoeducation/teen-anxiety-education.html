@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思春期の不安の正体 — こころのクリニック桜が丘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #d4819a;
+    --primary-light: #faeef1;
+    --primary-dark: #a25a71;
+    --accent: #b08bc4;
+    --text: #3d3935;
+    --text-light: #827c73;
+    --bg: #faf9f8;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #c06d86;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #827c73;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #9b7baf 0%, #b08bc4 40%, #c4a4d4 70%, #d4819a 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #edb8c5;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    background: #faeef1;
+    color: #c06d86;
+  }
+
+  .section-label.purple {
+    background: #f0edf6;
+    color: #a89cc8;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== TWO-COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 560px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .anxiety-card {
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+  }
+
+  .anxiety-card.acute {
+    background: linear-gradient(135deg, #faeef1 0%, #f5d8de 100%);
+    border: 2px solid rgba(212,129,154,0.2);
+  }
+
+  .anxiety-card.chronic {
+    background: linear-gradient(135deg, #f0edf6 0%, #e1d8ee 100%);
+    border: 2px solid rgba(176,139,196,0.2);
+  }
+
+  .anxiety-card .ac-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .anxiety-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .anxiety-card.acute h3 { color: #a25a71; }
+  .anxiety-card.chronic h3 { color: #9b7baf; }
+
+  .anxiety-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ===== SYMPTOM TAGS ===== */
+  .symptom-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .symptom-tag {
+    background: #faeef1;
+    color: #c06d86;
+    border: 1px solid rgba(212,129,154,0.3);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  /* ===== DISORDER CARDS ===== */
+  .disorder-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .disorder-card.school { border-color: #b08bc4; }
+  .disorder-card.sns { border-color: #8d9ad4; }
+  .disorder-card.exam { border-color: #d4819a; }
+  .disorder-card.separation { border-color: #e8a87c; }
+  .disorder-card.gad { border-color: #8dbfa8; }
+
+  .disorder-card .d-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .disorder-card .d-icon {
+    font-size: 1.6rem;
+  }
+
+  .disorder-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .disorder-card.school h3 { color: #b08bc4; }
+  .disorder-card.sns h3 { color: #8d9ad4; }
+  .disorder-card.exam h3 { color: #d4819a; }
+  .disorder-card.separation h3 { color: #e8a87c; }
+  .disorder-card.gad h3 { color: #8dbfa8; }
+
+  .disorder-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ===== COPING APPROACHES ===== */
+  .approach-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .approach-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .approach-content h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .approach-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BREATHING BOX ===== */
+  .breathing-box {
+    background: linear-gradient(135deg, #9b7baf, #b08bc4);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .breath-step {
+    padding: 0.8rem 0.4rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+  }
+
+  .breath-step .b-num {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #edb8c5;
+    line-height: 1;
+  }
+
+  .breath-step .b-label {
+    font-size: 0.78rem;
+    margin-top: 0.25rem;
+    opacity: 0.9;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #f0edf6 0%, #faeef1 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(176,139,196,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #a89cc8;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(212,129,154,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #a25a71;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tip-box ul li {
+    font-size: 0.9rem;
+    color: var(--text);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(212,129,154,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.6;
+  }
+
+  .tip-box ul li:last-child { border-bottom: none; }
+
+  .tip-box ul li::before {
+    content: '\2713';
+    color: #c06d86;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ===== CONTACT LIST ===== */
+  .contact-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 560px) {
+    .contact-list { grid-template-columns: 1fr; }
+  }
+
+  .contact-item {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.04);
+    text-align: center;
+  }
+
+  .contact-item .ci-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-item .ci-name {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-item .ci-detail {
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+
+  /* ===== PARENT CARD ===== */
+  .parent-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 2px solid rgba(176,139,196,0.15);
+  }
+
+  .parent-card .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  @media (max-width: 560px) {
+    .parent-card .do-dont { grid-template-columns: 1fr; }
+  }
+
+  .parent-card .do-box,
+  .parent-card .dont-box {
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .parent-card .do-box {
+    background: #f0f5ef;
+    color: #5a7a58;
+  }
+
+  .parent-card .dont-box {
+    background: #faeef1;
+    color: #a25a71;
+  }
+
+  .parent-card .do-box strong,
+  .parent-card .dont-box strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.92rem;
+  }
+
+  /* ===== PEAK CURVE ===== */
+  .peak-curve {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+
+  .peak-curve .curve-visual {
+    background: linear-gradient(135deg, #f0edf6 0%, #faeef1 100%);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin: 0.8rem 0;
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  .peak-curve p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #c06d86;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #faeef1;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #f5d8de; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav { position: static; box-shadow: none; }
+    .hero { padding: 1.5rem; }
+    .card, .disorder-card, .approach-card, .anxiety-card { break-inside: avoid; }
+    .tip-box, .science-box, .breathing-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-icons { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">&larr; トップへ</a>
+  <span class="nav-clinic-name">&#127800; こころのクリニック桜が丘</span>
+  <a href="teen-anxiety-work.html" class="nav-link-secondary">ワークシート &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">&#129489;&#8205;&#127891;</div>
+  <h1>思春期の不安の正体</h1>
+  <p class="subtitle">〜 「なんかモヤモヤする」の脳科学 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 思春期の脳で何が起きている？ -->
+  <section>
+    <div class="section-label purple">&#129504; Section 01</div>
+    <h2 class="section-title">思春期の脳で何が起きている？</h2>
+
+    <div class="card">
+      <h3>&#128679; キミの脳は「工事中」</h3>
+      <p>
+        思春期の脳は、ものすごいスピードでリニューアル工事をしている最中。とくに、理性をつかさどる<strong>前頭前皮質</strong>（ぜんとうぜんひしつ）は<strong>25歳ごろまで発達途上</strong>です。一方で、感情を生み出す<strong>扁桃体</strong>（へんとうたい）は先に成熟しています。
+      </p>
+      <p style="margin-top:0.6rem;">
+        つまり、感情のアクセルは全開なのに、ブレーキがまだ工事中。だから「感情の嵐」が起きやすいんです。これは<strong>弱さではなく、脳の発達段階として完全に正常なこと</strong>です。
+      </p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; 脳科学の研究から</div>
+      <p>
+        fMRI研究（Casey et al., 2008）では、思春期の脳は「アクセルは強いがブレーキが未熟な車」にたとえられています。扁桃体の反応性が高い一方で、前頭前皮質による感情制御がまだ十分に機能していません。前頭前皮質の成熟とともに、感情制御能力は着実に向上していきます。
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="anxiety-card acute">
+        <div class="ac-icon">&#128680;</div>
+        <h3>扁桃体（感情センサー）</h3>
+        <p>危険を察知すると不安・恐怖を発動させるセンサー。思春期は感度MAX。ちょっとしたことでも「ヤバい！」と反応しやすい状態です。</p>
+      </div>
+      <div class="anxiety-card chronic">
+        <div class="ac-icon">&#128736;&#65039;</div>
+        <h3>前頭前皮質（コントロール室）</h3>
+        <p>「大丈夫、落ち着いて」と判断する脳の司令塔。でも、まだ工事中。だから感情に振り回されやすいのは当たり前なんです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 思春期に多い不安のパターン -->
+  <section>
+    <div class="section-label">&#128203; Section 02</div>
+    <h2 class="section-title">思春期に多い不安のパターン</h2>
+
+    <div class="disorder-card school">
+      <div class="d-header">
+        <span class="d-icon">&#127979;</span>
+        <h3>学校が怖い（社交不安）</h3>
+      </div>
+      <p>発表、グループ活動、教室に入ること自体がつらい。「みんなに変に思われるんじゃないか」という恐怖が頭から離れない。クラス替えや新学期に悪化しやすいパターンです。</p>
+    </div>
+
+    <div class="disorder-card sns">
+      <div class="d-header">
+        <span class="d-icon">&#128241;</span>
+        <h3>SNS不安</h3>
+      </div>
+      <p>既読スルー、いいねの数、他人との比較、ネットいじめ。スマホがあることで24時間つながるプレッシャーにさらされます。「あの投稿、どう思われたかな」が頭の中をグルグル回ります。</p>
+    </div>
+
+    <div class="disorder-card exam">
+      <div class="d-header">
+        <span class="d-icon">&#128221;</span>
+        <h3>テスト・受験不安</h3>
+      </div>
+      <p>「できなかったらどうしよう」「落ちたら人生終わり」。完璧主義と結びつきやすく、勉強していても「まだ足りない」と感じてしまいます。テスト前に体調を崩すこともあります。</p>
+    </div>
+
+    <div class="disorder-card separation">
+      <div class="d-header">
+        <span class="d-icon">&#127968;</span>
+        <h3>分離不安</h3>
+      </div>
+      <p>親と離れることへの強い不安。小さい頃の問題と思われがちですが、小学校高学年〜中学で再燃することもあります。修学旅行や合宿への参加が難しくなることも。</p>
+    </div>
+
+    <div class="disorder-card gad">
+      <div class="d-header">
+        <span class="d-icon">&#127744;</span>
+        <h3>漠然とした不安（GAD）</h3>
+      </div>
+      <p>何が不安かわからないけど、ずっとモヤモヤ。友達のこと、将来のこと、家族のこと…心配の種が次から次へと浮かんでくる「心配のクセ」。本人もなぜ不安なのか説明できないことが多いです。</p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128202; 研究データ</div>
+      <p>
+        不安障害の75%は24歳以前に発症します（Kessler et al., 2005）。つまり、思春期は不安障害がもっとも始まりやすい時期です。だからこそ、早期介入が成人期の慢性化を防ぐカギになります。10代に対するCBT（認知行動療法）の効果サイズはd=0.9〜1.2と非常に高く、若いうちに適切なサポートを受けることで大きな改善が見込めます。
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 不安の「からだサイン」を知ろう -->
+  <section>
+    <div class="section-label purple">&#129657; Section 03</div>
+    <h2 class="section-title">不安の「からだサイン」を知ろう</h2>
+
+    <div class="card">
+      <h3>&#128147; キミの体は、キミを守ろうとしている</h3>
+      <p>不安を感じると、体にもいろんな反応が出ます。これは体が「危険だ！守らなきゃ！」とがんばっている証拠。異常なことじゃありません。</p>
+      <div class="symptom-tags">
+        <span class="symptom-tag">心臓バクバク</span>
+        <span class="symptom-tag">お腹が痛い</span>
+        <span class="symptom-tag">頭痛</span>
+        <span class="symptom-tag">息苦しい</span>
+        <span class="symptom-tag">手汗がすごい</span>
+        <span class="symptom-tag">筋肉のこわばり</span>
+        <span class="symptom-tag">めまい</span>
+        <span class="symptom-tag">吐き気</span>
+      </div>
+    </div>
+
+    <div class="peak-curve">
+      <h3 style="font-family:'M PLUS Rounded 1c',sans-serif; font-size:1.02rem; font-weight:800; color:var(--text); margin-bottom:0.4rem;">&#128200; 不安のピーク曲線</h3>
+      <p>不安は<strong>必ずピークを迎えて、そのあと下がります</strong>。永遠に上がり続けることはありません。</p>
+      <div class="curve-visual">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9650; ピーク<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9585;&nbsp;&nbsp;&#9586;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&#9585;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9586;<br>
+        &nbsp;&nbsp;&#9585;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9586;&#9586;<br>
+        &#9585;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9586;&#9586;&#9586;&#9586;&#8594;<br>
+        &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;<br>
+        0分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-20分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;時間&rarr;
+      </div>
+      <p style="margin-top:0.6rem;">パニック発作も<strong>10〜20分でピークを迎えて収まります</strong>。「今がつらくても、必ず波は引く」ということを覚えておいてください。</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 不安との付き合い方（10代向け） -->
+  <section>
+    <div class="section-label">&#128736;&#65039; Section 04</div>
+    <h2 class="section-title">不安との付き合い方（10代向け）</h2>
+
+    <div class="approach-card">
+      <div class="approach-icon">&#129723;</div>
+      <div class="approach-content">
+        <h3>5-5-5呼吸法</h3>
+        <p>5秒かけて鼻から吸って、5秒止めて、5秒かけて口から吐く。これだけ。授業中でも、トイレでも、電車の中でも、どこでもできます。</p>
+        <div class="breathing-box">
+          <div class="breath-step">
+            <div class="b-num">5</div>
+            <div class="b-label">鼻から<br>ゆっくり吸う<br>（5秒）</div>
+          </div>
+          <div class="breath-step">
+            <div class="b-num">5</div>
+            <div class="b-label">息を<br>止める<br>（5秒）</div>
+          </div>
+          <div class="breath-step">
+            <div class="b-num">5</div>
+            <div class="b-label">口から<br>細く吐く<br>（5秒）</div>
+          </div>
+        </div>
+        <p style="margin-top:0.6rem; font-size:0.82rem;">※ 3〜4回繰り返すと効果的です。副交感神経が活性化して、体の「緊急モード」がオフになります。</p>
+      </div>
+    </div>
+
+    <div class="approach-card">
+      <div class="approach-icon">&#129482;</div>
+      <div class="approach-content">
+        <h3>グラウンディング（5-4-3-2-1法）</h3>
+        <p>
+          不安で頭がグルグルしたとき、五感を使って「今ここ」に戻るテクニックです。
+        </p>
+        <div class="card" style="margin-top:0.8rem; background:#f9f9f9; padding:1rem;">
+          <p style="font-size:0.85rem;">
+            <strong>&#128064; 見えるもの</strong>を5つ探す<br>
+            <strong>&#128066; 聞こえるもの</strong>を4つ探す<br>
+            <strong>&#9995; 触れるもの</strong>を3つ探す<br>
+            <strong>&#128067; 匂い</strong>を2つ探す<br>
+            <strong>&#128069; 味</strong>を1つ探す
+          </p>
+        </div>
+        <p style="font-size:0.85rem; margin-top:0.5rem; color: var(--text-light);">意識を「体の感覚」に向けることで、不安な思考の渦から抜け出せます。</p>
+      </div>
+    </div>
+
+    <div class="approach-card">
+      <div class="approach-icon">&#128211;</div>
+      <div class="approach-content">
+        <h3>不安の書き出し</h3>
+        <p>
+          モヤモヤを紙に書き出してみよう。頭の中だけで考えると、不安はどんどん大きくなります。書くことで「見える化」できます。
+        </p>
+        <div class="card" style="margin-top:0.8rem; background:#f9f9f9; padding:1rem;">
+          <p style="font-size:0.85rem;">
+            <strong>ステップ1:</strong> 今不安に思っていることを全部書く<br>
+            <strong>ステップ2:</strong> 「最悪のシナリオ」を書く<br>
+            <strong>ステップ3:</strong> 「実際に起きそうなこと」を書く<br>
+            <strong>ステップ4:</strong> 2つを比べてみる &rarr; だいたい最悪のシナリオは起きない
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="approach-card">
+      <div class="approach-icon">&#127918;</div>
+      <div class="approach-content">
+        <h3>セルフケアリスト</h3>
+        <p>
+          元気なときに、自分だけの「落ち着く方法リスト」を作っておこう。不安が来たときにリストを見ればOK。考えなくても行動に移せます。
+        </p>
+        <div class="card" style="margin-top:0.8rem; background:#f9f9f9; padding:1rem;">
+          <p style="font-size:0.85rem; color: var(--text-light);">
+            例: 好きな音楽を聴く / 散歩する / ペットをなでる / 好きな動画を見る / お風呂に入る / 絵を描く / ストレッチする / 推しの写真を見る
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="approach-card">
+      <div class="approach-icon">&#128483;&#65039;</div>
+      <div class="approach-content">
+        <h3>信頼できる人に話す</h3>
+        <p>
+          先生、スクールカウンセラー、親、友達。誰でもいいから、信頼できる人に話してみよう。「つらい」と言えることは弱さじゃなくて<strong>強さ</strong>です。一人で抱え込まなくて大丈夫。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: こんな時は相談しよう -->
+  <section>
+    <div class="section-label">&#127973; Section 05</div>
+    <h2 class="section-title">こんなときは相談しよう</h2>
+
+    <div class="tip-box">
+      <div class="tb-header">&#9888;&#65039; こんなサインがあったら、一人で抱えないで</div>
+      <ul>
+        <li>学校に行けない日が増えた</li>
+        <li>好きだったことが楽しくなくなった</li>
+        <li>眠れない日が2週間以上続いている</li>
+        <li>「消えたい」「いなくなりたい」と思うことがある</li>
+        <li>自分を傷つけてしまう</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>&#128222; 相談できる場所</h3>
+      <p>キミの話を聞いてくれる場所は、ちゃんとあります。</p>
+      <div class="contact-list">
+        <div class="contact-item">
+          <div class="ci-icon">&#127973;</div>
+          <div class="ci-name">こころのクリニック桜が丘</div>
+          <div class="ci-detail">まずはお気軽にご相談ください</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">&#128218;</div>
+          <div class="ci-name">スクールカウンセラー</div>
+          <div class="ci-detail">学校にいるカウンセラーに相談できます</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">&#128222;</div>
+          <div class="ci-name">よりそいホットライン</div>
+          <div class="ci-detail">0120-279-338（24時間対応）</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">&#128149;</div>
+          <div class="ci-name">チャイルドライン</div>
+          <div class="ci-detail">0120-99-7777（18歳まで）</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: 保護者の方へ -->
+  <section>
+    <div class="section-label purple">&#128106; Section 06</div>
+    <h2 class="section-title">保護者の方へ</h2>
+
+    <div class="parent-card">
+      <h3 style="font-family:'M PLUS Rounded 1c',sans-serif; font-size:1.05rem; font-weight:800; margin-bottom:0.6rem;">お子さんの不安に寄り添うために</h3>
+      <div class="do-dont">
+        <div class="do-box">
+          <strong>&#9898; こう伝えよう</strong>
+          「話聞くよ」<br>
+          「そう感じるんだね」<br>
+          「つらかったね」<br>
+          「一緒に考えよう」
+        </div>
+        <div class="dont-box">
+          <strong>&#10060; これは避けよう</strong>
+          「大丈夫でしょ」<br>
+          「気のせいだよ」<br>
+          「甘えるな」<br>
+          「みんな同じだよ」
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>&#128161; 保護者ができること</h3>
+      <p>不安を否定せず、「そう感じるんだね」と受け止めることが第一歩です。「大丈夫？」と聞くより、「話聞くよ」と伝える方が、お子さんは安心して話しやすくなります。</p>
+      <p style="margin-top:0.6rem;">専門家への相談は<strong>早ければ早いほど効果的</strong>です。「もう少し様子を見よう」と待つうちに症状が固定化してしまうケースも少なくありません。気になることがあれば、まずはお気軽にご相談ください。</p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; 研究から分かっていること</div>
+      <p>
+        親の関わり方（Expressed Emotion：感情表出）が、お子さんの不安障害の予後に影響することが研究で明らかになっています。批判的・過保護な関わりよりも、「温かく見守る」姿勢が回復を促進します。お子さんの不安を「問題行動」ではなく「助けを求めるサイン」として捉えることが大切です。
+      </p>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html" style="background:#faeef1; color:#c06d86;">&larr; トップに戻る</a>
+    <a href="teen-anxiety-work.html" style="background:#f0f5ef; color:#7aad78;">ワークに取り組む &rarr;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer" style="text-align:center;">
+    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="/index.html" style="color:#827c73; text-decoration:none;">サイトトップ</a>　·　<a href="../mindfulness/index.html" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>

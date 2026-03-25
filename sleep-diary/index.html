@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>睡眠日誌 — こころのクリニック桜が丘</title>
+  <meta name="description" content="睡眠日誌アプリ。毎日の睡眠パターンを記録し、振り返りに役立てましょう。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --color-primary-50:  #fdf7f8;
+      --color-primary-100: #faeef1;
+      --color-primary-200: #f5d8de;
+      --color-primary-300: #edb8c5;
+      --color-primary-500: #d4819a;
+      --color-primary-600: #c06d86;
+      --color-neutral-50:  #faf9f8;
+      --color-neutral-100: #f5f3f0;
+      --color-neutral-200: #ebe8e3;
+      --color-neutral-300: #d8d4cd;
+      --color-neutral-400: #ada79e;
+      --color-neutral-500: #827c73;
+      --color-neutral-600: #625d56;
+      --color-neutral-700: #43403b;
+      --color-neutral-800: #2a2826;
+      --color-accent-100: #f0f5ef;
+      --color-accent-500: #7aad78;
+      --color-info: #7bafd5;
+      --color-lavender: #a89cc8;
+      --color-sleep-bg: #f0eef8;
+      --color-sleep-card: #f7f5fc;
+      --color-sleep-accent: #8b7fc7;
+      --font-base: 'Noto Sans JP', sans-serif;
+      --font-heading: 'Noto Serif JP', serif;
+      --text: #3d3935;
+      --text-light: #827c73;
+      --bg: #faf9f8;
+    }
+
+    body {
+      font-family: var(--font-base);
+      background: var(--bg);
+      color: var(--text);
+      font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container { max-width: 640px; margin: 0 auto; padding: 0 1.25rem; width: 100%; }
+
+    /* Top bar */
+    .top-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--color-neutral-200);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-bar-back {
+      font-size: 0.85rem;
+      color: var(--color-sleep-accent);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 150ms ease;
+    }
+    .top-bar-back:hover { color: var(--color-lavender); }
+    .top-bar-back svg { width: 18px; height: 18px; }
+    .top-bar-title {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      color: var(--color-neutral-600);
+      font-weight: 500;
+    }
+
+    /* Header */
+    .app-header {
+      background: linear-gradient(145deg, #eee8f8 0%, #f5f2fc 40%, var(--color-sleep-bg) 100%);
+      padding: 1.75rem 0 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .app-header-stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--color-lavender);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    .star:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+    .star:nth-child(2) { top: 15%; left: 45%; animation-delay: 1s; width: 3px; height: 3px; }
+    .star:nth-child(3) { top: 30%; left: 75%; animation-delay: 1.8s; }
+    .star:nth-child(4) { top: 50%; left: 25%; animation-delay: 0.5s; width: 3px; height: 3px; }
+    .star:nth-child(5) { top: 10%; left: 85%; animation-delay: 2.2s; width: 5px; height: 5px; }
+    .star:nth-child(6) { top: 60%; left: 60%; animation-delay: 1.3s; width: 3px; height: 3px; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .star { animation: none; opacity: 0.2; }
+    }
+
+    .header-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(168, 156, 200, 0.15);
+      color: var(--color-sleep-accent);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 0.75rem;
+      font-size: 1.6rem;
+    }
+    .app-header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      color: var(--color-neutral-800);
+      font-weight: 500;
+    }
+    .app-header p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding-bottom: 5.5rem;
+    }
+
+    /* Tab views */
+    .tab-view {
+      display: none;
+      padding: 1.25rem 0 1.5rem;
+      animation: fadeIn 250ms ease;
+    }
+    .tab-view.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      @keyframes fadeIn { from { opacity: 1; } to { opacity: 1; } }
+    }
+
+    /* Bottom tabs */
+    .bottom-tabs {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--color-neutral-200);
+      z-index: 100;
+      padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    .bottom-tabs .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+      padding: 0.35rem 0.75rem;
+      background: none;
+      border: none;
+      color: var(--color-neutral-400);
+      font-size: 0.68rem;
+      font-family: var(--font-base);
+      cursor: pointer;
+      transition: color 150ms ease;
+      border-radius: 8px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tab-btn svg { width: 22px; height: 22px; }
+    .tab-btn.active {
+      color: var(--color-sleep-accent);
+    }
+    .tab-btn:hover { color: var(--color-lavender); }
+
+    /* Section titles */
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-sleep-bg);
+    }
+
+    /* Form styles */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+      margin-bottom: 0.4rem;
+    }
+    .form-label-hint {
+      font-weight: 400;
+      color: var(--text-light);
+      font-size: 0.78rem;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 10px;
+      font-family: var(--font-base);
+      font-size: 0.92rem;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-lavender);
+      box-shadow: 0 0 0 3px rgba(168, 156, 200, 0.15);
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ada79e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2.25rem;
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    input[type="time"] {
+      cursor: pointer;
+    }
+
+    /* Quality scale */
+    .quality-scale {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .quality-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.6rem 0.5rem;
+      border: 2px solid var(--color-neutral-200);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      font-family: var(--font-base);
+      transition: all 200ms ease;
+      flex: 1;
+      max-width: 72px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .quality-btn .emoji { font-size: 1.5rem; line-height: 1; }
+    .quality-btn .label { font-size: 0.6rem; color: var(--text-light); line-height: 1.2; }
+    .quality-btn:hover { border-color: var(--color-lavender); }
+    .quality-btn.selected {
+      border-color: var(--color-sleep-accent);
+      background: var(--color-sleep-bg);
+    }
+    .quality-btn.selected .label { color: var(--color-sleep-accent); font-weight: 500; }
+
+    /* Daytime sleepiness */
+    .sleepiness-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .sleepiness-btn {
+      flex: 1;
+      padding: 0.6rem 0.5rem;
+      border: 2px solid var(--color-neutral-200);
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      font-family: var(--font-base);
+      font-size: 0.85rem;
+      color: var(--text);
+      transition: all 200ms ease;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sleepiness-btn:hover { border-color: var(--color-lavender); }
+    .sleepiness-btn.selected {
+      border-color: var(--color-sleep-accent);
+      background: var(--color-sleep-bg);
+      color: var(--color-sleep-accent);
+      font-weight: 500;
+    }
+
+    /* Save button */
+    .btn-save {
+      display: block;
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, var(--color-sleep-accent), var(--color-lavender));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-base);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 200ms ease, transform 100ms ease;
+      margin-top: 1.5rem;
+    }
+    .btn-save:hover { opacity: 0.9; }
+    .btn-save:active { transform: scale(0.98); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 6rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--color-neutral-800);
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease, transform 300ms ease;
+      z-index: 200;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ========== Calendar ========== */
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .cal-nav-btn {
+      background: none;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 8px;
+      padding: 0.4rem 0.6rem;
+      cursor: pointer;
+      color: var(--color-neutral-600);
+      font-size: 0.85rem;
+      transition: all 150ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cal-nav-btn:hover { border-color: var(--color-lavender); color: var(--color-sleep-accent); }
+    .cal-month-label {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .cal-dow {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-light);
+      padding: 0.4rem 0;
+    }
+    .cal-day {
+      text-align: center;
+      padding: 0.35rem 0;
+      font-size: 0.78rem;
+      color: var(--color-neutral-600);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 150ms ease;
+      position: relative;
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cal-day:hover { background: var(--color-sleep-bg); }
+    .cal-day.today {
+      font-weight: 700;
+      color: var(--color-sleep-accent);
+    }
+    .cal-day.empty { cursor: default; }
+    .cal-day.empty:hover { background: none; }
+    .cal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .cal-legend {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .cal-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      color: var(--text-light);
+    }
+    .cal-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Day detail modal */
+    .day-detail-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 300;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      animation: fadeOverlay 200ms ease;
+    }
+    .day-detail-overlay.show { display: flex; }
+    @keyframes fadeOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .day-detail-sheet {
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem 1.25rem 2rem;
+      width: 100%;
+      max-width: 640px;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideUp 300ms ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      @keyframes fadeOverlay { from { opacity: 1; } to { opacity: 1; } }
+      @keyframes slideUp { from { transform: translateY(0); } to { transform: translateY(0); } }
+    }
+    .day-detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .day-detail-date {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+    }
+    .day-detail-close {
+      background: none;
+      border: none;
+      color: var(--color-neutral-400);
+      cursor: pointer;
+      padding: 0.3rem;
+      font-size: 1.2rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .day-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--color-neutral-100);
+      font-size: 0.85rem;
+    }
+    .day-detail-label { color: var(--text-light); }
+    .day-detail-value { color: var(--text); font-weight: 500; }
+    .day-detail-note {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: var(--color-sleep-bg);
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .day-detail-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .btn-delete-record {
+      padding: 0.55rem 1rem;
+      background: none;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 8px;
+      font-family: var(--font-base);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+    .btn-delete-record:hover { border-color: #e08080; color: #c06060; }
+
+    /* ========== Stats ========== */
+    .period-selector {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .period-btn {
+      flex: 1;
+      padding: 0.5rem 0.5rem;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-family: var(--font-base);
+      font-size: 0.82rem;
+      color: var(--color-neutral-600);
+      text-align: center;
+      transition: all 150ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .period-btn:hover { border-color: var(--color-lavender); }
+    .period-btn.active {
+      background: var(--color-sleep-accent);
+      color: #fff;
+      border-color: var(--color-sleep-accent);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 14px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+    .stat-value {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-neutral-800);
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+    .stat-trend {
+      font-size: 0.72rem;
+      margin-top: 0.2rem;
+      font-weight: 500;
+    }
+    .stat-trend.up { color: var(--color-accent-500); }
+    .stat-trend.down { color: #d48181; }
+    .stat-trend.neutral { color: var(--text-light); }
+
+    /* Chart area */
+    .chart-section {
+      margin-bottom: 1.5rem;
+    }
+    .chart-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+      margin-bottom: 0.75rem;
+    }
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 120px;
+      padding: 0 0.25rem;
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      min-width: 0;
+    }
+    .bar {
+      width: 100%;
+      max-width: 24px;
+      border-radius: 4px 4px 0 0;
+      transition: height 300ms ease;
+    }
+    .bar-label {
+      font-size: 0.55rem;
+      color: var(--text-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* Insight cards */
+    .insight-card {
+      background: var(--color-sleep-card);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .insight-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    /* ========== Export ========== */
+    .export-card {
+      background: #fff;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .export-card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .export-card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-neutral-700);
+      margin-bottom: 0.3rem;
+    }
+    .export-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .btn-export {
+      display: inline-block;
+      padding: 0.7rem 1.75rem;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-base);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 200ms ease, transform 100ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-export:hover { opacity: 0.9; }
+    .btn-export:active { transform: scale(0.98); }
+    .btn-export-primary {
+      background: linear-gradient(135deg, var(--color-sleep-accent), var(--color-lavender));
+      color: #fff;
+    }
+    .btn-export-secondary {
+      background: #fff;
+      color: var(--color-sleep-accent);
+      border: 2px solid var(--color-sleep-accent);
+    }
+    .export-period-selector {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    /* No data state */
+    .no-data {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-light);
+      font-size: 0.88rem;
+    }
+    .no-data-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+    /* Footer */
+    .site-footer {
+      padding: 1.5rem 0 calc(6rem + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--color-neutral-200);
+      text-align: center;
+    }
+    .site-footer-brand {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      color: var(--color-neutral-600);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .site-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .site-footer-links a {
+      font-size: 0.75rem;
+      color: var(--color-neutral-400);
+      transition: color 150ms ease;
+    }
+    .site-footer-links a:hover { color: var(--color-sleep-accent); }
+    .site-footer-copy {
+      font-size: 0.7rem;
+      color: var(--color-neutral-400);
+    }
+
+    /* Existing data notice */
+    .today-existing {
+      background: var(--color-sleep-card);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.82rem;
+      color: var(--color-sleep-accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="container">
+      <a href="/index.html" class="top-bar-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        アプリトップ
+      </a>
+      <span class="top-bar-title">こころのクリニック桜が丘</span>
+    </div>
+  </header>
+
+  <!-- App header -->
+  <section class="app-header">
+    <div class="app-header-stars" aria-hidden="true">
+      <span class="star"></span><span class="star"></span><span class="star"></span>
+      <span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+    <div class="container">
+      <div class="header-icon" aria-hidden="true">🌙</div>
+      <h1>睡眠日誌</h1>
+      <p>毎日の睡眠を記録して、より良い眠りへ</p>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main class="main-content">
+
+    <!-- View 1: Record -->
+    <div id="view-record" class="tab-view active">
+      <div class="container">
+        <h2 class="section-title">今日の記録</h2>
+
+        <div id="today-existing-notice" class="today-existing" style="display:none;">
+          <span>&#x1f4dd;</span>
+          <span>今日の記録は既に保存されています。再度保存すると上書きされます。</span>
+        </div>
+
+        <form id="sleep-form" autocomplete="off">
+          <div class="form-group">
+            <label class="form-label" for="bedtime">就寝時刻</label>
+            <input type="time" id="bedtime" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="sleep-latency">入眠までの時間</label>
+            <select id="sleep-latency" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="すぐ">すぐ</option>
+              <option value="15分">15分</option>
+              <option value="30分">30分</option>
+              <option value="1時間">1時間</option>
+              <option value="1時間以上">1時間以上</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="awakenings">中途覚醒回数</label>
+            <select id="awakenings" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="0回">0回</option>
+              <option value="1回">1回</option>
+              <option value="2回">2回</option>
+              <option value="3回以上">3回以上</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="waketime">起床時刻</label>
+            <input type="time" id="waketime" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">睡眠の質</label>
+            <div class="quality-scale" id="quality-scale">
+              <button type="button" class="quality-btn" data-value="1">
+                <span class="emoji">😫</span>
+                <span class="label">とても悪い</span>
+              </button>
+              <button type="button" class="quality-btn" data-value="2">
+                <span class="emoji">😟</span>
+                <span class="label">悪い</span>
+              </button>
+              <button type="button" class="quality-btn" data-value="3">
+                <span class="emoji">😐</span>
+                <span class="label">普通</span>
+              </button>
+              <button type="button" class="quality-btn" data-value="4">
+                <span class="emoji">😊</span>
+                <span class="label">良い</span>
+              </button>
+              <button type="button" class="quality-btn" data-value="5">
+                <span class="emoji">😴</span>
+                <span class="label">とても良い</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">日中の眠気</label>
+            <div class="sleepiness-group" id="sleepiness-group">
+              <button type="button" class="sleepiness-btn" data-value="なし">なし</button>
+              <button type="button" class="sleepiness-btn" data-value="少し">少し</button>
+              <button type="button" class="sleepiness-btn" data-value="強い">強い</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="nap">昼寝</label>
+            <select id="nap" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="なし">なし</option>
+              <option value="15分以下">15分以下</option>
+              <option value="30分">30分</option>
+              <option value="1時間以上">1時間以上</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="note">メモ <span class="form-label-hint">（任意）</span></label>
+            <textarea id="note" class="form-textarea" placeholder="気になったことを自由にメモ…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-save">保存する</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- View 2: Calendar -->
+    <div id="view-calendar" class="tab-view">
+      <div class="container">
+        <h2 class="section-title">カレンダー</h2>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" id="cal-prev" aria-label="前月">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <span class="cal-month-label" id="cal-month-label"></span>
+          <button class="cal-nav-btn" id="cal-next" aria-label="翌月">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot" style="background:#e08080;"></span>1</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot" style="background:#e0a870;"></span>2</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot" style="background:#d4c86a;"></span>3</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot" style="background:#8bc490;"></span>4</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot" style="background:#7aad78;"></span>5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View 3: Stats -->
+    <div id="view-stats" class="tab-view">
+      <div class="container">
+        <h2 class="section-title">統計・トレンド</h2>
+
+        <div class="period-selector" id="period-selector">
+          <button class="period-btn active" data-days="7">7日</button>
+          <button class="period-btn" data-days="30">30日</button>
+          <button class="period-btn" data-days="90">90日</button>
+        </div>
+
+        <div id="stats-content"></div>
+      </div>
+    </div>
+
+    <!-- View 4: Export -->
+    <div id="view-export" class="tab-view">
+      <div class="container">
+        <h2 class="section-title">結果出力</h2>
+
+        <div class="export-card">
+          <div class="export-card-icon">📋</div>
+          <div class="export-card-title">結果を表示</div>
+          <div class="export-card-desc">
+            睡眠記録のまとめを表示します。<br>
+            スクリーンショットを撮ってデジスマ問診票に添付できます。
+          </div>
+          <div class="export-period-selector">
+            <button class="period-btn active" data-export-days="7">7日</button>
+            <button class="period-btn" data-export-days="30">30日</button>
+            <button class="period-btn" data-export-days="90">90日</button>
+          </div>
+          <button class="btn-export btn-export-primary" id="btn-show-summary">結果を表示</button>
+        </div>
+
+        <div class="export-card">
+          <div class="export-card-icon">📊</div>
+          <div class="export-card-title">CSVダウンロード</div>
+          <div class="export-card-desc">
+            全期間の睡眠記録をCSVファイルとして<br>ダウンロードします。
+          </div>
+          <button class="btn-export btn-export-secondary" id="btn-csv">CSVをダウンロード</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Day detail overlay -->
+  <div class="day-detail-overlay" id="day-detail-overlay">
+    <div class="day-detail-sheet" id="day-detail-sheet">
+      <div class="day-detail-header">
+        <span class="day-detail-date" id="day-detail-date"></span>
+        <button class="day-detail-close" id="day-detail-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div id="day-detail-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Bottom tabs -->
+  <nav class="bottom-tabs" aria-label="メイン">
+    <div class="container">
+      <button class="tab-btn active" data-tab="record" aria-label="記録">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span>記録</span>
+      </button>
+      <button class="tab-btn" data-tab="calendar" aria-label="カレンダー">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>カレンダー</span>
+      </button>
+      <button class="tab-btn" data-tab="stats" aria-label="統計">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>統計</span>
+      </button>
+      <button class="tab-btn" data-tab="export" aria-label="出力">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>出力</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer-brand">こころのクリニック桜が丘</p>
+      <nav class="site-footer-links">
+        <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener">クリニックHP</a>
+        <a href="/index.html">サイトトップ</a>
+      </nav>
+      <p class="site-footer-copy">&copy; こころのクリニック桜が丘</p>
+    </div>
+  </footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ========== Constants ==========
+  const STORAGE_KEY = 'sakura_sleep_diary';
+  const QUALITY_COLORS = {
+    1: '#e08080',
+    2: '#e0a870',
+    3: '#d4c86a',
+    4: '#8bc490',
+    5: '#7aad78'
+  };
+  const QUALITY_LABELS = {
+    1: 'とても悪い',
+    2: '悪い',
+    3: '普通',
+    4: '良い',
+    5: 'とても良い'
+  };
+  const QUALITY_EMOJIS = {
+    1: '😫',
+    2: '😟',
+    3: '😐',
+    4: '😊',
+    5: '😴'
+  };
+
+  // ========== Data layer ==========
+  function loadData() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveData(records) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+
+  function getRecordByDate(dateStr) {
+    return loadData().find(r => r.date === dateStr);
+  }
+
+  function saveRecord(record) {
+    const records = loadData();
+    const idx = records.findIndex(r => r.date === record.date);
+    if (idx >= 0) {
+      records[idx] = record;
+    } else {
+      records.push(record);
+    }
+    records.sort((a, b) => a.date.localeCompare(b.date));
+    saveData(records);
+  }
+
+  function deleteRecord(dateStr) {
+    const records = loadData().filter(r => r.date !== dateStr);
+    saveData(records);
+  }
+
+  function getRecordsInRange(days) {
+    const records = loadData();
+    const now = new Date();
+    const cutoff = new Date(now);
+    cutoff.setDate(cutoff.getDate() - days);
+    const cutoffStr = formatDate(cutoff);
+    return records.filter(r => r.date >= cutoffStr);
+  }
+
+  // ========== Utilities ==========
+  function formatDate(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
+  function todayStr() {
+    return formatDate(new Date());
+  }
+
+  function formatDateJP(dateStr) {
+    const [y, m, d] = dateStr.split('-');
+    const dow = ['日', '月', '火', '水', '木', '金', '土'];
+    const dt = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
+    return `${parseInt(y)}年${parseInt(m)}月${parseInt(d)}日（${dow[dt.getDay()]}）`;
+  }
+
+  function timeToMinutes(t) {
+    if (!t) return NaN;
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  function minutesToHM(mins) {
+    const h = Math.floor(mins / 60);
+    const m = Math.round(mins % 60);
+    return `${h}時間${m}分`;
+  }
+
+  function latencyMinutes(latency) {
+    const map = { 'すぐ': 0, '15分': 15, '30分': 30, '1時間': 60, '1時間以上': 90 };
+    return map[latency] || 0;
+  }
+
+  function calcSleepDuration(bedtime, waketime) {
+    let bed = timeToMinutes(bedtime);
+    let wake = timeToMinutes(waketime);
+    if (wake <= bed) wake += 24 * 60;
+    return wake - bed;
+  }
+
+  function calcSleepEfficiency(bedtime, waketime, latency) {
+    const totalBedMins = calcSleepDuration(bedtime, waketime);
+    const latMins = latencyMinutes(latency);
+    if (totalBedMins <= 0) return 0;
+    const sleepMins = totalBedMins - latMins;
+    return Math.max(0, Math.min(100, Math.round((sleepMins / totalBedMins) * 100)));
+  }
+
+  function averageTime(times) {
+    if (times.length === 0) return '--:--';
+    // Convert times to minutes, adjusting for wrapping around midnight
+    const mins = times.map(t => {
+      let m = timeToMinutes(t);
+      return m;
+    });
+    // For bedtimes that might cross midnight: if any time is before 12:00 (noon),
+    // treat it as next day (add 24h)
+    const adjusted = mins.map(m => m < 720 ? m + 1440 : m);
+    const avg = Math.round(adjusted.reduce((s, v) => s + v, 0) / adjusted.length) % 1440;
+    const h = Math.floor(avg / 60);
+    const m = avg % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // ========== Tab navigation ==========
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabViews = document.querySelectorAll('.tab-view');
+
+  function switchTab(tabName) {
+    tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
+    tabViews.forEach(v => {
+      v.classList.toggle('active', v.id === `view-${tabName}`);
+    });
+    if (tabName === 'calendar') renderCalendar();
+    if (tabName === 'stats') renderStats();
+    if (tabName === 'record') checkTodayExisting();
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // ========== View 1: Record form ==========
+  let selectedQuality = 0;
+  let selectedSleepiness = '';
+
+  // Quality buttons
+  document.querySelectorAll('#quality-scale .quality-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedQuality = parseInt(btn.dataset.value);
+      document.querySelectorAll('#quality-scale .quality-btn').forEach(b =>
+        b.classList.toggle('selected', parseInt(b.dataset.value) === selectedQuality)
+      );
+    });
+  });
+
+  // Sleepiness buttons
+  document.querySelectorAll('#sleepiness-group .sleepiness-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedSleepiness = btn.dataset.value;
+      document.querySelectorAll('#sleepiness-group .sleepiness-btn').forEach(b =>
+        b.classList.toggle('selected', b.dataset.value === selectedSleepiness)
+      );
+    });
+  });
+
+  function checkTodayExisting() {
+    const existing = getRecordByDate(todayStr());
+    const notice = document.getElementById('today-existing-notice');
+    if (existing) {
+      notice.style.display = 'flex';
+      // Pre-fill form
+      document.getElementById('bedtime').value = existing.bedtime || '';
+      document.getElementById('sleep-latency').value = existing.sleepLatency || '';
+      document.getElementById('awakenings').value = existing.awakenings || '';
+      document.getElementById('waketime').value = existing.wakeTime || '';
+      document.getElementById('nap').value = existing.nap || '';
+      document.getElementById('note').value = existing.note || '';
+      if (existing.quality) {
+        selectedQuality = existing.quality;
+        document.querySelectorAll('#quality-scale .quality-btn').forEach(b =>
+          b.classList.toggle('selected', parseInt(b.dataset.value) === selectedQuality)
+        );
+      }
+      if (existing.daytimeSleepiness) {
+        selectedSleepiness = existing.daytimeSleepiness;
+        document.querySelectorAll('#sleepiness-group .sleepiness-btn').forEach(b =>
+          b.classList.toggle('selected', b.dataset.value === selectedSleepiness)
+        );
+      }
+    } else {
+      notice.style.display = 'none';
+    }
+  }
+
+  // Form submit
+  document.getElementById('sleep-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const bedtime = document.getElementById('bedtime').value;
+    const sleepLatency = document.getElementById('sleep-latency').value;
+    const awakenings = document.getElementById('awakenings').value;
+    const wakeTime = document.getElementById('waketime').value;
+    const nap = document.getElementById('nap').value;
+    const note = document.getElementById('note').value.trim();
+
+    if (!bedtime || !sleepLatency || !awakenings || !wakeTime || !selectedQuality || !selectedSleepiness || !nap) {
+      showToast('すべての項目を入力してください');
+      return;
+    }
+
+    const record = {
+      date: todayStr(),
+      bedtime,
+      sleepLatency,
+      awakenings,
+      wakeTime,
+      quality: selectedQuality,
+      daytimeSleepiness: selectedSleepiness,
+      nap,
+      note
+    };
+
+    saveRecord(record);
+    showToast('保存しました');
+    checkTodayExisting();
+  });
+
+  // Initialize record view
+  checkTodayExisting();
+
+  // ========== View 2: Calendar ==========
+  let calYear, calMonth;
+  (function() {
+    const now = new Date();
+    calYear = now.getFullYear();
+    calMonth = now.getMonth();
+  })();
+
+  document.getElementById('cal-prev').addEventListener('click', () => {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  });
+  document.getElementById('cal-next').addEventListener('click', () => {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  });
+
+  function renderCalendar() {
+    const label = document.getElementById('cal-month-label');
+    label.textContent = `${calYear}年${calMonth + 1}月`;
+
+    const grid = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+
+    // Day of week headers
+    const dows = ['日', '月', '火', '水', '木', '金', '土'];
+    dows.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-dow';
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const today = todayStr();
+    const records = loadData();
+    const recordMap = {};
+    records.forEach(r => { recordMap[r.date] = r; });
+
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      grid.appendChild(el);
+    }
+
+    // Day cells
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const el = document.createElement('div');
+      el.className = 'cal-day';
+      if (dateStr === today) el.classList.add('today');
+
+      const dayNum = document.createElement('span');
+      dayNum.textContent = d;
+      el.appendChild(dayNum);
+
+      const rec = recordMap[dateStr];
+      if (rec) {
+        const dot = document.createElement('span');
+        dot.className = 'cal-dot';
+        dot.style.background = QUALITY_COLORS[rec.quality] || '#ccc';
+        el.appendChild(dot);
+
+        el.addEventListener('click', () => showDayDetail(dateStr, rec));
+      }
+
+      grid.appendChild(el);
+    }
+  }
+
+  // Day detail
+  function showDayDetail(dateStr, rec) {
+    const overlay = document.getElementById('day-detail-overlay');
+    document.getElementById('day-detail-date').textContent = formatDateJP(dateStr);
+
+    const duration = calcSleepDuration(rec.bedtime, rec.wakeTime);
+    const efficiency = calcSleepEfficiency(rec.bedtime, rec.wakeTime, rec.sleepLatency);
+
+    let html = '';
+    const rows = [
+      ['就寝時刻', rec.bedtime],
+      ['入眠までの時間', rec.sleepLatency],
+      ['中途覚醒回数', rec.awakenings],
+      ['起床時刻', rec.wakeTime],
+      ['睡眠時間', minutesToHM(duration)],
+      ['睡眠の質', `${QUALITY_EMOJIS[rec.quality]} ${QUALITY_LABELS[rec.quality]}`],
+      ['睡眠効率', `${efficiency}%`],
+      ['日中の眠気', rec.daytimeSleepiness],
+      ['昼寝', rec.nap]
+    ];
+    rows.forEach(([label, value]) => {
+      html += `<div class="day-detail-row"><span class="day-detail-label">${label}</span><span class="day-detail-value">${value}</span></div>`;
+    });
+
+    if (rec.note) {
+      html += `<div class="day-detail-note"><strong>メモ:</strong> ${escapeHtml(rec.note)}</div>`;
+    }
+
+    html += `<div class="day-detail-actions"><button class="btn-delete-record" onclick="app.deleteDay('${dateStr}')">この記録を削除</button></div>`;
+
+    document.getElementById('day-detail-body').innerHTML = html;
+    overlay.classList.add('show');
+  }
+
+  function closeDayDetail() {
+    document.getElementById('day-detail-overlay').classList.remove('show');
+  }
+
+  document.getElementById('day-detail-close').addEventListener('click', closeDayDetail);
+  document.getElementById('day-detail-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeDayDetail();
+  });
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // Expose for inline onclick
+  window.app = {
+    deleteDay: function(dateStr) {
+      if (confirm('この日の記録を削除しますか？')) {
+        deleteRecord(dateStr);
+        closeDayDetail();
+        renderCalendar();
+        showToast('削除しました');
+      }
+    }
+  };
+
+  // ========== View 3: Stats ==========
+  let statsDays = 7;
+
+  document.querySelectorAll('#period-selector .period-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      statsDays = parseInt(btn.dataset.days);
+      document.querySelectorAll('#period-selector .period-btn').forEach(b =>
+        b.classList.toggle('active', b === btn)
+      );
+      renderStats();
+    });
+  });
+
+  function renderStats() {
+    const container = document.getElementById('stats-content');
+    const records = getRecordsInRange(statsDays);
+
+    if (records.length === 0) {
+      container.innerHTML = `
+        <div class="no-data">
+          <div class="no-data-icon">📝</div>
+          <p>この期間のデータがありません。<br>まずは今日の睡眠を記録してみましょう。</p>
+        </div>`;
+      return;
+    }
+
+    // Calculate averages
+    const durations = records.map(r => calcSleepDuration(r.bedtime, r.wakeTime));
+    const avgDuration = Math.round(durations.reduce((s, v) => s + v, 0) / durations.length);
+    const qualities = records.map(r => r.quality);
+    const avgQuality = (qualities.reduce((s, v) => s + v, 0) / qualities.length).toFixed(1);
+    const avgBedtime = averageTime(records.map(r => r.bedtime));
+    const avgWaketime = averageTime(records.map(r => r.wakeTime));
+    const efficiencies = records.map(r => calcSleepEfficiency(r.bedtime, r.wakeTime, r.sleepLatency));
+    const avgEfficiency = Math.round(efficiencies.reduce((s, v) => s + v, 0) / efficiencies.length);
+
+    // Trend calculation (compare first half vs second half)
+    let qualityTrend = '';
+    if (records.length >= 4) {
+      const half = Math.floor(records.length / 2);
+      const firstHalfAvg = records.slice(0, half).reduce((s, r) => s + r.quality, 0) / half;
+      const secondHalfAvg = records.slice(half).reduce((s, r) => s + r.quality, 0) / (records.length - half);
+      const diff = secondHalfAvg - firstHalfAvg;
+      if (diff > 0.2) qualityTrend = '<span class="stat-trend up">&#9650; 改善</span>';
+      else if (diff < -0.2) qualityTrend = '<span class="stat-trend down">&#9660; 低下</span>';
+      else qualityTrend = '<span class="stat-trend neutral">&#9644; 横ばい</span>';
+    }
+
+    let durationTrend = '';
+    if (records.length >= 4) {
+      const half = Math.floor(records.length / 2);
+      const firstDurs = records.slice(0, half).map(r => calcSleepDuration(r.bedtime, r.wakeTime));
+      const secondDurs = records.slice(half).map(r => calcSleepDuration(r.bedtime, r.wakeTime));
+      const firstAvg = firstDurs.reduce((s, v) => s + v, 0) / firstDurs.length;
+      const secondAvg = secondDurs.reduce((s, v) => s + v, 0) / secondDurs.length;
+      const diffMins = Math.round(secondAvg - firstAvg);
+      if (diffMins > 10) durationTrend = `<span class="stat-trend up">+${diffMins}分</span>`;
+      else if (diffMins < -10) durationTrend = `<span class="stat-trend down">${diffMins}分</span>`;
+      else durationTrend = '<span class="stat-trend neutral">&#9644; 変化なし</span>';
+    }
+
+    // Stats cards
+    let html = `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🛏️</div>
+          <div class="stat-value">${minutesToHM(avgDuration)}</div>
+          <div class="stat-label">平均睡眠時間</div>
+          ${durationTrend}
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">${QUALITY_EMOJIS[Math.round(parseFloat(avgQuality))] || '😐'}</div>
+          <div class="stat-value">${avgQuality}</div>
+          <div class="stat-label">平均睡眠の質</div>
+          ${qualityTrend}
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🌙</div>
+          <div class="stat-value" style="font-size:1.1rem;">${avgBedtime}</div>
+          <div class="stat-label">平均就寝時刻</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">☀️</div>
+          <div class="stat-value" style="font-size:1.1rem;">${avgWaketime}</div>
+          <div class="stat-label">平均起床時刻</div>
+        </div>
+      </div>
+      <div class="stats-grid" style="grid-template-columns: 1fr;">
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-value">${avgEfficiency}%</div>
+          <div class="stat-label">平均睡眠効率（睡眠時間 ÷ 床上時間）</div>
+        </div>
+      </div>`;
+
+    // Bar chart
+    const chartRecords = records.slice(-Math.min(records.length, statsDays <= 30 ? 30 : 30));
+    html += `
+      <div class="chart-section">
+        <div class="chart-title">睡眠の質の推移</div>
+        <div class="bar-chart">`;
+
+    chartRecords.forEach(r => {
+      const height = (r.quality / 5) * 100;
+      const color = QUALITY_COLORS[r.quality] || '#ccc';
+      const dayLabel = r.date.slice(5).replace('-', '/');
+      html += `
+        <div class="bar-col">
+          <div class="bar" style="height:${height}%;background:${color};"></div>
+          <span class="bar-label">${dayLabel}</span>
+        </div>`;
+    });
+
+    html += `</div></div>`;
+
+    // Insights
+    html += '<div class="chart-section"><div class="chart-title">インサイト</div>';
+
+    // Duration insight
+    if (records.length >= 4) {
+      const half = Math.floor(records.length / 2);
+      const firstDurs = records.slice(0, half).map(r => calcSleepDuration(r.bedtime, r.wakeTime));
+      const secondDurs = records.slice(half).map(r => calcSleepDuration(r.bedtime, r.wakeTime));
+      const firstAvg = firstDurs.reduce((s, v) => s + v, 0) / firstDurs.length;
+      const secondAvg = secondDurs.reduce((s, v) => s + v, 0) / secondDurs.length;
+      const diffMins = Math.round(secondAvg - firstAvg);
+      if (diffMins > 0) {
+        html += `<div class="insight-card"><span class="insight-icon">💡</span><span>最近は前半と比べて約${diffMins}分多く眠れています。</span></div>`;
+      } else if (diffMins < 0) {
+        html += `<div class="insight-card"><span class="insight-icon">💡</span><span>最近は前半と比べて約${Math.abs(diffMins)}分少なくなっています。就寝時間を見直してみましょう。</span></div>`;
+      }
+    }
+
+    // Efficiency insight
+    if (avgEfficiency >= 85) {
+      html += `<div class="insight-card"><span class="insight-icon">✨</span><span>睡眠効率${avgEfficiency}%は良好です。寝つきがスムーズなようですね。</span></div>`;
+    } else if (avgEfficiency < 75) {
+      html += `<div class="insight-card"><span class="insight-icon">🔔</span><span>睡眠効率が${avgEfficiency}%とやや低めです。眠くなってから布団に入ることを試してみましょう。</span></div>`;
+    }
+
+    // Awakening insight
+    const awakeningCounts = records.map(r => {
+      const map = { '0回': 0, '1回': 1, '2回': 2, '3回以上': 3 };
+      return map[r.awakenings] || 0;
+    });
+    const avgAwakenings = awakeningCounts.reduce((s, v) => s + v, 0) / awakeningCounts.length;
+    if (avgAwakenings >= 2) {
+      html += `<div class="insight-card"><span class="insight-icon">🌜</span><span>中途覚醒が多めです。次回の診察で主治医にご相談ください。</span></div>`;
+    }
+
+    // Record count
+    html += `<div class="insight-card"><span class="insight-icon">📊</span><span>この期間の記録数: ${records.length}日分</span></div>`;
+
+    html += '</div>';
+
+    container.innerHTML = html;
+  }
+
+  // ========== View 4: Export ==========
+  let exportDays = 7;
+
+  document.querySelectorAll('.export-period-selector .period-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      exportDays = parseInt(btn.dataset.exportDays);
+      document.querySelectorAll('.export-period-selector .period-btn').forEach(b =>
+        b.classList.toggle('active', b === btn)
+      );
+    });
+  });
+
+  // Show summary
+  document.getElementById('btn-show-summary').addEventListener('click', () => {
+    const records = getRecordsInRange(exportDays);
+    if (records.length === 0) {
+      showToast('この期間のデータがありません');
+      return;
+    }
+
+    const durations = records.map(r => calcSleepDuration(r.bedtime, r.wakeTime));
+    const avgDuration = Math.round(durations.reduce((s, v) => s + v, 0) / durations.length);
+    const avgQuality = (records.reduce((s, r) => s + r.quality, 0) / records.length).toFixed(1);
+    const avgBedtime = averageTime(records.map(r => r.bedtime));
+    const avgWaketime = averageTime(records.map(r => r.wakeTime));
+    const efficiencies = records.map(r => calcSleepEfficiency(r.bedtime, r.wakeTime, r.sleepLatency));
+    const avgEfficiency = Math.round(efficiencies.reduce((s, v) => s + v, 0) / efficiencies.length);
+
+    const now = new Date();
+    const dateLabel = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 出力`;
+
+    let tableRows = records.map(r => {
+      const dur = calcSleepDuration(r.bedtime, r.wakeTime);
+      return `<tr>
+        <td>${r.date.slice(5).replace('-', '/')}</td>
+        <td>${r.bedtime}</td>
+        <td>${r.wakeTime}</td>
+        <td>${minutesToHM(dur)}</td>
+        <td style="text-align:center;">${QUALITY_EMOJIS[r.quality]}${r.quality}</td>
+        <td>${r.sleepLatency}</td>
+        <td>${r.awakenings}</td>
+      </tr>`;
+    }).join('');
+
+    const summaryHtml = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>睡眠日誌レポート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#3d3935;font-size:13px;line-height:1.6;padding:1rem;max-width:420px;margin:0 auto;}
+h1{font-family:'Noto Serif JP',serif;font-size:1.1rem;text-align:center;color:#2a2826;margin-bottom:0.2rem;font-weight:500;}
+.clinic{text-align:center;font-size:0.78rem;color:#827c73;margin-bottom:0.3rem;}
+.date-label{text-align:center;font-size:0.72rem;color:#ada79e;margin-bottom:1rem;}
+.period{text-align:center;font-size:0.82rem;color:#625d56;background:#f0eef8;border-radius:8px;padding:0.5rem;margin-bottom:1rem;font-weight:500;}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-bottom:1rem;}
+.stat{background:#faf9f8;border:1px solid #ebe8e3;border-radius:10px;padding:0.6rem;text-align:center;}
+.stat-val{font-size:1.1rem;font-weight:700;color:#2a2826;}
+.stat-lbl{font-size:0.68rem;color:#827c73;}
+table{width:100%;border-collapse:collapse;font-size:0.72rem;margin-bottom:1rem;}
+th{background:#f0eef8;color:#625d56;font-weight:500;padding:0.4rem 0.3rem;border-bottom:1px solid #d8d4cd;text-align:left;}
+td{padding:0.35rem 0.3rem;border-bottom:1px solid #ebe8e3;}
+tr:nth-child(even){background:#faf9f8;}
+.footer{text-align:center;font-size:0.7rem;color:#ada79e;margin-top:1rem;padding-top:0.75rem;border-top:1px solid #ebe8e3;line-height:1.8;}
+.footer strong{color:#8b7fc7;font-weight:500;}
+</style>
+</head>
+<body>
+<h1>睡眠日誌レポート</h1>
+<p class="clinic">こころのクリニック桜が丘</p>
+<p class="date-label">${dateLabel}</p>
+<div class="period">過去${exportDays}日間（${records.length}日分の記録）</div>
+<div class="stats">
+<div class="stat"><div class="stat-val">${minutesToHM(avgDuration)}</div><div class="stat-lbl">平均睡眠時間</div></div>
+<div class="stat"><div class="stat-val">${avgQuality}</div><div class="stat-lbl">平均睡眠の質</div></div>
+<div class="stat"><div class="stat-val">${avgBedtime}</div><div class="stat-lbl">平均就寝時刻</div></div>
+<div class="stat"><div class="stat-val">${avgWaketime}</div><div class="stat-lbl">平均起床時刻</div></div>
+<div class="stat" style="grid-column:span 2;"><div class="stat-val">${avgEfficiency}%</div><div class="stat-lbl">平均睡眠効率</div></div>
+</div>
+<table>
+<thead><tr><th>日付</th><th>就寝</th><th>起床</th><th>時間</th><th>質</th><th>入眠</th><th>覚醒</th></tr></thead>
+<tbody>${tableRows}</tbody>
+</table>
+<div class="footer">
+こころのクリニック桜が丘<br>
+<strong>デジスマ問診票に添付してください</strong>
+</div>
+</body>
+</html>`;
+
+    const blob = new Blob([summaryHtml], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  });
+
+  // CSV Export
+  document.getElementById('btn-csv').addEventListener('click', () => {
+    const records = loadData();
+    if (records.length === 0) {
+      showToast('データがありません');
+      return;
+    }
+
+    const headers = ['日付', '就寝時刻', '入眠までの時間', '中途覚醒回数', '起床時刻', '睡眠の質', '日中の眠気', '昼寝', 'メモ'];
+    const rows = records.map(r => [
+      r.date,
+      r.bedtime,
+      r.sleepLatency,
+      r.awakenings,
+      r.wakeTime,
+      r.quality,
+      r.daytimeSleepiness,
+      r.nap,
+      `"${(r.note || '').replace(/"/g, '""')}"`
+    ].join(','));
+
+    const csv = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `sleep_diary_${todayStr()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSVをダウンロードしました');
+  });
+
+})();
+</script>
+</body>
+</html>
