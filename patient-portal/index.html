@@ -24,6 +24,7 @@
       <h1 class="login-title">患者ポータル</h1>
       <p class="login-subtitle">こころのクリニック桜が丘</p>
 
+      <!-- ログインフォーム -->
       <form class="login-form" id="loginForm">
         <div id="loginError" class="login-error">
           患者IDまたは生年月日が正しくありません。
@@ -48,6 +49,49 @@
         <button type="submit" class="btn btn--primary btn--block btn--lg">
           ログイン
         </button>
+      </form>
+
+      <p style="text-align:center; margin-top:1rem;">
+        <button id="showSignupBtn" class="btn btn--ghost" style="font-size: var(--text-sm); color: var(--color-primary-500);">
+          はじめての方はこちら（新規登録）
+        </button>
+      </p>
+
+      <!-- 新規登録フォーム（初期非表示） -->
+      <form class="login-form" id="signupForm" hidden>
+        <h2 style="font-size: var(--text-lg); text-align:center; margin-bottom: var(--space-4); color: var(--color-neutral-800);">新規登録</h2>
+
+        <div id="signupError" class="login-error">
+          入力内容を確認してください。
+        </div>
+        <div id="signupSuccess" class="login-error" style="display:none; background: var(--color-accent-100); border-color: var(--color-accent-300); color: var(--color-accent-500);">
+          登録が完了しました。ログインしてください。
+        </div>
+
+        <div class="input-group">
+          <label for="signupName">お名前</label>
+          <input type="text" id="signupName" class="input" placeholder="例: 山田 太郎" required>
+        </div>
+
+        <div class="input-group">
+          <label for="signupBirthDate">生年月日</label>
+          <input type="date" id="signupBirthDate" class="input" required>
+        </div>
+
+        <div class="input-group">
+          <label for="signupPhone">電話番号（任意）</label>
+          <input type="tel" id="signupPhone" class="input" placeholder="例: 090-1234-5678">
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg">
+          登録する
+        </button>
+
+        <p style="text-align:center; margin-top:0.75rem;">
+          <button type="button" id="showLoginBtn" class="btn btn--ghost" style="font-size: var(--text-sm); color: var(--color-neutral-400);">
+            ログインに戻る
+          </button>
+        </p>
       </form>
 
       <p class="login-privacy">
