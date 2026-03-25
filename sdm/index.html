@@ -959,6 +959,18 @@ const medicationDB = {
         demerits: ['眠気が強い', '抗うつ効果はSSRIより弱い', '体重増加', '血球減少（まれ）'],
         onset: '1-2週間（睡眠は初日から）', cost: '◎', costLabel: '安い',
         tags: { drowsiness: 3, weightGain: 2, nausea: 0, sexualDysfunction: 0, dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 1, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      },
+      {
+        id: 'zuranolone', brand: 'ザズベイ', generic: 'ズラノロン',
+        classLabel: 'GABA-A受容体PAM', classColor: '#d4819a', classColorLight: '#faeef1',
+        desc: '14日間限定投与の新しい抗うつ薬。産後うつに適応',
+        mechanism: 'GABA-A受容体の正のアロステリック調節因子（PAM）。神経ステロイドとして作用し、GABA系を介して迅速に抗うつ効果を発揮。',
+        merits: ['2週間の短期服用で効果（長期服薬不要）', '効果発現が早い（3日目から改善報告）', '産後うつ病に日本初の適応', '従来の抗うつ薬と異なる作用機序'],
+        demerits: ['眠気・めまい（服用当日は運転禁止）', '14日間限定のため慢性うつには不向き', '新薬のため長期安全性データが限定的', '高価'],
+        onset: '3日-2週間',
+        cost: '△',
+        costLabel: 'やや高い',
+        tags: { drowsiness: 3, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 3, dependence: 0, efficacy: 2, fastOnset: 3, lowSideEffects: 1, lowCost: 0, pregnancy: 1, cognitive: 1 }
       }
     ]
   },
@@ -1061,6 +1073,18 @@ const medicationDB = {
         cost: '◎',
         costLabel: '安い',
         tags: { drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 2, efficacy: 3, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0 }
+      },
+      {
+        id: 'loflazepate', brand: 'メイラックス', generic: 'ロフラゼプ酸エチル',
+        classLabel: 'ベンゾジアゼピン（長時間型）', classColor: '#7bafd5', classColorLight: '#eef4fb',
+        desc: '超長時間作用型。1日1回で安定した抗不安効果',
+        mechanism: 'GABA-A受容体を増強する超長時間作用型ベンゾジアゼピン。半減期122時間で血中濃度が安定。',
+        merits: ['1日1回の服用で効果が安定', '超長時間作用で不安の波が少ない', '離脱症状が出にくい（漸減しやすい）', '広く処方されており実績豊富'],
+        demerits: ['眠気', '依存性あり（ただし離脱は比較的穏やか）', '体内蓄積しやすい（高齢者注意）', '認知機能低下（長期）'],
+        onset: '1-2時間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 1, efficacy: 2, fastOnset: 1, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0 }
       }
     ]
   },
