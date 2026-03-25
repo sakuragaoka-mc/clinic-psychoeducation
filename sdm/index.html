@@ -875,6 +875,70 @@ const medicationDB = {
           dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
           fastOnset: 0, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 3
         }
+      },
+      {
+        id: 'paroxetine',
+        brand: 'パキシル',
+        generic: 'パロキセチン',
+        classLabel: 'SSRI',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '強力な抗不安作用を持つSSRI',
+        mechanism: 'セロトニン再取り込みを強力に阻害。抗不安作用が最も強いSSRIとされる。',
+        merits: ['強い抗不安効果', 'パニック障害に高い有効性', '社交不安障害の第一選択'],
+        demerits: ['離脱症状が出やすい（漸減必須）', '眠気', '体重増加', '性機能障害'],
+        onset: '2-4週間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 2, weightGain: 2, nausea: 1, sexualDysfunction: 3, dryMouth: 1, dizziness: 1, dependence: 1, efficacy: 3, fastOnset: 0, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      },
+      {
+        id: 'fluvoxamine',
+        brand: 'ルボックス/デプロメール',
+        generic: 'フルボキサミン',
+        classLabel: 'SSRI',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '強迫性障害に強いSSRI',
+        mechanism: 'セロトニン再取り込みを阻害。σ1受容体にも作用し、強迫症状に効果。',
+        merits: ['強迫性障害に有効', '社交不安にも適応', '比較的古い薬で使用実績豊富'],
+        demerits: ['薬物相互作用が多い（CYP1A2阻害）', '吐き気', '1日2回服用', '眠気'],
+        onset: '2-4週間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 1, weightGain: 0, nausea: 2, sexualDysfunction: 1, dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 2, fastOnset: 0, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      },
+      {
+        id: 'venlafaxine',
+        brand: 'イフェクサー',
+        generic: 'ベンラファキシン',
+        classLabel: 'SNRI',
+        classColor: '#7aad78',
+        classColorLight: '#f0f5ef',
+        desc: '高用量で強力な抗うつ・抗不安効果',
+        mechanism: 'セロトニンとノルアドレナリンの再取り込みを阻害。用量依存的に作用が変化。',
+        merits: ['用量調整で効果を強められる', '全般性不安障害に適応', '体重増加が少ない'],
+        demerits: ['血圧上昇（高用量）', '吐き気（初期）', '離脱症状が出やすい', '発汗'],
+        onset: '1-2週間',
+        cost: '○',
+        costLabel: 'ふつう',
+        tags: { drowsiness: 0, weightGain: 0, nausea: 2, sexualDysfunction: 2, dryMouth: 1, dizziness: 1, dependence: 1, efficacy: 3, fastOnset: 1, lowSideEffects: 1, lowCost: 2, pregnancy: 0, cognitive: 1 }
+      },
+      {
+        id: 'trazodone',
+        brand: 'デジレル/レスリン',
+        generic: 'トラゾドン',
+        classLabel: 'SARI',
+        classColor: '#d4b070',
+        classColorLight: '#fef6ec',
+        desc: '睡眠改善作用が強く低用量で補助的に使われる',
+        mechanism: 'セロトニン2A受容体を遮断しつつ再取り込みも阻害。低用量で睡眠補助に。',
+        merits: ['睡眠改善に即効性', '性機能障害が少ない', '依存性なし', '低用量で補助薬として有用'],
+        demerits: ['日中の眠気', '起立性低血圧', '抗うつ効果には高用量必要'],
+        onset: '睡眠: 初日から / 抗うつ: 2-4週',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 3, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 1, dizziness: 2, dependence: 0, efficacy: 1, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
       }
     ]
   },
@@ -961,6 +1025,38 @@ const medicationDB = {
           dryMouth: 2, dizziness: 1, dependence: 0, efficacy: 2,
           fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1
         }
+      },
+      {
+        id: 'clonazepam',
+        brand: 'リボトリール/ランドセン',
+        generic: 'クロナゼパム',
+        classLabel: 'ベンゾジアゼピン',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '長時間作用で不安・てんかん・アカシジアに有効',
+        mechanism: 'GABA-A受容体を増強。長時間作用型で安定した効果が持続。',
+        merits: ['長時間作用で1日の変動が少ない', '不安＋てんかんに使える', 'アカシジア治療にも', 'パニック障害に有効'],
+        demerits: ['眠気', '依存性あり', '急な中止で離脱症状', '認知機能低下（長期）'],
+        onset: '30分-1時間',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 2, efficacy: 3, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0 }
+      },
+      {
+        id: 'pregabalin',
+        brand: 'リリカ',
+        generic: 'プレガバリン',
+        classLabel: 'ガバペンチノイド',
+        classColor: '#d4b070',
+        classColorLight: '#fef6ec',
+        desc: '全般性不安障害＋神経痛に効果',
+        mechanism: '電位依存性カルシウムチャネルα2δサブユニットに結合し、興奮性神経伝達物質の放出を抑制。',
+        merits: ['不安＋痛みの両方に効く', 'ベンゾジアゼピンと異なる作用機序', '睡眠の質も改善'],
+        demerits: ['眠気・ふらつき', '体重増加', '浮腫', '急な中止で離脱症状'],
+        onset: '1-2週間',
+        cost: '◎',
+        costLabel: '安い（後発品あり）',
+        tags: { drowsiness: 2, weightGain: 2, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 2, dependence: 1, efficacy: 2, fastOnset: 1, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
       }
     ]
   },
@@ -1113,6 +1209,39 @@ const medicationDB = {
           dryMouth: 0, dizziness: 0, dependence: 0, efficacy: 2,
           fastOnset: 1, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 2
         }
+      }
+,
+      {
+        id: 'eszopiclone',
+        brand: 'ルネスタ',
+        generic: 'エスゾピクロン',
+        classLabel: '非ベンゾジアゼピン',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '入眠＋中途覚醒に効く非ベンゾ。長期処方可能',
+        mechanism: 'GABA-A受容体のα1サブユニットに選択的に作用し、自然に近い睡眠を誘導。',
+        merits: ['入眠＋中途覚醒の両方に効果', '長期処方が可能', '翌朝に残りにくい'],
+        demerits: ['苦味（味覚異常）', '依存性あり（非ベンゾより弱い）', '眠気'],
+        onset: '15-30分',
+        cost: '◎',
+        costLabel: '安い（後発品あり）',
+        tags: { drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 1, efficacy: 2, fastOnset: 3, lowSideEffects: 2, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      },
+      {
+        id: 'triazolam',
+        brand: 'ハルシオン',
+        generic: 'トリアゾラム',
+        classLabel: 'ベンゾジアゼピン',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '超短時間作用型。入眠困難に即効',
+        mechanism: 'GABA-A受容体を非選択的に増強。超短時間作用で入眠に特化。',
+        merits: ['入眠に即効', '超短時間作用で翌朝に残りにくい', '実績が長い'],
+        demerits: ['健忘リスク', '反跳性不眠', '依存性', '夢遊行動のリスク'],
+        onset: '15-30分',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 3, efficacy: 3, fastOnset: 3, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 0 }
       }
     ]
   },
