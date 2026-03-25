@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>治療ガイドライン入門 — こころのクリニック桜が丘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #d4819a;
+    --primary-light: #faeef1;
+    --primary-dark: #c06d86;
+    --accent: #7aad78;
+    --accent-light: #f0f5ef;
+    --blue: #7bafd5;
+    --blue-light: #eef4fb;
+    --lavender: #a89cc8;
+    --lavender-light: #f0edf6;
+    --text: #3d3935;
+    --text-light: #827c73;
+    --bg: #faf9f8;
+    --card: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .nav-link-primary {
+    color: #c06d86;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .nav-link-secondary {
+    color: #827c73;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #7bafd5 0%, #6a9cc4 40%, #8d9ad4 70%, #a89cc8 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(168,156,200,0.12) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 45px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .hero-icons {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #c8dff0;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .card .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ===== GUIDELINE CARDS (border-left) ===== */
+  .guideline-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 5px solid;
+  }
+
+  .guideline-card .g-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .guideline-card .g-icon {
+    font-size: 1.6rem;
+  }
+
+  .guideline-card h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .guideline-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 0.4rem;
+  }
+
+  .guideline-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+
+  .guideline-card ul li {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .guideline-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: inherit;
+    font-size: 0.8rem;
+  }
+
+  .guideline-card .g-note {
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, #f0edf6 0%, #faeef1 100%);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(168,156,200,0.15);
+  }
+
+  .science-box .sb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #a89cc8;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    border: 2px solid rgba(212,129,154,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .tip-box .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #a25a71;
+    margin-bottom: 0.8rem;
+  }
+
+  .tip-box p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  .tip-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+
+  .tip-box ul li {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .tip-box ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #7aad78;
+    font-weight: 700;
+  }
+
+  /* ===== EVIDENCE LEVEL TABLE ===== */
+  .evidence-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0.8rem 0;
+    font-size: 0.85rem;
+  }
+
+  .evidence-table th {
+    background: rgba(168,156,200,0.15);
+    color: var(--text);
+    font-weight: 700;
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    font-size: 0.8rem;
+  }
+
+  .evidence-table th:first-child { border-radius: 8px 0 0 0; }
+  .evidence-table th:last-child { border-radius: 0 8px 0 0; }
+
+  .evidence-table td {
+    padding: 0.45rem 0.8rem;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    vertical-align: top;
+  }
+
+  .evidence-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .evidence-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+  .evidence-table .level-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.1rem 0.5rem;
+    border-radius: 6px;
+    color: #fff;
+    min-width: 1.6rem;
+    text-align: center;
+  }
+
+  /* ===== GRADE CARDS ===== */
+  .grade-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin: 0.8rem 0;
+  }
+
+  .grade-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.35rem 0.8rem;
+    border-radius: 10px;
+  }
+
+  .grade-badge .grade-letter {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bottom-nav a {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #c06d86;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #faeef1;
+    transition: background 0.2s;
+  }
+
+  .bottom-nav a:hover { background: #f5d8de; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.72rem;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .top-nav, .bottom-nav, .footer { display: none !important; }
+    .hero { padding: 1.5rem; }
+    .card, .guideline-card, .science-box, .tip-box { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-icons { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">&larr; トップへ</a>
+  <span class="nav-clinic-name">&#127800; こころのクリニック桜が丘</span>
+  <a href="treatment-guide.html" class="nav-link-secondary">治療の解説 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">&#128203;</div>
+  <h1>治療ガイドライン入門</h1>
+  <p class="subtitle">〜 エビデンスに基づく治療の道しるべ 〜</p>
+</div>
+
+<div class="container">
+
+  <!-- ===== SECTION 1: 治療ガイドラインとは ===== -->
+  <section>
+    <div class="section-label" style="background:#eef4fb; color:#7bafd5;">&#128218; Section 01</div>
+    <h2 class="section-title">治療ガイドラインとは</h2>
+
+    <div class="card">
+      <div class="card-icon">&#128214;</div>
+      <h3>最新の研究をまとめた「治療の教科書」</h3>
+      <p>
+        治療ガイドラインとは、世界中で行われた膨大な研究結果を専門家が系統的にまとめ、「この病気にはこの治療が最も効果的」という推奨をまとめた文書です。いわば、医師が治療方針を決めるときに参照する「教科書」のようなものです。
+      </p>
+      <p style="margin-top:0.5rem;">
+        ガイドラインは一度作られたら終わりではなく、新しい研究成果が蓄積されるたびに定期的に改訂されます。世界中の研究者・臨床家が協力して作成し、その信頼性を維持しています。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">&#129309;</div>
+      <h3>主治医はガイドラインを「参考に」しています</h3>
+      <p>
+        主治医はガイドラインの推奨を基盤としつつ、あなたの症状の特徴、体質、生活状況、ご希望などを総合的に考慮して、最適な治療法を提案します。ガイドラインはあくまで「標準的な道しるべ」であり、あなただけのオーダーメイド治療を一緒に考えるための出発点です。
+      </p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; エビデンスのレベル</div>
+      <p>医学的エビデンス（科学的根拠）には信頼性のレベルがあります。ガイドラインはより信頼性の高いエビデンスを重視して推奨を決めています。</p>
+      <table class="evidence-table" style="margin-top:0.8rem;">
+        <thead>
+          <tr>
+            <th>レベル</th>
+            <th>研究の種類</th>
+            <th>信頼性</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="level-badge" style="background:#7aad78;">1</span></td>
+            <td><strong>メタ分析・系統的レビュー</strong> — 複数のRCTを統合的に分析</td>
+            <td>最も高い</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge" style="background:#7bafd5;">2</span></td>
+            <td><strong>ランダム化比較試験（RCT）</strong> — 治療群と対照群をランダムに比較</td>
+            <td>高い</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge" style="background:#d4b070;">3</span></td>
+            <td><strong>観察研究（コホート研究等）</strong> — 実際の臨床データを分析</td>
+            <td>中程度</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge" style="background:#a89cc8;">4</span></td>
+            <td><strong>専門家の意見・症例報告</strong> — 臨床経験に基づく知見</td>
+            <td>参考レベル</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: うつ病の治療ガイドライン ===== -->
+  <section>
+    <div class="section-label" style="background:#f0f5ef; color:#7aad78;">&#127811; Section 02</div>
+    <h2 class="section-title">うつ病の治療ガイドライン</h2>
+
+    <div class="guideline-card" style="border-color:#7aad78;">
+      <div class="g-header">
+        <span class="g-icon">&#127807;</span>
+        <h3 style="color:#5a9a68;">日本うつ病学会 治療ガイドライン 2023</h3>
+      </div>
+      <p>
+        日本うつ病学会が作成する最も代表的なうつ病治療の指針です。重症度に応じた治療戦略を明確に示しています。
+      </p>
+      <ul>
+        <li style="color:#5a9a68;"><strong>軽症うつ病：</strong><span style="color:var(--text-light);">まずは心理教育と支持的精神療法から開始します。症状や希望に応じて認知行動療法（CBT）を導入。薬物療法は必ずしも第一選択ではありません。</span></li>
+        <li style="color:#5a9a68;"><strong>中等症以上：</strong><span style="color:var(--text-light);">抗うつ薬による薬物療法が推奨されます。第一選択はSSRI（選択的セロトニン再取り込み阻害薬）またはSNRI（セロトニン・ノルアドレナリン再取り込み阻害薬）です。心理療法との併用がより高い効果をもたらすことが示されています。</span></li>
+        <li style="color:#5a9a68;"><strong>治療抵抗性：</strong><span style="color:var(--text-light);">十分な量・期間の抗うつ薬で改善しない場合は、増強療法（リチウム、非定型抗精神病薬の追加）を検討します。重症例では電気けいれん療法（ECT）も選択肢となります。</span></li>
+        <li style="color:#5a9a68;"><strong>維持療法：</strong><span style="color:var(--text-light);">初発の場合は寛解後6〜12ヶ月の薬物継続が推奨されます。再発歴がある場合はより長期の継続が必要です。</span></li>
+      </ul>
+      <p style="margin-top:0.6rem;">
+        海外では英国NICE（国立医療技術評価機構）や米国APA（アメリカ精神医学会）のガイドラインも広く参照されています。NICE2022は軽症うつに対し薬物より心理療法を優先する傾向がさらに強く、APA2024はケースに応じた柔軟な第一選択を推奨しています。いずれも「患者さんとの共同意思決定（SDM）」を重視している点は共通です。
+      </p>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; STAR*D研究の知見</div>
+      <p>
+        米国NIHが実施した大規模臨床試験「STAR*D（Sequenced Treatment Alternatives to Relieve Depression）」は、うつ病治療の実態を明らかにした画期的な研究です。最初の抗うつ薬で寛解（症状がほぼなくなること）に至るのは<strong>約30%</strong>にとどまります。しかし、薬の変更や増強療法など2〜3段階の治療ステップを踏むことで、<strong>約70%の患者さんが改善</strong>を経験します。最初の薬で効果がなくても、あきらめずに主治医と相談しながら治療を進めることが大切です。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: 双極性障害の治療ガイドライン ===== -->
+  <section>
+    <div class="section-label" style="background:#fef6ec; color:#c08a5a;">&#127774; Section 03</div>
+    <h2 class="section-title">双極性障害の治療ガイドライン</h2>
+
+    <div class="guideline-card" style="border-color:#d4b070;">
+      <div class="g-header">
+        <span class="g-icon">&#9878;&#65039;</span>
+        <h3 style="color:#b89840;">日本うつ病学会／日本双極性障害研究会 治療ガイドライン &amp; CANMAT/ISBD 2018</h3>
+      </div>
+      <p>
+        双極性障害は躁状態とうつ状態を繰り返す疾患であり、単極性うつ病とは治療戦略が大きく異なります。日本および国際的なガイドラインの要点をまとめます。
+      </p>
+      <ul>
+        <li style="color:#b89840;"><strong>躁状態の治療：</strong><span style="color:var(--text-light);">気分安定薬（リチウム、バルプロ酸）と抗精神病薬の併用が第一選択です。興奮が強い場合は抗精神病薬を優先的に使用し、速やかな安定化を図ります。</span></li>
+        <li style="color:#b89840;"><strong>双極性うつの治療：</strong><span style="color:var(--text-light);">クエチアピン、ルラシドン、ラモトリギンが推奨されています。<strong>重要な注意点</strong>として、抗うつ薬の単独使用は躁転のリスクがあるため推奨されていません。単極性うつ病とは治療が大きく異なる点です。</span></li>
+        <li style="color:#b89840;"><strong>維持療法：</strong><span style="color:var(--text-light);">リチウムが第一選択です。リチウムには気分の安定化だけでなく、自殺予防効果があることが複数の研究で示されています。定期的な血中濃度モニタリングが必要です。</span></li>
+        <li style="color:#b89840;"><strong>生活リズム療法（IPSRT）：</strong><span style="color:var(--text-light);">対人関係・社会リズム療法は、生活リズムの安定化を通じて再発を予防する心理療法です。睡眠・活動リズムの乱れが躁・うつエピソードの引き金になるため、リズムの安定が治療の土台となります。</span></li>
+      </ul>
+      <div class="g-note" style="background:#fef6ec; color:#9a6d3a; margin-top:0.6rem;">
+        &#9888;&#65039; 抗うつ薬の使い方が単極性うつ病と大きく異なります。自己判断での薬の変更は危険です。必ず主治医にご相談ください。
+      </div>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; 心理教育の効果</div>
+      <p>
+        Colom et al.（2003）の研究では、双極性障害の患者さんに体系的な心理教育プログラムを実施したところ、<strong>再発率が約50%低下</strong>することが示されました。病気の性質、薬の重要性、再発のサイン、生活リズムの管理などを学ぶことが、長期的な安定に大きく貢献します。このページを読んでいるあなたは、すでにその第一歩を踏み出しています。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: 統合失調症の治療ガイドライン ===== -->
+  <section>
+    <div class="section-label" style="background:#f0edf6; color:#a89cc8;">&#128156; Section 04</div>
+    <h2 class="section-title">統合失調症の治療ガイドライン</h2>
+
+    <div class="guideline-card" style="border-color:#a89cc8;">
+      <div class="g-header">
+        <span class="g-icon">&#128218;</span>
+        <h3 style="color:#8a7caf;">統合失調症薬物治療ガイドライン 2022</h3>
+      </div>
+      <p>
+        統合失調症は、薬物療法とリハビリテーションの両輪で治療を進める疾患です。早期発見・早期治療が長期予後を大きく左右します。
+      </p>
+      <ul>
+        <li style="color:#8a7caf;"><strong>初発精神病（FEP）の治療：</strong><span style="color:var(--text-light);">低用量の第二世代（非定型）抗精神病薬から慎重に開始します。初回エピソードでは薬剤への反応性が高い一方、副作用にも敏感なため、少量から徐々に増量していきます。</span></li>
+        <li style="color:#8a7caf;"><strong>薬剤の選択：</strong><span style="color:var(--text-light);">主要な抗精神病薬の間で効果の差はわずかであることが大規模研究で示されています。そのため、代謝系への影響（体重増加、糖尿病リスク）、錐体外路症状、鎮静作用などの副作用プロファイルを考慮して、個々の患者さんに最適な薬剤を選択します。</span></li>
+        <li style="color:#8a7caf;"><strong>クロザピン（治療抵抗性の場合）：</strong><span style="color:var(--text-light);">2種類以上の抗精神病薬を十分な量・期間使用しても改善しない「治療抵抗性統合失調症」に対する最も有効な薬剤です。日本ではCPMS（クロザリル患者モニタリングサービス）への登録が必要で、定期的な血液検査を行いながら使用します。</span></li>
+        <li style="color:#8a7caf;"><strong>LAI（持効性注射剤）：</strong><span style="color:var(--text-light);">2〜4週間に1回の注射で効果が持続する製剤です。毎日の服薬が難しい場合のアドヒアランス（服薬継続）改善に有効で、近年は初発段階からの早期導入も推奨されつつあります。</span></li>
+        <li style="color:#8a7caf;"><strong>リハビリテーション：</strong><span style="color:var(--text-light);">薬物療法に加え、認知機能リハビリテーション、SST（社会生活技能訓練）、就労支援（IPS型援助付き雇用など）を組み合わせることで、社会機能の回復と生活の質の向上を目指します。</span></li>
+      </ul>
+    </div>
+
+    <div class="science-box">
+      <div class="sb-header">&#128300; 早期介入の重要性</div>
+      <p>
+        統合失調症では、未治療期間（DUP: Duration of Untreated Psychosis）が短いほど長期予後が良好であることが多くの研究で示されています。初発精神病（FEP）に対する専門的早期介入サービスは、通常治療と比較して症状の改善、社会機能の回復、再入院率の低下に効果があることが実証されています。世界的にFEPサービスの整備が進んでおり、日本でも早期支援体制の充実が課題となっています。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5: ガイドラインの読み方 ===== -->
+  <section>
+    <div class="section-label" style="background:#faeef1; color:#c06d86;">&#128161; Section 05</div>
+    <h2 class="section-title">ガイドラインの読み方</h2>
+
+    <div class="card">
+      <div class="card-icon">&#128220;</div>
+      <h3>推奨グレードの意味</h3>
+      <p>ガイドラインの各推奨には「どのくらい強く勧められるか」を示すグレード（等級）が付されています。</p>
+      <div class="grade-row" style="margin-top:0.8rem;">
+        <span class="grade-badge" style="background:#e8f5e8; color:#3d7a3d;">
+          <span class="grade-letter">A</span> 強く推奨
+        </span>
+        <span class="grade-badge" style="background:#eef4fb; color:#5a7fa0;">
+          <span class="grade-letter">B</span> 推奨
+        </span>
+        <span class="grade-badge" style="background:#fef6ec; color:#9a6d3a;">
+          <span class="grade-letter">C</span> 考慮してもよい
+        </span>
+        <span class="grade-badge" style="background:#faeef1; color:#a25a71;">
+          <span class="grade-letter">D</span> 推奨しない
+        </span>
+      </div>
+      <p style="margin-top:0.6rem;">
+        推奨グレードAは最も強いエビデンスに裏付けられた推奨です。ただし、グレードが低いからといって「効果がない」わけではなく、まだ十分な研究が行われていない場合もあります。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">&#128101;</div>
+      <h3>ガイドラインは「平均的な患者さん」への推奨です</h3>
+      <p>
+        ガイドラインの推奨は、多くの患者さんを対象とした研究に基づいています。しかし、患者さん一人ひとりは異なる背景を持っています。年齢、併存疾患、これまでの治療歴、生活状況、ご本人のご希望 — これらすべてを考慮した「あなたに最適な治療」は、主治医との対話を通じて見つけていくものです。
+      </p>
+      <p style="margin-top:0.5rem;">
+        ガイドラインの知識は、主治医とより実りある対話をするための「共通言語」として役立ちます。疑問や不安があれば、遠慮なく主治医に質問してみてください。
+      </p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tb-header">&#128161; こんな時にガイドラインの知識が役立ちます</div>
+      <p>ガイドラインの基本を知っておくと、以下のような場面で治療への理解が深まり、主治医との対話がより充実します。</p>
+      <ul>
+        <li><strong>治療方針の変更時</strong> — なぜ薬を変えるのか、次のステップは何かを理解しやすくなります</li>
+        <li><strong>セカンドオピニオンを考える時</strong> — 現在の治療が標準的かどうかを判断する手がかりになります</li>
+        <li><strong>新しい薬を提案された時</strong> — その薬がガイドラインでどう位置づけられているか確認できます</li>
+        <li><strong>治療が長引いていると感じる時</strong> — 治療ステップの全体像を知ることで、現在地を把握できます</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 最後に ===== -->
+  <div class="science-box">
+    <div class="sb-header">&#128202; ガイドラインは「進化する文書」です</div>
+    <p>
+      治療ガイドラインは、新しい研究成果や臨床経験の蓄積により、数年ごとに改訂されます。ここでご紹介した内容も、今後の研究によって推奨が変わる可能性があります。最新の治療については、主治医にお尋ねください。当クリニックでは、国内外の最新ガイドラインを踏まえた治療を提供しています。
+    </p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">&larr; トップに戻る</a>
+    <a href="treatment-guide.html">治療の解説を読む &rarr;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer" style="text-align:center;">
+    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="/index.html" style="color:#827c73; text-decoration:none;">サイトトップ</a>　·　<a href="../mindfulness/index.html" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
+  </div>
+
+</div>
+</body>
+</html>

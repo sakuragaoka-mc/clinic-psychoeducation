@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高齢者の睡眠と睡眠衛生指導 — こころのクリニック桜が丘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #6a9cc4;
+    --primary-light: #eef4fb;
+    --accent: #7aad78;
+    --accent-light: #f0f5ef;
+    --warm: #d4b070;
+    --warm-light: #fdf6e8;
+    --text: #3d3935;
+    --text-light: #827c73;
+    --bg: #faf9f8;
+    --card-bg: rgba(255,255,255,0.92);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #4d5080 0%, #5d6b98 40%, #7b8fb8 70%, #a8bdd8 100%);
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 50% 15%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 85% 70%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 20% 80%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.8), transparent);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  .hero-icons {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 800;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.02em;
+  }
+
+  .hero .subtitle {
+    color: #d4c8a0;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    font-weight: 500;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* ===== SECTION ===== */
+  section {
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(1.3rem, 4vw, 1.7rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.8rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+    backdrop-filter: blur(10px);
+  }
+
+  /* ===== SCIENCE BOX ===== */
+  .science-box {
+    background: linear-gradient(135deg, var(--primary-light), #e4edf6);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 1.2rem 0;
+    border: 2px solid rgba(106,156,196,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .science-box::after {
+    content: '🔬';
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    font-size: 3.5rem;
+    opacity: 0.1;
+    transform: rotate(10deg);
+  }
+
+  .science-box h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #4a7a9c;
+    margin-bottom: 0.5rem;
+  }
+
+  .science-box p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, var(--accent-light), #e6f0e5);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 1.2rem 0;
+    border: 2px solid rgba(122,173,120,0.2);
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .tip-box .tip-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .tip-box p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  /* ===== MESSAGE CARD ===== */
+  .message-card {
+    background: linear-gradient(135deg, var(--warm-light), #fdf0d8);
+    border-radius: 20px;
+    padding: 1.8rem;
+    margin: 1.2rem 0;
+    border: 2px solid rgba(212,176,112,0.25);
+    text-align: center;
+  }
+
+  .message-card p {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.8;
+    color: #8a7040;
+  }
+
+  .message-card .msg-sub {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+  }
+
+  /* ===== TWO-COL GRID ===== */
+  .cause-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .cause-grid { grid-template-columns: 1fr; }
+  }
+
+  .cause-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 4px solid;
+    transition: transform 0.2s ease;
+  }
+
+  .cause-card:hover { transform: translateY(-2px); }
+
+  .cause-card.physical { border-left-color: var(--primary); }
+  .cause-card.mental { border-left-color: #9b85cf; }
+  .cause-card.medication { border-left-color: var(--warm); }
+  .cause-card.environment { border-left-color: var(--accent); }
+
+  .cause-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cause-card h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .cause-card.physical h4 { color: #4a7a9c; }
+  .cause-card.mental h4 { color: #7a60a8; }
+  .cause-card.medication h4 { color: #a08040; }
+  .cause-card.environment h4 { color: #5a8a58; }
+
+  .cause-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.65;
+  }
+
+  /* ===== STEP CARDS ===== */
+  .step-list {
+    counter-reset: steps;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    counter-increment: steps;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #5080b0);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(106,156,196,0.35);
+  }
+
+  .step-content {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .step-content strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+  }
+
+  .step-content p {
+    font-size: 0.87rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 0.3rem;
+  }
+
+  .step-content .step-science {
+    background: linear-gradient(135deg, #f4f8fc, #eaf0f6);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    border-left: 3px solid var(--primary);
+  }
+
+  .step-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.6rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #d4b070, #c4a060);
+    color: #fff;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+
+  /* ===== MEDICATION SECTION ===== */
+  .med-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .med-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px;
+    height: 100%;
+  }
+
+  .med-card.caution::before { background: linear-gradient(to bottom, #ef5350, #ff8a80); }
+  .med-card.recommend::before { background: linear-gradient(to bottom, var(--accent), #8cc48a); }
+
+  .med-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .med-card p, .med-card li {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .med-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+
+  .med-card ul li {
+    padding: 0.35rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .med-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  .med-card.caution ul li::before { color: #ef5350; }
+  .med-card.recommend ul li::before { color: var(--accent); }
+
+  /* ===== DIARY SECTION ===== */
+  .diary-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .diary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 400px;
+  }
+
+  .diary-table th {
+    background: var(--primary-light);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 700;
+    color: #4a7a9c;
+    border-bottom: 2px solid rgba(106,156,196,0.2);
+  }
+
+  .diary-table td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: var(--text-light);
+  }
+
+  .diary-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ===== FAMILY SECTION ===== */
+  .family-highlight {
+    background: linear-gradient(135deg, #fdf6e8, #fdefd0);
+    border-radius: 20px;
+    padding: 1.8rem;
+    border: 2px solid rgba(212,176,112,0.2);
+    margin-bottom: 1.2rem;
+  }
+
+  .family-highlight h3 {
+    color: #8a7040;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+  }
+
+  .family-highlight p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  /* ===== CHANGE LIST ===== */
+  .change-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0 0;
+  }
+
+  .change-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.6rem;
+    position: relative;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .change-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0.3rem;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  /* ===== NOTE BOX ===== */
+  .note-box {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid rgba(233,30,99,0.15);
+  }
+
+  .note-box h4 {
+    color: #c2185b;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .note-box p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* ===== REFERENCES ===== */
+  .references {
+    margin: 2rem 0 0;
+    padding: 1.5rem;
+    background: #f5f5f5;
+    border-radius: 18px;
+  }
+
+  .references h3 {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .ref-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: refs;
+  }
+
+  .ref-list li {
+    counter-increment: refs;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    padding: 0.4rem 0;
+    padding-left: 2rem;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .ref-list li:last-child { border-bottom: none; }
+
+  .ref-list li::before {
+    content: counter(refs) ".";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--text);
+    width: 1.5rem;
+    text-align: right;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    margin-top: 2rem;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-link-primary {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .nav-link-secondary {
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #827c73;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .hero { padding: 2rem 1rem; min-height: auto; }
+    .card, .cause-card, .step-content, .med-card, .science-box { break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-icons { animation: none; }
+    .hero::before { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-link-primary">&larr; トップへ</a>
+  <span class="nav-clinic-name">🌸 こころのクリニック桜が丘</span>
+  <a href="sleep-education.html" class="nav-link-secondary">睡眠の解説 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-icons">🌙</div>
+  <h1>高齢者の睡眠と睡眠衛生指導</h1>
+  <p class="subtitle">〜 年齢とともに変わる眠りを理解する 〜</p>
+</div>
+
+<div class="container">
+
+<!-- ===== SECTION 1: 高齢者の睡眠の特徴 ===== -->
+<section>
+  <div class="section-label" style="background:var(--primary-light); color:#4a7a9c;">🧠 まず知っておきたいこと</div>
+  <h2 class="section-title">高齢者の睡眠の特徴</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
+    「昔のようにぐっすり眠れなくなった」——これは多くの方が感じる変化ですが、その多くは<strong>加齢による自然な変化</strong>であり、必ずしも病気ではありません。まずは「年齢とともに睡眠がどう変わるか」を正しく理解しましょう。
+  </p>
+
+  <div class="card">
+    <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:0.8rem; color:var(--primary);">加齢による睡眠の変化</h3>
+    <ul class="change-list">
+      <li><strong>深い睡眠（徐波睡眠）が減る</strong> — 眠りが浅くなり、ちょっとした物音でも目が覚めやすくなります</li>
+      <li><strong>中途覚醒が増える</strong> — 夜中に何度も目が覚めるようになります。1〜2回の中途覚醒は正常の範囲です</li>
+      <li><strong>早朝覚醒</strong> — 朝早く（4〜5時など）に目が覚めて、その後眠れなくなります</li>
+      <li><strong>体内時計の前進</strong> — 夜早い時間に眠くなり、朝も早く起きるようになります（「前進」といいます）</li>
+      <li><strong>必要な睡眠時間が短くなる</strong> — 高齢者の場合、6〜7時間で十分なことが多く、若い頃のように8時間眠る必要はありません</li>
+    </ul>
+  </div>
+
+  <div class="science-box">
+    <h4>🔬 科学的な背景</h4>
+    <p>
+      大規模な研究（Ohayon et al., 2004）によると、80代の方の深い睡眠（徐波睡眠）は20代の約<strong>4分の1</strong>にまで減少します。これは病気ではなく、<strong>正常な加齢変化</strong>です。問題は「8時間眠らなければいけない」という思い込みです。実際には眠れない時間を長くベッドで過ごすことがかえって不眠を悪化させることが、多くの研究で示されています。
+    </p>
+  </div>
+
+  <div class="message-card">
+    <p>「昔のように眠れない」≠「不眠症」</p>
+    <p class="msg-sub">年齢に合った睡眠の目安を知ることが、安心への第一歩です。</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: 高齢者の不眠の原因 ===== -->
+<section>
+  <div class="section-label" style="background:#f3eef8; color:#7a60a8;">🔍 原因を知る</div>
+  <h2 class="section-title">高齢者の不眠の原因</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
+    高齢者の不眠には、加齢以外にもさまざまな原因が重なっていることがあります。睡眠薬に頼る前に、まず原因を整理することが大切です。
+  </p>
+
+  <div class="cause-grid">
+    <div class="cause-card physical">
+      <div class="cause-icon">🏥</div>
+      <h4>身体的要因</h4>
+      <p>腰痛・関節痛などの慢性的な痛み、夜間頻尿、睡眠時無呼吸症候群、むずむず脚症候群（脚がムズムズして眠れない）など、身体の症状が睡眠を妨げていることがあります。</p>
+    </div>
+    <div class="cause-card mental">
+      <div class="cause-icon">💭</div>
+      <h4>精神的要因</h4>
+      <p>うつ病や不安障害は不眠の大きな原因です。認知症に伴う昼夜逆転や睡眠・覚醒リズムの乱れも多く見られます。孤独感や喪失体験も影響します。</p>
+    </div>
+    <div class="cause-card medication">
+      <div class="cause-icon">💊</div>
+      <h4>薬の影響</h4>
+      <p>ステロイド剤、利尿薬（夜間の排尿が増える）、一部の降圧薬、カフェインを含む薬剤など、日常的に服用している薬が不眠の原因になっていることがあります。</p>
+    </div>
+    <div class="cause-card environment">
+      <div class="cause-icon">🏠</div>
+      <h4>環境・生活習慣</h4>
+      <p>日中の活動量の低下、長すぎる昼寝、テレビをつけたまま居眠り、寝室の明るさ・温度・騒音など、生活環境が睡眠に影響していることがあります。</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-icon">💡</div>
+    <div>
+      <p>
+        <strong>まずは「治せる原因」がないか確認しましょう。</strong>痛みの管理、頻尿の治療、薬の見直し、睡眠時無呼吸の検査など、原因に対処することで不眠が改善するケースは多くあります。睡眠薬はそれらを試した上での選択肢です。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: 睡眠衛生指導（実践編） ===== -->
+<section>
+  <div class="section-label" style="background:var(--accent-light); color:#5a8a58;">🌿 実践編</div>
+  <h2 class="section-title">睡眠衛生指導<br>〜 今日からできる8つのこと 〜</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.5rem;">
+    睡眠衛生とは、良い睡眠のための生活習慣や環境のことです。薬に頼らずに睡眠を改善するための、具体的な方法をご紹介します。
+  </p>
+
+  <div class="step-list">
+    <!-- Step 1 -->
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>床上時間を短くする <span class="step-badge">最重要</span></strong>
+        <p>「眠れないのにベッドにいる時間」を減らしましょう。実際に眠れている時間＋30分程度を目安に、ベッドにいる時間を設定します。</p>
+        <p>眠くなるまでベッドに入らないこと。横になって<strong>20分経っても眠れなければ、一度起き上がって別の部屋へ</strong>行き、眠気が来たら戻りましょう。</p>
+        <div class="step-science">
+          🔬 睡眠制限療法は不眠症の認知行動療法（CBT-I）の核心的要素です（Spielman et al., 1987）。ベッドにいる時間を制限することで「ベッド＝眠る場所」という結びつきが強化され、睡眠の質が向上します。
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>起床時刻を一定にする ⏰</strong>
+        <p>平日・休日にかかわらず、<strong>毎日同じ時間に起きる</strong>ことが最も効果的な体内時計の調整法です。前の晩に眠れなかったとしても、朝は決めた時間に起きましょう。</p>
+        <p>就寝時間よりも起床時間を固定することが大切です。体内時計がリセットされ、夜になると自然に眠気が訪れるリズムが整います。</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>日中に光を浴びる ☀️</strong>
+        <p>朝起きたら<strong>30分以上</strong>、太陽の光を浴びましょう。光は体内時計をリセットし、夜のメラトニン（眠りのホルモン）分泌を促します。</p>
+        <p>曇りの日でも屋外の光は室内の何倍も明るいため、散歩やベランダで過ごすだけで十分です。特に冬季は日照時間が短いので、意識的に光を浴びるようにしましょう。</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>日中の活動量を増やす 🚶</strong>
+        <p>散歩、体操、園芸、買い物など、無理のない範囲で日中の身体活動を増やしましょう。<strong>午後の早い時間に30分程度</strong>の軽い運動が、夜の睡眠の質を高めるのに理想的です。</p>
+        <p>ただし、就寝直前の激しい運動は逆効果になることがあります。夕方までに済ませるのがポイントです。</p>
+        <div class="step-science">
+          🔬 有酸素運動は高齢者の睡眠の質を有意に改善することが、複数の研究をまとめたメタ分析で示されています（Kelley & Kelley, 2017）。
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>昼寝は15〜20分まで 💤</strong>
+        <p>日中にどうしても眠い場合は、短い昼寝は効果的です。ただし、<strong>午後3時以降の昼寝は夜の睡眠を妨げます</strong>。</p>
+        <p>アラームをセットして<strong>15〜20分で切り上げる</strong>習慣をつけましょう。横になるより、椅子に座ったままの「うたた寝」のほうが深く眠りすぎず、起きやすいのでおすすめです。</p>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step-item">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <strong>カフェイン・アルコールの管理 ☕</strong>
+        <p>カフェインは<strong>午後2時以降</strong>は避けましょう。コーヒーだけでなく、<strong>緑茶・ほうじ茶・紅茶</strong>にもカフェインが含まれています。高齢者はカフェインの代謝が遅くなるため、影響が長引きやすい点にも注意が必要です。</p>
+        <p>アルコール（寝酒）は入眠を一時的に助けますが、<strong>中途覚醒を増やし、睡眠の質を大幅に悪化</strong>させます。「寝酒がないと眠れない」という状態は依存のサインです。</p>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step-item">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <strong>寝室環境を整える 🛏️</strong>
+        <p>快適な睡眠のための寝室環境の目安です。</p>
+        <ul class="change-list" style="margin-top:0.3rem;">
+          <li><strong>温度：18〜22℃</strong>、<strong>湿度：50〜60%</strong>が理想</li>
+          <li><strong>遮光カーテン</strong>で外の光を遮る</li>
+          <li>夜間のトイレ照明は<strong>暖色系（オレンジ色）の足元灯</strong>にして、覚醒しすぎない工夫を</li>
+          <li>テレビ・スマホは<strong>就寝1時間前にオフ</strong>にする</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 8 -->
+    <div class="step-item">
+      <div class="step-num">8</div>
+      <div class="step-content">
+        <strong>リラクゼーション 🧘</strong>
+        <p><strong>ぬるめのお風呂（38〜40℃）</strong>を就寝1〜2時間前に入りましょう。入浴で上がった深部体温が下がるときに、自然な眠気が訪れます。</p>
+        <p><strong>腹式呼吸</strong>（お腹を膨らませてゆっくり吐く）や<strong>漸進的筋弛緩法</strong>（体の各部位に力を入れて抜く）も効果的です。</p>
+        <p>心配事が頭から離れない場合は、<strong>「心配ノート」</strong>に書き出して寝室に持ち込まないようにしましょう。「書いたから明日考えよう」と脳に区切りをつけることがポイントです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: 睡眠薬について ===== -->
+<section>
+  <div class="section-label" style="background:#ffebee; color:#c62828;">💊 薬について知る</div>
+  <h2 class="section-title">高齢者の睡眠薬について</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
+    不眠の治療において、<strong>まず試すべきは上記の睡眠衛生指導や認知行動療法（CBT-I）などの非薬物療法</strong>です。薬はそれらを補う形で、必要最小限に使うことが大切です。
+  </p>
+
+  <div class="med-card caution">
+    <h4>⚠️ 高齢者で注意すべき薬：ベンゾジアゼピン系睡眠薬</h4>
+    <p>従来よく処方されてきたベンゾジアゼピン系（トリアゾラム、ニトラゼパムなど）や非ベンゾジアゼピン系（ゾルピデムなど）の睡眠薬は、高齢者では以下のリスクがあります。</p>
+    <ul>
+      <li><strong>転倒・骨折</strong>のリスクが上昇（筋弛緩作用、ふらつき）</li>
+      <li><strong>認知機能の低下</strong>（せん妄、もの忘れの悪化）</li>
+      <li><strong>依存性</strong>（やめられなくなる）</li>
+      <li>持ち越し効果による<strong>日中の眠気</strong>（高齢者は代謝が遅い）</li>
+    </ul>
+    <p style="margin-top:0.6rem; font-weight:700; color:#c62828;">
+      → 高齢者では極力避けることが推奨されています。
+    </p>
+  </div>
+
+  <div class="med-card recommend">
+    <h4>✅ 比較的安全とされる選択肢</h4>
+    <ul>
+      <li><strong>オレキシン受容体拮抗薬</strong>（スボレキサント〔ベルソムラ〕、レンボレキサント〔デエビゴ〕）— 自然な眠りに近い作用。筋弛緩作用がなく、転倒リスクが低い</li>
+      <li><strong>メラトニン受容体作動薬</strong>（ラメルテオン〔ロゼレム〕）— 体内時計に作用。依存性がなく、高齢者にも使いやすい</li>
+    </ul>
+    <p style="margin-top:0.6rem;">
+      いずれの薬も、<strong>「漫然と飲み続ける」ことは避け</strong>、定期的に主治医と必要性を見直しましょう。睡眠が改善してきたら、少しずつ減量・中止を検討します。
+    </p>
+  </div>
+
+  <div class="science-box">
+    <h4>🔬 ガイドラインの推奨</h4>
+    <p>
+      米国老年医学会の<strong>Beers criteria</strong>（高齢者に不適切な薬のリスト）では、ベンゾジアゼピン系薬剤は<strong>「避けるべき薬」</strong>に分類されています。日本老年医学会の「高齢者の安全な薬物療法ガイドライン」でも、ベンゾジアゼピン系睡眠薬は<strong>「特に慎重な投与を要する薬物」</strong>とされており、可能な限り使用を控えるよう推奨されています。
+    </p>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: 睡眠日誌 ===== -->
+<section>
+  <div class="section-label" style="background:var(--warm-light); color:#8a7040;">📝 記録する</div>
+  <h2 class="section-title">睡眠日誌のすすめ</h2>
+  <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1.2rem;">
+    睡眠日誌をつけると、自分の睡眠パターンが見えてきます。<strong>2週間</strong>記録すると、主治医が治療方針を立てやすくなります。完璧に記録する必要はありません。おおよそで構いませんので、毎朝つける習慣をつけましょう。
+  </p>
+
+  <div class="card">
+    <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.8rem; color:var(--warm);">記録する項目</h3>
+    <div class="diary-table-wrap">
+      <table class="diary-table">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>記録の例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>就寝時刻</strong></td>
+            <td>ベッドに入った時刻（例：22:30）</td>
+          </tr>
+          <tr>
+            <td><strong>入眠時刻</strong></td>
+            <td>実際に眠りについた時刻（おおよそで可）（例：23:00頃）</td>
+          </tr>
+          <tr>
+            <td><strong>中途覚醒</strong></td>
+            <td>夜中に目が覚めた回数と大体の時刻（例：2回、1時・4時頃）</td>
+          </tr>
+          <tr>
+            <td><strong>起床時刻</strong></td>
+            <td>朝、最終的に起き上がった時刻（例：6:00）</td>
+          </tr>
+          <tr>
+            <td><strong>日中の眠気</strong></td>
+            <td>なし ／ 少し ／ かなり強い、の3段階</td>
+          </tr>
+          <tr>
+            <td><strong>昼寝</strong></td>
+            <td>昼寝の有無と時間（例：13時〜13:20）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text-light); margin-top:0.8rem; line-height:1.7;">
+      枕元にメモ帳とペンを置いておくか、ご家族に手伝ってもらうのもよい方法です。正確な時刻がわからなくても「だいたいこのくらい」で十分です。
+    </p>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-icon">📋</div>
+    <div>
+      <p>
+        より詳しい睡眠のワークシートは<a href="morning-motivation-work.html" style="color:var(--primary); font-weight:700;">こちらのページ</a>でもご紹介しています。印刷してお使いいただけます。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: ご家族へ ===== -->
+<section>
+  <div class="section-label" style="background:var(--warm-light); color:#8a7040;">👨‍👩‍👧 ご家族の方へ</div>
+  <h2 class="section-title">ご家族にできること</h2>
+
+  <div class="family-highlight">
+    <h3>🤝 一緒に取り組む睡眠改善</h3>
+    <p>
+      高齢のご家族の不眠を心配するあまり、つい<strong>「早く寝なさい」「もう寝る時間だよ」</strong>と声をかけてしまうことがあるかもしれません。しかし、眠くないのに寝ることを強いられるのは本人にとってストレスになり、<strong>かえって不眠を悪化させる</strong>ことがあります。
+    </p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.6rem; color:var(--accent);">家族ができる3つのこと</h3>
+    <ul class="change-list">
+      <li><strong>日中の活動を一緒に楽しむ</strong> — 散歩に誘う、園芸を一緒にする、買い物に出かけるなど、日中の活動量を自然に増やすことが最良の睡眠改善策です</li>
+      <li><strong>「眠れない」を責めない</strong> — 「また起きているの？」ではなく「眠れないときは無理しなくていいよ」と安心感を。不眠への不安が不眠を悪化させる悪循環を避けましょう</li>
+      <li><strong>変化に気づいたら専門医へ</strong> — 昼夜逆転が進む、日中もずっとぼんやりしている、夜中に混乱するなど、<strong>認知症に伴う睡眠障害</strong>が疑われる場合は早めに専門医にご相談ください</li>
+    </ul>
+  </div>
+
+  <div class="note-box">
+    <h4>⚠️ こんなときは早めにご相談を</h4>
+    <p>
+      睡眠衛生を2〜3週間実践しても改善しない場合、強い日中の眠気が続く場合、いびきや呼吸の停止が見られる場合、気分の落ち込みが続く場合は、<strong>治療が必要な疾患</strong>（睡眠時無呼吸症候群、うつ病、レストレスレッグス症候群など）の可能性があります。「年のせい」と片づけず、一度ご相談ください。
+    </p>
+  </div>
+</section>
+
+<!-- ===== 参考文献 ===== -->
+<section>
+  <div class="references">
+    <h3>📚 参考文献</h3>
+    <p style="font-size:0.78rem; color:var(--text-light); margin-bottom:0.8rem;">この資料の内容は以下の文献・ガイドラインに基づいています。</p>
+    <ol class="ref-list">
+      <li>Ohayon MM, Carskadon MA, Guilleminault C, Vitiello MV. Meta-analysis of quantitative sleep parameters from childhood to old age in healthy individuals: developing normative sleep values across the human lifespan. <em>Sleep</em>. 2004;27(7):1255-1273. doi:10.1093/sleep/27.7.1255</li>
+      <li>Spielman AJ, Saskin P, Thorpy MJ. Treatment of chronic insomnia by restriction of time in bed. <em>Sleep</em>. 1987;10(1):45-56. doi:10.1093/sleep/10.1.45</li>
+      <li>Kelley GA, Kelley KS. Exercise and sleep: a systematic review of previous meta-analyses. <em>Journal of Evidence-Based Medicine</em>. 2017;10(1):26-36. doi:10.1111/jebm.12236</li>
+      <li>Irwin MR, Olmstead R, Motivala SJ. Improving sleep quality in older adults with moderate sleep complaints: A randomized controlled trial of Tai Chi Chih. <em>Sleep</em>. 2008;31(7):1001-1008. doi:10.1093/sleep/31.7.1001</li>
+      <li>Qaseem A, Kansagara D, Forciea MA, et al. Management of chronic insomnia disorder in adults: a clinical practice guideline from the American College of Physicians. <em>Annals of Internal Medicine</em>. 2016;165(2):125-133. doi:10.7326/M15-2175</li>
+      <li>American Geriatrics Society 2023 Updated AGS Beers Criteria for potentially inappropriate medication use in older adults. <em>Journal of the American Geriatrics Society</em>. 2023;71(7):2052-2081. doi:10.1111/jgs.18372</li>
+      <li>日本老年医学会 編. 高齢者の安全な薬物療法ガイドライン2015. メジカルビュー社; 2015.</li>
+      <li>Morin CM, Vallières A, Guay B, et al. Cognitive behavioral therapy, singly and combined with medication, for persistent insomnia: a randomized controlled trial. <em>JAMA</em>. 2009;301(19):2005-2015. doi:10.1001/jama.2009.682</li>
+      <li>Buysse DJ. Insomnia. <em>JAMA</em>. 2013;309(7):706-716. doi:10.1001/jama.2013.193</li>
+      <li>Riemann D, Baglioni C, Bassetti C, et al. European guideline for the diagnosis and treatment of insomnia. <em>Journal of Sleep Research</em>. 2017;26(6):675-700. doi:10.1111/jsr.12594</li>
+    </ol>
+  </div>
+</section>
+
+<!-- BOTTOM NAV -->
+<div style="display:flex; gap:0.8rem; margin:2rem 0 0; flex-wrap:wrap;">
+  <a href="index.html" style="flex:1; min-width:140px; text-decoration:none; background:var(--primary-light); border-radius:14px; padding:1rem; text-align:center; display:block;">
+    <span style="font-size:1.2rem;">🏠</span>
+    <p style="font-size:0.82rem; font-weight:700; color:var(--primary); margin-top:0.2rem;">&larr; トップに戻る</p>
+  </a>
+  <a href="sleep-education.html" style="flex:1; min-width:140px; text-decoration:none; background:var(--accent-light); border-radius:14px; padding:1rem; text-align:center; display:block;">
+    <span style="font-size:1.2rem;">🌙📖</span>
+    <p style="font-size:0.82rem; font-weight:700; color:var(--accent); margin-top:0.2rem;">睡眠の解説 &rarr;</p>
+  </a>
+</div>
+
+<div class="footer" style="text-align:center;">
+  <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:var(--primary); text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="/index.html" style="color:#827c73; text-decoration:none;">サイトトップ</a>　·　<a href="../mindfulness/index.html" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">© こころのクリニック桜が丘</p>
+</div>
+
+</div>
+</body>
+</html>
