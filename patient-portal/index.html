@@ -27,12 +27,12 @@
       <!-- ログインフォーム -->
       <form class="login-form" id="loginForm">
         <div id="loginError" class="login-error">
-          患者IDまたは生年月日が正しくありません。
+          ログインIDまたは生年月日が正しくありません。
         </div>
 
         <div class="input-group">
-          <label for="patientId">患者ID</label>
-          <input type="text" id="patientId" class="input" placeholder="例: P-20250001" required autocomplete="username">
+          <label for="patientId">ログインID</label>
+          <input type="text" id="patientId" class="input" placeholder="登録時に設定したID" required autocomplete="username">
         </div>
 
         <div class="input-group">
@@ -69,6 +69,12 @@
         </div>
 
         <div class="input-group">
+          <label for="signupId">ログインID</label>
+          <input type="text" id="signupId" class="input" placeholder="半角英数字で自由に設定" required autocomplete="username">
+          <span style="font-size: var(--text-xs); color: var(--color-neutral-400);">ログイン時に使います。忘れないようにしてください。</span>
+        </div>
+
+        <div class="input-group">
           <label for="signupName">お名前</label>
           <input type="text" id="signupName" class="input" placeholder="例: 山田 太郎" required>
         </div>
@@ -76,11 +82,7 @@
         <div class="input-group">
           <label for="signupBirthDate">生年月日</label>
           <input type="date" id="signupBirthDate" class="input" required>
-        </div>
-
-        <div class="input-group">
-          <label for="signupPhone">電話番号（任意）</label>
-          <input type="tel" id="signupPhone" class="input" placeholder="例: 090-1234-5678">
+          <span style="font-size: var(--text-xs); color: var(--color-neutral-400);">ログイン時の確認に使います。</span>
         </div>
 
         <button type="submit" class="btn btn--primary btn--block btn--lg">

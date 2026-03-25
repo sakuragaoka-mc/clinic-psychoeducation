@@ -19,26 +19,22 @@ const SakuraAuth = {
     return [...this.DEFAULT_PATIENTS, ...registered];
   },
 
-  signup(name, birthDate, phone) {
-    if (!name || !birthDate) return null;
+  signup(customId, name, birthDate) {
+    if (!customId || !name || !birthDate) return { error: 'missing_fields' };
+
+    // IDのバリデーション
+    if (customId.length < 3) return { error: 'id_too_short' };
 
     const registered = SakuraStorage.get('portal_registered_patients') || [];
-
-    // 既存チェック
     const allPatients = [...this.DEFAULT_PATIENTS, ...registered];
-    const exists = allPatients.find(
-      p => p.name === name && p.birthDate === birthDate
+
+    // ID重複チェック
+    const idExists = allPatients.find(
+      p => p.id.toLowerCase() === customId.toLowerCase()
     );
-    if (exists) return { error: 'already_exists', patient: exists };
+    if (idExists) return { error: 'id_taken' };
 
-    // 新しいIDを生成
-    const maxNum = allPatients
-      .map(p => parseInt(p.id.replace('P-', ''), 10))
-      .filter(n => !isNaN(n))
-      .reduce((a, b) => Math.max(a, b), 20250000);
-    const newId = 'P-' + String(maxNum + 1).padStart(8, '0');
-
-    const newPatient = { id: newId, name: name, birthDate: birthDate, phone: phone || '' };
+    const newPatient = { id: customId, name: name, birthDate: birthDate };
     registered.push(newPatient);
     SakuraStorage.set('portal_registered_patients', registered);
     return { success: true, patient: newPatient };
@@ -143,28 +139,32 @@ const SakuraAuth = {
 
     signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const customId = document.getElementById('signupId').value.trim();
       const name = document.getElementById('signupName').value.trim();
       const birthDate = document.getElementById('signupBirthDate').value;
-      const phone = document.getElementById('signupPhone').value.trim();
       const errorEl = document.getElementById('signupError');
       const successEl = document.getElementById('signupSuccess');
 
-      if (!name || !birthDate) {
-        errorEl.textContent = 'お名前と生年月日を入力してください。';
+      if (!customId || !name || !birthDate) {
+        errorEl.textContent = 'すべての項目を入力してください。';
         errorEl.style.display = 'block';
         successEl.style.display = 'none';
         return;
       }
 
-      const result = SakuraAuth.signup(name, birthDate, phone);
+      const result = SakuraAuth.signup(customId, name, birthDate);
 
-      if (result && result.error === 'already_exists') {
-        errorEl.textContent = 'この情報はすでに登録されています。患者ID: ' + result.patient.id + ' でログインしてください。';
+      if (result && result.error === 'id_too_short') {
+        errorEl.textContent = 'ログインIDは3文字以上にしてください。';
+        errorEl.style.display = 'block';
+        successEl.style.display = 'none';
+      } else if (result && result.error === 'id_taken') {
+        errorEl.textContent = 'このIDはすでに使われています。別のIDを入力してください。';
         errorEl.style.display = 'block';
         successEl.style.display = 'none';
       } else if (result && result.success) {
         errorEl.style.display = 'none';
-        successEl.textContent = '登録が完了しました！ 患者ID: ' + result.patient.id + '（この番号を控えてください）';
+        successEl.textContent = '登録完了！ ログインID「' + result.patient.id + '」＋生年月日でログインできます。';
         successEl.style.display = 'block';
 
         // ログインフォームに自動入力
