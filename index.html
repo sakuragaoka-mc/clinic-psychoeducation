@@ -3,29 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>こころの学び — 心理教育ライブラリ | こころのクリニック桜が丘</title>
-  <meta name="description" content="こころや体のしくみを知ることは、回復への第一歩です。心理教育記事とワークシートをご用意しました。">
+  <title>こころのクリニック桜が丘 — ウェブアプリ</title>
+  <meta name="description" content="こころのクリニック桜が丘の患者さま向けウェブアプリ。心理教育ライブラリ、マインドフルネスツール、患者ポータルをご利用いただけます。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
   <style>
-    /* === リセット === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { text-decoration: none; color: inherit; }
-    button { border: none; background: none; cursor: pointer; font: inherit; }
-    img { max-width: 100%; display: block; }
 
-    /* === デザイントークン（優しい桜色パレット） === */
     :root {
       --color-primary-50:  #fdf7f8;
       --color-primary-100: #faeef1;
       --color-primary-200: #f5d8de;
       --color-primary-300: #edb8c5;
-      --color-primary-400: #e098ab;
       --color-primary-500: #d4819a;
       --color-primary-600: #c06d86;
-      --color-primary-700: #a25a71;
-
       --color-neutral-50:  #faf9f8;
       --color-neutral-100: #f5f3f0;
       --color-neutral-200: #ebe8e3;
@@ -35,27 +28,13 @@
       --color-neutral-600: #625d56;
       --color-neutral-700: #43403b;
       --color-neutral-800: #2a2826;
-
       --color-accent-100: #f0f5ef;
-      --color-accent-300: #b5d4b3;
       --color-accent-500: #7aad78;
-
-      --color-info:    #7bafd5;
-      --color-warning: #e8b468;
-
-      --font-base: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
-      --font-heading: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 20px;
-
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-      --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+      --color-info: #7bafd5;
+      --font-base: 'Noto Sans JP', sans-serif;
+      --font-heading: 'Noto Serif JP', serif;
     }
 
-    /* === ベース === */
     body {
       font-family: var(--font-base);
       background: var(--color-neutral-50);
@@ -65,48 +44,9 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
+    .container { max-width: 640px; margin: 0 auto; padding: 0 1.25rem; }
 
-    /* === トップバー === */
-    .top-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 249, 248, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-neutral-200);
-      padding: 0.75rem 0;
-    }
-
-    .top-bar .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .top-bar-brand {
-      font-family: var(--font-heading);
-      font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
-      color: var(--color-neutral-700);
-      font-weight: 500;
-    }
-
-    .top-bar-link {
-      font-size: 0.78rem;
-      color: var(--color-primary-500);
-      transition: color 150ms ease;
-    }
-
-    .top-bar-link:hover {
-      color: var(--color-primary-600);
-    }
-
-    /* === ヒーロー === */
+    /* Hero */
     .hero {
       position: relative;
       padding: 3.5rem 0 3rem;
@@ -115,554 +55,161 @@
       overflow: hidden;
     }
 
-    /* 花びら */
-    .hero-petals {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
+    .hero-petals { position: absolute; inset: 0; pointer-events: none; }
     .petal {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: var(--color-primary-200);
-      border-radius: 50% 0 50% 50%;
-      opacity: 0.35;
-      animation: petalFall 9s ease-in-out infinite;
+      position: absolute; width: 10px; height: 10px;
+      background: var(--color-primary-200); border-radius: 50% 0 50% 50%;
+      opacity: 0.35; animation: petalFall 9s ease-in-out infinite;
     }
-
     .petal:nth-child(1) { top: -10px; left: 15%; animation-duration: 8s; }
     .petal:nth-child(2) { top: -10px; left: 50%; animation-delay: 2.5s; animation-duration: 10s; width: 8px; height: 8px; }
     .petal:nth-child(3) { top: -10px; left: 80%; animation-delay: 4.5s; animation-duration: 7s; width: 7px; height: 7px; }
-
     @keyframes petalFall {
       0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
       10%  { opacity: 0.35; }
       100% { transform: translateY(200px) rotate(360deg) translateX(25px); opacity: 0; }
     }
+    @media (prefers-reduced-motion: reduce) { .petal { animation: none; opacity: 0.15; } }
 
-    @media (prefers-reduced-motion: reduce) {
-      .petal { animation: none; opacity: 0.15; }
-    }
-
-    .hero-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--color-primary-100);
-      color: var(--color-primary-500);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
+    .hero-logo {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--color-primary-100); color: var(--color-primary-500);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; font-size: 1.8rem;
     }
 
     .hero h1 {
       font-family: var(--font-heading);
-      font-size: clamp(1.6rem, 1.3rem + 1.5vw, 2.2rem);
-      color: var(--color-neutral-800);
-      font-weight: 500;
-      margin-bottom: 0.25rem;
+      font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+      color: var(--color-neutral-800); font-weight: 500;
     }
 
-    .hero-subtitle {
-      font-size: clamp(0.85rem, 0.8rem + 0.25vw, 0.95rem);
-      color: var(--color-primary-500);
-      font-weight: 500;
-      margin-bottom: 1rem;
+    .hero-sub {
+      font-size: 0.88rem; color: var(--color-primary-500);
+      font-weight: 500; margin-top: 0.25rem;
     }
 
     .hero-desc {
-      font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.9rem);
-      color: var(--color-neutral-500);
-      line-height: 1.8;
-      max-width: 420px;
-      margin: 0 auto;
+      font-size: 0.85rem; color: var(--color-neutral-500);
+      margin-top: 0.75rem; line-height: 1.8;
     }
 
-    .hero-tip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 1.25rem;
-      padding: 0.4rem 0.9rem;
-      background: rgba(255,255,255,0.7);
-      border-radius: 999px;
-      font-size: 0.75rem;
-      color: var(--color-neutral-500);
-    }
+    /* App Cards */
+    .apps { padding: 1.5rem 0 2rem; }
+    .app-grid { display: flex; flex-direction: column; gap: 1rem; }
 
-    /* === セクション === */
-    .section {
-      padding: 2rem 0;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-header h2 {
-      font-family: var(--font-heading);
-      font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
-      color: var(--color-neutral-700);
-      font-weight: 500;
-    }
-
-    .section-badge {
-      font-size: 0.72rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: var(--color-neutral-100);
-      color: var(--color-neutral-400);
-    }
-
-    /* === カード === */
-    .card-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .content-card {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      background: #fff;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--color-neutral-200);
-      box-shadow: var(--shadow-sm);
+    .app-card {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.25rem 1.5rem; background: #fff;
+      border-radius: 16px; border: 1px solid var(--color-neutral-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       transition: box-shadow 250ms ease, transform 250ms ease;
     }
+    .app-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .app-card:active { transform: translateY(0); }
 
-    .content-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+    .app-icon {
+      flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
     }
 
-    .content-card:active {
-      transform: translateY(0);
-    }
+    .app-body { flex: 1; min-width: 0; }
+    .app-title { font-size: 1.05rem; font-weight: 700; color: var(--color-neutral-800); margin-bottom: 0.15rem; }
+    .app-desc { font-size: 0.82rem; color: var(--color-neutral-400); line-height: 1.5; }
 
-    .card-icon-wrap {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-    }
-
-    .card-icon-wrap.education {
-      background: var(--color-primary-100);
-      color: var(--color-primary-500);
-    }
-
-    .card-icon-wrap.worksheet {
-      background: var(--color-accent-100);
-      color: var(--color-accent-500);
-    }
-
-    .card-body {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .card-title {
-      font-size: clamp(0.88rem, 0.84rem + 0.2vw, 0.95rem);
-      font-weight: 500;
-      color: var(--color-neutral-700);
-      margin-bottom: 0.2rem;
-    }
-
-    .card-desc {
-      font-size: 0.78rem;
-      color: var(--color-neutral-400);
-      line-height: 1.6;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-arrow {
-      flex-shrink: 0;
-      color: var(--color-neutral-300);
+    .app-arrow {
+      flex-shrink: 0; color: var(--color-neutral-300);
       transition: color 150ms ease, transform 150ms ease;
     }
+    .app-card:hover .app-arrow { color: var(--color-primary-500); transform: translateX(3px); }
 
-    .content-card:hover .card-arrow {
-      color: var(--color-primary-400);
-      transform: translateX(3px);
-    }
-
-    /* === アプリリンク === */
-    .app-links {
-      padding: 1.5rem 0;
-    }
-
-    .app-links-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-    }
-
-    .app-link-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1.25rem 0.75rem;
-      background: #fff;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--color-neutral-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 250ms ease, transform 250ms ease;
-    }
-
-    .app-link-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .app-link-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .app-link-label {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--color-neutral-700);
-    }
-
-    /* === フッター === */
+    /* Footer */
     .site-footer {
-      padding: 2rem 0 1.5rem;
-      border-top: 1px solid var(--color-neutral-200);
-      text-align: center;
+      padding: 2rem 0 1.5rem; border-top: 1px solid var(--color-neutral-200); text-align: center;
     }
-
     .site-footer-brand {
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      color: var(--color-neutral-600);
-      font-weight: 500;
-      margin-bottom: 0.75rem;
+      font-family: var(--font-heading); font-size: 0.88rem;
+      color: var(--color-neutral-600); font-weight: 500; margin-bottom: 0.75rem;
     }
-
     .site-footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem 1rem;
-      margin-bottom: 0.75rem;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.5rem 1rem; margin-bottom: 0.75rem;
     }
-
     .site-footer-links a {
-      font-size: 0.75rem;
-      color: var(--color-neutral-400);
-      transition: color 150ms ease;
+      font-size: 0.78rem; color: var(--color-neutral-400); transition: color 150ms ease;
     }
-
-    .site-footer-links a:hover {
-      color: var(--color-primary-500);
-    }
-
-    .site-footer-copy {
-      font-size: 0.72rem;
-      color: var(--color-neutral-400);
-      line-height: 1.7;
-    }
-
-    .site-footer-disclaimer {
-      font-size: 0.7rem;
-      color: var(--color-neutral-400);
-      line-height: 1.6;
-      margin-top: 0.75rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--color-neutral-200);
-    }
+    .site-footer-links a:hover { color: var(--color-primary-500); }
+    .site-footer-copy { font-size: 0.72rem; color: var(--color-neutral-400); }
   </style>
 </head>
 <body>
 
-  <!-- トップバー -->
-  <header class="top-bar">
-    <div class="container">
-      <span class="top-bar-brand">こころのクリニック桜が丘</span>
-      <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" class="top-bar-link">
-        クリニックHP
-      </a>
-    </div>
-  </header>
-
-  <!-- ヒーロー -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-petals" aria-hidden="true">
-      <span class="petal"></span>
-      <span class="petal"></span>
-      <span class="petal"></span>
+      <span class="petal"></span><span class="petal"></span><span class="petal"></span>
     </div>
     <div class="container">
-      <div class="hero-icon" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-        </svg>
-      </div>
-      <h1>こころの学び</h1>
-      <p class="hero-subtitle">心理教育ライブラリ</p>
-      <p class="hero-desc">
-        こころや体のしくみを知ることは、回復への第一歩です。<br>
-        あなたのペースで、気になるテーマから読んでみてください。
-      </p>
-      <span class="hero-tip">📱 ホーム画面に追加すると、いつでもすぐにアクセスできます</span>
+      <div class="hero-logo" aria-hidden="true">🌸</div>
+      <h1>こころのクリニック桜が丘</h1>
+      <p class="hero-sub">患者さま向けウェブアプリ</p>
+      <p class="hero-desc">心理教育・セルフケアツール・患者ポータルを<br>ご利用いただけます。</p>
     </div>
   </section>
 
-  <main>
+  <!-- App Cards -->
+  <main class="apps">
     <div class="container">
+      <div class="app-grid">
 
-      <!-- 治療・お薬の解説 -->
-      <section class="section">
-        <div class="section-header">
-          <h2>治療・お薬について</h2>
-          <span class="section-badge">2記事</span>
-        </div>
-        <div class="card-grid">
+        <a href="psychoeducation/index.html" class="app-card">
+          <div class="app-icon" style="background: var(--color-primary-100); color: var(--color-primary-500);">📖</div>
+          <div class="app-body">
+            <div class="app-title">こころの学び</div>
+            <div class="app-desc">心理教育ライブラリ — 疾患の解説、治療・お薬の情報、ワークシート</div>
+          </div>
+          <span class="app-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </a>
 
-          <a href="treatment-guide.html" class="content-card">
-            <div class="card-icon-wrap" style="background: #faeef1; color: #d4819a;">🏥</div>
-            <div class="card-body">
-              <div class="card-title">治療の解説</div>
-              <div class="card-desc">精神科・心療内科の治療の流れ——心理療法の種類やエビデンス、よくある質問にお答えします。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
+        <a href="mindfulness/index.html" class="app-card">
+          <div class="app-icon" style="background: var(--color-accent-100); color: var(--color-accent-500);">🧘</div>
+          <div class="app-body">
+            <div class="app-title">マインドフルネス</div>
+            <div class="app-desc">瞑想タイマー、気分記録、呼吸法 — 心を穏やかに保つためのツール</div>
+          </div>
+          <span class="app-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </a>
 
-          <a href="medication-guide.html" class="content-card">
-            <div class="card-icon-wrap" style="background: #eef4fb; color: #7bafd5;">💊</div>
-            <div class="card-body">
-              <div class="card-title">お薬の解説</div>
-              <div class="card-desc">抗うつ薬・抗不安薬・気分安定薬・抗精神病薬——それぞれの仕組みと付き合い方をやさしく解説。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
+        <a href="patient-portal/index.html" class="app-card">
+          <div class="app-icon" style="background: #eef4fb; color: var(--color-info);">💊</div>
+          <div class="app-body">
+            <div class="app-title">患者ポータル</div>
+            <div class="app-desc">予約確認、お知らせ、診察情報 — クリニックとの連絡窓口</div>
+          </div>
+          <span class="app-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </a>
 
-        </div>
-      </section>
-
-      <!-- 心理教育記事 -->
-      <section class="section">
-        <div class="section-header">
-          <h2>心理教育</h2>
-          <span class="section-badge">6記事</span>
-        </div>
-        <div class="card-grid">
-
-          <a href="sleep-education.html" class="content-card">
-            <div class="card-icon-wrap education">📖</div>
-            <div class="card-body">
-              <div class="card-title">睡眠と覚醒のしくみ</div>
-              <div class="card-desc">朝起きられないのは怠けじゃない——体内時計・ドーパミン・オレキシンなど、脳のメカニズムからやさしく解説します。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="anxiety-education.html" class="content-card">
-            <div class="card-icon-wrap education">📖</div>
-            <div class="card-body">
-              <div class="card-title">不安のメカニズムと対処法</div>
-              <div class="card-desc">パニック・社交不安・全般性不安障害——「不安」が生まれる脳の仕組みと、3つの対処アプローチ。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="depression-education.html" class="content-card">
-            <div class="card-icon-wrap education">📖</div>
-            <div class="card-body">
-              <div class="card-title">うつの理解と行動活性化</div>
-              <div class="card-desc">「やる気が出ない」は意志の問題じゃない——脳科学から理解するうつと、小さな一歩から始める行動活性化。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="adhd-asd-education.html" class="content-card">
-            <div class="card-icon-wrap education">📖</div>
-            <div class="card-body">
-              <div class="card-title">発達特性との付き合い方</div>
-              <div class="card-desc">ADHD・ASDは「欠陥」じゃなく「脳の多様性」——特性を知り、日常をもっとラクにする工夫。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="schizophrenia-education.html" class="content-card">
-            <div class="card-icon-wrap education">📖</div>
-            <div class="card-body">
-              <div class="card-title">統合失調症の理解と回復</div>
-              <div class="card-desc">約100人に1人が経験する脳の病気——正しく知り、治療の3本柱で回復を目指す。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="bipolar-education.html" class="content-card">
-            <div class="card-icon-wrap education">📖</div>
-            <div class="card-body">
-              <div class="card-title">双極性障害の理解と付き合い方</div>
-              <div class="card-desc">躁とうつの波を知り、気分安定薬と生活リズムでコントロールする方法。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-        </div>
-      </section>
-
-      <!-- ワークシート -->
-      <section class="section">
-        <div class="section-header">
-          <h2>ワークシート</h2>
-          <span class="section-badge">6ワーク</span>
-        </div>
-        <div class="card-grid">
-
-          <a href="morning-motivation-work.html" class="content-card">
-            <div class="card-icon-wrap worksheet">✏️</div>
-            <div class="card-body">
-              <div class="card-title">朝の覚醒モチベーション</div>
-              <div class="card-desc">朝起きるための小さな楽しみを見つけて、覚醒へのモチベーションをつくるワーク。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="anxiety-work.html" class="content-card">
-            <div class="card-icon-wrap worksheet">✏️</div>
-            <div class="card-body">
-              <div class="card-title">不安への対処</div>
-              <div class="card-desc">不安な気持ちを書き出し、対処法を整理するためのセルフワーク。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="depression-work.html" class="content-card">
-            <div class="card-icon-wrap worksheet">✏️</div>
-            <div class="card-body">
-              <div class="card-title">行動活性化</div>
-              <div class="card-desc">小さな行動から始めて、少しずつ活動を増やしていくためのワーク。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="adhd-asd-work.html" class="content-card">
-            <div class="card-icon-wrap worksheet">✏️</div>
-            <div class="card-body">
-              <div class="card-title">発達特性の生活の工夫</div>
-              <div class="card-desc">発達特性に合わせた日常の工夫を見つけて実践するワーク。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="schizophrenia-work.html" class="content-card">
-            <div class="card-icon-wrap worksheet">✏️</div>
-            <div class="card-body">
-              <div class="card-title">統合失調症セルフモニタリング</div>
-              <div class="card-desc">日々の体調や症状を記録して、変化に気づくためのモニタリングシート。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-          <a href="bipolar-work.html" class="content-card">
-            <div class="card-icon-wrap worksheet">✏️</div>
-            <div class="card-body">
-              <div class="card-title">双極性障害 気分モニタリング</div>
-              <div class="card-desc">躁とうつの波を記録して、パターンを把握するための気分日記。</div>
-            </div>
-            <span class="card-arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-
-        </div>
-      </section>
-
-      <!-- クリニックリンク -->
-      <section class="app-links">
-        <div class="section-header">
-          <h2>クリニック情報</h2>
-        </div>
-        <div class="app-links-grid">
-          <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" class="app-link-card">
-            <div class="app-link-icon" style="background: var(--color-primary-100); color: var(--color-primary-500);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
-            </div>
-            <span class="app-link-label">クリニックHP</span>
-          </a>
-          <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" class="app-link-card">
-            <div class="app-link-icon" style="background: var(--color-accent-100); color: var(--color-accent-500);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            <span class="app-link-label">ご予約・お問合せ</span>
-          </a>
-        </div>
-      </section>
-
+      </div>
     </div>
   </main>
 
-  <!-- フッター -->
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p class="site-footer-brand">こころのクリニック桜が丘</p>
       <nav class="site-footer-links">
         <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener">クリニックHP</a>
+        <a href="psychoeducation/index.html">こころの学び</a>
+        <a href="mindfulness/index.html">マインドフルネス</a>
+        <a href="patient-portal/index.html">患者ポータル</a>
       </nav>
-      <p class="site-footer-copy">
-        &copy; こころのクリニック桜が丘
-      </p>
-      <p class="site-footer-disclaimer">
-        この資料は一般的な情報提供を目的としています。<br>
-        個別の症状については主治医にご相談ください。
-      </p>
+      <p class="site-footer-copy">&copy; こころのクリニック桜が丘</p>
     </div>
   </footer>
 

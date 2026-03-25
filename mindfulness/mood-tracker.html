@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>気分記録 - こころのクリニック桜が丘</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/css/variables.css">
+  <link rel="stylesheet" href="../shared/css/reset.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/mindfulness.css">
+</head>
+<body>
+  <div class="page">
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar-back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        戻る
+      </a>
+      <span class="navbar-title">気分記録</span>
+      <button class="btn btn--ghost btn--sm" id="exportBtn" aria-label="データを出力">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </button>
+    </nav>
+
+    <main class="page-content">
+      <div class="container">
+
+        <!-- タブ -->
+        <div class="tabs" role="tablist">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="entry">記録する</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="calendar">カレンダー</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="trends">トレンド</button>
+        </div>
+
+        <!-- 記録タブ -->
+        <div class="tab-content active" id="tab-entry" role="tabpanel">
+          <form id="moodForm" class="mt-4">
+            <!-- 気分スケール -->
+            <div class="input-group">
+              <label>今の気分は？</label>
+              <div class="mood-scale" role="radiogroup" aria-label="気分スケール">
+                <button type="button" class="mood-option" data-mood="1" role="radio" aria-checked="false" aria-label="とても悪い">
+                  <div class="mood-face" style="background: var(--color-mood-1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                      <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+                      <path d="M8 17c1.5-2 6.5-2 8 0" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span class="mood-label">とても<br>悪い</span>
+                </button>
+                <button type="button" class="mood-option" data-mood="2" role="radio" aria-checked="false" aria-label="悪い">
+                  <div class="mood-face" style="background: var(--color-mood-2);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                      <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+                      <path d="M8 16c1-1 7-1 8 0" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span class="mood-label">悪い</span>
+                </button>
+                <button type="button" class="mood-option" data-mood="3" role="radio" aria-checked="false" aria-label="ふつう">
+                  <div class="mood-face" style="background: var(--color-mood-3);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                      <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+                      <line x1="8" y1="15" x2="16" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span class="mood-label">ふつう</span>
+                </button>
+                <button type="button" class="mood-option" data-mood="4" role="radio" aria-checked="false" aria-label="良い">
+                  <div class="mood-face" style="background: var(--color-mood-4);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                      <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+                      <path d="M8 14c1 1 7 1 8 0" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span class="mood-label">良い</span>
+                </button>
+                <button type="button" class="mood-option" data-mood="5" role="radio" aria-checked="false" aria-label="とても良い">
+                  <div class="mood-face" style="background: var(--color-mood-5);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                      <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+                      <path d="M7 13c1.5 2.5 7.5 2.5 9 0" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span class="mood-label">とても<br>良い</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 感情タグ -->
+            <div class="input-group mt-4">
+              <label>感情（複数選択可）</label>
+              <div class="pills" id="emotionPills">
+                <button type="button" class="pill" data-emotion="不安" aria-pressed="false">不安</button>
+                <button type="button" class="pill" data-emotion="悲しみ" aria-pressed="false">悲しみ</button>
+                <button type="button" class="pill" data-emotion="怒り" aria-pressed="false">怒り</button>
+                <button type="button" class="pill" data-emotion="喜び" aria-pressed="false">喜び</button>
+                <button type="button" class="pill" data-emotion="穏やか" aria-pressed="false">穏やか</button>
+                <button type="button" class="pill" data-emotion="疲れ" aria-pressed="false">疲れ</button>
+                <button type="button" class="pill" data-emotion="希望" aria-pressed="false">希望</button>
+                <button type="button" class="pill" data-emotion="孤独" aria-pressed="false">孤独</button>
+                <button type="button" class="pill" data-emotion="感謝" aria-pressed="false">感謝</button>
+              </div>
+            </div>
+
+            <!-- 睡眠 -->
+            <div class="input-group mt-4">
+              <label>昨晩の睡眠は？</label>
+              <div class="pills" id="sleepPills">
+                <button type="button" class="pill" data-sleep="1" aria-pressed="false">眠れなかった</button>
+                <button type="button" class="pill" data-sleep="2" aria-pressed="false">あまり</button>
+                <button type="button" class="pill" data-sleep="3" aria-pressed="false">ふつう</button>
+                <button type="button" class="pill" data-sleep="4" aria-pressed="false">よく眠れた</button>
+                <button type="button" class="pill" data-sleep="5" aria-pressed="false">ぐっすり</button>
+              </div>
+            </div>
+
+            <!-- 活動タグ -->
+            <div class="input-group mt-4">
+              <label>今日の活動（複数選択可）</label>
+              <div class="pills" id="activityPills">
+                <button type="button" class="pill" data-activity="運動した" aria-pressed="false">運動した</button>
+                <button type="button" class="pill" data-activity="人と会った" aria-pressed="false">人と会った</button>
+                <button type="button" class="pill" data-activity="自然の中にいた" aria-pressed="false">自然の中にいた</button>
+                <button type="button" class="pill" data-activity="瞑想した" aria-pressed="false">瞑想した</button>
+                <button type="button" class="pill" data-activity="読書した" aria-pressed="false">読書した</button>
+                <button type="button" class="pill" data-activity="趣味を楽しんだ" aria-pressed="false">趣味を楽しんだ</button>
+              </div>
+            </div>
+
+            <!-- メモ -->
+            <div class="input-group mt-4">
+              <label for="moodNote">ひとこと（任意）</label>
+              <textarea id="moodNote" class="input" placeholder="今日はどんな一日でしたか？" maxlength="500" rows="3"></textarea>
+              <span class="text-sm text-muted" id="noteCount">0 / 500</span>
+            </div>
+
+            <!-- 保存ボタン -->
+            <button type="submit" class="btn btn--primary btn--block btn--lg mt-6">
+              記録を保存する
+            </button>
+          </form>
+
+          <!-- 保存完了メッセージ -->
+          <div id="savedMessage" class="card mt-4" hidden style="background: var(--color-accent-100); border-color: var(--color-accent-300); text-align: center;">
+            <p style="color: var(--color-accent-500); font-weight: var(--font-weight-medium);">
+              記録を保存しました
+            </p>
+          </div>
+        </div>
+
+        <!-- カレンダータブ -->
+        <div class="tab-content" id="tab-calendar" role="tabpanel">
+          <div class="mt-4 flex items-center justify-between">
+            <button class="btn btn--ghost btn--icon" id="prevMonth" aria-label="前の月">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <h3 id="calendarTitle" class="text-center"></h3>
+            <button class="btn btn--ghost btn--icon" id="nextMonth" aria-label="次の月">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+          <div class="mood-calendar" id="calendarGrid">
+            <span class="mood-calendar-header">日</span>
+            <span class="mood-calendar-header">月</span>
+            <span class="mood-calendar-header">火</span>
+            <span class="mood-calendar-header">水</span>
+            <span class="mood-calendar-header">木</span>
+            <span class="mood-calendar-header">金</span>
+            <span class="mood-calendar-header">土</span>
+          </div>
+
+          <!-- 選択した日の詳細 -->
+          <div id="dayDetail" class="card mt-4" hidden>
+            <h4 id="dayDetailTitle" class="mb-2"></h4>
+            <div id="dayDetailContent"></div>
+          </div>
+        </div>
+
+        <!-- トレンドタブ -->
+        <div class="tab-content" id="tab-trends" role="tabpanel">
+          <div class="mt-4 flex justify-center gap-2">
+            <button class="pill active" data-period="7">7日</button>
+            <button class="pill" data-period="30">30日</button>
+            <button class="pill" data-period="90">90日</button>
+          </div>
+
+          <div class="card mt-4">
+            <canvas id="moodChart" width="580" height="250" aria-label="気分トレンドグラフ" role="img"></canvas>
+          </div>
+
+          <!-- インサイト -->
+          <div id="insights" class="mt-4">
+            <h3 class="section-title">気づき</h3>
+            <div id="insightCards" class="flex flex-col gap-3"></div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="container">
+        <nav class="site-footer-links">
+          <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener">クリニックHP</a>
+          <a href="../psychoeducation/index.html" target="_blank" rel="noopener">こころの学び</a>
+          <a href="index.html">マインドフルネス</a>
+          <a href="../patient-portal/index.html">患者ポータル</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../shared/js/storage.js"></script>
+  <script src="js/mood-chart.js"></script>
+  <script src="js/mood-tracker.js"></script>
+</body>
+</html>

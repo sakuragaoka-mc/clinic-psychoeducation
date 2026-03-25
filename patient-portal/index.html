@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログイン - こころのクリニック桜が丘 患者ポータル</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/css/variables.css">
+  <link rel="stylesheet" href="../shared/css/reset.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <h1 class="login-title">患者ポータル</h1>
+      <p class="login-subtitle">こころのクリニック桜が丘</p>
+
+      <form class="login-form" id="loginForm">
+        <div id="loginError" class="login-error">
+          患者IDまたは生年月日が正しくありません。
+        </div>
+
+        <div class="input-group">
+          <label for="patientId">患者ID</label>
+          <input type="text" id="patientId" class="input" placeholder="例: P-20250001" required autocomplete="username">
+        </div>
+
+        <div class="input-group">
+          <label for="birthDate">生年月日</label>
+          <input type="date" id="birthDate" class="input" required>
+        </div>
+
+        <label class="toggle" style="justify-content: flex-start;">
+          <input type="checkbox" id="rememberMe" checked>
+          <span class="toggle-track"></span>
+          <span class="toggle-label">ログイン状態を保持する</span>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg">
+          ログイン
+        </button>
+      </form>
+
+      <p class="login-privacy">
+        お客様の個人情報は厳重に管理されています。<br>
+        30分間操作がない場合、自動的にログアウトされます。
+      </p>
+    </div>
+
+    <nav class="site-footer-links mt-4">
+      <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener">クリニックHP</a>
+      <a href="../psychoeducation/index.html" target="_blank" rel="noopener">こころの学び</a>
+      <a href="../mindfulness/index.html">マインドフルネス</a>
+    </nav>
+  </div>
+
+  <script src="../shared/js/storage.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

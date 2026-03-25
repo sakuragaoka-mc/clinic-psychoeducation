@@ -1,0 +1,540 @@
+/* ============================================
+   マインドフルネスアプリ - スタイル
+   ============================================ */
+
+/* --- ヘッダー --- */
+.mindfulness-header {
+  position: relative;
+  padding: var(--space-8) 0 var(--space-7);
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, #fff 50%, var(--color-accent-100) 100%);
+  text-align: center;
+  overflow: hidden;
+}
+
+.header-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-neutral-800);
+  margin-bottom: var(--space-1);
+}
+
+.header-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-primary-500);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-4);
+}
+
+.header-desc {
+  font-size: var(--text-sm);
+  color: var(--color-neutral-500);
+  line-height: var(--line-height-loose);
+}
+
+/* 桜の花びらアニメーション */
+.header-petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--color-primary-200);
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.4;
+  animation: petalFall 8s ease-in-out infinite;
+}
+
+.petal-1 {
+  top: -10px;
+  left: 20%;
+  animation-delay: 0s;
+  animation-duration: 7s;
+}
+
+.petal-2 {
+  top: -10px;
+  left: 55%;
+  animation-delay: 2.5s;
+  animation-duration: 9s;
+  width: 10px;
+  height: 10px;
+}
+
+.petal-3 {
+  top: -10px;
+  left: 80%;
+  animation-delay: 4s;
+  animation-duration: 6s;
+  width: 8px;
+  height: 8px;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(200px) rotate(360deg) translateX(30px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal { animation: none; opacity: 0.2; }
+}
+
+/* --- 機能カード --- */
+.feature-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: calc(-1 * var(--space-5));
+  position: relative;
+  z-index: 1;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.feature-card .card-icon {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.feature-card .card-title {
+  margin-bottom: var(--space-1);
+}
+
+.feature-card .card-arrow {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--color-neutral-300);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.feature-card:hover .card-arrow {
+  color: var(--color-primary-400);
+  transform: translateX(4px);
+}
+
+/* カード内テキストエリア */
+.feature-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- 瞑想タイマー --- */
+.timer-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100dvh - 56px);
+}
+
+.timer-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* タイマーリング */
+.timer-ring-container {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin-bottom: var(--space-6);
+}
+
+.timer-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-ring-bg {
+  fill: none;
+  stroke: var(--color-neutral-200);
+  stroke-width: 6;
+}
+
+.timer-ring-progress {
+  fill: none;
+  stroke: var(--color-primary-400);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timer-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-time {
+  font-family: var(--font-family-base);
+  font-size: 3.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-800);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-label {
+  font-size: var(--text-sm);
+  color: var(--color-neutral-400);
+  margin-top: var(--space-2);
+}
+
+/* 時間選択 */
+.duration-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.duration-btn {
+  min-width: 52px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  border: 1.5px solid var(--color-neutral-200);
+  background: #fff;
+  color: var(--color-neutral-600);
+  transition: all var(--transition-fast);
+}
+
+.duration-btn:hover {
+  border-color: var(--color-primary-300);
+}
+
+.duration-btn.active {
+  border-color: var(--color-primary-500);
+  background: var(--color-primary-500);
+  color: #fff;
+}
+
+/* コントロールボタン */
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.timer-start-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-primary-500);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.timer-start-btn:hover {
+  background: var(--color-primary-600);
+  transform: scale(1.05);
+}
+
+.timer-start-btn:active {
+  transform: scale(0.98);
+}
+
+.timer-start-btn svg {
+  width: 32px;
+  height: 32px;
+}
+
+.timer-stop-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.timer-stop-btn:hover {
+  background: var(--color-neutral-200);
+}
+
+/* オプション */
+.timer-options {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* セッション中の全画面風UI */
+.timer-active .timer-options,
+.timer-active .duration-selector {
+  display: none;
+}
+
+.timer-active .timer-ring-container {
+  width: 300px;
+  height: 300px;
+}
+
+/* 完了画面 */
+.timer-complete {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.timer-complete-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-accent-100);
+  color: var(--color-accent-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-5);
+}
+
+.timer-complete h2 {
+  color: var(--color-neutral-800);
+  margin-bottom: var(--space-2);
+}
+
+.timer-complete p {
+  color: var(--color-neutral-500);
+  font-size: var(--text-sm);
+}
+
+/* 連続記録 */
+.streak-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-primary-50);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  color: var(--color-primary-600);
+  margin-top: var(--space-4);
+}
+
+/* --- 気分トラッカー --- */
+.mood-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-4) 0;
+}
+
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  border: 2px solid transparent;
+  background: none;
+  flex: 1;
+}
+
+.mood-option:hover {
+  background: var(--color-neutral-100);
+}
+
+.mood-option.active,
+.mood-option[aria-pressed="true"] {
+  border-color: var(--color-primary-400);
+  background: var(--color-primary-50);
+}
+
+.mood-face {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mood-label {
+  font-size: var(--text-xs);
+  color: var(--color-neutral-500);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* カレンダー */
+.mood-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-top: var(--space-4);
+}
+
+.mood-calendar-header {
+  font-size: var(--text-xs);
+  color: var(--color-neutral-400);
+  text-align: center;
+  padding: var(--space-2) 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.mood-calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  position: relative;
+}
+
+.mood-calendar-day:hover {
+  background: var(--color-neutral-100);
+}
+
+.mood-calendar-day.today {
+  font-weight: var(--font-weight-bold);
+}
+
+.mood-calendar-day .mood-dot {
+  position: absolute;
+  bottom: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* --- 心理教育 --- */
+.education-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.education-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.education-card-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary-100);
+  color: var(--color-primary-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+.education-card.read .education-card-number {
+  background: var(--color-accent-100);
+  color: var(--color-accent-500);
+}
+
+.education-card-meta {
+  font-size: var(--text-xs);
+  color: var(--color-neutral-400);
+  margin-top: var(--space-1);
+}
+
+/* 記事ビュー */
+.article-view {
+  padding: var(--space-6) 0;
+}
+
+.article-view h2 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.article-view p {
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-loose);
+}
+
+/* 呼吸エクササイズウィジェット */
+.breathing-widget {
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-accent-100));
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+  text-align: center;
+  margin: var(--space-6) 0;
+}
+
+.breathing-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--color-primary-200);
+  margin: 0 auto var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 4s ease-in-out;
+  color: var(--color-primary-600);
+  font-weight: var(--font-weight-medium);
+}
+
+.breathing-circle.inhale {
+  transform: scale(1.4);
+}
+
+.breathing-circle.exhale {
+  transform: scale(1);
+}
+
+.breathing-instruction {
+  font-size: var(--text-lg);
+  color: var(--color-neutral-700);
+  font-weight: var(--font-weight-medium);
+}
+
+/* クリニック情報 */
+.clinic-info {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-neutral-200);
+}

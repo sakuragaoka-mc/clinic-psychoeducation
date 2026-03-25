@@ -1,0 +1,101 @@
+/* ============================================
+   こころのクリニック桜が丘 - デザイントークン
+   ============================================ */
+
+:root {
+  /* Primary -- 優しい桜色 */
+  --color-primary-50:  #fdf7f8;
+  --color-primary-100: #faeef1;
+  --color-primary-200: #f5d8de;
+  --color-primary-300: #edb8c5;
+  --color-primary-400: #e098ab;
+  --color-primary-500: #d4819a;
+  --color-primary-600: #c06d86;
+  --color-primary-700: #a25a71;
+
+  /* Neutral -- 優しいグレー */
+  --color-neutral-50:  #faf9f8;
+  --color-neutral-100: #f5f3f0;
+  --color-neutral-200: #ebe8e3;
+  --color-neutral-300: #d8d4cd;
+  --color-neutral-400: #ada79e;
+  --color-neutral-500: #827c73;
+  --color-neutral-600: #625d56;
+  --color-neutral-700: #43403b;
+  --color-neutral-800: #2a2826;
+
+  /* Accent -- 優しいセージグリーン */
+  --color-accent-100: #f0f5ef;
+  --color-accent-300: #b5d4b3;
+  --color-accent-500: #7aad78;
+
+  /* 気分カラー */
+  --color-mood-1: #9aa4b5;
+  --color-mood-2: #b3bdd0;
+  --color-mood-3: #d0ccb3;
+  --color-mood-4: #c3ddb5;
+  --color-mood-5: #edb8c5;
+
+  /* セマンティック */
+  --color-warning: #e8b468;
+  --color-error:   #d47070;
+  --color-success: #7aad78;
+  --color-info:    #7bafd5;
+
+  /* タイポグラフィ */
+  --font-family-base: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --font-family-heading: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+
+  --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.8rem);
+  --text-sm:   clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  --text-xl:   clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+  --text-2xl:  clamp(1.6rem, 1.3rem + 1.5vw, 2.25rem);
+
+  --line-height-tight: 1.4;
+  --line-height-base:  1.7;
+  --line-height-loose: 1.9;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold:   700;
+
+  /* スペーシング（8px基準） */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* 角丸 */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-full: 9999px;
+
+  /* シャドウ */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  /* トランジション */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* レイアウト */
+  --container-max: 640px;
+  --container-padding: var(--space-5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+}

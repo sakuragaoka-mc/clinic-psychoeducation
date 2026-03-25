@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>双極性障害 気分モニタリング・ワーク — こころのクリニック桜が丘</title>
+<title>不安への対処ワークシート — こころのクリニック桜が丘</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #7b88c4;
-    --primary-light: #eef0f9;
-    --primary-dark: #6a78b5;
-    --accent: #d4a060;
+    --primary: #d4819a;
+    --primary-light: #faeef1;
+    --primary-dark: #a25a71;
+    --accent: #b08bc4;
     --text: #3d3935;
     --text-light: #827c73;
     --bg: #faf9f8;
@@ -49,12 +49,6 @@
     text-decoration: none;
   }
 
-  .nav-clinic-name {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    font-weight: 500;
-  }
-
   .nav-link-secondary {
     color: #827c73;
     font-weight: 600;
@@ -62,9 +56,15 @@
     text-decoration: none;
   }
 
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #6a78b5 0%, #7b88c4 35%, #d4a060 65%, #e8c478 100%);
+    background: linear-gradient(135deg, #9b7baf 0%, #b08bc4 40%, #c4a4d4 70%, #d4819a 100%);
     padding: 3rem 1.5rem 4rem;
     text-align: center;
     position: relative;
@@ -82,7 +82,7 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(212,160,96,0.12) 0%, transparent 50%);
+      radial-gradient(circle at 80% 70%, rgba(255,152,0,0.12) 0%, transparent 50%);
   }
 
   .hero::after {
@@ -119,7 +119,7 @@
   }
 
   .hero .subtitle {
-    color: #f0d8a0;
+    color: #edb8c5;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     font-weight: 500;
     margin-top: 0.8rem;
@@ -134,31 +134,59 @@
     padding: 0 1.2rem;
   }
 
-  /* ===== SECTION ===== */
-  section {
+  /* ===== INTRO ===== */
+  .intro {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--primary);
+  }
+
+  .intro h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+  }
+
+  .intro p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ===== WORK SECTIONS ===== */
+  .work-section {
     margin: 2rem 0;
   }
 
-  .section-label {
+  .work-num {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 0.35rem 1rem;
+    gap: 0.5rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.3rem 1rem;
     border-radius: 20px;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
   }
 
-  .section-title {
+  .work-title {
     font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    font-size: clamp(1.15rem, 3.5vw, 1.4rem);
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     line-height: 1.4;
-    color: var(--text);
+  }
+
+  .work-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
   }
 
   /* ===== CARDS ===== */
@@ -166,363 +194,179 @@
     background: var(--card);
     border-radius: 18px;
     padding: 1.5rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     box-shadow: 0 3px 16px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.04);
   }
 
-  .card h3 {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 800;
-    margin-bottom: 0.6rem;
-    color: var(--text);
+  .card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
   }
 
   .card p {
-    font-size: 0.92rem;
-    color: var(--text-light);
-    line-height: 1.8;
-  }
-
-  /* ===== INTRO CARD ===== */
-  .intro-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 1.5rem;
-    margin-bottom: 1.2rem;
-    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.04);
-    text-align: center;
-  }
-
-  .intro-card p {
-    font-size: 0.92rem;
-    color: var(--text-light);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-
-  .clear-btn {
-    display: inline-block;
-    background: #ffebee;
-    color: #c62828;
-    border: 1px solid rgba(198,40,40,0.2);
-    padding: 0.5rem 1.2rem;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    transition: background 0.2s;
-  }
-
-  .clear-btn:hover {
-    background: #ffcdd2;
-  }
-
-  /* ===== WORKSHEET STYLES ===== */
-  .ws-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 1.5rem;
-    margin-bottom: 1.2rem;
-    box-shadow: 0 3px 16px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .ws-card h3 {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 800;
-    margin-bottom: 0.8rem;
-    color: var(--text);
-  }
-
-  .ws-card p {
     font-size: 0.88rem;
     color: var(--text-light);
     line-height: 1.75;
   }
 
-  /* ===== MOOD TABLE ===== */
-  .mood-table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 0.8rem;
-  }
-
-  .mood-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 0.82rem;
-    min-width: 640px;
-  }
-
-  .mood-table thead th {
-    background: #7b88c4;
-    color: #fff;
-    padding: 0.6rem 0.4rem;
-    font-weight: 700;
-    font-size: 0.78rem;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .mood-table thead th:first-child {
-    border-radius: 10px 0 0 0;
-  }
-
-  .mood-table thead th:last-child {
-    border-radius: 0 10px 0 0;
-  }
-
-  .mood-table tbody td {
-    padding: 0.3rem;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  .mood-table tbody tr:last-child td:first-child {
-    border-radius: 0 0 0 10px;
-  }
-
-  .mood-table tbody tr:last-child td:last-child {
-    border-radius: 0 0 10px 0;
-  }
-
-  .mood-table .day-label {
-    font-weight: 700;
-    color: var(--text);
-    background: #f5f5f5;
-    padding: 0.5rem 0.6rem;
-    white-space: nowrap;
-  }
-
-  .mood-table .ws-input {
-    width: 100%;
-    min-width: 50px;
-    padding: 0.4rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 0.82rem;
-    text-align: center;
-    background: #fafafa;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  .mood-table .ws-input:focus {
-    outline: none;
-    border-color: #7b88c4;
-    box-shadow: 0 0 0 3px rgba(123,136,196,0.12);
+  /* ===== WORKSHEET TABLES ===== */
+  .worksheet {
     background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+    margin: 1rem 0;
   }
 
-  .scale-info {
-    margin-top: 0.8rem;
-    padding: 0.8rem 1rem;
+  .ws-header {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .ws-body {
+    padding: 1rem 1.2rem;
+  }
+
+  .ws-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+
+  .ws-row:last-child { border-bottom: none; }
+
+  .ws-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    min-width: 100px;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+
+  .ws-input {
+    flex: 1;
+    border: none;
+    border-bottom: 2px dotted #ddd;
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    color: var(--text);
+    background: transparent;
+    min-height: 1.8rem;
+  }
+
+  .ws-input::placeholder {
+    color: #bbb;
+    font-size: 0.78rem;
+  }
+
+  /* ===== TRACKER TABLE ===== */
+  .tracker-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    margin: 0.8rem 0;
+  }
+
+  .tracker-table th, .tracker-table td {
+    padding: 0.5rem 0.4rem;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+  }
+
+  .tracker-table th {
     background: #f5f5f5;
-    border-radius: 10px;
-    font-size: 0.8rem;
+    font-weight: 700;
+    font-size: 0.72rem;
+  }
+
+  .tracker-table td {
+    background: #fff;
+    min-height: 2rem;
+  }
+
+  .tracker-table .day-header {
+    font-weight: 700;
+    background: #fafafa;
+    width: 40px;
+  }
+
+  .tracker-table input.ws-input {
+    width: 100%;
+    min-height: 1.5rem;
+    font-size: 0.75rem;
+    border-bottom: 1px dotted #ccc;
+    text-align: center;
+    padding: 0.2rem;
+  }
+
+  /* ===== BREATHING BOX ===== */
+  .breathing-box {
+    background: linear-gradient(135deg, #9b7baf, #b08bc4);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .breath-step {
+    padding: 0.8rem 0.4rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+  }
+
+  .breath-step .b-num {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #edb8c5;
+    line-height: 1;
+  }
+
+  .breath-step .b-label {
+    font-size: 0.78rem;
+    margin-top: 0.25rem;
+    opacity: 0.9;
+  }
+
+  /* ===== TIP BOX ===== */
+  .tip-box {
+    background: linear-gradient(135deg, #fef8f5, #fef6ec);
+    border-radius: 16px;
+    padding: 1.3rem;
+    margin: 1rem 0;
+    border: 2px solid rgba(212,129,154,0.2);
+  }
+
+  .tip-box h4 {
+    color: #a25a71;
+    font-size: 0.92rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tip-box p {
+    font-size: 0.82rem;
     color: var(--text-light);
     line-height: 1.7;
   }
 
-  .scale-info strong {
-    color: var(--text);
-  }
-
-  /* ===== WORKSHEET FIELDS ===== */
-  .ws-field {
-    margin-bottom: 1rem;
-  }
-
-  .ws-field label {
-    display: block;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-  }
-
-  .ws-field .ws-hint {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--text-light);
-    margin-bottom: 0.4rem;
-  }
-
-  .ws-field .ws-input {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 0.88rem;
-    background: #fafafa;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    color: var(--text);
-  }
-
-  .ws-field .ws-input:focus {
-    outline: none;
-    border-color: #7b88c4;
-    box-shadow: 0 0 0 3px rgba(123,136,196,0.12);
-    background: #fff;
-  }
-
-  .ws-field textarea.ws-input {
-    min-height: 60px;
-    resize: vertical;
-    line-height: 1.6;
-  }
-
-  /* ===== SIGN SECTION ===== */
-  .sign-group {
-    background: linear-gradient(135deg, #fef6ec 0%, #f8ecd8 100%);
-    border-radius: 14px;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(212,160,96,0.15);
-  }
-
-  .sign-group.depression-group {
-    background: linear-gradient(135deg, #eef0f9 0%, #d5d9f0 100%);
-    border: 1px solid rgba(106,120,181,0.15);
-  }
-
-  .sign-group h4 {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 800;
-    margin-bottom: 0.6rem;
-  }
-
-  .sign-group.mania-group h4 { color: #c48050; }
-  .sign-group.depression-group h4 { color: #6a78b5; }
-
-  .sign-group .ws-hint {
-    font-size: 0.78rem;
-    color: var(--text-light);
-    margin-bottom: 0.6rem;
-    display: block;
-  }
-
-  .sign-group .ws-input {
-    width: 100%;
-    padding: 0.5rem 0.8rem;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 8px;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 0.85rem;
-    background: rgba(255,255,255,0.7);
-    margin-bottom: 0.5rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    color: var(--text);
-  }
-
-  .sign-group .ws-input:focus {
-    outline: none;
-    border-color: #7b88c4;
-    box-shadow: 0 0 0 3px rgba(123,136,196,0.12);
-    background: #fff;
-  }
-
-  /* ===== ACTION FIELDS ===== */
-  .action-group {
-    background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
-    border-radius: 14px;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(0,105,92,0.15);
-  }
-
-  .action-group h4 {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #00695c;
-    margin-bottom: 0.6rem;
-  }
-
-  .action-group .ws-input {
-    width: 100%;
-    padding: 0.5rem 0.8rem;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 8px;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 0.85rem;
-    background: rgba(255,255,255,0.7);
-    margin-bottom: 0.5rem;
-    min-height: 50px;
-    resize: vertical;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    color: var(--text);
-  }
-
-  .action-group .ws-input:focus {
-    outline: none;
-    border-color: #00695c;
-    box-shadow: 0 0 0 3px rgba(0,105,92,0.12);
-    background: #fff;
-  }
-
-  .action-group label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #00695c;
-    margin-bottom: 0.3rem;
-  }
-
-  /* ===== EMERGENCY FIELD ===== */
-  .emergency-group {
-    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
-    border-radius: 14px;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(198,40,40,0.15);
-  }
-
-  .emergency-group h4 {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #c62828;
-    margin-bottom: 0.6rem;
-  }
-
-  .emergency-group .ws-input {
-    width: 100%;
-    padding: 0.5rem 0.8rem;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 8px;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 0.85rem;
-    background: rgba(255,255,255,0.7);
-    min-height: 50px;
-    resize: vertical;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    color: var(--text);
-  }
-
-  .emergency-group .ws-input:focus {
-    outline: none;
-    border-color: #c62828;
-    box-shadow: 0 0 0 3px rgba(198,40,40,0.12);
-    background: #fff;
-  }
-
   /* ===== SCIENCE BOX ===== */
   .science-box {
-    background: linear-gradient(135deg, #eef0f9 0%, #f0edf6 100%);
+    background: linear-gradient(135deg, #f0edf6 0%, #faeef1 100%);
     border-radius: 16px;
     padding: 1.2rem 1.4rem;
     margin-bottom: 1.2rem;
-    border: 1px solid rgba(106,120,181,0.15);
+    border: 1px solid rgba(176,139,196,0.15);
   }
 
   .science-box .sb-header {
@@ -531,7 +375,7 @@
     gap: 0.5rem;
     font-weight: 700;
     font-size: 0.88rem;
-    color: #6a78b5;
+    color: #a89cc8;
     margin-bottom: 0.5rem;
   }
 
@@ -541,35 +385,23 @@
     line-height: 1.75;
   }
 
-  /* ===== TIP BOX ===== */
-  .tip-box {
-    background: linear-gradient(135deg, #fef8f5 0%, #fef6ec 100%);
-    border-radius: 18px;
-    padding: 1.4rem 1.6rem;
-    border: 2px solid rgba(212,160,96,0.2);
-    margin-bottom: 1.2rem;
-  }
-
-  .tip-box .tb-header {
+  /* ===== EXPOSURE LADDER ===== */
+  .ladder-item {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: #c48050;
+    align-items: flex-start;
+    gap: 0.8rem;
     margin-bottom: 0.8rem;
   }
 
-  .tip-box p {
-    font-size: 0.9rem;
-    color: var(--text);
-    line-height: 1.75;
-  }
-
-  /* ===== WORK SECTION (for print) ===== */
-  .work-section {
-    margin: 2rem 0;
+  .ladder-level {
+    flex-shrink: 0;
+    width: 60px;
+    text-align: center;
+    padding: 0.4rem;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
   }
 
   /* ===== BOTTOM NAV ===== */
@@ -585,15 +417,15 @@
   .bottom-nav a {
     font-size: 0.85rem;
     font-weight: 700;
-    color: #7b88c4;
+    color: #c06d86;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: #eef0f9;
+    background: #faeef1;
     transition: background 0.2s;
   }
 
-  .bottom-nav a:hover { background: #d5d9f0; }
+  .bottom-nav a:hover { background: #f5d8de; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -611,12 +443,16 @@
     .top-nav, #save-indicator, #clear-btn, .print-btn-wrap, .bottom-nav, .footer, .hero, .intro, .digisma-section { display: none !important; }
     .container { max-width: 100%; padding: 0 5mm; }
     .work-section { break-inside: avoid; margin: 0.3rem 0; padding: 0.4rem; box-shadow: none; border: 1px solid #ddd; }
-    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; padding: 0.1rem 0 !important; }
+    .work-num { font-size: 0.7rem; margin-bottom: 0.2rem; }
+    .work-title { font-size: 0.9rem; margin-bottom: 0.1rem; }
+    .work-subtitle { font-size: 0.65rem; margin-bottom: 0.3rem; }
+    .ws-input { border-bottom: 1px solid #999 !important; font-size: 8pt; padding: 0.1rem 0 !important; min-height: auto !important; }
     .tracker-table th, .tracker-table td { padding: 0.15rem; font-size: 6.5pt; }
     .card, .tip-box, .science-box { display: none !important; }
+    h1 { font-size: 1rem !important; }
     @page { size: A4; margin: 8mm; }
-    body::before { content: '\53CC\6975\6027\969C\5BB3 \6C17\5206\30E2\30CB\30BF\30EA\30F3\30B0 \2014 \3053\3053\308D\306E\30AF\30EA\30CB\30C3\30AF\685C\304C\4E18'; display: block; font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 1px solid #ccc; }
-    body::after { content: '\60A3\8005ID\FF1A\FF3F\FF3F\FF3F\FF3F\FF3F\FF3F  \8A18\5165\65E5\FF1A\FF3F\FF3F\FF3F\FF3F\5E74\FF3F\FF3F\6708\FF3F\FF3F\65E5  \00A9 \3053\3053\308D\306E\30AF\30EA\30CB\30C3\30AF\685C\304C\4E18'; display: block; font-size: 7pt; text-align: center; margin-top: 3mm; padding-top: 2mm; border-top: 1px solid #ccc; color: #999; }
+    body::before { content: '不安への対処ワークシート — こころのクリニック桜が丘'; display: block; font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 1px solid #ccc; }
+    body::after { content: '患者ID:＿＿＿＿＿＿  記入日:＿＿＿＿年＿＿月＿＿日  © こころのクリニック桜が丘'; display: block; font-size: 7pt; text-align: center; margin-top: 3mm; padding-top: 2mm; border-top: 1px solid #ccc; color: #999; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -630,199 +466,250 @@
 <nav class="top-nav">
   <a href="index.html" class="nav-link-primary">&larr; トップへ</a>
   <span class="nav-clinic-name">🌸 こころのクリニック桜が丘</span>
-  <a href="bipolar-education.html" class="nav-link-secondary">&larr; 解説を読む</a>
+  <a href="anxiety-education.html" class="nav-link-secondary">&larr; 解説を読む</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-icons">&#9878;&#65039;&#128221;</div>
-  <h1>双極性障害 気分モニタリング・ワーク</h1>
-  <p class="subtitle">〜 気分の波を「見える化」する 〜</p>
+  <div class="hero-icons">&#128560;&#128221;</div>
+  <h1>不安への対処ワークシート</h1>
+  <p class="subtitle">〜 不安をコントロールするスキルを身につける 〜</p>
 </div>
 
 <div class="container">
 
-  <!-- INTRO -->
-  <section class="intro">
-    <div class="intro-card">
-      <p>このワークシートは、気分の波を記録・可視化し、早期のサインに気づくためのツールです。入力内容はお使いのブラウザに自動保存されます。</p>
-      <button id="clear-btn" class="clear-btn">&#128465;&#65039; 入力内容をすべて消去</button>
-    </div>
-  </section>
+<!-- INTRO -->
+<div class="intro">
+  <h2>&#128221; このワークについて</h2>
+  <p>
+    このワークでは、不安への3つの対処法を実践します。<strong>呼吸法・認知再構成・段階的エクスポージャー</strong>。入力した内容はスマホに自動保存されます。
+  </p>
+</div>
 
-  <!-- WORK 1: 気分チャート（1週間） -->
-  <section class="work-section">
-    <div class="section-label" style="background:#faeef1;color:#7b88c4;">&#128202; Work 01</div>
-    <h2 class="section-title">気分チャート（1週間）</h2>
+<!-- ===== WORK 1: 4-7-8呼吸法の記録 ===== -->
+<section class="work-section">
+  <div class="work-num" style="background:#f0edf6; color:#a89cc8;">WORK 1</div>
+  <h2 class="work-title">4-7-8呼吸法の記録</h2>
+  <p class="work-subtitle">呼吸法を習慣にすることで、不安を感じたときに素早く対処できるようになります。</p>
 
-    <div class="ws-card">
-      <h3>&#128197; 今週の気分・睡眠・活動を記録しましょう</h3>
-      <div class="mood-table-wrapper">
-        <table class="mood-table tracker-table">
-          <thead>
-            <tr>
-              <th>日</th>
-              <th>気分<br>(-3〜+3)</th>
-              <th>睡眠時間</th>
-              <th>活動レベル<br>(低/中/高)</th>
-              <th>薬<br>○/×</th>
-              <th>特記事項</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="day-label">月</td>
-              <td><input type="text" class="ws-input" data-key="mood-mon" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-mon" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-mon" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-mon" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-mon" placeholder=""></td>
-            </tr>
-            <tr>
-              <td class="day-label">火</td>
-              <td><input type="text" class="ws-input" data-key="mood-tue" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-tue" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-tue" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-tue" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-tue" placeholder=""></td>
-            </tr>
-            <tr>
-              <td class="day-label">水</td>
-              <td><input type="text" class="ws-input" data-key="mood-wed" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-wed" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-wed" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-wed" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-wed" placeholder=""></td>
-            </tr>
-            <tr>
-              <td class="day-label">木</td>
-              <td><input type="text" class="ws-input" data-key="mood-thu" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-thu" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-thu" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-thu" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-thu" placeholder=""></td>
-            </tr>
-            <tr>
-              <td class="day-label">金</td>
-              <td><input type="text" class="ws-input" data-key="mood-fri" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-fri" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-fri" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-fri" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-fri" placeholder=""></td>
-            </tr>
-            <tr>
-              <td class="day-label">土</td>
-              <td><input type="text" class="ws-input" data-key="mood-sat" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-sat" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-sat" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-sat" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-sat" placeholder=""></td>
-            </tr>
-            <tr>
-              <td class="day-label">日</td>
-              <td><input type="text" class="ws-input" data-key="mood-sun" placeholder="0"></td>
-              <td><input type="text" class="ws-input" data-key="sleep-sun" placeholder="7h"></td>
-              <td><input type="text" class="ws-input" data-key="activity-sun" placeholder="中"></td>
-              <td><input type="text" class="ws-input" data-key="med-sun" placeholder="○"></td>
-              <td><input type="text" class="ws-input" data-key="note-sun" placeholder=""></td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="card">
+    <h4>&#129495; やり方</h4>
+    <p>
+      <strong>4秒</strong>で鼻からゆっくり吸う &rarr; <strong>7秒</strong>息を止める &rarr; <strong>8秒</strong>で口から細く吐く。<br>
+      1日2回（朝・夜）、1回3セットを目標に取り組みましょう。
+    </p>
+    <div class="breathing-box">
+      <div class="breath-step">
+        <div class="b-num">4</div>
+        <div class="b-label">鼻から<br>ゆっくり吸う<br>（4秒）</div>
       </div>
-      <div class="scale-info">
-        <strong>気分スケール：</strong>
-        -3＝重いうつ / -2＝中程度のうつ / -1＝軽いうつ / 0＝安定 / +1＝やや高揚 / +2＝軽躁 / +3＝躁
+      <div class="breath-step">
+        <div class="b-num">7</div>
+        <div class="b-label">息を<br>止める<br>（7秒）</div>
+      </div>
+      <div class="breath-step">
+        <div class="b-num">8</div>
+        <div class="b-label">口から<br>細く吐く<br>（8秒）</div>
       </div>
     </div>
-  </section>
-
-  <!-- WORK 2: 私の「注意サイン」リスト -->
-  <section class="work-section">
-    <div class="section-label" style="background:#fef6ec;color:#c48050;">&#9888;&#65039; Work 02</div>
-    <h2 class="section-title">私の「注意サイン」リスト</h2>
-
-    <div class="ws-card">
-      <h3>&#128314; 気分が変わり始めるサインを書き出しましょう</h3>
-
-      <div class="sign-group mania-group">
-        <h4>&#11014;&#65039; 躁に向かうサイン</h4>
-        <span class="ws-hint">例：睡眠が3時間でも平気、お金を使いすぎる、早口になる</span>
-        <input type="text" class="ws-input" data-key="mania-sign1" placeholder="サイン①">
-        <input type="text" class="ws-input" data-key="mania-sign2" placeholder="サイン②">
-        <input type="text" class="ws-input" data-key="mania-sign3" placeholder="サイン③">
-      </div>
-
-      <div class="sign-group depression-group">
-        <h4>&#11015;&#65039; うつに向かうサイン</h4>
-        <span class="ws-hint">例：朝起きられない、好きなことに興味がなくなる</span>
-        <input type="text" class="ws-input" data-key="depression-sign1" placeholder="サイン①">
-        <input type="text" class="ws-input" data-key="depression-sign2" placeholder="サイン②">
-        <input type="text" class="ws-input" data-key="depression-sign3" placeholder="サイン③">
-      </div>
-
-      <div class="action-group">
-        <h4>&#128737;&#65039; サインに気づいたらやること</h4>
-        <label>躁のサインに気づいたら：</label>
-        <textarea class="ws-input" data-key="action-mania" placeholder="例：主治医に連絡する、睡眠を確保する、大きな決断を延期する"></textarea>
-        <label style="margin-top:0.5rem;">うつのサインに気づいたら：</label>
-        <textarea class="ws-input" data-key="action-depression" placeholder="例：無理しない、散歩に出る、信頼できる人に話す"></textarea>
-      </div>
-
-      <div class="emergency-group">
-        <h4>&#128222; 緊急連絡先（主治医・家族）</h4>
-        <textarea class="ws-input" data-key="emergency-contact" placeholder="例：主治医 ○○先生 TEL: 000-0000-0000 / 家族 ○○ TEL: 000-0000-0000"></textarea>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK 3: 生活リズム記録 -->
-  <section class="work-section">
-    <div class="section-label" style="background:#e0f2f1;color:#00695c;">&#128336; Work 03</div>
-    <h2 class="section-title">生活リズム記録</h2>
-
-    <div class="ws-card">
-      <h3>&#127749; 安定した生活リズムをデザインしましょう</h3>
-
-      <div class="ws-field">
-        <label>理想の起床時間</label>
-        <input type="text" class="ws-input" data-key="ideal-wake" placeholder="例：7:00">
-      </div>
-
-      <div class="ws-field">
-        <label>理想の就寝時間</label>
-        <input type="text" class="ws-input" data-key="ideal-sleep" placeholder="例：23:00">
-      </div>
-
-      <div class="ws-field">
-        <label>守りたい日課①</label>
-        <input type="text" class="ws-input" data-key="routine1" placeholder="例：朝食をとる">
-      </div>
-
-      <div class="ws-field">
-        <label>守りたい日課②</label>
-        <input type="text" class="ws-input" data-key="routine2" placeholder="例：30分散歩する">
-      </div>
-
-      <div class="ws-field">
-        <label>守りたい日課③</label>
-        <input type="text" class="ws-input" data-key="routine3" placeholder="例：同じ時間に薬を飲む">
-      </div>
-
-      <div class="ws-field">
-        <label>避けたいこと（躁のトリガー）</label>
-        <textarea class="ws-input" data-key="avoid-triggers" placeholder="例：徹夜、深酒、カフェインの取りすぎ、予定の詰め込みすぎ"></textarea>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCIENCE BOX -->
-  <div class="science-box">
-    <div class="sb-header">&#128218; 気分モニタリングの効果</div>
-    <p>毎日の気分を記録する「ムードチャート」は、双極性障害の自己管理において最も効果的なツールの一つです。気分の波のパターンを可視化することで、再発の早期警告サインに気づきやすくなり、主治医との情報共有にも役立ちます。研究では、気分モニタリングを継続した患者は、エピソードの持続期間が短くなる傾向が報告されています。</p>
   </div>
 
-  <!-- BOTTOM NAV -->
-  
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#9b7baf,#b08bc4);">&#128202; 1週間の呼吸法トラッカー</div>
+    <div class="ws-body" style="overflow-x:auto;">
+      <table class="tracker-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>朝<br>○/×</th>
+            <th>夜<br>○/×</th>
+            <th>不安レベル<br>(前) 1-5</th>
+            <th>不安レベル<br>(後) 1-5</th>
+            <th>メモ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="day-header">月</td>
+            <td><input type="text" class="ws-input" data-key="breath-mon-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-mon-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-mon-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-mon-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-mon-memo" placeholder="メモ"></td>
+          </tr>
+          <tr>
+            <td class="day-header">火</td>
+            <td><input type="text" class="ws-input" data-key="breath-tue-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-tue-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-tue-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-tue-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-tue-memo" placeholder="メモ"></td>
+          </tr>
+          <tr>
+            <td class="day-header">水</td>
+            <td><input type="text" class="ws-input" data-key="breath-wed-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-wed-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-wed-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-wed-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-wed-memo" placeholder="メモ"></td>
+          </tr>
+          <tr>
+            <td class="day-header">木</td>
+            <td><input type="text" class="ws-input" data-key="breath-thu-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-thu-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-thu-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-thu-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-thu-memo" placeholder="メモ"></td>
+          </tr>
+          <tr>
+            <td class="day-header">金</td>
+            <td><input type="text" class="ws-input" data-key="breath-fri-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-fri-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-fri-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-fri-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-fri-memo" placeholder="メモ"></td>
+          </tr>
+          <tr>
+            <td class="day-header">土</td>
+            <td><input type="text" class="ws-input" data-key="breath-sat-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sat-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sat-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sat-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sat-memo" placeholder="メモ"></td>
+          </tr>
+          <tr>
+            <td class="day-header">日</td>
+            <td><input type="text" class="ws-input" data-key="breath-sun-am" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sun-pm" placeholder="○/×"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sun-pre" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sun-post" placeholder="1-5"></td>
+            <td><input type="text" class="ws-input" data-key="breath-sun-memo" placeholder="メモ"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h4>&#128161; ヒント</h4>
+    <p>最初は7秒止めるのが難しいかもしれません。「長く吐く」ことだけ意識すればOKです。慣れてきたら秒数を増やしましょう。</p>
+  </div>
+</section>
+
+<!-- ===== WORK 2: 認知再構成ワーク ===== -->
+<section class="work-section">
+  <div class="work-num" style="background:#faeef1; color:#a25a71;">WORK 2</div>
+  <h2 class="work-title">認知再構成ワーク</h2>
+  <p class="work-subtitle">不安は「最悪のシナリオ」を自動的に描きがちです。その考えを検証し、より現実的な見方を探します。</p>
+
+  <div class="card">
+    <h4>&#128269; 認知再構成とは？</h4>
+    <p>
+      不安を感じたとき、頭の中では自動的に「最悪の予測」が浮かびます（自動思考）。認知再構成では、その考えの<strong>根拠を検証</strong>し、<strong>もっと現実的な考え</strong>に置き換える練習をします。考えを変えることで、感情も変わります。
+    </p>
+  </div>
+
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#d4819a,#c06d86);">&#128221; 認知再構成シート</div>
+    <div class="ws-body">
+      <div class="ws-row">
+        <div class="ws-label">不安な場面</div>
+        <input type="text" class="ws-input" data-key="situation" placeholder="例：明日の会議でプレゼンがある">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">頭に浮かんだ考え<br>（自動思考）</div>
+        <input type="text" class="ws-input" data-key="auto-thought" placeholder="例：きっと頭が真っ白になって失敗する">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">その考えが<br>起こる確率は？</div>
+        <input type="text" class="ws-input" data-key="probability" placeholder="例：20%くらい？過去に完全に失敗したことはない">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">最悪の場合、<br>どう対処できる？</div>
+        <input type="text" class="ws-input" data-key="worst-case-cope" placeholder="例：メモを見ながら話す、「少しお待ちください」と言う">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">もっと現実的<br>な考えは？</div>
+        <input type="text" class="ws-input" data-key="realistic-thought" placeholder="例：緊張するけど、準備はしている。完璧でなくても伝わればOK">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">今の不安レベル<br>1-5</div>
+        <input type="text" class="ws-input" data-key="anxiety-after" placeholder="例：3（最初は5だったけど少し落ち着いた）">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORK 3: 段階的エクスポージャー ===== -->
+<section class="work-section">
+  <div class="work-num" style="background:#faeef1; color:#c06d86;">WORK 3</div>
+  <h2 class="work-title">段階的エクスポージャー（不安の階段）</h2>
+  <p class="work-subtitle">避けていることを不安レベル順に並べ、低いものから少しずつ挑戦していきます。</p>
+
+  <div class="card">
+    <h4>&#128203; エクスポージャーとは？</h4>
+    <p>
+      回避は短期的に不安を和らげますが、長期的には不安を維持・悪化させます。不安の低い場面から少しずつ挑戦し、<strong>「怖いけどやってみたら大丈夫だった」</strong>という体験を積み重ねていきます。不安は時間とともに自然に下がることを体で学びます。
+    </p>
+  </div>
+
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#8d9ad4,#b08bc4);">&#129516; 不安の階段シート</div>
+    <div class="ws-body">
+      <div class="ws-row">
+        <div class="ws-label">
+          <div class="ladder-level" style="background:#66bb6a;">レベル<br>2-3</div>
+        </div>
+        <input type="text" class="ws-input" data-key="exposure-low" placeholder="軽い不安の挑戦 例：近所のコンビニに一人で行く">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">
+          <div class="ladder-level" style="background:#ffa726;">レベル<br>4-5</div>
+        </div>
+        <input type="text" class="ws-input" data-key="exposure-mid" placeholder="中程度の挑戦 例：知り合いに自分から声をかける">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">
+          <div class="ladder-level" style="background:#ef5350;">レベル<br>6-7</div>
+        </div>
+        <input type="text" class="ws-input" data-key="exposure-high" placeholder="やや強い不安の挑戦 例：少人数の集まりに参加する">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">
+          <div class="ladder-level" style="background:#9b7baf;">レベル<br>8-10</div>
+        </div>
+        <input type="text" class="ws-input" data-key="exposure-goal" placeholder="最終目標 例：大勢の前で発表する">
+      </div>
+    </div>
+  </div>
+
+  <div class="worksheet">
+    <div class="ws-header" style="background:linear-gradient(90deg,#b08bc4,#9b7baf);">&#128221; 今週のチャレンジ</div>
+    <div class="ws-body">
+      <div class="ws-row">
+        <div class="ws-label">今週チャレンジ<br>すること</div>
+        <input type="text" class="ws-input" data-key="this-week-challenge" placeholder="例：一人でカフェに入って30分過ごす">
+      </div>
+      <div class="ws-row">
+        <div class="ws-label">チャレンジの<br>結果</div>
+        <input type="text" class="ws-input" data-key="challenge-result" placeholder="例：最初は不安レベル4だったけど、15分後には2に下がった">
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <h4>&#128170; 大切なポイント</h4>
+    <p>一気に最終目標に挑戦する必要はありません。低い階段から一歩ずつ。うまくいかなくても「挑戦した自分」を認めましょう。セラピストと一緒に計画を立てるのがおすすめです。</p>
+  </div>
+</section>
+
+<!-- CLEAR BUTTON -->
+<div style="text-align:center; margin:2rem 0 1rem;">
+  <button id="clear-btn" style="background:#ef5350;color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:10px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;">&#128465;&#65039; 入力をクリア</button>
+</div>
+
+<!-- BOTTOM NAV -->
+
 <!-- PDF出力 & デジスマ案内 -->
 <div class="digisma-section">
 <div style="margin:2rem 0 0; text-align:center;">
@@ -850,20 +737,19 @@
 
 <div class="bottom-nav">
     <a href="index.html" style="background:#faeef1; color:#c06d86;">&larr; トップに戻る</a>
-    <a href="bipolar-education.html" style="background:#f0f5ef; color:#7aad78;">&larr; 解説を読む</a>
+    <a href="anxiety-education.html" style="background:#f0f5ef; color:#7aad78;">&larr; 解説を読む</a>
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer" style="text-align:center;">
-    <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
-  </div>
+<!-- FOOTER -->
+<div class="footer" style="text-align:center;">
+  <p>この資料は一般的な情報提供を目的としています。個別の症状については主治医にご相談ください。</p><p style="margin-top:0.5rem;"><a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="color:#c06d86; text-decoration:none;">クリニックHP</a>　·　<a href="index.html" style="color:#827c73; text-decoration:none;">こころの学び トップ</a>　·　<a href="../mindfulness/index.html" style="color:#827c73; text-decoration:none;">マインドフルネスアプリ</a></p><p style="margin-top:0.3rem; font-size:0.72rem; color:#ada79e;">&copy; こころのクリニック桜が丘</p>
+</div>
 
 </div>
 
-<!-- LOCALSTORAGE SAVE SCRIPT -->
 <script>
 (function() {
-  const STORAGE_KEY = 'bipolar-work-data';
+  const STORAGE_KEY = 'anxiety-work-data';
   const inputs = document.querySelectorAll('.ws-input');
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
@@ -899,5 +785,6 @@
   });
 })();
 </script>
+
 </body>
 </html>

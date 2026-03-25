@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心理教育 - こころのクリニック桜が丘</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/css/variables.css">
+  <link rel="stylesheet" href="../shared/css/reset.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/mindfulness.css">
+</head>
+<body>
+  <div class="page">
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar-back" id="backLink">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <span id="backText">戻る</span>
+      </a>
+      <span class="navbar-title" id="navTitle">心理教育</span>
+      <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="font-size: var(--text-xs); color: var(--color-primary-500);">クリニックHP</a>
+    </nav>
+
+    <!-- 読書プログレスバー -->
+    <div class="progress" id="readingProgress" hidden>
+      <div class="progress-bar" id="readingProgressBar" style="width: 0%"></div>
+    </div>
+
+    <main class="page-content">
+      <div class="container">
+
+        <!-- 記事一覧 -->
+        <div id="articleList">
+          <p class="text-sm text-muted mt-4 mb-4">
+            マインドフルネスの基礎を学びましょう。読んだ記事にはチェックマークがつきます。
+          </p>
+          <div class="education-cards" id="articleCards"></div>
+        </div>
+
+        <!-- 記事ビュー -->
+        <div id="articleView" class="article-view" hidden></div>
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="container">
+        <nav class="site-footer-links">
+          <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener">クリニックHP</a>
+          <a href="../psychoeducation/index.html" target="_blank" rel="noopener">こころの学び</a>
+          <a href="index.html">マインドフルネス</a>
+          <a href="../patient-portal/index.html">患者ポータル</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../shared/js/storage.js"></script>
+  <script src="js/education.js"></script>
+</body>
+</html>

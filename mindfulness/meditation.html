@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>瞑想タイマー - こころのクリニック桜が丘</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/css/variables.css">
+  <link rel="stylesheet" href="../shared/css/reset.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/mindfulness.css">
+</head>
+<body>
+  <div class="page" id="app">
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar-back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        戻る
+      </a>
+      <span class="navbar-title">瞑想タイマー</span>
+      <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener" style="font-size: var(--text-xs); color: var(--color-primary-500);">クリニックHP</a>
+    </nav>
+
+    <!-- 設定画面（初期状態） -->
+    <div id="setupView" class="timer-page">
+      <div class="timer-container">
+        <!-- 連続記録 -->
+        <div id="streakBadge" class="streak-badge" hidden>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span id="streakText"></span>
+        </div>
+
+        <!-- タイマーリング -->
+        <div class="timer-ring-container">
+          <svg class="timer-ring" viewBox="0 0 260 260">
+            <circle class="timer-ring-bg" cx="130" cy="130" r="115"/>
+            <circle class="timer-ring-progress" id="timerProgress" cx="130" cy="130" r="115"
+              stroke-dasharray="722.57"
+              stroke-dashoffset="0"/>
+          </svg>
+          <div class="timer-display">
+            <span class="timer-time" id="timerTime">05:00</span>
+            <span class="timer-label" id="timerLabel">タップして開始</span>
+          </div>
+        </div>
+
+        <!-- 時間選択 -->
+        <div class="duration-selector" id="durationSelector">
+          <button class="duration-btn" data-minutes="3">3分</button>
+          <button class="duration-btn active" data-minutes="5">5分</button>
+          <button class="duration-btn" data-minutes="10">10分</button>
+          <button class="duration-btn" data-minutes="15">15分</button>
+          <button class="duration-btn" data-minutes="20">20分</button>
+        </div>
+
+        <!-- コントロール -->
+        <div class="timer-controls" id="timerControls">
+          <button class="timer-start-btn" id="startBtn" aria-label="瞑想を開始">
+            <svg id="playIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <svg id="pauseIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" hidden>
+              <rect x="6" y="4" width="4" height="16"/>
+              <rect x="14" y="4" width="4" height="16"/>
+            </svg>
+          </button>
+          <button class="timer-stop-btn" id="stopBtn" aria-label="リセット" hidden>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="6" width="12" height="12" rx="2"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- オプション -->
+        <div class="timer-options" id="timerOptions">
+          <label class="toggle">
+            <input type="checkbox" id="bellToggle" checked>
+            <span class="toggle-track"></span>
+            <span class="toggle-label">ベル音（開始・終了）</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="ambientToggle">
+            <span class="toggle-track"></span>
+            <span class="toggle-label">環境音（自然の音）</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 完了画面 -->
+    <div id="completeView" class="timer-page" hidden>
+      <div class="timer-container">
+        <div class="timer-complete">
+          <div class="timer-complete-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2>お疲れさまでした</h2>
+          <p id="completeMessage">5分間の瞑想を完了しました。</p>
+          <p class="mt-2 text-sm text-muted" id="completeDatetime"></p>
+
+          <div class="mt-6 flex flex-col gap-3" style="align-items: center;">
+            <button class="btn btn--primary btn--lg" id="newSessionBtn">
+              もう一度瞑想する
+            </button>
+            <a href="index.html" class="btn btn--ghost">
+              ホームに戻る
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スクリーンリーダー用ライブリージョン -->
+    <div class="aria-live-region" aria-live="polite" id="ariaLive"></div>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="container">
+        <nav class="site-footer-links">
+          <a href="https://www.mental-clinic-sakuragaoka.com" target="_blank" rel="noopener">クリニックHP</a>
+          <a href="../psychoeducation/index.html" target="_blank" rel="noopener">こころの学び</a>
+          <a href="index.html">マインドフルネス</a>
+          <a href="../patient-portal/index.html">患者ポータル</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../shared/js/storage.js"></script>
+  <script src="js/meditation.js"></script>
+</body>
+</html>
