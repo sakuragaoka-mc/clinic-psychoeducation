@@ -1,17 +1,13 @@
 /**
  * 認証モジュール - マイページ
- * デモ版: localStorageベースの簡易認証
+ * localStorageベースの認証（パスワード・メール対応）
  */
 const SakuraAuth = {
   STORAGE_KEY: 'portal_auth',
-  SESSION_TIMEOUT: 30 * 60 * 1000, // 30分
+  SESSION_TIMEOUT: 30 * 60 * 1000,
 
-  // デモ用の患者データ
   DEFAULT_PATIENTS: [
-    { id: 'P-20250001', name: '田中 花子', birthDate: '1985-03-15' },
-    { id: 'P-20250002', name: '鈴木 太郎', birthDate: '1990-07-22' },
-    { id: 'P-20250003', name: '山田 美咲', birthDate: '1978-11-08' },
-    { id: 'demo', name: 'デモユーザー', birthDate: '2000-01-01' }
+    { id: 'demo', name: 'デモユーザー', birthDate: '2000-01-01', password: 'demo', email: 'demo@example.com' }
   ],
 
   getPatients() {
@@ -19,32 +15,28 @@ const SakuraAuth = {
     return [...this.DEFAULT_PATIENTS, ...registered];
   },
 
-  signup(customId, name, birthDate) {
-    if (!customId || !name || !birthDate) return { error: 'missing_fields' };
-
-    // IDのバリデーション
-    if (customId.length < 3) return { error: 'id_too_short' };
+  signup(id, password, name, email, birthDate) {
+    if (!id || !password || !name || !email || !birthDate) return { error: 'missing_fields' };
+    if (id.length < 3) return { error: 'id_too_short' };
+    if (password.length < 6) return { error: 'password_too_short' };
 
     const registered = SakuraStorage.get('portal_registered_patients') || [];
     const allPatients = [...this.DEFAULT_PATIENTS, ...registered];
 
-    // ID重複チェック
-    const idExists = allPatients.find(
-      p => p.id.toLowerCase() === customId.toLowerCase()
-    );
-    if (idExists) return { error: 'id_taken' };
+    if (allPatients.find(p => p.id.toLowerCase() === id.toLowerCase())) {
+      return { error: 'id_taken' };
+    }
 
-    const newPatient = { id: customId, name: name, birthDate: birthDate };
+    const newPatient = { id, name, birthDate, email, password };
     registered.push(newPatient);
     SakuraStorage.set('portal_registered_patients', registered);
     return { success: true, patient: newPatient };
   },
 
-  login(patientId, birthDate) {
+  login(loginId, password) {
     const patient = this.getPatients().find(
-      p => p.id.toLowerCase() === patientId.toLowerCase() && p.birthDate === birthDate
+      p => p.id.toLowerCase() === loginId.toLowerCase() && p.password === password
     );
-
     if (!patient) return null;
 
     const session = {
@@ -54,9 +46,30 @@ const SakuraAuth = {
       loginAt: Date.now(),
       lastActivity: Date.now()
     };
-
     SakuraStorage.set(this.STORAGE_KEY, session);
     return session;
+  },
+
+  resetPassword(loginId, email, newPassword) {
+    const registered = SakuraStorage.get('portal_registered_patients') || [];
+    const allPatients = [...this.DEFAULT_PATIENTS, ...registered];
+    const patient = allPatients.find(
+      p => p.id.toLowerCase() === loginId.toLowerCase() && p.email.toLowerCase() === email.toLowerCase()
+    );
+    if (!patient) return { error: 'not_found' };
+    if (newPassword && newPassword.length < 6) return { error: 'password_too_short' };
+    if (newPassword) {
+      // Update password in registered list
+      const reg = registered.find(p => p.id.toLowerCase() === loginId.toLowerCase());
+      if (reg) {
+        reg.password = newPassword;
+        SakuraStorage.set('portal_registered_patients', registered);
+        return { success: true };
+      }
+      // Demo user
+      return { error: 'demo_user' };
+    }
+    return { verified: true };
   },
 
   logout() {
@@ -66,14 +79,10 @@ const SakuraAuth = {
   getSession() {
     const session = SakuraStorage.get(this.STORAGE_KEY);
     if (!session || !session.isLoggedIn) return null;
-
-    // セッションタイムアウト確認
     if (Date.now() - session.lastActivity > this.SESSION_TIMEOUT) {
       this.logout();
       return null;
     }
-
-    // 最終アクティビティ更新
     session.lastActivity = Date.now();
     SakuraStorage.set(this.STORAGE_KEY, session);
     return session;
@@ -92,90 +101,147 @@ const SakuraAuth = {
 // --- ログインページのロジック ---
 (function () {
   const form = document.getElementById('loginForm');
-  if (!form) return; // ログインページ以外では実行しない
+  if (!form) return;
 
-  // 既にログイン済みならダッシュボードへ
   const existingSession = SakuraAuth.getSession();
   if (existingSession) {
     window.location.href = 'dashboard.html';
     return;
   }
 
+  const signupForm = document.getElementById('signupForm');
+  const resetForm = document.getElementById('resetForm');
+  const showSignupBtn = document.getElementById('showSignupBtn');
+  const showLoginBtn = document.getElementById('showLoginBtn');
+  const showResetBtn = document.getElementById('showResetBtn');
+  const showLoginFromResetBtn = document.getElementById('showLoginFromResetBtn');
+
+  function showOnly(target) {
+    [form, signupForm, resetForm].forEach(f => { if (f) f.hidden = true; });
+    if (showSignupBtn) showSignupBtn.parentElement.hidden = true;
+    if (target) target.hidden = false;
+    if (target === form && showSignupBtn) showSignupBtn.parentElement.hidden = false;
+    // Clear errors
+    document.querySelectorAll('.login-error').forEach(e => e.style.display = 'none');
+  }
+
+  // --- Login ---
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    const patientId = document.getElementById('patientId').value.trim();
-    const birthDate = document.getElementById('birthDate').value;
-    const errorEl = document.getElementById('loginError');
-
-    const session = SakuraAuth.login(patientId, birthDate);
-
+    const id = document.getElementById('patientId').value.trim();
+    const pw = document.getElementById('loginPassword').value;
+    const session = SakuraAuth.login(id, pw);
     if (session) {
       window.location.href = 'dashboard.html';
     } else {
-      errorEl.style.display = 'block';
+      const err = document.getElementById('loginError');
+      err.style.display = 'block';
       document.getElementById('patientId').focus();
     }
   });
 
-  // --- サインアップ切り替え ---
-  const signupForm = document.getElementById('signupForm');
-  const showSignupBtn = document.getElementById('showSignupBtn');
-  const showLoginBtn = document.getElementById('showLoginBtn');
+  // --- Show signup ---
+  if (showSignupBtn) showSignupBtn.addEventListener('click', () => showOnly(signupForm));
+  if (showLoginBtn) showLoginBtn.addEventListener('click', () => showOnly(form));
+  if (showResetBtn) showResetBtn.addEventListener('click', () => showOnly(resetForm));
+  if (showLoginFromResetBtn) showLoginFromResetBtn.addEventListener('click', () => showOnly(form));
 
-  if (showSignupBtn && signupForm) {
-    showSignupBtn.addEventListener('click', () => {
-      form.hidden = true;
-      showSignupBtn.parentElement.hidden = true;
-      signupForm.hidden = false;
-      document.getElementById('loginError').style.display = 'none';
-    });
-
-    showLoginBtn.addEventListener('click', () => {
-      signupForm.hidden = true;
-      form.hidden = false;
-      showSignupBtn.parentElement.hidden = false;
-    });
-
+  // --- Signup ---
+  if (signupForm) {
     signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const customId = document.getElementById('signupId').value.trim();
+      const id = document.getElementById('signupId').value.trim();
+      const pw = document.getElementById('signupPassword').value;
+      const pwConfirm = document.getElementById('signupPasswordConfirm').value;
       const name = document.getElementById('signupName').value.trim();
-      const birthDate = document.getElementById('signupBirthDate').value;
-      const errorEl = document.getElementById('signupError');
-      const successEl = document.getElementById('signupSuccess');
+      const email = document.getElementById('signupEmail').value.trim();
+      const birth = document.getElementById('signupBirthDate').value;
+      const errEl = document.getElementById('signupError');
+      const sucEl = document.getElementById('signupSuccess');
 
-      if (!customId || !name || !birthDate) {
-        errorEl.textContent = 'すべての項目を入力してください。';
-        errorEl.style.display = 'block';
-        successEl.style.display = 'none';
+      if (pw !== pwConfirm) {
+        errEl.textContent = 'パスワードが一致しません。';
+        errEl.style.display = 'block';
+        sucEl.style.display = 'none';
         return;
       }
 
-      const result = SakuraAuth.signup(customId, name, birthDate);
+      const result = SakuraAuth.signup(id, pw, name, email, birth);
+      if (!result) return;
 
-      if (result && result.error === 'id_too_short') {
-        errorEl.textContent = 'ログインIDは3文字以上にしてください。';
-        errorEl.style.display = 'block';
-        successEl.style.display = 'none';
-      } else if (result && result.error === 'id_taken') {
-        errorEl.textContent = 'このIDはすでに使われています。別のIDを入力してください。';
-        errorEl.style.display = 'block';
-        successEl.style.display = 'none';
-      } else if (result && result.success) {
-        errorEl.style.display = 'none';
-        successEl.textContent = '登録完了！ ログインID「' + result.patient.id + '」＋生年月日でログインできます。';
-        successEl.style.display = 'block';
+      if (result.error === 'missing_fields') {
+        errEl.textContent = 'すべての項目を入力してください。';
+      } else if (result.error === 'id_too_short') {
+        errEl.textContent = 'ログインIDは3文字以上にしてください。';
+      } else if (result.error === 'password_too_short') {
+        errEl.textContent = 'パスワードは6文字以上にしてください。';
+      } else if (result.error === 'id_taken') {
+        errEl.textContent = 'このIDはすでに使われています。';
+      } else if (result.success) {
+        errEl.style.display = 'none';
+        sucEl.textContent = '登録完了！ ID「' + id + '」とパスワードでログインできます。';
+        sucEl.style.display = 'block';
+        document.getElementById('patientId').value = id;
+        setTimeout(() => showOnly(form), 3000);
+        return;
+      }
+      errEl.style.display = 'block';
+      sucEl.style.display = 'none';
+    });
+  }
 
-        // ログインフォームに自動入力
-        document.getElementById('patientId').value = result.patient.id;
-        document.getElementById('birthDate').value = birthDate;
+  // --- Password reset ---
+  if (resetForm) {
+    let verified = false;
+    resetForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('resetId').value.trim();
+      const email = document.getElementById('resetEmail').value.trim();
+      const errEl = document.getElementById('resetError');
+      const sucEl = document.getElementById('resetSuccess');
+      const newPwGroup = document.getElementById('newPasswordGroup');
+      const submitBtn = document.getElementById('resetSubmitBtn');
 
-        setTimeout(() => {
-          signupForm.hidden = true;
-          form.hidden = false;
-          showSignupBtn.parentElement.hidden = false;
-        }, 3000);
+      if (!verified) {
+        // Step 1: verify ID + email
+        const result = SakuraAuth.resetPassword(id, email);
+        if (result && result.verified) {
+          newPwGroup.hidden = false;
+          document.getElementById('resetNewPassword').required = true;
+          submitBtn.textContent = 'パスワードを変更';
+          verified = true;
+          errEl.style.display = 'none';
+          sucEl.textContent = '確認が取れました。新しいパスワードを入力してください。';
+          sucEl.style.display = 'block';
+        } else if (result && result.error === 'not_found') {
+          errEl.textContent = 'IDとメールアドレスの組み合わせが見つかりません。';
+          errEl.style.display = 'block';
+          sucEl.style.display = 'none';
+        }
+      } else {
+        // Step 2: set new password
+        const newPw = document.getElementById('resetNewPassword').value;
+        const result = SakuraAuth.resetPassword(id, email, newPw);
+        if (result && result.success) {
+          errEl.style.display = 'none';
+          sucEl.textContent = 'パスワードを変更しました。新しいパスワードでログインしてください。';
+          sucEl.style.display = 'block';
+          document.getElementById('patientId').value = id;
+          verified = false;
+          setTimeout(() => {
+            showOnly(form);
+            newPwGroup.hidden = true;
+            submitBtn.textContent = '確認する';
+          }, 3000);
+        } else if (result && result.error === 'password_too_short') {
+          errEl.textContent = 'パスワードは6文字以上にしてください。';
+          errEl.style.display = 'block';
+          sucEl.style.display = 'none';
+        } else if (result && result.error === 'demo_user') {
+          errEl.textContent = 'デモユーザーのパスワードは変更できません。';
+          errEl.style.display = 'block';
+          sucEl.style.display = 'none';
+        }
       }
     });
   }
