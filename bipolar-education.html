@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>双極性障害の理解と付き合い方 — こころのクリニック桜が丘</title>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --primary: #7b88c4;
@@ -47,8 +49,14 @@
     text-decoration: none;
   }
 
+  .nav-clinic-name {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
   .nav-link-secondary {
-    color: #6b6b8d;
+    color: #827c73;
     font-weight: 600;
     font-size: 0.78rem;
     text-decoration: none;
@@ -405,6 +413,10 @@
     .card, .type-card, .step-card, .bipolar-card { break-inside: avoid; }
     .tip-box, .science-box { break-inside: avoid; }
     section { break-inside: avoid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-icons, .petal { animation: none; }
   }
 </style>
 </head>
