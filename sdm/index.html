@@ -940,6 +940,26 @@ const medicationDB = {
         costLabel: '安い',
         tags: { drowsiness: 3, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 1, dizziness: 2, dependence: 0, efficacy: 1, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
       }
+    
+      ,{
+        id: 'clomipramine', brand: 'アナフラニール', generic: 'クロミプラミン',
+        classLabel: '三環系', classColor: '#c06d86', classColorLight: '#faeef1',
+        desc: '強迫性障害に最も強力な抗うつ薬。点滴静注も可能',
+        mechanism: 'セロトニンとノルアドレナリンの再取り込みを強力に阻害する三環系抗うつ薬。',
+        merits: ['強迫性障害に最も強力', 'SSRIが効かない場合の選択肢', '点滴静注が可能（重症例）', 'パニック障害にも有効'],
+        demerits: ['抗コリン作用（口渇・便秘・排尿困難）', '眠気', '体重増加', '心毒性（過量服薬に注意）', '起立性低血圧'],
+        onset: '2-4週間', cost: '◎', costLabel: '安い',
+        tags: { drowsiness: 3, weightGain: 2, nausea: 1, sexualDysfunction: 2, dryMouth: 3, dizziness: 2, dependence: 0, efficacy: 3, fastOnset: 0, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 0 }
+      },{
+        id: 'mianserin', brand: 'テトラミド', generic: 'ミアンセリン',
+        classLabel: '四環系', classColor: '#a89cc8', classColorLight: '#f0edf6',
+        desc: '眠気を利用した睡眠改善。抗コリン作用が少ない',
+        mechanism: 'α2受容体を遮断してノルアドレナリン放出を促進。抗ヒスタミン作用で睡眠を改善。',
+        merits: ['抗コリン作用が少ない（三環系より安全）', '睡眠改善が早い', '心毒性が少ない', '高齢者に使いやすい'],
+        demerits: ['眠気が強い', '抗うつ効果はSSRIより弱い', '体重増加', '血球減少（まれ）'],
+        onset: '1-2週間（睡眠は初日から）', cost: '◎', costLabel: '安い',
+        tags: { drowsiness: 3, weightGain: 2, nausea: 0, sexualDysfunction: 0, dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 1, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      }
     ]
   },
   anxiolytics: {
@@ -1041,23 +1061,7 @@ const medicationDB = {
         cost: '◎',
         costLabel: '安い',
         tags: { drowsiness: 2, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 2, efficacy: 3, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0 }
-      },
-      {
-        id: 'pregabalin',
-        brand: 'リリカ',
-        generic: 'プレガバリン',
-        classLabel: 'ガバペンチノイド',
-        classColor: '#d4b070',
-        classColorLight: '#fef6ec',
-        desc: '全般性不安障害＋神経痛に効果',
-        mechanism: '電位依存性カルシウムチャネルα2δサブユニットに結合し、興奮性神経伝達物質の放出を抑制。',
-        merits: ['不安＋痛みの両方に効く', 'ベンゾジアゼピンと異なる作用機序', '睡眠の質も改善'],
-        demerits: ['眠気・ふらつき', '体重増加', '浮腫', '急な中止で離脱症状'],
-        onset: '1-2週間',
-        cost: '◎',
-        costLabel: '安い（後発品あり）',
-        tags: { drowsiness: 2, weightGain: 2, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 2, dependence: 1, efficacy: 2, fastOnset: 1, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
-      }
+      }}
     ]
   },
   moodStabilizers: {
@@ -1123,6 +1127,17 @@ const medicationDB = {
           dryMouth: 0, dizziness: 1, dependence: 0, efficacy: 2,
           fastOnset: 0, lowSideEffects: 2, lowCost: 3, pregnancy: 1, cognitive: 3
         }
+      }
+    
+      ,{
+        id: 'carbamazepine', brand: 'テグレトール', generic: 'カルバマゼピン',
+        classLabel: '抗てんかん薬', classColor: '#d4b070', classColorLight: '#fef6ec',
+        desc: '難治性の躁状態や混合状態に使用',
+        mechanism: 'ナトリウムチャネルを遮断し、神経の過剰な興奮を抑制。',
+        merits: ['リチウム・バルプロ酸が効かない場合の選択肢', '三叉神経痛にも有効', '長い使用実績'],
+        demerits: ['薬物相互作用が非常に多い', '皮疹（SJS/TENリスク→HLA検査推奨）', '血球減少', '肝機能障害', '催奇形性'],
+        onset: '1-2週間', cost: '◎', costLabel: '安い',
+        tags: { drowsiness: 2, weightGain: 1, nausea: 1, sexualDysfunction: 0, dryMouth: 1, dizziness: 2, dependence: 0, efficacy: 2, fastOnset: 1, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 1 }
       }
     ]
   },
@@ -1210,38 +1225,35 @@ const medicationDB = {
           fastOnset: 1, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 2
         }
       }
-,
-      {
-        id: 'eszopiclone',
-        brand: 'ルネスタ',
-        generic: 'エスゾピクロン',
-        classLabel: '非ベンゾジアゼピン',
-        classColor: '#a89cc8',
-        classColorLight: '#f0edf6',
-        desc: '入眠＋中途覚醒に効く非ベンゾ。長期処方可能',
-        mechanism: 'GABA-A受容体のα1サブユニットに選択的に作用し、自然に近い睡眠を誘導。',
-        merits: ['入眠＋中途覚醒の両方に効果', '長期処方が可能', '翌朝に残りにくい'],
-        demerits: ['苦味（味覚異常）', '依存性あり（非ベンゾより弱い）', '眠気'],
-        onset: '15-30分',
-        cost: '◎',
-        costLabel: '安い（後発品あり）',
-        tags: { drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 1, efficacy: 2, fastOnset: 3, lowSideEffects: 2, lowCost: 3, pregnancy: 0, cognitive: 1 }
-      },
-      {
-        id: 'triazolam',
-        brand: 'ハルシオン',
-        generic: 'トリアゾラム',
-        classLabel: 'ベンゾジアゼピン',
-        classColor: '#7bafd5',
-        classColorLight: '#eef4fb',
-        desc: '超短時間作用型。入眠困難に即効',
-        mechanism: 'GABA-A受容体を非選択的に増強。超短時間作用で入眠に特化。',
-        merits: ['入眠に即効', '超短時間作用で翌朝に残りにくい', '実績が長い'],
-        demerits: ['健忘リスク', '反跳性不眠', '依存性', '夢遊行動のリスク'],
-        onset: '15-30分',
-        cost: '◎',
-        costLabel: '安い',
-        tags: { drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 3, efficacy: 3, fastOnset: 3, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 0 }
+}
+    
+      ,{
+        id: 'risperidone', brand: 'リスパダール', generic: 'リスペリドン',
+        classLabel: 'SDA', classColor: '#7bafd5', classColorLight: '#eef4fb',
+        desc: '幅広い適応を持つ代表的な第二世代抗精神病薬',
+        mechanism: 'ドーパミンD2受容体とセロトニン5-HT2A受容体を遮断。陽性・陰性両症状に効果。',
+        merits: ['幅広い適応（統合失調症・双極性障害・易刺激性）', '液剤あり（服薬困難時に）', '持効性注射剤（LAI）あり'],
+        demerits: ['高プロラクチン血症（乳汁分泌・月経異常）', '錐体外路症状（高用量）', '体重増加（中等度）'],
+        onset: '数日-1週間', cost: '◎', costLabel: '安い（後発品あり）',
+        tags: { drowsiness: 1, weightGain: 2, nausea: 0, sexualDysfunction: 1, dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 3, fastOnset: 2, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      },{
+        id: 'paliperidone', brand: 'インヴェガ/ゼプリオン(LAI)', generic: 'パリペリドン',
+        classLabel: 'SDA', classColor: '#7bafd5', classColorLight: '#eef4fb',
+        desc: 'リスペリドンの活性代謝物。月1回の注射剤あり',
+        mechanism: 'リスペリドンの活性代謝物。ドーパミンD2/セロトニン5-HT2A遮断作用。',
+        merits: ['月1回注射で飲み忘れなし（LAI）', '3ヶ月に1回製剤もあり', '薬物相互作用が少ない', '安定した血中濃度'],
+        demerits: ['高プロラクチン血症', '体重増加', '注射部位の痛み（LAI）', '錐体外路症状'],
+        onset: '数日-1週間', cost: '○', costLabel: 'ふつう',
+        tags: { drowsiness: 1, weightGain: 2, nausea: 0, sexualDysfunction: 1, dryMouth: 1, dizziness: 1, dependence: 0, efficacy: 3, fastOnset: 2, lowSideEffects: 1, lowCost: 2, pregnancy: 0, cognitive: 1 }
+      },{
+        id: 'lurasidone', brand: 'ラツーダ', generic: 'ルラシドン',
+        classLabel: 'SDA', classColor: '#7aad78', classColorLight: '#f0f5ef',
+        desc: '双極性うつに適応。代謝への影響が少ない',
+        mechanism: 'ドーパミンD2/セロトニン5-HT2A遮断＋5-HT7拮抗作用で認知機能改善にも寄与。',
+        merits: ['双極性うつ・統合失調症に適応', '体重増加が少ない', '代謝への影響が少ない', '認知機能への好影響'],
+        demerits: ['食後に服用必須（吸収に影響）', 'アカシジア', '吐き気', '比較的新しい薬'],
+        onset: '1-2週間', cost: '△', costLabel: 'やや高い',
+        tags: { drowsiness: 1, weightGain: 0, nausea: 1, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 0, efficacy: 2, fastOnset: 1, lowSideEffects: 2, lowCost: 0, pregnancy: 0, cognitive: 2 }
       }
     ]
   },
@@ -1328,6 +1340,38 @@ const medicationDB = {
           dryMouth: 0, dizziness: 0, dependence: 2, efficacy: 2,
           fastOnset: 3, lowSideEffects: 1, lowCost: 3, pregnancy: 0, cognitive: 0
         }
+      ,{
+        id: 'eszopiclone',
+        brand: 'ルネスタ',
+        generic: 'エスゾピクロン',
+        classLabel: '非ベンゾジアゼピン',
+        classColor: '#a89cc8',
+        classColorLight: '#f0edf6',
+        desc: '入眠＋中途覚醒に効く非ベンゾ。長期処方可能',
+        mechanism: 'GABA-A受容体のα1サブユニットに選択的に作用し、自然に近い睡眠を誘導。',
+        merits: ['入眠＋中途覚醒の両方に効果', '長期処方が可能', '翌朝に残りにくい'],
+        demerits: ['苦味（味覚異常）', '依存性あり（非ベンゾより弱い）', '眠気'],
+        onset: '15-30分',
+        cost: '◎',
+        costLabel: '安い（後発品あり）',
+        tags: { drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 1, efficacy: 2, fastOnset: 3, lowSideEffects: 2, lowCost: 3, pregnancy: 0, cognitive: 1 }
+      },
+      {
+        id: 'triazolam',
+        brand: 'ハルシオン',
+        generic: 'トリアゾラム',
+        classLabel: 'ベンゾジアゼピン',
+        classColor: '#7bafd5',
+        classColorLight: '#eef4fb',
+        desc: '超短時間作用型。入眠困難に即効',
+        mechanism: 'GABA-A受容体を非選択的に増強。超短時間作用で入眠に特化。',
+        merits: ['入眠に即効', '超短時間作用で翌朝に残りにくい', '実績が長い'],
+        demerits: ['健忘リスク', '反跳性不眠', '依存性', '夢遊行動のリスク'],
+        onset: '15-30分',
+        cost: '◎',
+        costLabel: '安い',
+        tags: { drowsiness: 1, weightGain: 0, nausea: 0, sexualDysfunction: 0, dryMouth: 0, dizziness: 1, dependence: 3, efficacy: 3, fastOnset: 3, lowSideEffects: 0, lowCost: 3, pregnancy: 0, cognitive: 0 }
+      }
       }
     ]
   }
