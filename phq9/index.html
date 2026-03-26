@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHQ-9 うつ症状チェック — こころのクリニック桜が丘</title>
+  <meta name="description" content="PHQ-9によるうつ症状の自己チェック。この2週間のこころの状態を簡単に確認できます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="../shared/js/font-toggle.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf8f0;
+      --cream-dark: #f5eddf;
+      --green-light: #e8f5e9;
+      --green: #81c784;
+      --green-dark: #66bb6a;
+      --orange-light: #fff3e0;
+      --orange: #ffb74d;
+      --blue-light: #e3f2fd;
+      --red-light: #ffebee;
+      --text: #4a4035;
+      --text-light: #7d7269;
+      --text-muted: #a09889;
+      --white: #ffffff;
+      --shadow: 0 2px 12px rgba(120, 100, 80, 0.08);
+      --shadow-hover: 0 4px 20px rgba(120, 100, 80, 0.15);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --font: 'Zen Maru Gothic', 'Hiragino Maru Gothic Pro', 'BIZ UDPGothic', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--cream);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    @media (min-width: 600px) {
+      .container { padding: 32px 24px 60px; }
+      body { font-size: 16px; }
+    }
+
+    /* ナビ */
+    .back-link {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 4px 0;
+      margin-bottom: 8px;
+    }
+
+    /* ヘッダー */
+    .header {
+      text-align: center;
+      padding: 16px 0 24px;
+    }
+    .header-icon { font-size: 2.5rem; margin-bottom: 8px; }
+    .header-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .header-sub {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .header-badge {
+      display: inline-block;
+      background: var(--blue-light);
+      color: #1565c0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+
+    /* 説明ボックス */
+    .intro-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    /* プログレスバー */
+    .progress {
+      background: var(--cream-dark);
+      border-radius: 50px;
+      height: 6px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: var(--green-dark);
+      border-radius: 50px;
+      transition: width 0.3s ease;
+    }
+    .progress-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-bottom: 4px;
+    }
+
+    /* 質問カード */
+    .question-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .question-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .question-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    /* 回答ボタン */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 2px solid transparent;
+      border-radius: var(--radius-sm);
+      background: var(--cream);
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 0.88rem;
+      color: var(--text);
+      text-align: left;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .option-btn:hover { background: var(--cream-dark); }
+    .option-btn.selected {
+      border-color: var(--green-dark);
+      background: var(--green-light);
+      box-shadow: 0 0 0 1px var(--green-dark);
+    }
+    .option-score {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .option-btn.selected .option-score {
+      background: var(--green-dark);
+      color: var(--white);
+    }
+
+    /* ナビボタン */
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-prev {
+      background: var(--cream-dark);
+      color: var(--text-light);
+    }
+    .btn-next {
+      background: var(--green-dark);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(102, 187, 106, 0.3);
+    }
+
+    /* 機能障害の質問 */
+    .functional-card {
+      background: var(--orange-light);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--orange);
+    }
+
+    /* 結果画面 */
+    .result-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .result-card.border-green { border-top: 4px solid #66bb6a; }
+    .result-card.border-yellow { border-top: 4px solid #ffa726; }
+    .result-card.border-orange { border-top: 4px solid #ff7043; }
+    .result-card.border-red { border-top: 4px solid #ef5350; }
+
+    .result-badge {
+      display: inline-block;
+      padding: 4px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .result-score {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .result-total {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .result-message {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .result-advice {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* スコアバー */
+    .score-bar-container { margin: 16px 0; }
+    .score-bar-bg {
+      background: var(--cream-dark);
+      border-radius: 50px;
+      height: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 50px;
+      transition: width 0.5s ease;
+    }
+    .score-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* 免責事項 */
+    .disclaimer {
+      background: #fff8e1;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--orange);
+    }
+    .disclaimer p {
+      font-size: 0.85rem;
+      color: #6d5a00;
+      line-height: 1.7;
+    }
+
+    /* 緊急メッセージ */
+    .urgent-box {
+      background: var(--red-light);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 20px;
+      border-left: 4px solid #ef5350;
+    }
+    .urgent-box p {
+      font-size: 0.9rem;
+      color: #b71c1c;
+      line-height: 1.7;
+    }
+
+    /* 各質問のスコア内訳 */
+    .breakdown {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+    .breakdown-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f3f0;
+      font-size: 0.82rem;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-q { color: var(--text-light); flex: 1; }
+    .breakdown-score {
+      font-weight: 700;
+      min-width: 24px;
+      text-align: right;
+    }
+
+    /* 励まし */
+    .encourage {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .encourage p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.9;
+    }
+
+    /* CTA */
+    .cta-section { text-align: center; padding-bottom: 20px; }
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      border-radius: 50px;
+      background: var(--green-dark);
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(102, 187, 106, 0.35);
+      font-family: var(--font);
+      margin-bottom: 16px;
+    }
+    .retry-btn {
+      display: block;
+      margin: 0 auto;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: var(--font);
+      text-decoration: underline;
+      padding: 8px;
+    }
+
+    /* 非表示 */
+    .hidden { display: none; }
+
+    /* フェードイン */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.4s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* フッター */
+    .site-footer {
+      border-top: 1px solid var(--cream-dark);
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 8px;
+    }
+    .site-footer-brand {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .site-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 14px;
+      margin-bottom: 8px;
+    }
+    .site-footer-links a {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .site-footer-copy {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ===== 開始画面 ===== -->
+    <div id="screen-intro" class="fade-in">
+      <a href="/index.html" class="back-link">&larr; アプリトップ</a>
+
+      <div class="header">
+        <div class="header-icon">📋</div>
+        <div class="header-badge">PHQ-9</div>
+        <h1 class="header-title">うつ症状チェック</h1>
+        <p class="header-sub">
+          この2週間のこころの状態を<br>簡単にチェックできます。
+        </p>
+      </div>
+
+      <div class="intro-box">
+        <p><strong>PHQ-9</strong>は、世界中の医療現場で使われているうつ症状のスクリーニングツールです。</p>
+        <p style="margin-top:10px;">9つの質問に答えるだけで、今のこころの状態の目安がわかります。所要時間は<strong>約2〜3分</strong>です。</p>
+        <p style="margin-top:10px; font-size:0.82rem; color:var(--text-muted);">🔒 回答内容は保存されません。安心してご利用ください。</p>
+      </div>
+
+      <button class="btn btn-next" style="width:100%;" onclick="startQuiz()">チェックを始める</button>
+    </div>
+
+    <!-- ===== 質問画面 ===== -->
+    <div id="screen-quiz" class="hidden">
+      <a href="javascript:void(0)" class="back-link" onclick="goIntro()">&larr; 最初に戻る</a>
+
+      <div class="progress-label"><span id="progressText">1 / 9</span></div>
+      <div class="progress"><div class="progress-bar" id="progressBar" style="width:11.1%"></div></div>
+
+      <div id="questionArea"></div>
+
+      <div class="nav-buttons">
+        <button class="btn btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>&larr; 前へ</button>
+        <button class="btn btn-next" id="btnNext" onclick="nextQuestion()" disabled>次へ &rarr;</button>
+      </div>
+    </div>
+
+    <!-- ===== 機能障害の質問 ===== -->
+    <div id="screen-functional" class="hidden fade-in">
+      <a href="javascript:void(0)" class="back-link" onclick="backToQuiz()">&larr; 質問に戻る</a>
+
+      <div class="functional-card">
+        <p class="question-num">追加の質問</p>
+        <p class="question-text">上記のような問題がある場合、その問題によって仕事をしたり、家事をしたり、他の人と付き合ったりすることがどのくらい難しくなっていますか？</p>
+        <div class="options" id="functionalOptions"></div>
+      </div>
+
+      <button class="btn btn-next" id="btnResult" style="width:100%;" onclick="showResult()" disabled>結果を見る</button>
+    </div>
+
+    <!-- ===== 結果画面 ===== -->
+    <div id="screen-result" class="hidden fade-in"></div>
+  </div>
+
+  <script>
+  (function() {
+    'use strict';
+
+    var CLINIC_URL = 'https://www.mental-clinic-sakuragaoka.com';
+
+    var questions = [
+      '物事に対してほとんど興味がない、または楽しめない',
+      '気分が落ち込む、憂うつになる、または絶望的な気持ちになる',
+      '寝つきが悪い、途中で目がさめる、または逆に眠りすぎる',
+      '疲れた感じがする、または気力がない',
+      'あまり食欲がない、または食べすぎる',
+      '自分はダメな人間だ、人生の敗北者だと気に病む、または自分自身あるいは家族に申し訳がないと感じる',
+      '新聞を読む、またはテレビを見ることなどに集中することが難しい',
+      '他人が気づくぐらいに動きや話し方が遅くなる、あるいは反対に、そわそわしたり落ちつかず、ふだんよりも動き回ることがある',
+      '死んだ方がましだ、あるいは自分を何らかの方法で傷つけようかと思ったことがある'
+    ];
+
+    var options = [
+      { score: 0, label: '全くない' },
+      { score: 1, label: '数日' },
+      { score: 2, label: '半分以上' },
+      { score: 3, label: 'ほとんど毎日' }
+    ];
+
+    var functionalOptions = [
+      '全く難しくない',
+      'やや難しい',
+      '非常に難しい',
+      '極めて難しい'
+    ];
+
+    var answers = new Array(9).fill(-1);
+    var currentQ = 0;
+    var functionalAnswer = -1;
+
+    function $(id) { return document.getElementById(id); }
+
+    function showScreen(name) {
+      ['intro', 'quiz', 'functional', 'result'].forEach(function(s) {
+        $(('screen-' + s)).classList.add('hidden');
+      });
+      var el = $('screen-' + name);
+      el.classList.remove('hidden');
+      el.classList.remove('fade-in');
+      void el.offsetWidth;
+      el.classList.add('fade-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.startQuiz = function() {
+      answers = new Array(9).fill(-1);
+      currentQ = 0;
+      functionalAnswer = -1;
+      showScreen('quiz');
+      renderQuestion();
+    };
+
+    window.goIntro = function() {
+      showScreen('intro');
+    };
+
+    function renderQuestion() {
+      var area = $('questionArea');
+      var q = questions[currentQ];
+      var isQ9 = currentQ === 8;
+
+      var html = '<div class="question-card">';
+      if (isQ9) {
+        html += '<div style="background:var(--red-light);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:0.8rem;color:#b71c1c;line-height:1.6;">' +
+          '⚠️ この質問はデリケートな内容を含みます。正直にお答えいただくことが大切です。</div>';
+      }
+      html += '<p class="question-num">質問 ' + (currentQ + 1) + ' / 9</p>';
+      html += '<p class="question-text">この2週間、次の問題にどのくらい悩まされていますか？</p>';
+      html += '<p style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.6;">' + q + '</p>';
+      html += '<div class="options">';
+      options.forEach(function(opt) {
+        var sel = answers[currentQ] === opt.score ? ' selected' : '';
+        html += '<button class="option-btn' + sel + '" onclick="selectAnswer(' + opt.score + ', this)">' +
+          '<span class="option-score">' + opt.score + '</span>' +
+          '<span>' + opt.label + '</span></button>';
+      });
+      html += '</div></div>';
+      area.innerHTML = html;
+
+      // プログレス更新
+      $('progressText').textContent = (currentQ + 1) + ' / 9';
+      $('progressBar').style.width = ((currentQ + 1) / 9 * 100) + '%';
+
+      // ボタン状態
+      $('btnPrev').disabled = currentQ === 0;
+      updateNextBtn();
+    }
+
+    window.selectAnswer = function(score, btn) {
+      answers[currentQ] = score;
+      var btns = btn.parentElement.querySelectorAll('.option-btn');
+      btns.forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      updateNextBtn();
+    };
+
+    function updateNextBtn() {
+      var btn = $('btnNext');
+      btn.disabled = answers[currentQ] === -1;
+      btn.textContent = currentQ === 8 ? '次へ →' : '次へ →';
+    }
+
+    window.nextQuestion = function() {
+      if (answers[currentQ] === -1) return;
+      if (currentQ < 8) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        showFunctional();
+      }
+    };
+
+    window.prevQuestion = function() {
+      if (currentQ > 0) {
+        currentQ--;
+        renderQuestion();
+      }
+    };
+
+    function showFunctional() {
+      var totalScore = answers.reduce(function(a, b) { return a + b; }, 0);
+      if (totalScore === 0) {
+        functionalAnswer = 0;
+        showResult();
+        return;
+      }
+
+      var container = $('functionalOptions');
+      container.innerHTML = '';
+      functionalOptions.forEach(function(label, idx) {
+        var btn = document.createElement('button');
+        btn.className = 'option-btn' + (functionalAnswer === idx ? ' selected' : '');
+        btn.innerHTML = '<span>' + label + '</span>';
+        btn.onclick = function() {
+          functionalAnswer = idx;
+          container.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+          btn.classList.add('selected');
+          $('btnResult').disabled = false;
+        };
+        container.appendChild(btn);
+      });
+      $('btnResult').disabled = functionalAnswer === -1;
+      showScreen('functional');
+    }
+
+    window.backToQuiz = function() {
+      currentQ = 8;
+      showScreen('quiz');
+      renderQuestion();
+    };
+
+    window.showResult = function() {
+      var total = answers.reduce(function(a, b) { return a + b; }, 0);
+      var severity, color, colorBg, borderClass, message, advice;
+
+      if (total <= 4) {
+        severity = '正常';
+        color = '#66bb6a';
+        colorBg = '#e8f5e9';
+        borderClass = 'border-green';
+        message = '現在、うつ症状はほとんど見られません。';
+        advice = '今の良い状態を維持するために、十分な睡眠、適度な運動、リラックスする時間を大切にしましょう。';
+      } else if (total <= 9) {
+        severity = '軽度';
+        color = '#ffa726';
+        colorBg = '#fff3e0';
+        borderClass = 'border-yellow';
+        message = '軽いうつ症状が見られます。日常生活のセルフケアを意識してみましょう。';
+        advice = '症状が続く場合は、早めに専門家に相談することで、軽いうちに対処できることが多いです。';
+      } else if (total <= 14) {
+        severity = '中等度';
+        color = '#ff7043';
+        colorBg = '#fbe9e7';
+        borderClass = 'border-orange';
+        message = '中程度のうつ症状が見られます。専門家への相談をおすすめします。';
+        advice = '治療を受けることで改善が期待できます。一人で抱え込まず、医療機関を受診してみてください。';
+      } else if (total <= 19) {
+        severity = '中等度〜重度';
+        color = '#ef5350';
+        colorBg = '#ffebee';
+        borderClass = 'border-red';
+        message = 'やや重いうつ症状が見られます。できるだけ早めに専門の医療機関を受診されることをおすすめします。';
+        advice = '適切な治療（お薬やカウンセリング）で、多くの方が回復されています。';
+      } else {
+        severity = '重度';
+        color = '#ef5350';
+        colorBg = '#ffebee';
+        borderClass = 'border-red';
+        message = '重いうつ症状が見られます。できるだけ早く専門の医療機関を受診してください。';
+        advice = 'つらい状態が続いていると思いますが、専門家の力を借りることで必ず楽になれます。';
+      }
+
+      var hasQ9 = answers[8] > 0;
+
+      var html = '';
+
+      // 免責事項
+      html += '<div class="disclaimer"><p>⚠️ この結果は医学的な診断ではありません。気になる症状がある場合は、必ず専門の医療機関を受診してください。</p></div>';
+
+      // 自殺念慮への対応
+      if (hasQ9) {
+        html += '<div class="urgent-box"><p>' +
+          '🆘 質問9で「死にたい気持ち」や「自分を傷つけること」について回答がありました。<br>' +
+          'つらいお気持ちを抱えていらっしゃるのですね。<br><br>' +
+          '<strong>今すぐ相談できる窓口：</strong><br>' +
+          '・いのちの電話：0570-783-556<br>' +
+          '・よりそいホットライン：0120-279-338<br>' +
+          '・こころの健康相談統一ダイヤル：0570-064-556</p></div>';
+      }
+
+      // 結果カード
+      html += '<div class="result-card ' + borderClass + '">';
+      html += '<div class="result-badge" style="background:' + colorBg + ';color:' + color + ';">' + severity + '</div>';
+      html += '<div class="result-score">' + total + '<span style="font-size:1rem;font-weight:400;color:var(--text-muted);"> 点</span></div>';
+      html += '<div class="result-total">27点満点</div>';
+
+      // スコアバー
+      html += '<div class="score-bar-container">';
+      html += '<div class="score-bar-bg"><div class="score-bar-fill" style="width:' + (total / 27 * 100) + '%;background:' + color + ';"></div></div>';
+      html += '<div class="score-labels"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span><span>27</span></div>';
+      html += '</div>';
+
+      html += '<p class="result-message">' + message + '</p>';
+      html += '<p class="result-advice">' + advice + '</p>';
+      html += '</div>';
+
+      // 機能障害レベル
+      if (total > 0 && functionalAnswer >= 0) {
+        var funcLabels = ['全く難しくない', 'やや難しい', '非常に難しい', '極めて難しい'];
+        html += '<div class="breakdown" style="text-align:center;">';
+        html += '<p class="breakdown-title">日常生活への影響</p>';
+        html += '<p style="font-size:1.1rem;font-weight:700;color:' + color + ';">' + funcLabels[functionalAnswer] + '</p>';
+        html += '</div>';
+      }
+
+      // スコア内訳
+      html += '<div class="breakdown">';
+      html += '<p class="breakdown-title">📊 回答の内訳</p>';
+      var shortLabels = [
+        '興味・喜び', '気分の落ち込み', '睡眠', '疲労感',
+        '食欲', '自己評価', '集中力', '動作・落ち着き', '希死念慮'
+      ];
+      var scoreLabels = ['全くない', '数日', '半分以上', 'ほぼ毎日'];
+      for (var i = 0; i < 9; i++) {
+        var sc = answers[i];
+        var scColor = sc === 0 ? 'var(--text-muted)' : sc <= 1 ? '#ffa726' : '#ef5350';
+        html += '<div class="breakdown-row">';
+        html += '<span class="breakdown-q">' + shortLabels[i] + '</span>';
+        html += '<span style="font-size:0.78rem;color:var(--text-muted);margin-right:8px;">' + scoreLabels[sc] + '</span>';
+        html += '<span class="breakdown-score" style="color:' + scColor + ';">' + sc + '</span>';
+        html += '</div>';
+      }
+      html += '</div>';
+
+      // 重症度の目安
+      html += '<div class="breakdown">';
+      html += '<p class="breakdown-title">📏 スコアの目安</p>';
+      var ranges = [
+        { range: '0〜4', label: '正常', c: '#66bb6a' },
+        { range: '5〜9', label: '軽度', c: '#ffa726' },
+        { range: '10〜14', label: '中等度', c: '#ff7043' },
+        { range: '15〜19', label: '中等度〜重度', c: '#ef5350' },
+        { range: '20〜27', label: '重度', c: '#ef5350' }
+      ];
+      ranges.forEach(function(r) {
+        var isActive = (severity === r.label) ? 'font-weight:700;' : '';
+        var marker = (severity === r.label) ? ' ◀' : '';
+        html += '<div class="breakdown-row" style="' + isActive + '">';
+        html += '<span class="breakdown-q">' + r.range + '点</span>';
+        html += '<span class="breakdown-score" style="color:' + r.c + ';">' + r.label + marker + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+
+      // 励まし
+      html += '<div class="encourage"><p>🌸 一人で抱え込まないでくださいね。<br>相談することは、とても勇気ある一歩です。</p></div>';
+
+      // CTA
+      html += '<div class="cta-section">';
+      html += '<a href="' + CLINIC_URL + '" class="cta-btn" target="_blank" rel="noopener">当クリニックに相談する</a>';
+      html += '<button class="retry-btn" onclick="startQuiz()">もう一度チェックする</button>';
+      html += '</div>';
+
+      // フッター
+      html += '<footer class="site-footer">';
+      html += '<p class="site-footer-brand">こころのクリニック桜が丘</p>';
+      html += '<nav class="site-footer-links">';
+      html += '<a href="' + CLINIC_URL + '" target="_blank" rel="noopener">クリニックHP</a>';
+      html += '<a href="/index.html">サイトトップ</a>';
+      html += '</nav>';
+      html += '<p class="site-footer-copy">&copy; こころのクリニック桜が丘</p>';
+      html += '</footer>';
+
+      $('screen-result').innerHTML = html;
+      showScreen('result');
+    };
+  })();
+  </script>
+</body>
+</html>
