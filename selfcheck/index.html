@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メンタルヘルス セルフチェック — こころのクリニック桜が丘</title>
+  <meta name="description" content="簡単なセルフチェックで、今のこころの状態を確認してみましょう。受診の目安にもなります。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf8f0;
+      --cream-dark: #f5eddf;
+      --green-light: #e8f5e9;
+      --green: #81c784;
+      --green-dark: #66bb6a;
+      --orange-light: #fff3e0;
+      --orange: #ffb74d;
+      --orange-dark: #ffa726;
+      --pink-light: #fce4ec;
+      --blue-light: #e3f2fd;
+      --purple-light: #f3e5f5;
+      --text: #4a4035;
+      --text-light: #7d7269;
+      --text-muted: #a09889;
+      --white: #ffffff;
+      --shadow: 0 2px 12px rgba(120, 100, 80, 0.08);
+      --shadow-hover: 0 4px 20px rgba(120, 100, 80, 0.15);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --font: 'Zen Maru Gothic', 'Hiragino Maru Gothic Pro', 'BIZ UDPGothic', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--cream);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #root {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    .fade-enter {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .fade-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    @media (min-width: 600px) {
+      #root { padding: 32px 24px 60px; }
+      body { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    /* ========== データ定義 ========== */
+
+    const CLINIC_URL = "https://example.com";
+
+    const categories = [
+      {
+        id: "mood",
+        icon: "🌧️",
+        title: "気分の落ち込み・やる気が出ない",
+        description: "何をしても楽しくない、以前好きだったことに興味がわかない",
+        color: "#e8eaf6",
+        symptoms: [
+          "朝起きたとき、一日が始まるのがつらいと感じる",
+          "以前は楽しめていた趣味や活動に興味がわかない",
+          "何をするにもおっくうで、体が重く感じる",
+          "自分はダメな人間だと感じることが増えた",
+          "ちょっとしたことで涙が出てしまう",
+          "集中力が続かず、仕事や家事が手につかない",
+          "食欲がなくなった、または食べすぎてしまう",
+          "人と会うのが面倒に感じる",
+          "将来に希望が持てないと感じる",
+          "これらの症状が2週間以上続いている"
+        ],
+        conditions: [
+          { name: "うつ病", desc: "気分の落ち込みや意欲の低下が続く状態です。適切な治療で多くの方が回復されています。" },
+          { name: "気分変調症", desc: "比較的軽い気分の落ち込みが長期間（2年以上）続く状態です。" },
+          { name: "適応障害", desc: "環境の変化やストレスがきっかけで気分の落ち込みが生じる状態です。" }
+        ]
+      },
+      {
+        id: "anxiety",
+        icon: "💭",
+        title: "不安・緊張が続く",
+        description: "漠然とした不安が消えない、常に何か心配してしまう",
+        color: "#fff8e1",
+        symptoms: [
+          "特に理由がないのに不安な気持ちが続く",
+          "「何か悪いことが起きるのでは」と考えてしまう",
+          "心臓がドキドキしたり、息苦しくなることがある",
+          "人前で話すとき、極端に緊張してしまう",
+          "電車やエレベーターなど特定の場所で不安になる",
+          "手や体が震えることがある",
+          "リラックスしようとしても力が抜けない",
+          "些細なことが気になって何度も確認してしまう",
+          "不安で夜なかなか寝つけない",
+          "これらの症状が2週間以上続いている"
+        ],
+        conditions: [
+          { name: "全般性不安障害", desc: "さまざまなことに対する過剰な不安や心配が長く続く状態です。" },
+          { name: "パニック障害", desc: "突然の強い不安発作（パニック発作）が繰り返し起こる状態です。" },
+          { name: "社交不安障害", desc: "人前での行動や会話に強い不安や恐怖を感じる状態です。" }
+        ]
+      },
+      {
+        id: "sleep",
+        icon: "🌙",
+        title: "眠れない・眠りすぎる",
+        description: "寝つきが悪い、夜中に目が覚める、いくら寝ても疲れがとれない",
+        color: "#e8f5e9",
+        symptoms: [
+          "布団に入ってもなかなか寝つけない（30分以上）",
+          "夜中に何度も目が覚めてしまう",
+          "朝早くに目が覚めて、その後眠れない",
+          "十分寝たはずなのに疲れがとれない",
+          "日中に強い眠気を感じる",
+          "休日に10時間以上寝てしまう",
+          "寝る前にスマホを見ていないと落ち着かない",
+          "夢をよく見て、眠りが浅い気がする",
+          "眠れないことへの不安で余計に眠れなくなる",
+          "これらの症状が2週間以上続いている"
+        ],
+        conditions: [
+          { name: "不眠症", desc: "寝つきの悪さや中途覚醒など、睡眠の問題が続く状態です。" },
+          { name: "過眠症", desc: "十分な睡眠をとっても日中に強い眠気が続く状態です。" },
+          { name: "うつ病に伴う睡眠障害", desc: "気分の問題と合わせて睡眠のリズムが乱れる状態です。" }
+        ]
+      },
+      {
+        id: "relationship",
+        icon: "🤝",
+        title: "人間関係がつらい",
+        description: "職場や家庭での人間関係に疲れている、孤独を感じる",
+        color: "#fce4ec",
+        symptoms: [
+          "職場の同僚や上司との関係に強いストレスを感じる",
+          "家族とのコミュニケーションがうまくいかない",
+          "相手の顔色をうかがいすぎて疲れてしまう",
+          "自分の気持ちや意見をうまく伝えられない",
+          "人と一緒にいると緊張して疲れる",
+          "誰にも理解されていないと感じる",
+          "SNSを見ると気分が落ち込む",
+          "一人でいるときは楽だが、孤独も感じる",
+          "誰かに相談したいが、迷惑をかけたくないと思う",
+          "これらの悩みが2週間以上続いている"
+        ],
+        conditions: [
+          { name: "適応障害", desc: "特定のストレス要因に対して心身の不調が出る状態です。環境調整と治療で改善できます。" },
+          { name: "社交不安障害", desc: "対人場面で過度な不安や緊張を感じる状態です。" },
+          { name: "うつ病", desc: "人間関係のストレスがきっかけで気分の落ち込みが続くこともあります。" }
+        ]
+      },
+      {
+        id: "physical",
+        icon: "🩹",
+        title: "体の不調が続く",
+        description: "頭痛・動悸・胃痛・めまいなど、検査しても原因がわからない",
+        color: "#fff3e0",
+        symptoms: [
+          "頭痛や頭の重さが続いている",
+          "胃の痛みやムカムカが続く",
+          "心臓がドキドキする、脈が飛ぶ感じがする",
+          "めまいやふらつきがある",
+          "体のだるさがとれない",
+          "肩こりや首のこりがひどい",
+          "お腹の調子が悪い（下痢や便秘を繰り返す）",
+          "内科で検査しても「異常なし」と言われた",
+          "ストレスがかかると症状が悪化する気がする",
+          "これらの症状が2週間以上続いている"
+        ],
+        conditions: [
+          { name: "自律神経失調症", desc: "ストレスなどで自律神経のバランスが崩れ、体のさまざまな不調が出る状態です。" },
+          { name: "心身症", desc: "心理的なストレスが体の症状として現れる状態です。" },
+          { name: "うつ病・不安障害の身体症状", desc: "こころの不調が体の症状として現れることもあります。" }
+        ]
+      },
+      {
+        id: "social",
+        icon: "🏠",
+        title: "仕事や学校に行けない",
+        description: "朝になると体が動かない、行こうとすると体調が悪くなる",
+        color: "#e3f2fd",
+        symptoms: [
+          "朝になると体が動かず、起き上がれない",
+          "仕事や学校のことを考えると気分が悪くなる",
+          "玄関を出ようとすると体調が悪くなる",
+          "遅刻や欠勤・欠席が増えてきた",
+          "「行かなければ」と思うほどつらくなる",
+          "休みの日は比較的元気に過ごせる",
+          "このままではいけないと焦りを感じる",
+          "周りの人に申し訳ないと感じる",
+          "家にいても罪悪感で休めない",
+          "この状態が2週間以上続いている"
+        ],
+        conditions: [
+          { name: "うつ病", desc: "気力の低下により日常生活に支障が出ている可能性があります。" },
+          { name: "適応障害", desc: "職場や学校の環境ストレスが原因で心身の不調が出ている状態です。" },
+          { name: "不安障害", desc: "特定の場面への強い不安が日常生活に影響を与えている状態です。" }
+        ]
+      }
+    ];
+
+    /* ========== コンポーネント ========== */
+
+    function FadeIn({ children }) {
+      const ref = useRef(null);
+      useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        el.classList.add("fade-enter");
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            el.classList.add("fade-enter-active");
+          });
+        });
+      }, []);
+      return <div ref={ref}>{children}</div>;
+    }
+
+    /* --- 画面1: トップ --- */
+    function TopScreen({ onSelect }) {
+      return (
+        <FadeIn>
+          <div style={styles.header}>
+            <div style={styles.headerIcon}>🍀</div>
+            <h1 style={styles.headerTitle}>最近、こんなことありませんか？</h1>
+            <p style={styles.headerSub}>
+              気になる項目をタップして、<br />
+              今のこころの状態をチェックしてみましょう。
+            </p>
+          </div>
+
+          <div style={styles.cardGrid}>
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                style={{ ...styles.card, backgroundColor: cat.color }}
+                onClick={() => onSelect(cat)}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = "translateY(-3px)";
+                  e.currentTarget.style.boxShadow = "var(--shadow-hover)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "var(--shadow)";
+                }}
+              >
+                <span style={styles.cardIcon}>{cat.icon}</span>
+                <span style={styles.cardTitle}>{cat.title}</span>
+                <span style={styles.cardDesc}>{cat.description}</span>
+              </button>
+            ))}
+          </div>
+
+          <p style={styles.footerNote}>
+            🔒 このチェックの結果は保存されません。<br />
+            安心してご利用ください。
+          </p>
+        </FadeIn>
+      );
+    }
+
+    /* --- 画面2: 症状チェック --- */
+    function CheckScreen({ category, onBack, onResult }) {
+      const [checked, setChecked] = useState({});
+
+      const toggle = (idx) => {
+        setChecked(prev => ({ ...prev, [idx]: !prev[idx] }));
+      };
+
+      const checkedCount = Object.values(checked).filter(Boolean).length;
+
+      return (
+        <FadeIn>
+          <button style={styles.backBtn} onClick={onBack}>
+            ← カテゴリ選択に戻る
+          </button>
+
+          <div style={{ ...styles.checkHeader, backgroundColor: category.color }}>
+            <span style={{ fontSize: "2rem" }}>{category.icon}</span>
+            <h2 style={styles.checkTitle}>{category.title}</h2>
+            <p style={styles.checkSub}>
+              あてはまるものにチェックを入れてください。
+            </p>
+          </div>
+
+          <div style={styles.checkList}>
+            {category.symptoms.map((symptom, idx) => {
+              const isLast = idx === category.symptoms.length - 1;
+              return (
+                <label
+                  key={idx}
+                  style={{
+                    ...styles.checkItem,
+                    ...(checked[idx] ? styles.checkItemActive : {}),
+                    ...(isLast ? styles.checkItemLast : {})
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={!!checked[idx]}
+                    onChange={() => toggle(idx)}
+                    style={styles.checkbox}
+                  />
+                  <span style={styles.checkLabel}>{symptom}</span>
+                </label>
+              );
+            })}
+          </div>
+
+          <div style={styles.checkFooter}>
+            <p style={styles.checkedCount}>
+              {checkedCount}件 選択中
+            </p>
+            <button
+              style={{
+                ...styles.resultBtn,
+                ...(checkedCount === 0 ? styles.resultBtnDisabled : {})
+              }}
+              disabled={checkedCount === 0}
+              onClick={() => onResult(checkedCount)}
+            >
+              結果を見る
+            </button>
+          </div>
+        </FadeIn>
+      );
+    }
+
+    /* --- 画面3: 結果 --- */
+    function ResultScreen({ category, checkedCount, onReset }) {
+      const total = category.symptoms.length;
+      let level, levelColor, levelBg, message, advice;
+
+      if (checkedCount <= 3) {
+        level = "軽度";
+        levelColor = "#66bb6a";
+        levelBg = "#e8f5e9";
+        message = "今のところ大きな心配はなさそうですが、気になることがあれば遠慮なくご相談ください。";
+        advice = "日常のセルフケア（十分な睡眠、適度な運動、リラックスする時間）を大切にしましょう。";
+      } else if (checkedCount <= 6) {
+        level = "中度";
+        levelColor = "#ffa726";
+        levelBg = "#fff3e0";
+        message = "少しお疲れが溜まっているかもしれません。一人で抱え込まず、専門家に相談してみませんか？";
+        advice = "早めに専門家へ相談することで、症状が軽いうちに対処できることが多いです。";
+      } else {
+        level = "要注意";
+        levelColor = "#ef5350";
+        levelBg = "#ffebee";
+        message = "おつらい状況が続いているようですね。一人で頑張りすぎないでください。専門の医療機関への相談をおすすめします。";
+        advice = "できるだけ早めに専門の医療機関を受診されることをおすすめします。適切な治療で楽になれることがたくさんあります。";
+      }
+
+      return (
+        <FadeIn>
+          {/* 免責事項 */}
+          <div style={styles.disclaimer}>
+            <p style={styles.disclaimerText}>
+              ⚠️ このチェックは医学的な診断ではありません。気になる症状がある場合は、必ず専門の医療機関を受診してください。
+            </p>
+          </div>
+
+          {/* 結果サマリー */}
+          <div style={{ ...styles.resultCard, borderColor: levelColor }}>
+            <div style={{ ...styles.levelBadge, backgroundColor: levelBg, color: levelColor }}>
+              {level}
+            </div>
+            <p style={styles.resultCategory}>
+              {category.icon} {category.title}
+            </p>
+            <p style={styles.resultScore}>
+              {total}項目中 <strong>{checkedCount}項目</strong> に該当
+            </p>
+            <p style={styles.resultMessage}>{message}</p>
+            <p style={styles.resultAdvice}>{advice}</p>
+          </div>
+
+          {/* 該当する可能性のある疾患 */}
+          <div style={styles.conditionSection}>
+            <h3 style={styles.sectionTitle}>💡 関連する可能性のある状態</h3>
+            <p style={styles.conditionNote}>
+              ※ 以下は一般的な情報であり、診断ではありません。
+            </p>
+            {category.conditions.map((cond, idx) => (
+              <div key={idx} style={styles.conditionCard}>
+                <h4 style={styles.conditionName}>{cond.name}</h4>
+                <p style={styles.conditionDesc}>{cond.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* 治療法の説明 */}
+          <div style={styles.treatmentSection}>
+            <h3 style={styles.sectionTitle}>🏥 主な治療法について</h3>
+
+            <div style={styles.treatmentCard}>
+              <h4 style={styles.treatmentName}>💊 薬物療法</h4>
+              <p style={styles.treatmentDesc}>
+                症状に合わせたお薬を使って治療します。保険適用で、自己負担は月1,500〜2,500円程度が目安です。
+              </p>
+            </div>
+
+            <div style={styles.treatmentCard}>
+              <h4 style={styles.treatmentName}>🗣️ 心理療法（カウンセリング）</h4>
+              <p style={styles.treatmentDesc}>
+                専門のカウンセラーと対話を通じて、考え方や行動パターンを見直していきます。自費で1回5,000〜10,000円程度です。
+              </p>
+            </div>
+          </div>
+
+          {/* 保険診療の注意点 */}
+          <div style={styles.insuranceBox}>
+            <h4 style={styles.insuranceTitle}>⚠️ 日本の保険診療について</h4>
+            <p style={styles.insuranceText}>
+              精神科・心療内科の診察は保険適用です。ただしカウンセリング（心理療法）は多くの場合自費となります。まずは医師の診察をお勧めします。
+            </p>
+          </div>
+
+          {/* 寄り添いメッセージ */}
+          <div style={styles.encourageBox}>
+            <p style={styles.encourageText}>
+              🌸 一人で抱え込まないでくださいね。<br />
+              相談することは、とても勇気ある一歩です。
+            </p>
+          </div>
+
+          {/* CTAボタン */}
+          <div style={styles.ctaSection}>
+            <a href={CLINIC_URL} style={styles.ctaBtn}>
+              当クリニックに相談する
+            </a>
+            <button style={styles.retryBtn} onClick={onReset}>
+              もう一度チェックする
+            </button>
+          </div>
+        </FadeIn>
+      );
+    }
+
+    /* --- メインApp --- */
+    function App() {
+      const [screen, setScreen] = useState("top");
+      const [selectedCategory, setSelectedCategory] = useState(null);
+      const [checkedCount, setCheckedCount] = useState(0);
+
+      const handleSelect = (cat) => {
+        setSelectedCategory(cat);
+        setScreen("check");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      const handleBack = () => {
+        setScreen("top");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      const handleResult = (count) => {
+        setCheckedCount(count);
+        setScreen("result");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      const handleReset = () => {
+        setSelectedCategory(null);
+        setCheckedCount(0);
+        setScreen("top");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      return (
+        <div>
+          {screen === "top" && <TopScreen onSelect={handleSelect} />}
+          {screen === "check" && (
+            <CheckScreen
+              category={selectedCategory}
+              onBack={handleBack}
+              onResult={handleResult}
+            />
+          )}
+          {screen === "result" && (
+            <ResultScreen
+              category={selectedCategory}
+              checkedCount={checkedCount}
+              onReset={handleReset}
+            />
+          )}
+        </div>
+      );
+    }
+
+    /* ========== スタイル ========== */
+
+    const styles = {
+      /* ヘッダー */
+      header: {
+        textAlign: "center",
+        padding: "20px 0 28px",
+      },
+      headerIcon: {
+        fontSize: "2.5rem",
+        marginBottom: "8px",
+      },
+      headerTitle: {
+        fontSize: "1.4rem",
+        fontWeight: 700,
+        color: "var(--text)",
+        marginBottom: "10px",
+        lineHeight: 1.5,
+      },
+      headerSub: {
+        fontSize: "0.9rem",
+        color: "var(--text-light)",
+        lineHeight: 1.7,
+      },
+
+      /* カードグリッド */
+      cardGrid: {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: "12px",
+      },
+      card: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: "6px",
+        padding: "18px 16px",
+        borderRadius: "var(--radius)",
+        border: "none",
+        boxShadow: "var(--shadow)",
+        cursor: "pointer",
+        textAlign: "left",
+        fontFamily: "var(--font)",
+        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+      },
+      cardIcon: {
+        fontSize: "1.8rem",
+      },
+      cardTitle: {
+        fontSize: "0.9rem",
+        fontWeight: 700,
+        color: "var(--text)",
+        lineHeight: 1.5,
+      },
+      cardDesc: {
+        fontSize: "0.75rem",
+        color: "var(--text-light)",
+        lineHeight: 1.6,
+      },
+
+      /* フッター注 */
+      footerNote: {
+        textAlign: "center",
+        fontSize: "0.78rem",
+        color: "var(--text-muted)",
+        marginTop: "24px",
+        lineHeight: 1.7,
+      },
+
+      /* 戻るボタン */
+      backBtn: {
+        display: "inline-block",
+        background: "none",
+        border: "none",
+        color: "var(--text-light)",
+        fontSize: "0.9rem",
+        cursor: "pointer",
+        fontFamily: "var(--font)",
+        padding: "8px 0",
+        marginBottom: "8px",
+      },
+
+      /* チェック画面ヘッダー */
+      checkHeader: {
+        borderRadius: "var(--radius)",
+        padding: "24px 20px",
+        textAlign: "center",
+        marginBottom: "20px",
+      },
+      checkTitle: {
+        fontSize: "1.15rem",
+        fontWeight: 700,
+        marginTop: "8px",
+        lineHeight: 1.5,
+      },
+      checkSub: {
+        fontSize: "0.85rem",
+        color: "var(--text-light)",
+        marginTop: "6px",
+      },
+
+      /* チェックリスト */
+      checkList: {
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+      },
+      checkItem: {
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "12px",
+        padding: "14px 16px",
+        borderRadius: "var(--radius-sm)",
+        backgroundColor: "var(--white)",
+        boxShadow: "var(--shadow)",
+        cursor: "pointer",
+        transition: "background-color 0.2s ease, box-shadow 0.2s ease",
+      },
+      checkItemActive: {
+        backgroundColor: "#e8f5e9",
+        boxShadow: "0 0 0 2px #81c784, var(--shadow)",
+      },
+      checkItemLast: {
+        backgroundColor: "#fff8e1",
+        borderLeft: "4px solid #ffa726",
+      },
+      checkbox: {
+        marginTop: "3px",
+        width: "20px",
+        height: "20px",
+        flexShrink: 0,
+        accentColor: "#66bb6a",
+        cursor: "pointer",
+      },
+      checkLabel: {
+        fontSize: "0.92rem",
+        lineHeight: 1.7,
+        color: "var(--text)",
+      },
+
+      /* チェックフッター */
+      checkFooter: {
+        textAlign: "center",
+        marginTop: "24px",
+      },
+      checkedCount: {
+        fontSize: "0.85rem",
+        color: "var(--text-light)",
+        marginBottom: "12px",
+      },
+      resultBtn: {
+        display: "inline-block",
+        padding: "14px 48px",
+        borderRadius: "50px",
+        border: "none",
+        backgroundColor: "#66bb6a",
+        color: "white",
+        fontSize: "1rem",
+        fontWeight: 700,
+        fontFamily: "var(--font)",
+        cursor: "pointer",
+        transition: "opacity 0.2s ease",
+        boxShadow: "0 4px 12px rgba(102, 187, 106, 0.3)",
+      },
+      resultBtnDisabled: {
+        opacity: 0.4,
+        cursor: "not-allowed",
+        boxShadow: "none",
+      },
+
+      /* 結果画面 */
+      disclaimer: {
+        backgroundColor: "#fff8e1",
+        borderRadius: "var(--radius-sm)",
+        padding: "16px",
+        marginBottom: "20px",
+        borderLeft: "4px solid #ffa726",
+      },
+      disclaimerText: {
+        fontSize: "0.85rem",
+        color: "#6d5a00",
+        lineHeight: 1.7,
+      },
+
+      resultCard: {
+        backgroundColor: "var(--white)",
+        borderRadius: "var(--radius)",
+        padding: "24px 20px",
+        boxShadow: "var(--shadow)",
+        borderTop: "4px solid",
+        textAlign: "center",
+        marginBottom: "24px",
+      },
+      levelBadge: {
+        display: "inline-block",
+        padding: "4px 20px",
+        borderRadius: "50px",
+        fontSize: "0.9rem",
+        fontWeight: 700,
+        marginBottom: "12px",
+      },
+      resultCategory: {
+        fontSize: "0.9rem",
+        color: "var(--text-light)",
+        marginBottom: "8px",
+      },
+      resultScore: {
+        fontSize: "1.1rem",
+        marginBottom: "16px",
+      },
+      resultMessage: {
+        fontSize: "0.95rem",
+        lineHeight: 1.8,
+        marginBottom: "12px",
+        color: "var(--text)",
+      },
+      resultAdvice: {
+        fontSize: "0.85rem",
+        color: "var(--text-light)",
+        lineHeight: 1.7,
+      },
+
+      /* 疾患セクション */
+      conditionSection: {
+        marginBottom: "24px",
+      },
+      sectionTitle: {
+        fontSize: "1.05rem",
+        fontWeight: 700,
+        marginBottom: "10px",
+      },
+      conditionNote: {
+        fontSize: "0.8rem",
+        color: "var(--text-muted)",
+        marginBottom: "12px",
+      },
+      conditionCard: {
+        backgroundColor: "var(--white)",
+        borderRadius: "var(--radius-sm)",
+        padding: "16px",
+        marginBottom: "10px",
+        boxShadow: "var(--shadow)",
+      },
+      conditionName: {
+        fontSize: "0.95rem",
+        fontWeight: 700,
+        color: "var(--text)",
+        marginBottom: "4px",
+      },
+      conditionDesc: {
+        fontSize: "0.85rem",
+        color: "var(--text-light)",
+        lineHeight: 1.7,
+      },
+
+      /* 治療法セクション */
+      treatmentSection: {
+        marginBottom: "24px",
+      },
+      treatmentCard: {
+        backgroundColor: "var(--white)",
+        borderRadius: "var(--radius-sm)",
+        padding: "16px",
+        marginBottom: "10px",
+        boxShadow: "var(--shadow)",
+      },
+      treatmentName: {
+        fontSize: "0.95rem",
+        fontWeight: 700,
+        marginBottom: "6px",
+      },
+      treatmentDesc: {
+        fontSize: "0.85rem",
+        color: "var(--text-light)",
+        lineHeight: 1.7,
+      },
+
+      /* 保険ボックス */
+      insuranceBox: {
+        backgroundColor: "#e3f2fd",
+        borderRadius: "var(--radius-sm)",
+        padding: "18px",
+        marginBottom: "20px",
+        borderLeft: "4px solid #64b5f6",
+      },
+      insuranceTitle: {
+        fontSize: "0.95rem",
+        fontWeight: 700,
+        color: "#1565c0",
+        marginBottom: "8px",
+      },
+      insuranceText: {
+        fontSize: "0.85rem",
+        color: "#1a3a5c",
+        lineHeight: 1.7,
+      },
+
+      /* 励ましボックス */
+      encourageBox: {
+        textAlign: "center",
+        padding: "20px",
+        marginBottom: "24px",
+      },
+      encourageText: {
+        fontSize: "0.95rem",
+        color: "var(--text)",
+        lineHeight: 1.9,
+      },
+
+      /* CTAセクション */
+      ctaSection: {
+        textAlign: "center",
+        paddingBottom: "20px",
+      },
+      ctaBtn: {
+        display: "inline-block",
+        padding: "16px 40px",
+        borderRadius: "50px",
+        backgroundColor: "#66bb6a",
+        color: "white",
+        fontSize: "1.05rem",
+        fontWeight: 700,
+        textDecoration: "none",
+        boxShadow: "0 4px 16px rgba(102, 187, 106, 0.35)",
+        marginBottom: "16px",
+        fontFamily: "var(--font)",
+        transition: "opacity 0.2s ease",
+      },
+      retryBtn: {
+        display: "block",
+        margin: "0 auto",
+        background: "none",
+        border: "none",
+        color: "var(--text-light)",
+        fontSize: "0.9rem",
+        cursor: "pointer",
+        fontFamily: "var(--font)",
+        textDecoration: "underline",
+        padding: "8px",
+      },
+    };
+
+    /* ========== レンダリング ========== */
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
